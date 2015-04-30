@@ -74,7 +74,7 @@ public class CasinoGame extends Fragment {
     /**
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
-     *
+     * Test
      * @param param1 Parameter 1.
 
      * @return A new instance of fragment CasinoGame.
@@ -118,7 +118,7 @@ public class CasinoGame extends Fragment {
         int width = display.getWidth();
         int height = (int) (width * 0.45);
 
-        
+
 
         mAdapter = new GamesAdapter(getActivity(), height);
         listView.setAdapter(mAdapter);

@@ -27,7 +27,6 @@ import it.casinovenezia.it.casinovenezia.model.NavDrawerItem;
  */
 public class HomeActivity extends ActionBarActivity implements EventDetails.OnEventsInteractionListener,
         CasinoGame.OnGameInteractionListener,
-        Poker.OnPokerInteractionListener,
         Tournament.OnTournamentInteractionListener,
         Restaurant.OnRestaurantInteractionListener,
         Map.OnMapInteractionListener,
@@ -39,8 +38,10 @@ public class HomeActivity extends ActionBarActivity implements EventDetails.OnEv
         EventsFr.ListEventItemClickListener
 
 
+
 {
-    
+    protected OnBackPressedListener onBackPressedListener;
+
     //slide menu titles
     private String[] navMenuTitles;
     private TypedArray navMenuIcons;
@@ -185,17 +186,17 @@ public class HomeActivity extends ActionBarActivity implements EventDetails.OnEv
 
     @Override
     public void onListItemClick(ListView l, View v, int position, long id) {
-
+        Log.e("MainActivity", "Error in creating fragment");
     }
 
     @Override
     public void onFragmentInteraction(Uri uri) {
-
+        Log.e("MainActivity", "Error in creating fragment");
     }
 
     @Override
     public void onListFragmentItemClick(int position) {
-
+        Log.e("MainActivity", "Error in creating fragment");
     }
 
 
@@ -267,8 +268,25 @@ public class HomeActivity extends ActionBarActivity implements EventDetails.OnEv
     private void changeVenue() {
 
     }
+    public void setOnBackPressedListener(OnBackPressedListener onBackPressedListener) {
+        this.onBackPressedListener = onBackPressedListener;
+    }
 
 
+    @Override
+    public void onBackPressed() {
+        if (onBackPressedListener != null)
+           switch (onBackPressedListener.getClass().getSimpleName()) {
+               case "CasinoGame":
+                   onBackPressedListener.doBack();
+                   onBackPressedListener = null;
+                   break;
+           }
+
+       // else
+           // super.onBackPressed();
+
+    }
 
 
 }

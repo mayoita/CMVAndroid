@@ -1,6 +1,5 @@
 package it.casinovenezia.casinodivenezia;
 
-
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -16,15 +15,15 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 /**
- * Created by massimomoro on 25/03/15.
+ * Created by massimomoro on 08/05/15.
  */
-public class EventsFr extends Fragment {
+public class PokerFr extends Fragment {
 
     public static final String EXTRA_MESSAGE = "EXTRA_MESSAGE";
     private ListView listView;
 
 
-    private EventsAdapter mAdapter;
+    private PokerAdapter mAdapter;
 
     boolean mDualPane;
     int mCurCheckPosition = 0;
@@ -62,18 +61,18 @@ public class EventsFr extends Fragment {
      * Mandatory empty constructor for the fragment manager to instantiate the
      * fragment (e.g. upon screen orientation changes).
      */
-    public EventsFr() {
+    public PokerFr() {
     }
-//
+    //
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        View rootView = inflater.inflate(R.layout.events_fragment, container, false);
+        View rootView = inflater.inflate(R.layout.poker_fragment, container, false);
         listView = (ListView) rootView.findViewById(R.id.list_events);
 
 
 
-        mAdapter = new EventsAdapter(getActivity());
+        mAdapter = new PokerAdapter(getActivity());
 
         for (int i = 1; i < 12; i++) {
             mAdapter.addItem("Row Item #" + i);
@@ -89,7 +88,7 @@ public class EventsFr extends Fragment {
             mCurCheckPosition = savedInstanceState.getInt("curChoice", 0);
         }
 
-        if (rootView.findViewById(R.id.event_details) != null) {
+        if (rootView.findViewById(R.id.text_for_general_poker) != null) {
             mDualPane = true;
             // Its a tablet, so create a new detail fragment if one does not already exist
             // In dual-pane mode, the list view highlights the selected item.
@@ -115,8 +114,8 @@ public class EventsFr extends Fragment {
 
 
 
-    public static final EventsFr newInstance(String message) {
-        EventsFr instance = new EventsFr();
+    public static final PokerFr newInstance(String message) {
+        PokerFr instance = new PokerFr();
         Bundle bdl = new Bundle();
         bdl.putString(EXTRA_MESSAGE, message);
         instance.setArguments(bdl);
@@ -149,19 +148,19 @@ public class EventsFr extends Fragment {
             listView.setItemChecked(index, true);
 
             // Check what fragment is currently shown, replace if needed.
-            EventDetails details = (EventDetails)
-                    getFragmentManager().findFragmentById(R.id.containerInLand);
+            PokerDetails details = (PokerDetails)
+                    getFragmentManager().findFragmentById(R.id.containerInLandPoker);
             if (details == null || details.getShownIndex() != demoData[index]) {
                 // Make new fragment to show this selection.
-                details = EventDetails.newInstance(demoData[index]);
+                details = PokerDetails.newInstance(demoData[index]);
 
                 // Execute a transaction, replacing any existing fragment
                 // with this one inside the frame.
                 FragmentTransaction ft = getFragmentManager().beginTransaction();
-              //  if (index == 0) {
-                    ft.replace(R.id.containerInLand, details);
-               // } else {
-                   // ft.replace(R.id.a_item, details);
+                //  if (index == 0) {
+                ft.replace(R.id.containerInLandPoker, details);
+                // } else {
+                // ft.replace(R.id.a_item, details);
                 //}
                 ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
                 ft.commit();
@@ -172,7 +171,7 @@ public class EventsFr extends Fragment {
             // Otherwise we need to launch a new activity to display
             // the dialog fragment with selected text.
             Intent intent = new Intent();
-            intent.setClass(getActivity(), EventDetailsActivity.class);
+            intent.setClass(getActivity(), PokerDetailsActivity.class);
             intent.putExtra("param1", demoData[index]);
             startActivity(intent);
         }

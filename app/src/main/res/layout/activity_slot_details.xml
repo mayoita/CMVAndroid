@@ -1,0 +1,103 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/greentilebg">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="18+"
+        android:id="@+id/diciottoetichetta"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        android:paddingLeft="2dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/diciottopiu"
+        android:text="@string/link"
+        android:textSize="8sp"
+        android:textColor="@color/white"
+        android:layout_toRightOf="@+id/diciottoetichetta"
+        android:layout_alignBottom="@+id/diciottoetichetta"
+        android:paddingRight="2dp"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="SLOT"
+        android:id="@+id/textViewTitleGame"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="22dp"
+        android:textColor="@color/white"
+        android:textSize="28sp" />
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:fillViewport="false"
+        android:layout_marginTop="55dp"
+        android:id="@+id/myScrollEvent">
+<FrameLayout
+android:id="@+id/game_details"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+    >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="206dp"
+            android:id="@+id/imageViewSlotDetails"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="7dp"
+            android:layout_marginRight="7dp"
+            android:background="@color/white" />
+
+        <com.daimajia.slider.library.SliderLayout
+            android:id="@+id/slider"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="13dp" />
+
+
+            <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+                android:layout_below="@+id/imageViewSlotDetails"
+                android:layout_alignLeft="@+id/slider"
+                android:layout_alignStart="@+id/slider">
+
+                <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/lore"
+                android:id="@+id/textViewSlotDetails"
+                android:textSize="14sp"
+                android:textColor="@color/white"
+                android:layout_marginLeft="3dp"
+                android:layout_marginRight="3dp"
+                    android:layout_marginTop="10dp" />
+            </LinearLayout>
+
+
+
+    </RelativeLayout>
+
+</FrameLayout>
+
+
+</ScrollView>
+
+
+</RelativeLayout>

@@ -20,6 +20,18 @@
             android:name=".EventDetailsActivity"
             android:label="@string/title_activity_event_details" >
         </activity>
+        <activity
+            android:name=".SlotDetailsActivity"
+            android:label="@string/title_activity_slot_details" >
+        </activity>
+        <activity
+            android:name=".CasinoGame_Item_Activity"
+            android:label="@string/title_activity_game_item" >
+        </activity>
+        <activity
+            android:name=".PokerDetailsActivity"
+            android:label="@string/title_activity_poker_item" >
+        </activity>
     </application>
     <!-- if you want to load images from the internet -->
     <uses-permission android:name="android.permission.INTERNET" />

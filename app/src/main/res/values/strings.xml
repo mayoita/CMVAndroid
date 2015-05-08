@@ -76,16 +76,22 @@
     <string name="online_games">ONLINE GAMES</string>
     <string name="fair">FAIR ROULETTE</string>
     <string name="black">BLACK JACK</string>
-    <string name="texas">TEXAS HOLD'EM POKER</string>
+    <string name="texas">TEXAS HOLD\'EM POKER</string>
     <string name="punto">PUNTO BANCO</string>
     <string name="carribean">CARRIBEAN STUD POKER</string>
     <string name="francese">FRENCH ROULETTE</string>
     <string name="chemin">CHEMIN DE FER</string>
     <string name="trente">MIDI TRENTE ET QUARANTE</string>
     <string name="what">WHAT WE OFFER</string>
-    <string name="whatnew">WHAT'S NEW</string>
+    <string name="whatnew">WHAT\'S NEW</string>
     <string name="rooms">SLOT MACHINE ROOMS</string>
     <string name="jackpot_slot">OUR JACKPOTS</string>
+    <string name="title_activity_game_item">GAME</string>
+    <string name="close_rule">CLOSE</string>
+    <string name="title_activity_slot_details">SLOT</string>
+    <string name="text_for_game_general">GENERAL DESCRIPTION</string>
+    <string name="title_activity_poker_item">POKER</string>
+    <string name="text_for_game_general_poker">TEXT FOR POKER</string>
 
 
 </resources>

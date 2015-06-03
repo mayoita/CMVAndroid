@@ -21,16 +21,18 @@ import com.daimajia.slider.library.SliderTypes.BaseSliderView;
 
 import org.lucasr.twowayview.TwoWayView;
 
+import it.casinovenezia.TournamentDayAdapter;
+
 /**
- * Created by massimomoro on 08/05/15.
+ * Created by massimomoro on 13/05/15.
  */
-public class PokerDetailsActivity extends ActionBarActivity implements BaseSliderView.OnSliderClickListener{
+public class TournamentDetailsActivity extends ActionBarActivity implements BaseSliderView.OnSliderClickListener{
 
-    private PokerDayAdapter mAdapter;
+    private TournamentDayAdapter mAdapter;
     private ListView myListView;
-    private PokerCellAdapter mCellAdapter;
+    private TournamentCellAdapter mCellAdapter;
 
-    Context context = PokerDetailsActivity.this;
+    Context context = TournamentDetailsActivity.this;
 
 
     private int convertDpToPx(int dp, DisplayMetrics displayMetrics) {
@@ -42,9 +44,9 @@ public class PokerDetailsActivity extends ActionBarActivity implements BaseSlide
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.activity_poker_details);
+        setContentView(R.layout.activity_tournament_details);
 
-        myListView = (ListView)findViewById(R.id.listViewPoker);
+        myListView = (ListView)findViewById(R.id.listViewTournament);
         TextView diciotto = (TextView) findViewById(R.id.diciottopiu);
         diciotto.setMovementMethod(LinkMovementMethod.getInstance());
         Typeface XLight = Typeface.createFromAsset(getAssets(), "fonts/GothamXLight.otf");
@@ -53,8 +55,8 @@ public class PokerDetailsActivity extends ActionBarActivity implements BaseSlide
         Display display = getWindowManager().getDefaultDisplay();
 
         DisplayMetrics dm = getResources().getDisplayMetrics();
-        TextView titolo = (TextView)findViewById(R.id.textViewPoker);
-        TextView titoloR = (TextView)findViewById(R.id.textViewPokerRule);
+        TextView titolo = (TextView)findViewById(R.id.textViewTournament);
+        TextView titoloR = (TextView)findViewById(R.id.textViewTournamentRule);
         titolo.setTypeface(XLight);
         titoloR.setTypeface(XLight);
 
@@ -67,7 +69,7 @@ public class PokerDetailsActivity extends ActionBarActivity implements BaseSlide
         fp.setMargins(convertDpToPx(7, dm), convertDpToPx(37, dm), convertDpToPx(7, dm), 0);
         sp.setMargins(convertDpToPx(10, dm), convertDpToPx(40, dm), convertDpToPx(10, dm), 0);
 
-        mAdapter = new PokerDayAdapter(context, width);
+        mAdapter = new TournamentDayAdapter(context, width);
         mAdapter.addItem("Item 1");
         mAdapter.addItem("Item 2");
         mAdapter.addItem("Item 3");
@@ -75,7 +77,7 @@ public class PokerDetailsActivity extends ActionBarActivity implements BaseSlide
         mAdapter.addItem("Item 5");
         mAdapter.addItem("Item 6");
 
-        mCellAdapter = new PokerCellAdapter(context, width);
+        mCellAdapter = new TournamentCellAdapter(context, width);
 
         mCellAdapter.addItem("Item1");
         mCellAdapter.addItem("Item2");
@@ -87,7 +89,7 @@ public class PokerDetailsActivity extends ActionBarActivity implements BaseSlide
 
 
 
-        TwoWayView lvTest = (TwoWayView) findViewById(R.id.lvItemsPoker);
+        TwoWayView lvTest = (TwoWayView) findViewById(R.id.lvItemsTournament);
         lvTest.setAdapter(mAdapter);
 
 

@@ -20,6 +20,8 @@ import android.widget.Toast;
 
 import com.daimajia.slider.library.SliderTypes.BaseSliderView;
 
+import org.lucasr.twowayview.TwoWayView;
+
 /**
  * Created by massimomoro on 08/05/15.
  */
@@ -28,6 +30,9 @@ public class PokerDetails extends Fragment implements BaseSliderView.OnSliderCli
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 private static final String ARG_PARAM1 = "param1";
 private static final String ARG_PARAM2 = "param2";
+        private PokerDayAdapter mAdapter;
+        private PokerCellAdapter mCellAdapter;
+        private ListView myListView;
 
 // TODO: Rename and change types of parameters
 private String mParam1;
@@ -104,26 +109,47 @@ public void onActivityCreated(@Nullable Bundle savedInstanceState) {
 final View myView = getView();
         if (myView != null) {
         myView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
-@Override
-public void onGlobalLayout() {
-        fragmentWidth = getView().getWidth();
+                @Override
+                public void onGlobalLayout() {
+                        fragmentWidth = getView().getWidth();
 
-        DisplayMetrics dm = getResources().getDisplayMetrics();
-        int height = (int) (fragmentWidth * 0.66); // 0.75 if image aspect ration is 4:3, change accordingly
+                        DisplayMetrics dm = getResources().getDisplayMetrics();
+                        int height = (int) (fragmentWidth * 0.66); // 0.75 if image aspect ration is 4:3, change accordingly
 
-        RelativeLayout.LayoutParams fp = new RelativeLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, height + convertDpToPx(6,dm));
-        RelativeLayout.LayoutParams sp = new RelativeLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, height);
+                        RelativeLayout.LayoutParams fp = new RelativeLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, height + convertDpToPx(6, dm));
+                        RelativeLayout.LayoutParams sp = new RelativeLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, height);
 
-        fp.setMargins(convertDpToPx(7,dm) ,convertDpToPx(37,dm), convertDpToPx(7,dm), 0);
-        sp.setMargins(convertDpToPx(10,dm) ,convertDpToPx(40,dm), convertDpToPx(10,dm), 0);
+                        fp.setMargins(convertDpToPx(7, dm), convertDpToPx(37, dm), convertDpToPx(7, dm), 0);
+                        sp.setMargins(convertDpToPx(10, dm), convertDpToPx(40, dm), convertDpToPx(10, dm), 0);
+
+                        mAdapter = new PokerDayAdapter(getActivity(), fragmentWidth);
+                        mAdapter.addItem("Item 1");
+                        mAdapter.addItem("Item 2");
+                        mAdapter.addItem("Item 3");
+                        mAdapter.addItem("Item 4");
+                        mAdapter.addItem("Item 5");
+                        mAdapter.addItem("Item 6");
 
 
+                        TwoWayView lvTest = (TwoWayView) myView.findViewById(R.id.lvItemsPoker);
+                        lvTest.setAdapter(mAdapter);
+                        myListView = (ListView)myView.findViewById(R.id.listViewPoker);
+
+                        mCellAdapter = new PokerCellAdapter(getActivity(), fragmentWidth);
+
+                        mCellAdapter.addItem("Item1");
+                        mCellAdapter.addItem("Item2");
+                        mCellAdapter.addItem("Item3");
+                        mCellAdapter.addItem("Item4");
+                        mCellAdapter.addItem("Item5");
+
+                        myListView.setAdapter(mCellAdapter);
 
 
-        if (fragmentWidth > 0) {
-        getView().getViewTreeObserver().removeGlobalOnLayoutListener(this);
-        }
-        }
+                        if (fragmentWidth > 0) {
+                                getView().getViewTreeObserver().removeGlobalOnLayoutListener(this);
+                        }
+                }
         });
 
 
@@ -134,6 +160,8 @@ public void onGlobalLayout() {
                 TextView titoloR = (TextView)myView.findViewById(R.id.textViewPokerRule);
                 titolo.setTypeface(XLight);
                 titoloR.setTypeface(XLight);
+
+
 
         }
 

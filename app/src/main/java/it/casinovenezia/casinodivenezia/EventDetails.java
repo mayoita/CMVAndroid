@@ -44,7 +44,7 @@ public class EventDetails extends Fragment implements BaseSliderView.OnSliderCli
     private String mParam1;
     private SliderLayout mySlider;
     int fragmentWidth;
-    int fragmentHeight;
+
 
 
 

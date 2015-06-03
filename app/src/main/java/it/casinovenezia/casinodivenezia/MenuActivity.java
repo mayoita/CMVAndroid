@@ -1,7 +1,7 @@
 package it.casinovenezia.casinodivenezia;
 
-import android.content.Context;
 import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
@@ -10,28 +10,19 @@ import android.util.DisplayMetrics;
 import android.util.TypedValue;
 import android.view.Display;
 import android.view.Menu;
-import android.view.MenuItem;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import com.daimajia.slider.library.SliderTypes.BaseSliderView;
-
-import org.lucasr.twowayview.TwoWayView;
 
 /**
- * Created by massimomoro on 08/05/15.
+ * Created by massimomoro on 26/05/15.
  */
-public class PokerDetailsActivity extends ActionBarActivity implements BaseSliderView.OnSliderClickListener{
+public class MenuActivity extends ActionBarActivity {
 
-    private PokerDayAdapter mAdapter;
-    private ListView myListView;
-    private PokerCellAdapter mCellAdapter;
-
-    Context context = PokerDetailsActivity.this;
-
+    private MenuAdapter mAdapter;
+    private ListView listView;
 
     private int convertDpToPx(int dp, DisplayMetrics displayMetrics) {
         float pixels = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, displayMetrics);
@@ -42,53 +33,59 @@ public class PokerDetailsActivity extends ActionBarActivity implements BaseSlide
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.activity_poker_details);
+        setContentView(R.layout.pop_menu_restaurant);
 
-        myListView = (ListView)findViewById(R.id.listViewPoker);
+
         TextView diciotto = (TextView) findViewById(R.id.diciottopiu);
         diciotto.setMovementMethod(LinkMovementMethod.getInstance());
         Typeface XLight = Typeface.createFromAsset(getAssets(), "fonts/GothamXLight.otf");
-
+        Typeface Thin = Typeface.createFromAsset(getAssets(), "fonts/Giorgio-Thin.ttf");
 
         Display display = getWindowManager().getDefaultDisplay();
-
+        ImageView imageView = (ImageView) findViewById(R.id.imageView9);
+        ImageView imageView2 = (ImageView) findViewById(R.id.imageView10);
         DisplayMetrics dm = getResources().getDisplayMetrics();
-        TextView titolo = (TextView)findViewById(R.id.textViewPoker);
-        TextView titoloR = (TextView)findViewById(R.id.textViewPokerRule);
-        titolo.setTypeface(XLight);
-        titoloR.setTypeface(XLight);
-
         int width = display.getWidth();
         int height = (int) (width * 0.66); // 0.75 if image aspect ration is 4:3, change accordingly
 
         RelativeLayout.LayoutParams fp = new RelativeLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, height + convertDpToPx(6,dm));
         RelativeLayout.LayoutParams sp = new RelativeLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, height);
 
-        fp.setMargins(convertDpToPx(7, dm), convertDpToPx(37, dm), convertDpToPx(7, dm), 0);
-        sp.setMargins(convertDpToPx(10, dm), convertDpToPx(40, dm), convertDpToPx(10, dm), 0);
+        fp.setMargins(convertDpToPx(3, dm), convertDpToPx(0, dm), convertDpToPx(3, dm), 0);
+        sp.setMargins(convertDpToPx(5, dm), convertDpToPx(3, dm), convertDpToPx(5, dm), 0);
+        imageView.setLayoutParams(sp);
+        imageView.setLayoutParams(fp);
+        Resources res = getResources();
+        mAdapter = new MenuAdapter(this);
+        listView = (ListView)findViewById(R.id.listViewMenu);
+        for (int i = 0; i < 16; i++) {
 
-        mAdapter = new PokerDayAdapter(context, width);
-        mAdapter.addItem("Item 1");
-        mAdapter.addItem("Item 2");
-        mAdapter.addItem("Item 3");
-        mAdapter.addItem("Item 4");
-        mAdapter.addItem("Item 5");
-        mAdapter.addItem("Item 6");
+            if (i % 4 == 0) {
+                switch(i) {
+                    case 0:
 
-        mCellAdapter = new PokerCellAdapter(context, width);
+                        mAdapter.addSectionHeaderItem(res.getString(R.string.starters));
+                        break;
+                    case 4:
+                        mAdapter.addSectionHeaderItem(res.getString(R.string.first));
+                        break;
+                    case 8:
+                        mAdapter.addSectionHeaderItem(res.getString(R.string.second));
+                        break;
+                    case 12:
+                        mAdapter.addSectionHeaderItem(res.getString(R.string.dessert));
+                        break;
+                    default:
+                        mAdapter.addSectionHeaderItem(res.getString(R.string.starters));
+                }
 
-        mCellAdapter.addItem("Item1");
-        mCellAdapter.addItem("Item2");
-        mCellAdapter.addItem("Item3");
-        mCellAdapter.addItem("Item4");
-        mCellAdapter.addItem("Item5");
+            } else {
+                mAdapter.addItem("Row Item #" + i);
+            }
 
-        myListView.setAdapter(mCellAdapter);
+        }
 
-
-
-        TwoWayView lvTest = (TwoWayView) findViewById(R.id.lvItemsPoker);
-        lvTest.setAdapter(mAdapter);
+        listView.setAdapter(mAdapter);
 
 
         if (getResources().getConfiguration().orientation
@@ -114,26 +111,5 @@ public class PokerDetailsActivity extends ActionBarActivity implements BaseSlide
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_event_details, menu);
         return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
-
-    @Override
-    public void onSliderClick(BaseSliderView baseSliderView) {
-        Toast.makeText(this, baseSliderView.getBundle().get("extra") + "", Toast.LENGTH_SHORT).show();
-
     }
 }

@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:text="@string/torneo"
+            android:id="@+id/textTorneo"
+            android:background="@drawable/poker_cell_bg_grey"
+            android:textColor="@color/black"
+            android:paddingLeft="5dp"
+            android:paddingTop="2dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:text="@string/ora"
+            android:id="@+id/textOraTorneo"
+            android:paddingLeft="5dp"
+            android:background="@drawable/poker_cell_bg_black"
+            android:textColor="@color/white"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:text="@string/buy"
+            android:id="@+id/textBuyTorneo"
+            android:paddingLeft="5dp"
+            android:background="@drawable/poker_cell_bg_black"
+            android:textColor="@color/white"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:text="@string/note"
+            android:id="@+id/textNoteTorneo"
+            android:paddingLeft="5dp"
+            android:background="@drawable/poker_cell_bg_black"
+            android:textColor="@color/white"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="3"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:text="New Text"
+            android:id="@+id/textNameTorneoTorneo"
+            android:background="@drawable/poker_cell_bg_grey"
+            android:textColor="@color/black"
+            android:paddingLeft="5dp"
+            android:paddingTop="2dp" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:text="@string/ora"
+            android:id="@+id/textOraTorneoV"
+            android:paddingLeft="5dp"
+            android:background="@drawable/poker_cell_bg_black"
+            android:textColor="@color/white"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:text="@string/buy"
+            android:id="@+id/textBuyTorneoV"
+            android:paddingLeft="5dp"
+            android:background="@drawable/poker_cell_bg_black"
+            android:textColor="@color/white"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:text="@string/note"
+            android:id="@+id/textNoteTorneoV"
+            android:paddingLeft="5dp"
+            android:background="@drawable/poker_cell_bg_black"
+            android:textColor="@color/white"/>
+    </LinearLayout>
+
+</LinearLayout>

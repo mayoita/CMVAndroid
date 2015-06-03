@@ -152,7 +152,7 @@ public class HomeMainFr extends Fragment {
         fList.add(EventsFr.newInstance("@string/events_title"));
         fList.add(CasinoGame.newInstance("@string/casino_title"));
         fList.add(PokerFr.newInstance("@string/poker_title"));
-        fList.add(Tournament.newInstance("@string/tournament_title"));
+        fList.add(TournamentFr.newInstance("@string/tournament_title"));
         fList.add(Restaurant.newInstance("@string/restaurant_title"));
         fList.add(Map.newInstance("@string/map_title"));
 

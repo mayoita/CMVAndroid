@@ -92,6 +92,68 @@
     <string name="text_for_game_general">GENERAL DESCRIPTION</string>
     <string name="title_activity_poker_item">POKER</string>
     <string name="text_for_game_general_poker">TEXT FOR POKER</string>
+    <string name="torneo">TORNEO</string>
+    <string name="ora">Ora</string>
+    <string name="buy">BUY IN</string>
+    <string name="stack">STACK</string>
+    <string name="blind">BLINDS</string>
+    <string name="late">LATE</string>
+    <string name="cap">CAP</string>
+    <string name="note">NOTE</string>
+    <string name="text_for_game_general_tournament">TEXT FOR TOURNAMENT</string>
+    <string name="title_activity_tournament_item">TOURNAMENT</string>
+    <string name="telUno">+390415297230 (from 9.30 am - 5.30 pm)</string>
+    <string name="telDue">+390415297201 (7.30 pm - midnight)</string>
+    <string name="openingtime">Opening times:</string>
+    <string name="openingtimeTx">7.30 pm - midnight</string>
+    <string name="closed">Closed:</string>
+    <string name="closedTx">December 24 and 25</string>
+    <string name="creditCardLabel">Credit cards</string>
+    <string name="fromtoMenu">from 26 to 5 march 2015</string>
+    <string name="nome_chef">VALERIO VERGINE</string>
+    <string name="title_activity_menu">MENU</string>
+    <string name="starters">Starters</string>
+    <string name="first">First Course</string>
+    <string name="second">Second Course</string>
+    <string name="dessert">Dessert</string>
+    <string name="orari">TIMETABLES</string>
+    <string name="map">MAP</string>
+    <string name="info_map">INFO</string>
+    <string name="directions">(click on icons to get directions)</string>
+    <string formatted="false" name="info_text">With the exception of December 24 and 25 the Casinò di Venezia\’s two venues, Ca\’ Vendramin Calergi and Ca\’ Noghera are open all year round.\n
+        Access to the Casinò di Venezia\’s games rooms is restricted to adults only who are in possession of a valid ID document:\n\nacceptable forms of identification include either an ID Card,
+        a driving licence or a passport.\n\n€5.00 Admission Card (services excluded);\n€10.00 Admission Card: a €10 admission.\n\nThe €10.00 Admission Card includes services:\n-
+        The gift of a non convertible chip or ez-pay ticket worth € 10.00 for use at the gaming tables or on the slot machines;\n- cloakroom;\n- parking (at Ca\' Noghera it\'s free of charge;
+        in Venice there is a 50% discount at the ASM and Garage San Marco from Monday to Friday, but Sundays, public holidays and the day before these are excluded);\n- road shuttle service:
+        Casinò di Ca\' Noghera - Venice Piazzale Roma and vice versa;\n- road shuttle service: Mestre Railway Station –Ca\’ Noghera Casino and vice versa;\n-
+        waterways shuttle service: Piazzale Roma - Ca\' Vendramin Calergi and vice versa.\n\nIf you are staying in a hotel in Venice why not ask for a Free Entry Coupon.\n\n
+        There\’s a gift waiting for everyone who comes to gamble at the Casino on their birthday.\n\nThere are lots of different promotions and special occasions every month for organising a
+        visit to our two venues. Gifts from the Casinò di Venezia\’s own branded collections. An offer of drinks and snacks, gambling benefits with slot machine tickets or gaming table chips,
+        free.\nFind out about the promotion of the month.\n\n\nMETHODS OF PAYMENT\n\nFor the purchase of means of gambling, we accept:\n- payment in Italian or foreign currency, up to the maximum
+        limit prescribed by current legislation (during the gambling at tables opening times)\n- payment with the following forms of credit cards: Pagobancomat Cash card; Visa; MasterCard, Maestro,
+        China Union Pay.\nPayment of gambling credits or winnings can be made in cash, within the limits prescribed by law, with non-transferable cheques made payable to the client or in the form
+        of a means of gambling.\n\nEach of the Casinò di Venezia\’s venues has cashier and POS/credit card and cash card banking service points.\n\nThe use of cash\nLegislative Decree No. 201 of
+        December 06 2013, published in the Official Gazette (No. 284 of December 06 2011) placed a limit on the use of ready cash for any transactions. As a result of this, therefore,
+        the transfer of cash to and from clients within the gaming house can only be for amounts of less than €1000.00.</string>
+    <string name="info_titolo">WAYS OF GAINING ADMISSION TO THE CASINO</string>
+    <string name="info_activiy_text">INFO</string>
+    <string name="title_activity_sign_up">SignUpActivity</string>
+    <string name="title_activity_login">Log in</string>
+    <string name="title_activity_signup">Sign up</string>
+    <string name="prompt_username">Username</string>
+    <string name="prompt_password">Password</string>
+    <string name="prompt_password_again">Password Again</string>
+    <string name="error_intro">"Please "</string>
+    <string name="error_blank_username">enter a username</string>
+    <string name="error_blank_password">enter a password</string>
+    <string name="error_mismatched_passwords">enter the same password twice</string>
+    <string name="error_join">", and "</string>
+    <string name="error_end">.</string>
+    <string name="progress_login">Logging you in&#8230;</string>
+    <string name="progress_signup">Signing you up&#8230;</string>
+    <string name="signup">Sign Up</string>
+    <string name="forgot">FORGOT ?</string>
+    <string name="you_can">YOU CAN LOG IN WITH</string>
 
 
 </resources>

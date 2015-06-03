@@ -1,0 +1,67 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/blacktilebg">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="18+"
+        android:id="@+id/diciottoetichetta"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        android:paddingLeft="2dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/diciottopiu"
+        android:text="@string/link"
+        android:textSize="8sp"
+        android:textColor="@color/white"
+        android:layout_toRightOf="@+id/diciottoetichetta"
+        android:layout_alignBottom="@+id/diciottoetichetta"
+        android:paddingRight="2dp"
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/info_titolo"
+        android:id="@+id/textViewInfotitle"
+        android:textSize="16sp"
+        android:textColor="@color/yellow_brand"
+        android:layout_marginLeft="3dp"
+        android:gravity="center_horizontal"
+        android:layout_below="@+id/diciottopiu"
+        android:layout_marginTop="5dp" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+
+        android:orientation="vertical"
+        android:fillViewport="false"
+        android:layout_marginTop="5dp"
+        android:id="@+id/myScrollEvent"
+        android:layout_below="@+id/textViewInfotitle"
+        android:layout_alignParentBottom="true">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/info_text"
+                android:id="@+id/textView30"
+                android:textColor="@color/white" />
+        </RelativeLayout>
+
+
+    </ScrollView>
+
+
+</RelativeLayout>

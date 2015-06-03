@@ -1,6 +1,7 @@
 package it.casinovenezia.casinodivenezia;
 
 
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.content.res.TypedArray;
 import android.net.Uri;
@@ -17,6 +18,9 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
+import com.parse.Parse;
+import com.parse.ParseFacebookUtils;
+
 import java.util.ArrayList;
 
 import it.casinovenezia.adapter.NavDrawerListAdapter;
@@ -27,7 +31,7 @@ import it.casinovenezia.it.casinovenezia.model.NavDrawerItem;
  */
 public class HomeActivity extends ActionBarActivity implements EventDetails.OnEventsInteractionListener,
         CasinoGame.OnGameInteractionListener,
-        Tournament.OnTournamentInteractionListener,
+
         Restaurant.OnRestaurantInteractionListener,
         Map.OnMapInteractionListener,
         Newsletter.OnNewsletterInteractionListener,
@@ -61,6 +65,12 @@ public class HomeActivity extends ActionBarActivity implements EventDetails.OnEv
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        Parse.enableLocalDatastore(this);
+
+        Parse.initialize(this, "yO3MBzW9liNCaiAfXWGb3NtZJ3VhXyy4Zh8rR5ck", "KImYuYCrJ9j3IbDI3W2KtDXCXwmfqsRDCn5Em6A9");
+        ParseFacebookUtils.initialize(this);
+
         setContentView(R.layout.home_main);
 
         //Drawer inizialization
@@ -287,6 +297,9 @@ public class HomeActivity extends ActionBarActivity implements EventDetails.OnEv
            // super.onBackPressed();
 
     }
-
+    public void openInfo(View v) {
+        Intent intent = new Intent(this, InfoActivity.class);
+        startActivity(intent);
+    }
 
 }

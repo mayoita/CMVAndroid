@@ -154,6 +154,26 @@
     <string name="signup">Sign Up</string>
     <string name="forgot">FORGOT ?</string>
     <string name="you_can">YOU CAN LOG IN WITH</string>
-
-
+    <string name="parse_app_id">yO3MBzW9liNCaiAfXWGb3NtZJ3VhXyy4Zh8rR5ck</string>
+    <string name="parse_client_key">KImYuYCrJ9j3IbDI3W2KtDXCXwmfqsRDCn5Em6A9</string>
+    <string name="facebook_app_id">724548800932026</string>
+    <string-array name="my_facebook_permissions">
+        <item>public_profile</item>
+        <item>email</item>
+    </string-array>
+    <string name="profile_title_logged_in">Your are logged in as</string>
+    <string name="profile_logout_button_label">Log out</string>
+    <string name="profile_title_logged_out">You must be logged in to view your profile</string>
+    <string name="profile_login_button_label">Log in</string>
+    <string name="myEmail">EMAIL</string>
+    <string name="welcome">WELCOME</string>
+    <string name="dont_have">DON\'T HAVE AN ACCOUNT YET?</string>
+    <string name="login">LOG IN</string>
+    <string name="todayIsClosed">Today is closed</string>
+    <string name="todayOpen">Today open 11:00 am - 3:15 am</string>
+    <string name="todayOpenVenice">Today open 11:00 am - 02:45 am</string>
+    <string name="canogheratime1">Today open 11:00 am - 03:45 am</string>
+    <string name="canogheratime2">Today open 11:00 am - 03:15 am</string>
+    <string name="veneziatime1">Today open 11.00 am - 03.15 am</string>
+    <string name="veneziatime2">Today open 11:00 am - 02:45 am</string>
 </resources>

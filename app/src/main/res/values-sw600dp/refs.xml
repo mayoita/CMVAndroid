@@ -8,5 +8,6 @@
     http://developer.android.com/training/multiscreen/screensizes.html#TaskUseAliasFilters
     -->
 
+    <bool name="isTablet">true</bool>
 
 </resources>

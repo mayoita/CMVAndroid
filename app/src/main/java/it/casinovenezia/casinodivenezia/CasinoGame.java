@@ -1,18 +1,35 @@
 package it.casinovenezia.casinodivenezia;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.res.AssetManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Config;
+import android.util.Log;
 import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
 
 
 /**
@@ -32,6 +49,13 @@ public class CasinoGame extends Fragment implements OnBackPressedListener {
     private int level = 0;
     private int levelTwo = 0;
     private CasinoGame me;
+    private static final String TAG = "GAME_LIST";
+    int height;
+
+    private JSONObject gameList;
+    JSONArray myjArr;
+
+
     String [] demoData = {"a", "b", "c", "d", "e","f", "g", "h", "i", "l"};
 
     private int[] textureArray = {
@@ -55,6 +79,15 @@ public class CasinoGame extends Fragment implements OnBackPressedListener {
             R.drawable.chemin,
             R.drawable.trente
     };
+    private int[] arrayGamesCN = {
+            R.drawable.fair,
+            R.drawable.blackj,
+            R.drawable.texas,
+            R.drawable.banco,
+            R.drawable.carribean,
+            R.drawable.french,
+            R.drawable.chemin
+    };
 
     private int[] arraySlots = {
             R.drawable.slotoffer,
@@ -72,6 +105,15 @@ public class CasinoGame extends Fragment implements OnBackPressedListener {
             R.string.francese,
             R.string.chemin,
             R.string.trente
+    };
+    private int[] arrayGamesTitleCN = {
+            R.string.fair,
+            R.string.black,
+            R.string.texas,
+            R.string.punto,
+            R.string.carribean,
+            R.string.francese,
+            R.string.chemin
     };
     private int[] arraySlotsTitle = {
             R.string.what,
@@ -127,6 +169,13 @@ public class CasinoGame extends Fragment implements OnBackPressedListener {
                              Bundle savedInstanceState) {
 
         me = this;
+        try {
+            gameList = new JSONObject(loadJSONFromAsset());
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+
         View rootView = inflater.inflate(R.layout.fragment_casino_game, container, false);
         listView = (ListView) rootView.findViewById(R.id.list_games);
 
@@ -134,12 +183,12 @@ public class CasinoGame extends Fragment implements OnBackPressedListener {
         Display display = getActivity().getWindowManager().getDefaultDisplay();
 
         int width = display.getWidth();
-        int height = (int) (width * 0.45);
-
-
+        height = (int) (width * 0.45);
 
         mAdapter = new GamesAdapter(getActivity(), height, textureArray, titleArray);
         listView.setAdapter(mAdapter);
+        level=0;
+
 
         if (savedInstanceState != null) {
             // Restore last state for checked position.
@@ -168,10 +217,13 @@ public class CasinoGame extends Fragment implements OnBackPressedListener {
                     ((HomeActivity) activity).setOnBackPressedListener(me);
                     switch (position) {
                         case 0:
-                            mAdapter.textureArray = arrayGames;
-                            mAdapter.titleArray = arrayGamesTitle;
-                            mAdapter.notifyDataSetChanged();
                             level++;
+                            try {
+                                setOffice();
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+
                             break;
                         case 1:
                             levelTwo = 1;
@@ -179,6 +231,11 @@ public class CasinoGame extends Fragment implements OnBackPressedListener {
                             mAdapter.titleArray = arraySlotsTitle;
                             mAdapter.notifyDataSetChanged();
                             level++;
+                            try {
+                                myjArr = gameList.getJSONArray("Slot");
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
                             break;
                         case 2:
                             Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.clickandplay.it"));
@@ -193,9 +250,11 @@ public class CasinoGame extends Fragment implements OnBackPressedListener {
                     switch (levelTwo) {
                         case 0:
                             showDetails(position, levelTwo);
+
                             break;
                         case 1:
                             showDetails(position, levelTwo);
+
                             break;
                         default:
                             break;
@@ -329,7 +388,11 @@ public class CasinoGame extends Fragment implements OnBackPressedListener {
                     case 0:
                         Intent intent = new Intent();
                         intent.setClass(getActivity(), CasinoGame_Item_Activity.class);
-                        //intent.putExtra("param1", demoData[index]);
+                        try {
+                            intent.putExtra("jsonArray", myjArr.getJSONArray(index).toString());
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
                         startActivity(intent);
                         break;
                     case 1:
@@ -346,6 +409,79 @@ public class CasinoGame extends Fragment implements OnBackPressedListener {
         }
 
     }
+
+    public String loadJSONFromAsset() {
+        String json = null;
+        try {
+
+            InputStream is = getActivity().getAssets().open("base/GameDBase.json");
+
+            int size = is.available();
+
+            byte[] buffer = new byte[size];
+
+            is.read(buffer);
+
+            is.close();
+
+            json = new String(buffer, "UTF-8");
+
+
+        } catch (IOException ex) {
+            ex.printStackTrace();
+            return null;
+        }
+        return json;
+
+    }
+    public void setOffice () throws JSONException {
+    if (level == 1) {
+            if (Venue.currentVenue == 0) {
+
+                mAdapter.textureArray = arrayGames;
+                mAdapter.titleArray = arrayGamesTitle;
+                mAdapter.notifyDataSetChanged();
+
+                try {
+                    myjArr = gameList.getJSONArray("Tavoli").getJSONArray(0).getJSONArray(2);
+                    ;
+                    Log.d(TAG, "VENEZIA ");
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+
+            } else {
+
+                mAdapter.textureArray = arrayGamesCN;
+                mAdapter.titleArray = arrayGamesTitleCN;
+                mAdapter.notifyDataSetChanged();
+
+                try {
+                    myjArr = gameList.getJSONArray("Tavoli").getJSONArray(0).getJSONArray(3);
+                    ;
+                    Log.d(TAG, "CA NOGHERA ");
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        }
+    }
+//
+//    public JSONArray inOffice(String office)    {
+//        JSONArray helper = new JSONArray();
+//        for (int i=0; i< gameList.size(); i++) {
+//            EventItem myArray = (EventItem) gameList.get(i);
+//
+//            if (myArray.getOffice().equals(office)) {
+//                helper.add(myArray);
+//                helper.add(myArray);
+//                //mAdapter.addItem(myArray);
+//            }
+//        }
+//        return(helper);
+//    }
 
 
 }

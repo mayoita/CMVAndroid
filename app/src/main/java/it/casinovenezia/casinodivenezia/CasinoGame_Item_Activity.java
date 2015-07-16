@@ -1,11 +1,14 @@
 package it.casinovenezia.casinodivenezia;
 
 import android.content.Context;
+import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.text.method.LinkMovementMethod;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.Display;
 import android.view.LayoutInflater;
@@ -17,7 +20,10 @@ import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import org.json.JSONArray;
+import org.json.JSONException;
 import org.lucasr.twowayview.TwoWayView;
 
 /**
@@ -31,7 +37,18 @@ public class CasinoGame_Item_Activity extends ActionBarActivity {
     private int OverMarginForDeepRule = 80;
     private int OverMarginForDeepRuleTopBottom = 200;
     private int heightDisplay;
+    JSONArray myData;
     Context context = CasinoGame_Item_Activity.this;
+    private int[] arrayGames = {
+            R.drawable.fair,
+            R.drawable.blackj,
+            R.drawable.texas,
+            R.drawable.banco,
+            R.drawable.carribean,
+            R.drawable.french,
+            R.drawable.chemin,
+            R.drawable.trente
+    };
 
 
 
@@ -44,6 +61,22 @@ public class CasinoGame_Item_Activity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        Intent intent = getIntent();
+        String jsonArray = intent.getStringExtra("jsonArray");
+
+        try {
+            myData = new JSONArray(jsonArray);
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        boolean tabletSize = getResources().getBoolean(R.bool.isTablet);
+        if (tabletSize) {
+
+        } else {
+            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        }
         setContentView(R.layout.game_single);
 
         Typeface XLight = Typeface.createFromAsset(getAssets(), "fonts/GothamXLight.otf");
@@ -58,6 +91,12 @@ public class CasinoGame_Item_Activity extends ActionBarActivity {
 
         myText.setTypeface(XLight);
         myTexttitle.setTypeface(XLight);
+        imageViewGame.setImageResource(arrayGames[position]);
+        try {
+            myTexttitle.setText(myData.getString(0));
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
 
 
         dm = getResources().getDisplayMetrics();

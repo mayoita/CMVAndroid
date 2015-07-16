@@ -8,6 +8,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.PagerTitleStrip;
 import android.support.v4.view.ViewPager;
+import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -99,6 +100,7 @@ public class HomeMainFr extends Fragment {
     public class MyPageAdapter extends FragmentStatePagerAdapter {
 
         private List<Fragment> fragments;
+        SparseArray<Fragment> registeredFragments = new SparseArray<Fragment>();
 
         public MyPageAdapter(FragmentManager fm, List<Fragment> fragments) {
             super(fm);
@@ -107,6 +109,7 @@ public class HomeMainFr extends Fragment {
 
         @Override
         public Fragment getItem(int position) {
+
             return this.fragments.get(position);
         }
 
@@ -142,6 +145,23 @@ public class HomeMainFr extends Fragment {
                 default:
                     return "item " + position;
             }
+        }
+
+        @Override
+        public Object instantiateItem(ViewGroup container, int position) {
+            Fragment fragment = (Fragment) super.instantiateItem(container, position);
+            registeredFragments.put(position, fragment);
+            return fragment;
+        }
+
+        @Override
+        public void destroyItem(ViewGroup container, int position, Object object) {
+            registeredFragments.remove(position);
+            super.destroyItem(container, position, object);
+        }
+
+        public Fragment getRegisteredFragment(int position) {
+            return registeredFragments.get(position);
         }
     }
 

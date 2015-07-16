@@ -1,26 +1,46 @@
 package it.casinovenezia.casinodivenezia;
 
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.Signature;
 import android.content.res.Configuration;
 import android.content.res.TypedArray;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentStatePagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.util.Base64;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
+import android.widget.Toast;
 
+import com.facebook.appevents.AppEventsLogger;
 import com.parse.Parse;
 import com.parse.ParseFacebookUtils;
+import com.parse.ParseObject;
+import com.parse.ParseTwitterUtils;
+import com.parse.ui.ParseLoginBuilder;
 
+import org.json.JSONException;
+
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 
 import it.casinovenezia.adapter.NavDrawerListAdapter;
@@ -60,16 +80,27 @@ public class HomeActivity extends ActionBarActivity implements EventDetails.OnEv
     private CharSequence mDrawerTitle;
     //use to store App title
     private CharSequence mTitle;
+    ViewPager mPager;
+
 
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        Parse.enableLocalDatastore(this);
+        boolean tabletSize = getResources().getBoolean(R.bool.isTablet);
+        if (tabletSize) {
+
+        } else {
+            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        }
+       // Parse.enableLocalDatastore(this);
 
         Parse.initialize(this, "yO3MBzW9liNCaiAfXWGb3NtZJ3VhXyy4Zh8rR5ck", "KImYuYCrJ9j3IbDI3W2KtDXCXwmfqsRDCn5Em6A9");
         ParseFacebookUtils.initialize(this);
+        ParseTwitterUtils.initialize("iG8JhxkUYQS0liIzwtYQ", "DCT2PL3MbHCN0RV9cx5K7iTlSdKfimaEUB8cOBELOTc");
+
+
 
         setContentView(R.layout.home_main);
 
@@ -277,6 +308,58 @@ public class HomeActivity extends ActionBarActivity implements EventDetails.OnEv
 
     private void changeVenue() {
 
+        if (Venue.currentVenue == 0) {
+            Venue.currentVenue = 1;
+            checkFragment(0);
+
+        } else {
+            Venue.currentVenue = 0;
+            checkFragment(1);
+        }
+
+    }
+
+    private void checkFragment (int venue) {
+        Object currentFragment = this.getSupportFragmentManager().findFragmentById(R.id.frame_container);
+        if (currentFragment instanceof HomeMainFr) {
+
+            mPager = (ViewPager)((HomeMainFr)currentFragment).getView().findViewById(R.id.viewpager);
+            HomeMainFr.MyPageAdapter myadapter = (HomeMainFr.MyPageAdapter) mPager.getAdapter();
+            Fragment page = myadapter.getRegisteredFragment(mPager.getCurrentItem());
+            if (page != null) {
+                switch (page.getClass().getName()) {
+                    case "it.casinovenezia.casinodivenezia.HomeFr":
+                        ImageView myBack = (ImageView) page.getView().findViewById(R.id.imageView);
+                        TextView venueLabel = (TextView)page.getView().findViewById(R.id.cavendramin);
+                        HomeFr theClass = (HomeFr)page;
+                        if (venue == 0) {
+                            venueLabel.setText("CA' NOGHERA");
+                            myBack.setImageResource(R.drawable.backcn);
+                            theClass.loadFestivity(getResources().getText(R.string.canogheratime1).toString(), getResources().getText(R.string.canogheratime2).toString());
+                        } else {
+                            theClass.loadFestivity(getResources().getText(R.string.veneziatime1).toString(), getResources().getText(R.string.veneziatime2).toString());
+                            venueLabel.setText("CA' VENDRAMIN CALERGI");
+                            myBack.setImageResource(R.drawable.backve);
+                        }
+                        break;
+                    case "it.casinovenezia.casinodivenezia.EventsFr":
+
+                        EventsFr theClassEvents = (EventsFr)page;
+                        theClassEvents.setOffice();
+                        break;
+                    case "it.casinovenezia.casinodivenezia.CasinoGame":
+
+                        CasinoGame theClassGame = (CasinoGame)page;
+                        try {
+                            theClassGame.setOffice();
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        break;
+
+                }
+            }
+        }
     }
     public void setOnBackPressedListener(OnBackPressedListener onBackPressedListener) {
         this.onBackPressedListener = onBackPressedListener;
@@ -293,7 +376,7 @@ public class HomeActivity extends ActionBarActivity implements EventDetails.OnEv
                    break;
            }
 
-       // else
+        // else
            // super.onBackPressed();
 
     }
@@ -302,4 +385,23 @@ public class HomeActivity extends ActionBarActivity implements EventDetails.OnEv
         startActivity(intent);
     }
 
+    public void openSignUpLogIn(View v) {
+        ParseLoginBuilder builder = new ParseLoginBuilder(HomeActivity.this);
+        startActivityForResult(builder.build(), 0);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        // Logs 'install' and 'app activate' App Events.
+        AppEventsLogger.activateApp(this);
+    }
+    @Override
+    protected void onPause() {
+        super.onPause();
+
+        // Logs 'app deactivate' App Event.
+        AppEventsLogger.deactivateApp(this);
+    }
 }

@@ -44,7 +44,7 @@ public class CircularImageView extends ImageView {
 		paint.setAntiAlias(true);
 		
 		paintBorder = new Paint();
-		setBorderColor(Color.BLUE);
+		setBorderColor(Color.WHITE);
 		paintBorder.setAntiAlias(true);		
 	}
 	

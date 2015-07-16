@@ -2,8 +2,11 @@ package it.casinovenezia.casinodivenezia;
 
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -12,8 +15,23 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
+
+import com.parse.FindCallback;
+import com.parse.GetCallback;
+import com.parse.ParseException;
+import com.parse.ParseFile;
+import com.parse.ParseObject;
+import com.parse.ParseQuery;
+
+import java.io.Serializable;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 /**
  * Created by massimomoro on 25/03/15.
@@ -22,9 +40,12 @@ public class EventsFr extends Fragment {
 
     public static final String EXTRA_MESSAGE = "EXTRA_MESSAGE";
     private ListView listView;
-
-
+    List<ParseObject> ob;
     private EventsAdapter mAdapter;
+    private List<EventItem> eventitemlist = null;
+    private List<EventItem> myEventitemlist = null;
+
+    ProgressDialog mProgressDialog;
 
     boolean mDualPane;
     int mCurCheckPosition = 0;
@@ -70,19 +91,8 @@ public class EventsFr extends Fragment {
 
         View rootView = inflater.inflate(R.layout.events_fragment, container, false);
         listView = (ListView) rootView.findViewById(R.id.list_events);
+        new RemoteDataTask().execute();
 
-
-
-        mAdapter = new EventsAdapter(getActivity());
-
-        for (int i = 1; i < 12; i++) {
-            mAdapter.addItem("Row Item #" + i);
-            if (i % 4 == 0) {
-                mAdapter.addSectionHeaderItem("Section #" + i);
-            }
-        }
-
-        listView.setAdapter(mAdapter);
 
         if (savedInstanceState != null) {
             // Restore last state for checked position.
@@ -103,8 +113,8 @@ public class EventsFr extends Fragment {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                final String titoloriga = (String)parent.getItemAtPosition(position);
-                Log.d("list", "Ho cliccato sull'elemento con il titolo " + titoloriga);
+                //final String titoloriga = (String)parent.getItemAtPosition(position);
+                //Log.d("list", "Ho cliccato sull'elemento con il titolo " + titoloriga);
                 showDetails(position);
             }
         });
@@ -173,7 +183,10 @@ public class EventsFr extends Fragment {
             // the dialog fragment with selected text.
             Intent intent = new Intent();
             intent.setClass(getActivity(), EventDetailsActivity.class);
-            intent.putExtra("param1", demoData[index]);
+            intent.putExtra("name", myEventitemlist.get(index).getName());
+            intent.putExtra("description", myEventitemlist.get(index).getDescription());
+            intent.putExtra("date", myEventitemlist.get(index).getStartDate());
+            intent.putExtra("objectId", myEventitemlist.get(index).getMyId());
             startActivity(intent);
         }
 
@@ -190,5 +203,119 @@ public class EventsFr extends Fragment {
 //        // Do something when a list item is clicked
 //    }
 
+
+
+    public void setOffice () {
+        if (Venue.currentVenue == 0) {
+
+            myEventitemlist = inOffice("CN");
+            mAdapter = new EventsAdapter(getActivity(),
+                    myEventitemlist);
+
+            mAdapter.notifyDataSetChanged();
+            listView.setAdapter(mAdapter);
+
+        } else {
+
+            myEventitemlist = inOffice("VE");
+            mAdapter = new EventsAdapter(getActivity(),
+                    myEventitemlist);
+            //inOffice("VE");
+            mAdapter.notifyDataSetChanged();
+            listView.setAdapter(mAdapter);
+        }
+    }
+
+    public ArrayList<EventItem> inOffice(String office)    {
+        ArrayList<EventItem> helper = new ArrayList<EventItem>();
+        for (int i=0; i< eventitemlist.size(); i++) {
+            EventItem myArray = (EventItem) eventitemlist.get(i);
+
+            if (myArray.getOffice().equals(office)) {
+                 helper.add(myArray);
+                helper.add(myArray);
+                //mAdapter.addItem(myArray);
+            }
+        }
+        return(helper);
+    }
+    // RemoteDataTask AsyncTask
+    private class RemoteDataTask extends AsyncTask<Void, Void, Void> {
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            // Create a progressdialog
+            mProgressDialog = new ProgressDialog(getActivity());
+            // Set progressdialog title
+            mProgressDialog.setTitle("Parse.com Custom ListView Tutorial");
+            // Set progressdialog message
+            mProgressDialog.setMessage("Loading...");
+            mProgressDialog.setIndeterminate(false);
+            // Show progressdialog
+            mProgressDialog.show();
+        }
+
+        @Override
+        protected Void doInBackground(Void... params) {
+            // Create the array
+            eventitemlist = new ArrayList<EventItem>();
+            try {
+                // Locate the class table named "Country" in Parse.com
+                ParseQuery<ParseObject> query = new ParseQuery<ParseObject>(
+                        "Events");
+                // Locate the column named "ranknum" in Parse.com and order list
+                // by ascending
+                query.orderByDescending("StartDate");
+                ob = query.find();
+                for (ParseObject event : ob) {
+                    // Locate images in flag column
+                    ParseFile image = (ParseFile) event.get("ImageName");
+
+                    EventItem map = new EventItem();
+                    map.setImageMain(image);
+                    map.setOffice((String) event.get("office"));
+                    map.setMyId((String)event.getObjectId());
+                    map.setName((String) event.get("Name"));
+                    map.setDescription((String) event.get("Description"));
+                    map.setStartDate(formatMyDate(event.getDate("StartDate")));
+                    map.setEndDate(event.getDate("EndDate"));
+
+                    eventitemlist.add(map);
+                }
+            } catch (ParseException e) {
+                Log.e("Error", e.getMessage());
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void result) {
+
+            // Locate the listview in listview_main.xml
+            //listView = (ListView) findViewById(R.id.list_events);
+            // Pass the results into ListViewAdapter.java
+            setOffice();
+
+
+            // Close the progressdialog
+            mProgressDialog.dismiss();
+        }
+    }
+
+    private String formatMyDate(Date myDate) {
+
+        SimpleDateFormat sdf = new SimpleDateFormat("EEEE dd LLLL", getResources().getConfiguration().locale);
+        //String cc = sdf.format(myDate);
+       // Date date = null;
+//        try {
+//            date = sdf.parse(myDate);
+//        } catch (ParseException e) {
+//            // handle exception here !
+//        }
+        //DateFormat dateFormat = android.text.format.DateFormat.getDateFormat(getActivity());
+        //String s = dateFormat.format(myDate);
+        return sdf.format(myDate);
+    }
 
 }

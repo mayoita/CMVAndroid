@@ -1,6 +1,7 @@
 package it.casinovenezia.casinodivenezia;
 
 import android.content.Context;
+import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -43,7 +44,12 @@ public class TournamentDetailsActivity extends ActionBarActivity implements Base
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        boolean tabletSize = getResources().getBoolean(R.bool.isTablet);
+        if (tabletSize) {
 
+        } else {
+            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        }
         setContentView(R.layout.activity_tournament_details);
 
         myListView = (ListView)findViewById(R.id.listViewTournament);

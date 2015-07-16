@@ -1,23 +1,71 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingTop="@dimen/com_parse_ui_vertical_margin"
-    android:paddingLeft="@dimen/com_parse_ui_horizontal_margin"
-    android:paddingRight="@dimen/com_parse_ui_horizontal_margin"
-    android:paddingBottom="@dimen/com_parse_ui_vertical_margin"
-    android:gravity="center"
-    android:orientation="vertical">
 
-    <include
-        layout="@layout/com_parse_ui_parse_login_app_logo"
+    android:background="@drawable/bluetilebg">
+
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_weight="0.5" />
+        android:text="18+"
+        android:id="@+id/diciottoetichetta"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        android:paddingLeft="2dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/diciottopiu"
+        android:text="@string/link"
+        android:textSize="8sp"
+        android:textColor="@color/white"
+        android:layout_toRightOf="@+id/diciottoetichetta"
+        android:layout_alignBottom="@+id/diciottoetichetta"
+        android:paddingRight="2dp"
+        />
+
+    <ImageView
+
+        android:id="@+id/homebanner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/homebanner"
+
+        android:paddingLeft="30dp"
+        android:paddingRight="30dp"
+        android:paddingTop="10dp"
+        android:layout_below="@+id/diciottopiu" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageView12"
+        android:src="@drawable/loginsmallshadow"
+        android:layout_below="@+id/homebanner"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="5dp" />
 
     <include
         layout="@layout/com_parse_ui_parse_signup_form"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="0.5" />
+        android:layout_weight="0.5"
+        android:layout_below="@+id/imageView12"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:id="@+id/include"
+        android:layout_marginTop="10dp" />
 
-</LinearLayout>
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageView13"
+        android:src="@drawable/loginsmallshadow"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="0dp"
+        android:layout_below="@+id/include" />
+
+
+
+</RelativeLayout>

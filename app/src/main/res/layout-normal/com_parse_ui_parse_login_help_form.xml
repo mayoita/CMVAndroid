@@ -18,11 +18,13 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/com_parse_ui_xlarge_vertical_spacing"
         android:hint="@string/com_parse_ui_login_help_email_input_hint"
-        android:inputType="textEmailAddress"></EditText>
+        android:inputType="textEmailAddress"
+        android:textColor="@color/white"></EditText>
 
     <Button
         android:id="@+id/login_help_submit"
         style="@style/ParseLoginUI.Button"
         android:layout_marginTop="@dimen/com_parse_ui_xlarge_vertical_spacing"
+        android:background="@drawable/button_login_custom_bg"
         android:text="@string/com_parse_ui_login_help_submit_button_label" />
 </LinearLayout>

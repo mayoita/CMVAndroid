@@ -40,14 +40,13 @@ public class CasinoGame_Item_Activity extends ActionBarActivity {
     JSONArray myData;
     Context context = CasinoGame_Item_Activity.this;
     private int[] arrayGames = {
-            R.drawable.fair,
-            R.drawable.blackj,
-            R.drawable.texas,
-            R.drawable.banco,
-            R.drawable.carribean,
-            R.drawable.french,
-            R.drawable.chemin,
-            R.drawable.trente
+            R.drawable.fairroulette_972,
+            R.drawable.blackjack458,
+            R.drawable.carribean_458,
+            R.drawable.roulettefrancese_458,
+            R.drawable.chemindefer_458,
+            R.drawable.trentaquaranta_458
+
     };
 
 
@@ -91,9 +90,25 @@ public class CasinoGame_Item_Activity extends ActionBarActivity {
 
         myText.setTypeface(XLight);
         myTexttitle.setTypeface(XLight);
-        imageViewGame.setImageResource(arrayGames[position]);
+        int myNum = 0;
+
+        try {
+            myNum = Integer.parseInt(myData.getJSONArray(2).getString(0));
+        } catch(NumberFormatException nfe) {
+            System.out.println("Could not parse " + nfe);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+            imageViewGame.setImageResource(arrayGames[myNum]);
+
         try {
             myTexttitle.setText(myData.getString(0));
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        try {
+            myText.setText(myData.getJSONArray(2).getJSONArray(3).getJSONArray(0).getString(1));
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -102,7 +117,7 @@ public class CasinoGame_Item_Activity extends ActionBarActivity {
         dm = getResources().getDisplayMetrics();
         int width = display.getWidth();
         heightDisplay = display.getHeight();
-        int height = (int) (width * 0.47);
+        int height = (int) (width * 0.45);
 
         RelativeLayout.LayoutParams fp = new RelativeLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, height + convertDpToPx(6,dm));
         RelativeLayout.LayoutParams sp = new RelativeLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, height);

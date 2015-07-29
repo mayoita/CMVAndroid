@@ -11,9 +11,26 @@
         android:layout_weight="1" >
         >
     </ListView>
-    <include layout="@layout/activity_event_details"
+    <RelativeLayout
         android:layout_width="0dp"
+        android:layout_weight="2"
         android:layout_height="match_parent"
-        android:layout_weight="3"
-        android:id="@+id/containerInLand"/>
+        android:id="@+id/containerInLand"
+        android:background="@drawable/greentilebg">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/text_for_event_general"
+            android:id="@+id/text_for_general"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:textColor="@color/yellow_brand"
+            android:textSize="25dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:phoneNumber="true"
+            android:gravity="center" />
+    </RelativeLayout>
 </LinearLayout>

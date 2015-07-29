@@ -5,29 +5,33 @@
     android:orientation="vertical"
 
 
->
-    <TextView
+    >
+    <it.casinovenezia.casinodivenezia.AutoResizeTextView
         android:id="@+id/textGameRule"
         android:layout_width="match_parent"
         android:textColor="@color/yellow_brand"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:textSize="18sp"
-        android:gravity="center_vertical|center_horizontal" />
+        android:textSize="100sp"
+        android:ellipsize="none"
+        android:maxLines="1"
+        android:gravity="center" />
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="2">
-        <TextView
+        <it.casinovenezia.casinodivenezia.AutoResizeTextView
             android:id="@+id/textGameRuleDeep"
             android:layout_width="match_parent"
             android:textColor="@color/white"
             android:layout_height="match_parent"
-
-            android:textSize="16sp"
-
-            android:gravity="center_vertical|center_horizontal" />
+            android:textSize="100sp"
+            android:ellipsize="none"
+            android:maxLines="1"
+            android:gravity="center"
+            android:layout_toLeftOf="@+id/buttonPopWindow"
+            android:layout_toStartOf="@+id/buttonPopWindow" />
 
         <ImageButton
             android:layout_width="wrap_content"

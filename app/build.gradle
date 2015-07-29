@@ -19,6 +19,11 @@ android {
         }
     }
 }
+repositories {
+    maven {
+        url "https://jitpack.io"
+    }
+}
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
@@ -36,5 +41,5 @@ dependencies {
     compile project(':ParseLoginUI')
     // Uncomment if using Facebook Login (optional Maven dependency)
     compile 'com.facebook.android:facebook-android-sdk:4.0.1'
-
+    compile 'com.github.moondroid.coverflow:library:1.0'
 }

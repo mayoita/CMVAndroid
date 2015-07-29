@@ -1,5 +1,6 @@
 package it.casinovenezia.casinodivenezia;
 
+import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -7,6 +8,7 @@ import android.support.v4.app.Fragment;
 import android.text.method.LinkMovementMethod;
 import android.util.DisplayMetrics;
 import android.util.TypedValue;
+import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,6 +24,11 @@ import com.daimajia.slider.library.Animations.DescriptionAnimation;
 import com.daimajia.slider.library.SliderLayout;
 import com.daimajia.slider.library.SliderTypes.BaseSliderView;
 import com.daimajia.slider.library.SliderTypes.DefaultSliderView;
+import com.parse.GetCallback;
+import com.parse.ParseException;
+import com.parse.ParseFile;
+import com.parse.ParseObject;
+import com.parse.ParseQuery;
 
 import java.util.HashMap;
 
@@ -37,13 +44,18 @@ import java.util.HashMap;
 public class EventDetails extends Fragment implements BaseSliderView.OnSliderClickListener{
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+    private static final String NAME = "name";
+    private static final String DESCRIPTION = "description";
+    private static final String DATE = "date";
+    private static final String OBJECTID = "objectId";
 
     // TODO: Rename and change types of parameters
-    private String mParam1;
+
     private SliderLayout mySlider;
     int fragmentWidth;
+    private String image1;
+    private String image2;
+    private String image3;
 
 
 
@@ -62,17 +74,20 @@ public class EventDetails extends Fragment implements BaseSliderView.OnSliderCli
      * @return A new instance of fragment EventDetails.
      */
     // TODO: Rename and change types and number of parameters
-    public static EventDetails newInstance(String index) {
+    public static EventDetails newInstance(String name, String description, String date, String objecyId) {
         EventDetails fragment = new EventDetails();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, index);
+        args.putString(NAME, name);
+        args.putString(DESCRIPTION, description);
+        args.putString(DATE, date);
+        args.putString(OBJECTID, objecyId);
 
         fragment.setArguments(args);
         return fragment;
     }
 
     public String getShownIndex() {
-        return getArguments().getString(ARG_PARAM1);
+        return getArguments().getString(NAME);
     }
 
     public EventDetails() {
@@ -83,7 +98,7 @@ public class EventDetails extends Fragment implements BaseSliderView.OnSliderCli
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
+
 
         }
 
@@ -103,7 +118,13 @@ public class EventDetails extends Fragment implements BaseSliderView.OnSliderCli
             // the view hierarchy; it would just never be used.
             return null;
         }
+
         View rootView = inflater.inflate(R.layout.activity_event_details, container, false);
+        mySlider = (SliderLayout)getActivity().findViewById(R.id.slider);
+
+
+        Typeface XLight = Typeface.createFromAsset(getActivity().getAssets(), "fonts/GothamXLight.otf");
+        Typeface Thin = Typeface.createFromAsset(getActivity().getAssets(), "fonts/Giorgio-Thin.ttf");
 
         return rootView;
     }
@@ -118,43 +139,26 @@ public class EventDetails extends Fragment implements BaseSliderView.OnSliderCli
                 @Override
                 public void onGlobalLayout() {
                     fragmentWidth = getView().getWidth();
+                    loadImage(getArguments().getString(OBJECTID));
                     ImageView imageView = (ImageView) myView.findViewById(R.id.imageView7);
+                    TextView name = (TextView) myView.findViewById(R.id.textView8);
+                    TextView date = (TextView) myView.findViewById(R.id.textView9);
+                    TextView description = (TextView) myView.findViewById(R.id.textView10);
+                    name.setText(getArguments().getString(NAME));
+                    date.setText(getArguments().getString(DATE));
+                    description.setText(getArguments().getString(DESCRIPTION));
                     DisplayMetrics dm = getResources().getDisplayMetrics();
                     int height = (int) (fragmentWidth * 0.66); // 0.75 if image aspect ration is 4:3, change accordingly
 
                     RelativeLayout.LayoutParams fp = new RelativeLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, height + convertDpToPx(6,dm));
                     RelativeLayout.LayoutParams sp = new RelativeLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, height);
 
-                    fp.setMargins(convertDpToPx(7,dm) ,convertDpToPx(37,dm), convertDpToPx(7,dm), 0);
-                    sp.setMargins(convertDpToPx(10,dm) ,convertDpToPx(40,dm), convertDpToPx(10,dm), 0);
+                    fp.setMargins(convertDpToPx(7, dm),convertDpToPx(37,dm), convertDpToPx(7, dm), 0);
+                    sp.setMargins(convertDpToPx(10, dm),convertDpToPx(40,dm), convertDpToPx(10,dm), 0);
                     imageView.setLayoutParams(fp);
                     mySlider.setLayoutParams(sp);
 
-                    HashMap<String,Integer> file_maps = new HashMap<String, Integer>();
-                    file_maps.put("Hannibal",R.drawable.hannibal);
-                    file_maps.put("Big Bang Theory",R.drawable.bigbang);
-                    file_maps.put("House of Cards",R.drawable.house);
-                    file_maps.put("Game of Thrones", R.drawable.game_of_thrones);
 
-                    for(String name : file_maps.keySet()){
-                        DefaultSliderView textSliderView = new DefaultSliderView(getActivity());
-                        // initialize a SliderLayout
-                        textSliderView
-                                .description(name)
-                                .image(file_maps.get(name))
-                                .setScaleType(BaseSliderView.ScaleType.Fit);
-
-
-                        //add your extra information
-                        textSliderView.getBundle()
-                                .putString("extra",name);
-
-                        mySlider.addSlider(textSliderView);
-                    }
-                    mySlider.setPresetTransformer(SliderLayout.Transformer.Fade);
-                    mySlider.setPresetIndicator(SliderLayout.PresetIndicators.Center_Bottom);
-                    mySlider.setCustomAnimation(new DescriptionAnimation());
-                    mySlider.setDuration(4000);
                     if (fragmentWidth > 0) {
                          getView().getViewTreeObserver().removeGlobalOnLayoutListener(this);
                     }
@@ -178,7 +182,7 @@ public class EventDetails extends Fragment implements BaseSliderView.OnSliderCli
 
     @Override
     public void onSliderClick(BaseSliderView baseSliderView) {
-        Toast.makeText(getActivity(), baseSliderView.getBundle().get("extra") + "", Toast.LENGTH_SHORT).show();
+
     }
 
 
@@ -197,6 +201,77 @@ public class EventDetails extends Fragment implements BaseSliderView.OnSliderCli
 
         // TODO: Update argument type and name
         public void onFragmentInteraction(Uri uri);
+    }
+    public void loadImage(String myId) {
+        ParseQuery<ParseObject> query = new ParseQuery<ParseObject>(
+                "Events");
+
+        query.getInBackground(myId,
+                new GetCallback<ParseObject>() {
+
+                    public void done(ParseObject object,
+                                     ParseException e) {
+                        // TODO Auto-generated method stub
+
+                        // Locate the column named "ImageName" and set
+                        // the string
+                        ParseFile image1F = (ParseFile) object
+                                .get("ImageEvent1");
+                        ParseFile image2F = (ParseFile) object
+                                .get("ImageEvent2");
+                        ParseFile image3F = (ParseFile) object
+                                .get("ImageEvent3");
+                        ParseFile imageDefault = (ParseFile) object
+                                .get("ImageName");
+                        if (image1F != null){
+                            image1 = image1F.getUrl();
+                        } else {
+                            image1 = imageDefault.getUrl();
+                        }
+
+                        if (image2F != null){
+                            image2 = image2F.getUrl();
+                        }
+                        if (image3F != null){
+                            image3 = image3F.getUrl();
+                        }
+                        createSlider();
+
+
+                    }
+                });
+    }
+    public void createSlider (){
+        HashMap<String, String> file_maps = new HashMap<String, String>();
+        if (image1 != null) {
+            file_maps.put("image1", image1);
+        }
+        if (image2 != null) {
+            file_maps.put("image2", image2);
+        }
+        if (image3 != null) {
+            file_maps.put("image3", image3);
+        }
+
+        for(String nameF : file_maps.keySet()){
+            DefaultSliderView textSliderView = new DefaultSliderView(getActivity());
+            // initialize a SliderLayout
+            textSliderView
+                    .description(nameF)
+                    .image(file_maps.get(nameF))
+                    .setScaleType(BaseSliderView.ScaleType.Fit)
+                    .setOnSliderClickListener(this);
+
+            //add your extra information
+            textSliderView.getBundle()
+                    .putString("extra",nameF);
+
+            mySlider.addSlider(textSliderView);
+        }
+        mySlider.setPresetTransformer(SliderLayout.Transformer.Fade);
+        mySlider.setPresetIndicator(SliderLayout.PresetIndicators.Center_Bottom);
+        mySlider.setCustomAnimation(new DescriptionAnimation());
+        mySlider.setDuration(2000);
     }
 
 }

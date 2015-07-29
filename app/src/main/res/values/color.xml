@@ -21,4 +21,5 @@
     <color name="menu_black">#181818</color>
     <color name="yellow_brand">#d49f01</color>
     <color name="red_brand">#B71C1C</color>
+    <color name="green_game_bg">#193529</color>
 </resources>

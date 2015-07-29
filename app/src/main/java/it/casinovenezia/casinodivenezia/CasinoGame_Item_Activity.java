@@ -6,6 +6,7 @@ import android.content.pm.ActivityInfo;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.text.TextUtils;
 import android.text.method.LinkMovementMethod;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -13,6 +14,7 @@ import android.util.TypedValue;
 import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -29,7 +31,7 @@ import org.lucasr.twowayview.TwoWayView;
 /**
  * Created by massimomoro on 04/05/15.
  */
-public class CasinoGame_Item_Activity extends ActionBarActivity {
+public class CasinoGame_Item_Activity extends ActionBarActivity  {
     private GameRuleAdapter mAdapter;
 
     private TextView myTexttitle;
@@ -37,6 +39,7 @@ public class CasinoGame_Item_Activity extends ActionBarActivity {
     private int OverMarginForDeepRule = 80;
     private int OverMarginForDeepRuleTopBottom = 200;
     private int heightDisplay;
+    TextView myText;
     JSONArray myData;
     Context context = CasinoGame_Item_Activity.this;
     private int[] arrayGames = {
@@ -45,9 +48,15 @@ public class CasinoGame_Item_Activity extends ActionBarActivity {
             R.drawable.carribean_458,
             R.drawable.roulettefrancese_458,
             R.drawable.chemindefer_458,
-            R.drawable.trentaquaranta_458
+            R.drawable.trentaquaranta_458,
+            R.drawable.default458
 
     };
+
+    private int currentVisibleItemCount;
+    private int currentScrollState;
+    private TwoWayView lvTest;
+
 
 
 
@@ -76,6 +85,7 @@ public class CasinoGame_Item_Activity extends ActionBarActivity {
         } else {
             setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         }
+
         setContentView(R.layout.game_single);
 
         Typeface XLight = Typeface.createFromAsset(getAssets(), "fonts/GothamXLight.otf");
@@ -85,12 +95,14 @@ public class CasinoGame_Item_Activity extends ActionBarActivity {
         Display display = getWindowManager().getDefaultDisplay();
         ImageView imageViewWhite = (ImageView) findViewById(R.id.imageViewWhite);
         ImageView imageViewGame = (ImageView) findViewById(R.id.imageViewGame);
-        TextView myText = (TextView)findViewById(R.id.textViewGame);
+
+
+        myText = (TextView)findViewById(R.id.textViewGame);
         myTexttitle = (TextView)findViewById(R.id.textViewTitleGame);
 
         myText.setTypeface(XLight);
         myTexttitle.setTypeface(XLight);
-        int myNum = 0;
+        int myNum = 6;
 
         try {
             myNum = Integer.parseInt(myData.getJSONArray(2).getString(0));
@@ -129,20 +141,76 @@ public class CasinoGame_Item_Activity extends ActionBarActivity {
 
 
         mAdapter = new GameRuleAdapter(context, width);
-        mAdapter.addItem("Item 1");
-        mAdapter.addItem("Item 2");
-        mAdapter.addItem("Item 3");
-        mAdapter.addItem("Item 4");
-        mAdapter.addItem("Item 5");
-        mAdapter.addItem("Item 6");
+        JSONArray values = new JSONArray();
+        try {
+             values = myData.getJSONArray(2).getJSONArray(3);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        for(int i = 0 ; i < values.length(); i++) {
+            try {
+                mAdapter.addItem(values.getJSONArray(i));
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
 
 
-        TwoWayView lvTest = (TwoWayView) findViewById(R.id.lvItems);
+
+        lvTest = (TwoWayView) findViewById(R.id.lvItems);
         lvTest.setAdapter(mAdapter);
+        lvTest.setOnScrollListener(new TwoWayView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(TwoWayView view, int scrollState) {
+                String stateName = "Undefined";
+                currentScrollState = scrollState;
+                isScrollCompleted();
+                switch (scrollState) {
+                    case SCROLL_STATE_IDLE:
+                        stateName = "Idle";
 
+                        break;
+
+                    case SCROLL_STATE_TOUCH_SCROLL:
+                        stateName = "Dragging";
+                        break;
+
+                    case SCROLL_STATE_FLING:
+                        stateName = "Flinging";
+                        break;
+                }
+
+
+
+            }
+
+            @Override
+            public void onScroll(TwoWayView view, int firstVisibleItem,
+                                 int visibleItemCount, int totalItemCount) {
+
+
+
+                currentVisibleItemCount = visibleItemCount;
+            }
+            private void isScrollCompleted() {
+
+                if (currentVisibleItemCount > 0 && currentScrollState == 0) {
+                    try {
+                        myText.setText(myData.getJSONArray(2).getJSONArray(3).getJSONArray(lvTest.getFirstVisiblePosition() ).getString(1));
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                    /*** In this way I detect if there's been a scroll which has completed ***/
+                    /*** do the work! ***/
+                }
+            }
+
+        });
 
 
     }
+
+
 
     public void openPopWindow(View v) {
        int a = heightDisplay;
@@ -150,32 +218,37 @@ public class CasinoGame_Item_Activity extends ActionBarActivity {
                 = (LayoutInflater)getBaseContext()
                 .getSystemService(LAYOUT_INFLATER_SERVICE);
         View popupView = layoutInflater.inflate(R.layout.popupgamerule, null);
+        TextView theTitle = (TextView) popupView.findViewById(R.id.popUpTitle);
         final PopupWindow popupWindow = new PopupWindow(
                 popupView,
-                myTexttitle.getWidth()  + convertDpToPx(OverMarginForDeepRule,dm),
+                WindowManager.LayoutParams.MATCH_PARENT,
                 heightDisplay - convertDpToPx(OverMarginForDeepRuleTopBottom, dm));
 
         ListView theList = (ListView)popupView.findViewById(R.id.therule);
 
         //Adapter for GameRule
         GameDeepRuleAdapter theRuleAdapter= new GameDeepRuleAdapter(v.getContext());
-        theRuleAdapter.addItem("Item 1");
-        theRuleAdapter.addItem("Item 2");
-        theRuleAdapter.addItem("Item 3");
-        theRuleAdapter.addItem("Item 4");
-        theRuleAdapter.addItem("Item 5");
-        theRuleAdapter.addItem("Item 6");
-        theRuleAdapter.addItem("Item 1");
-        theRuleAdapter.addItem("Item 2");
-        theRuleAdapter.addItem("Item 3");
-        theRuleAdapter.addItem("Item 4");
-        theRuleAdapter.addItem("Item 5");
-        theRuleAdapter.addItem("Item 6");
-        theRuleAdapter.addItem("Item 1");
-        theRuleAdapter.addItem("Item 2");
-        theRuleAdapter.addItem("Item 3");
-        theRuleAdapter.addItem("Item 4");
-        theRuleAdapter.addItem("Item 5");
+
+        JSONArray values = new JSONArray();
+        try {
+            theTitle.setText(myData.getJSONArray(2).getJSONArray(3).getJSONArray(lvTest.getFirstVisiblePosition()).getString(2));
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        try {
+            values = myData.getJSONArray(2).getJSONArray(3).getJSONArray(lvTest.getFirstVisiblePosition());
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        if (values.length() > 3 ) {
+            for (int i = 3; i < values.length(); i++) {
+                try {
+                    theRuleAdapter.addItem(values.getJSONArray(i));
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
 
         theList.setAdapter(theRuleAdapter);
 
@@ -188,7 +261,10 @@ public class CasinoGame_Item_Activity extends ActionBarActivity {
                 popupWindow.dismiss();
             }});
 
-        popupWindow.showAsDropDown(myTexttitle, -convertDpToPx(OverMarginForDeepRule/2,dm), 0);
+        popupWindow.showAsDropDown(myTexttitle, -convertDpToPx(OverMarginForDeepRule / 2, dm), 0);
     }
+
+
+
 
 }

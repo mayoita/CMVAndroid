@@ -14,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -43,7 +44,7 @@ public class HomeFr extends Fragment {
     TextView jackpotamount;
     TextView apertoDalle;
     public TextView venue;
-
+    private View rootView;
     private List<Object> arrayFestivity= new ArrayList<>();
     private Boolean VPS2 = false;
 
@@ -83,7 +84,7 @@ public class HomeFr extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        View rootView = inflater.inflate(R.layout.home_fragment, container, false);
+        rootView = inflater.inflate(R.layout.home_fragment, container, false);
 
         venue = (TextView) rootView.findViewById(R.id.cavendramin);
         Typeface XLight = Typeface.createFromAsset(getActivity().getAssets(), "fonts/GothamXLight.otf");
@@ -118,7 +119,7 @@ public class HomeFr extends Fragment {
                 new int[]{Color.rgb(253, 255, 26), Color.rgb(250, 100, 22)},
                 new float[]{0, 1}, Shader.TileMode.CLAMP);
         jackpotLabel.getPaint().setShader(textShader);
-
+        setOffice();
         return rootView;
     }
 
@@ -139,8 +140,7 @@ public class HomeFr extends Fragment {
 
                 } else {
                     // something went wrong
-                    Toast.makeText(getActivity(),
-                            "Bad connection !", Toast.LENGTH_SHORT).show();
+
                 }
             }
         }
@@ -159,8 +159,7 @@ public class HomeFr extends Fragment {
 
                         } else {
                             // something went wrong
-                            Toast.makeText(getActivity(),
-                                    "Bad connection !", Toast.LENGTH_SHORT).show();
+
                         }
                     }
                 }
@@ -204,5 +203,17 @@ public class HomeFr extends Fragment {
 
     }
 
+    public void setOffice() {
+        ImageView myBack = (ImageView) rootView.findViewById(R.id.imageView);
 
+        if (Venue.currentVenue == 1) {
+            venue.setText("CA' NOGHERA");
+            myBack.setImageResource(R.drawable.backcn);
+            loadFestivity(getResources().getText(R.string.canogheratime1).toString(), getResources().getText(R.string.canogheratime2).toString());
+        } else {
+            loadFestivity(getResources().getText(R.string.veneziatime1).toString(), getResources().getText(R.string.veneziatime2).toString());
+            venue.setText("CA' VENDRAMIN CALERGI");
+            myBack.setImageResource(R.drawable.backve);
+        }
+    }
 }

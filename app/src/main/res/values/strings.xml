@@ -89,7 +89,7 @@
     <string name="title_activity_game_item">GAME</string>
     <string name="close_rule">CLOSE</string>
     <string name="title_activity_slot_details">SLOT</string>
-    <string name="text_for_game_general">GENERAL DESCRIPTION</string>
+    <string name="text_for_game_general">Experiencing the pleasure of gambling and of the challenge in a refined and intriguing location. This is what the Casinò di Venezia’s two venues have to offer, each complete, but with their own unique character.\n\nAnd you can play online from your own home.</string>
     <string name="title_activity_poker_item">POKER</string>
     <string name="text_for_game_general_poker">TEXT FOR POKER</string>
     <string name="torneo">TORNEO</string>
@@ -176,4 +176,10 @@
     <string name="canogheratime2">Today open 11:00 am - 03:15 am</string>
     <string name="veneziatime1">Today open 11.00 am - 03.15 am</string>
     <string name="veneziatime2">Today open 11:00 am - 02:45 am</string>
+    <string name="text_for_event_general">Live music, concerts, disco club, performances, entertainment, bar area and refreshments ranging from Happy Hours to gala dinners.\n\nA mix of games and entertainment for special evenings of fun devoted to teaching the game.</string>
+    <string name="lore_news">Our offering is under constant evolution to guarantee the best in modern technology, in our constant desire to offer the best customer satisfaction.</string>
+    <string name="title1">God of War Ascension</string>
+    <string name="title2">Assassin\'s Creed III</string>
+    <string name="title3">Hitman Absolution</string>
+    <string name="title4">Dishonored</string>
 </resources>

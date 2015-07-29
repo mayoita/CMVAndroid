@@ -1,5 +1,7 @@
 package it.casinovenezia.casinodivenezia;
 
+import android.app.Activity;
+import android.content.Context;
 import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
@@ -12,12 +14,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
+import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import org.json.JSONArray;
+import org.json.JSONException;
 import org.lucasr.twowayview.TwoWayView;
 
 /**
@@ -25,7 +32,7 @@ import org.lucasr.twowayview.TwoWayView;
  */
 public class GameDetailsFragment extends Fragment {
 
-    private static final String ARG_PARAM1 = "param1";
+    private static final String MY_ARRAY = "theDataArray";
 
 
     // TODO: Rename and change types of parameters
@@ -34,11 +41,30 @@ public class GameDetailsFragment extends Fragment {
     private DisplayMetrics dm;
     private GameRuleAdapter mAdapter;
     private int heightDisplay;
-
+    JSONArray myData;
     int fragmentWidth;
+    private TwoWayView lvTest;
+    private int[] arrayGames = {
+            R.drawable.fairroulette_972,
+            R.drawable.blackjack458,
+            R.drawable.carribean_458,
+            R.drawable.roulettefrancese_458,
+            R.drawable.chemindefer_458,
+            R.drawable.trentaquaranta_458,
+            R.drawable.default458
 
+    };
+    private int currentVisibleItemCount;
+    private int currentScrollState;
+    TextView myText;
+    private int OverMarginForDeepRuleTopBottom = 200;
+    private int OverMarginForDeepRule = 80;
 
-
+    OnClickDeepRule mCallback;
+    // Container Activity must implement this interface
+    public interface OnClickDeepRule {
+        public void openPopWindow(View v);
+    }
 
     private OnEventsInteractionListener mListener;
 
@@ -54,17 +80,17 @@ public class GameDetailsFragment extends Fragment {
      * @return A new instance of fragment EventDetails.
      */
     // TODO: Rename and change types and number of parameters
-    public static GameDetailsFragment newInstance(String index) {
+    public static GameDetailsFragment newInstance(String myArray) {
         GameDetailsFragment fragment = new GameDetailsFragment();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, index);
+        args.putString(MY_ARRAY, myArray);
 
         fragment.setArguments(args);
         return fragment;
     }
 
     public String getShownIndex() {
-        return getArguments().getString(ARG_PARAM1);
+        return getArguments().getString(MY_ARRAY);
     }
 
     public GameDetailsFragment() {
@@ -75,11 +101,22 @@ public class GameDetailsFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
+            mParam1 = getArguments().getString(MY_ARRAY);
 
         }
 
 
+    }
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        try {
+            mCallback = (OnClickDeepRule) activity;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(activity.toString()
+                    + " must implement OnHeadlineSelectedListener");
+        }
     }
 
     @Override
@@ -105,6 +142,14 @@ public class GameDetailsFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
 
         final View myView = getView();
+        String jsonArray = mParam1;
+
+        try {
+            myData = new JSONArray(jsonArray);
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
         if (myView != null) {
             myView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
                 @Override
@@ -114,11 +159,34 @@ public class GameDetailsFragment extends Fragment {
 
                     ImageView imageViewWhite = (ImageView) myView.findViewById(R.id.imageViewWhite);
                     ImageView imageViewGame = (ImageView) myView.findViewById(R.id.imageViewGame);
-                    TextView myText = (TextView)myView.findViewById(R.id.textViewGame);
+                    myText = (TextView)myView.findViewById(R.id.textViewGame);
                     myTexttitle = (TextView)myView.findViewById(R.id.textViewTitleGame);
 
                     myText.setTypeface(XLight);
                     myTexttitle.setTypeface(XLight);
+
+                    int myNum = 6;
+
+                    try {
+                        myNum = Integer.parseInt(myData.getJSONArray(2).getString(0));
+                    } catch(NumberFormatException nfe) {
+                        System.out.println("Could not parse " + nfe);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
+                    imageViewGame.setImageResource(arrayGames[myNum]);
+
+                    try {
+                        myTexttitle.setText(myData.getString(0));
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                    try {
+                        myText.setText(myData.getJSONArray(2).getJSONArray(3).getJSONArray(0).getString(1));
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
 
                     dm = getResources().getDisplayMetrics();
                     int width = getView().getWidth();
@@ -135,16 +203,70 @@ public class GameDetailsFragment extends Fragment {
 
 
                     mAdapter = new GameRuleAdapter(getActivity(), width);
-                    mAdapter.addItem("Item 1");
-                    mAdapter.addItem("Item 2");
-                    mAdapter.addItem("Item 3");
-                    mAdapter.addItem("Item 4");
-                    mAdapter.addItem("Item 5");
-                    mAdapter.addItem("Item 6");
+                    JSONArray values = new JSONArray();
+                    try {
+                        values = myData.getJSONArray(2).getJSONArray(3);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                    for(int i = 0 ; i < values.length(); i++) {
+                        try {
+                            mAdapter.addItem(values.getJSONArray(i));
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
 
 
-                    TwoWayView lvTest = (TwoWayView) myView.findViewById(R.id.lvItems);
+
+                    lvTest = (TwoWayView) getActivity().findViewById(R.id.lvItems);
                     lvTest.setAdapter(mAdapter);
+                    lvTest.setOnScrollListener(new TwoWayView.OnScrollListener() {
+                        @Override
+                        public void onScrollStateChanged(TwoWayView view, int scrollState) {
+                            String stateName = "Undefined";
+                            currentScrollState = scrollState;
+                            isScrollCompleted();
+                            switch (scrollState) {
+                                case SCROLL_STATE_IDLE:
+                                    stateName = "Idle";
+
+                                    break;
+
+                                case SCROLL_STATE_TOUCH_SCROLL:
+                                    stateName = "Dragging";
+                                    break;
+
+                                case SCROLL_STATE_FLING:
+                                    stateName = "Flinging";
+                                    break;
+                            }
+
+
+                        }
+
+                        @Override
+                        public void onScroll(TwoWayView view, int firstVisibleItem,
+                                             int visibleItemCount, int totalItemCount) {
+
+
+                            currentVisibleItemCount = visibleItemCount;
+                        }
+
+                        private void isScrollCompleted() {
+
+                            if (currentVisibleItemCount > 0 && currentScrollState == 0) {
+                                try {
+                                    myText.setText(myData.getJSONArray(2).getJSONArray(3).getJSONArray(lvTest.getFirstVisiblePosition()).getString(1));
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                                /*** In this way I detect if there's been a scroll which has completed ***/
+                                /*** do the work! ***/
+                            }
+                        }
+
+                    });
 
                     if (fragmentWidth > 0) {
                         getView().getViewTreeObserver().removeGlobalOnLayoutListener(this);
@@ -185,5 +307,55 @@ public class GameDetailsFragment extends Fragment {
 
         // TODO: Update argument type and name
         public void onFragmentInteraction(Uri uri);
+    }
+    public void openPopWindow(View v) {
+
+        LayoutInflater layoutInflater
+                = LayoutInflater.from(getActivity());
+        View popupView = layoutInflater.inflate(R.layout.popupgamerule, null);
+        TextView theTitle = (TextView) popupView.findViewById(R.id.popUpTitle);
+        final PopupWindow popupWindow = new PopupWindow(
+                popupView,
+                WindowManager.LayoutParams.MATCH_PARENT,
+                heightDisplay - convertDpToPx(OverMarginForDeepRuleTopBottom, dm));
+
+        ListView theList = (ListView)popupView.findViewById(R.id.therule);
+
+        //Adapter for GameRule
+        GameDeepRuleAdapter theRuleAdapter= new GameDeepRuleAdapter(v.getContext());
+
+        JSONArray values = new JSONArray();
+        try {
+            theTitle.setText(myData.getJSONArray(2).getJSONArray(3).getJSONArray(lvTest.getFirstVisiblePosition()).getString(2));
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        try {
+            values = myData.getJSONArray(2).getJSONArray(3).getJSONArray(lvTest.getFirstVisiblePosition());
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        if (values.length() > 3 ) {
+            for (int i = 3; i < values.length(); i++) {
+                try {
+                    theRuleAdapter.addItem(values.getJSONArray(i));
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+        theList.setAdapter(theRuleAdapter);
+
+        Button btnDismiss = (Button)popupView.findViewById(R.id.dismiss);
+        btnDismiss.setOnClickListener(new Button.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                // TODO Auto-generated method stub
+                popupWindow.dismiss();
+            }});
+
+        popupWindow.showAsDropDown(myTexttitle, -convertDpToPx(OverMarginForDeepRule / 2, dm), 0);
     }
 }

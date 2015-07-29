@@ -93,7 +93,6 @@ public class EventDetailsActivity extends ActionBarActivity implements BaseSlide
         sp.setMargins(convertDpToPx(10, dm), convertDpToPx(40, dm), convertDpToPx(10, dm), 0);
         imageView.setLayoutParams(fp);
         mySlider.setLayoutParams(sp);
-        int drawableResourceId = this.getResources().getIdentifier("image1", "drawable", this.getPackageName());
 
 
         if (getResources().getConfiguration().orientation
@@ -138,7 +137,7 @@ public class EventDetailsActivity extends ActionBarActivity implements BaseSlide
 
     @Override
     public void onSliderClick(BaseSliderView baseSliderView) {
-        Toast.makeText(this,baseSliderView.getBundle().get("extra") + "", Toast.LENGTH_SHORT).show();
+
 
     }
     public void loadImage(String myId) {

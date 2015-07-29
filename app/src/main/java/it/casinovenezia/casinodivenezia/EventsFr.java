@@ -32,6 +32,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * Created by massimomoro on 25/03/15.
@@ -99,13 +100,13 @@ public class EventsFr extends Fragment {
             mCurCheckPosition = savedInstanceState.getInt("curChoice", 0);
         }
 
-        if (rootView.findViewById(R.id.event_details) != null) {
+        if (rootView.findViewById(R.id.containerInLand) != null) {
             mDualPane = true;
             // Its a tablet, so create a new detail fragment if one does not already exist
             // In dual-pane mode, the list view highlights the selected item.
             listView.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
             // Make sure our UI is in the correct state.
-            showDetails(mCurCheckPosition);
+            //showDetails(mCurCheckPosition);
 
 
         }
@@ -159,11 +160,12 @@ public class EventsFr extends Fragment {
             listView.setItemChecked(index, true);
 
             // Check what fragment is currently shown, replace if needed.
+
             EventDetails details = (EventDetails)
                     getFragmentManager().findFragmentById(R.id.containerInLand);
-            if (details == null || details.getShownIndex() != demoData[index]) {
+            if (details == null || details.getShownIndex() != myEventitemlist.get(index).getName()) {
                 // Make new fragment to show this selection.
-                details = EventDetails.newInstance(demoData[index]);
+                details = EventDetails.newInstance(myEventitemlist.get(index).getName(), myEventitemlist.get(index).getDescription(),myEventitemlist.get(index).getStartDate(),myEventitemlist.get(index).getMyId());
 
                 // Execute a transaction, replacing any existing fragment
                 // with this one inside the frame.
@@ -206,7 +208,7 @@ public class EventsFr extends Fragment {
 
 
     public void setOffice () {
-        if (Venue.currentVenue == 0) {
+        if (Venue.currentVenue == 1) {
 
             myEventitemlist = inOffice("CN");
             mAdapter = new EventsAdapter(getActivity(),
@@ -274,9 +276,39 @@ public class EventsFr extends Fragment {
                     EventItem map = new EventItem();
                     map.setImageMain(image);
                     map.setOffice((String) event.get("office"));
-                    map.setMyId((String)event.getObjectId());
-                    map.setName((String) event.get("Name"));
-                    map.setDescription((String) event.get("Description"));
+                    map.setMyId((String) event.getObjectId());
+
+                    switch (Locale.getDefault().getLanguage()) {
+                        case "it":
+                            map.setDescription((String) event.get("DescriptionIT"));
+                            map.setName((String) event.get("NameIT"));
+                            break;
+                        case "es":
+                            map.setDescription((String) event.get("DescriptionES"));
+                            map.setName((String) event.get("NameES"));
+                            break;
+                        case "fr":
+                            map.setDescription((String) event.get("DescriptionFR"));
+                            map.setName((String) event.get("NameFR"));
+                            break;
+                        case "de":
+                            map.setDescription((String) event.get("DescriptionDE"));
+                            map.setName((String) event.get("NameDE"));
+                            break;
+                        case "ru":
+                            map.setDescription((String) event.get("DescriptionRU"));
+                            map.setName((String) event.get("NameRU"));
+                            break;
+                        case "ch":
+                            map.setDescription((String) event.get("DescriptionCH"));
+                            map.setName((String) event.get("NameCH"));
+                            break;
+                        default:
+                            map.setDescription((String) event.get("Description"));
+                            map.setName((String) event.get("Name"));
+                            break;
+                    }
+
                     map.setStartDate(formatMyDate(event.getDate("StartDate")));
                     map.setEndDate(event.getDate("EndDate"));
 
@@ -317,5 +349,6 @@ public class EventsFr extends Fragment {
         //String s = dateFormat.format(myDate);
         return sdf.format(myDate);
     }
+
 
 }

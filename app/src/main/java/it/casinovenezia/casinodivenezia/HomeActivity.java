@@ -50,7 +50,7 @@ import it.casinovenezia.it.casinovenezia.model.NavDrawerItem;
  * Created by massimomoro on 24/03/15.
  */
 public class HomeActivity extends ActionBarActivity implements EventDetails.OnEventsInteractionListener,
-        CasinoGame.OnGameInteractionListener,
+        CasinoGame.OnGameInteractionListener, GameDetailsFragment.OnClickDeepRule,
 
         Restaurant.OnRestaurantInteractionListener,
         Map.OnMapInteractionListener,
@@ -323,43 +323,38 @@ public class HomeActivity extends ActionBarActivity implements EventDetails.OnEv
         Object currentFragment = this.getSupportFragmentManager().findFragmentById(R.id.frame_container);
         if (currentFragment instanceof HomeMainFr) {
 
-            mPager = (ViewPager)((HomeMainFr)currentFragment).getView().findViewById(R.id.viewpager);
+            mPager = (ViewPager) ((HomeMainFr) currentFragment).getView().findViewById(R.id.viewpager);
             HomeMainFr.MyPageAdapter myadapter = (HomeMainFr.MyPageAdapter) mPager.getAdapter();
-            Fragment page = myadapter.getRegisteredFragment(mPager.getCurrentItem());
-            if (page != null) {
-                switch (page.getClass().getName()) {
-                    case "it.casinovenezia.casinodivenezia.HomeFr":
-                        ImageView myBack = (ImageView) page.getView().findViewById(R.id.imageView);
-                        TextView venueLabel = (TextView)page.getView().findViewById(R.id.cavendramin);
-                        HomeFr theClass = (HomeFr)page;
-                        if (venue == 0) {
-                            venueLabel.setText("CA' NOGHERA");
-                            myBack.setImageResource(R.drawable.backcn);
-                            theClass.loadFestivity(getResources().getText(R.string.canogheratime1).toString(), getResources().getText(R.string.canogheratime2).toString());
-                        } else {
-                            theClass.loadFestivity(getResources().getText(R.string.veneziatime1).toString(), getResources().getText(R.string.veneziatime2).toString());
-                            venueLabel.setText("CA' VENDRAMIN CALERGI");
-                            myBack.setImageResource(R.drawable.backve);
-                        }
-                        break;
-                    case "it.casinovenezia.casinodivenezia.EventsFr":
+            for (int i=0; i < myadapter.getCount(); i++ ) {
+                Fragment theFragment = myadapter.getRegisteredFragment(i);
+                if (theFragment != null) {
 
-                        EventsFr theClassEvents = (EventsFr)page;
-                        theClassEvents.setOffice();
-                        break;
-                    case "it.casinovenezia.casinodivenezia.CasinoGame":
+                    switch (theFragment.getClass().getName()) {
+                        case "it.casinovenezia.casinodivenezia.HomeFr":
+                            HomeFr theClass = (HomeFr)theFragment;
+                            theClass.setOffice();
+                            break;
+                        case "it.casinovenezia.casinodivenezia.EventsFr":
 
-                        CasinoGame theClassGame = (CasinoGame)page;
-                        try {
-                            theClassGame.setOffice();
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                        break;
+                            EventsFr theClassEvents = (EventsFr)theFragment;
+                            theClassEvents.setOffice();
+                            break;
+                        case "it.casinovenezia.casinodivenezia.CasinoGame":
 
+                            CasinoGame theClassGame = (CasinoGame)theFragment;
+                            try {
+                                theClassGame.setOffice();
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                            break;
+
+                    }
                 }
             }
         }
+
+
     }
     public void setOnBackPressedListener(OnBackPressedListener onBackPressedListener) {
         this.onBackPressedListener = onBackPressedListener;
@@ -403,5 +398,34 @@ public class HomeActivity extends ActionBarActivity implements EventDetails.OnEv
 
         // Logs 'app deactivate' App Event.
         AppEventsLogger.deactivateApp(this);
+    }
+    public void openPopWindow(View v) {
+
+            if (getFragmentInPager() != null) {
+                switch (getFragmentInPager().getClass().getName()) {
+
+                    case "it.casinovenezia.casinodivenezia.CasinoGame":
+
+                        CasinoGame theClassGame = (CasinoGame)getFragmentInPager();
+                        try {
+                            theClassGame.openPop(v);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                        break;
+
+                }
+            }
+        }
+
+    public Fragment getFragmentInPager() {
+        Object currentFragment = this.getSupportFragmentManager().findFragmentById(R.id.frame_container);
+        if (currentFragment instanceof HomeMainFr) {
+
+            mPager = (ViewPager) ((HomeMainFr) currentFragment).getView().findViewById(R.id.viewpager);
+            HomeMainFr.MyPageAdapter myadapter = (HomeMainFr.MyPageAdapter) mPager.getAdapter();
+            return myadapter.getRegisteredFragment(mPager.getCurrentItem());
+        }
+        return null;
     }
 }

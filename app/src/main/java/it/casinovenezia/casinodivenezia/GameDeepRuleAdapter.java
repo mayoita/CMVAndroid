@@ -10,6 +10,9 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+
 import java.util.ArrayList;
 
 /**
@@ -17,11 +20,11 @@ import java.util.ArrayList;
  */
 public class GameDeepRuleAdapter extends BaseAdapter {
     private final Context context;
-    private int theWidth;
+
     private LayoutInflater mInflater;
     private Typeface myTypeFace;
-    private ArrayList<String> mData = new ArrayList<String>();
-    private final int sumOfMarginLeftAndRight = 60;
+    private JSONArray mData = new JSONArray();
+
     private DisplayMetrics dm;
 
 
@@ -40,24 +43,28 @@ public class GameDeepRuleAdapter extends BaseAdapter {
 
         this.context = context;
 
-        dm = context.getResources().getDisplayMetrics();
-        int a = dm.widthPixels;
         myTypeFace = Typeface.createFromAsset(context.getAssets(), "fonts/GothamXLight.otf");
         mInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
-    public void addItem(String item) {
-        mData.add(item);
+
+    public void addItem(JSONArray item) {
+        mData.put(item);
         notifyDataSetChanged();
     }
 
     @Override
     public int getCount() {
-        return mData.size();
+        return mData.length();
     }
 
     @Override
     public Object getItem(int position) {
-        return mData.get(position);
+        try {
+            return mData.getJSONObject(position);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     @Override
@@ -78,18 +85,21 @@ public class GameDeepRuleAdapter extends BaseAdapter {
             mViewHolder.text.setTypeface(myTypeFace);
             mViewHolder.text2 = (TextView) convertView.findViewById(R.id.deeprule2);
             mViewHolder.text2.setTypeface(myTypeFace);
-            int b = convertView.getWidth();
+
             convertView.setTag(mViewHolder);
         } else {
             mViewHolder = (ViewHolder)convertView.getTag();
         }
-        mViewHolder.text.setText("STRAIGHT");
-        mViewHolder.text2.setText("35 TO 1");
-//        final LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) convertView.getLayoutParams();
-//
-//        if (params != null) {
-//            params.setMargins(10,10,10,10);
-//        }
+        try {
+            mViewHolder.text.setText(mData.getJSONArray(position).getString(0));
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        try {
+            mViewHolder.text2.setText(mData.getJSONArray(position).getString(1));
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
 
         return convertView;
     }

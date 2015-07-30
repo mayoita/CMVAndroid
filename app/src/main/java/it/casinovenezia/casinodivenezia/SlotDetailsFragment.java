@@ -135,7 +135,7 @@ public class SlotDetailsFragment extends Fragment {
         }
         Display display = getActivity().getWindowManager().getDefaultDisplay();
         fragmentWidth= display.getWidth();
-       
+
 
     }
     @Override
@@ -200,18 +200,7 @@ public class SlotDetailsFragment extends Fragment {
                         default:
                             //fragmentWidth = myView.getWidth();
 
-                            ImageView imageView = (ImageView) myView.findViewById(R.id.imageViewSlotDetails);
-                            DisplayMetrics dm = getResources().getDisplayMetrics();
-                            int height = (int) (fragmentWidth * 0.66); // 0.75 if image aspect ration is 4:3, change accordingly
 
-                            RelativeLayout.LayoutParams fp = new RelativeLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, height + convertDpToPx(6,dm));
-                            RelativeLayout.LayoutParams sp = new RelativeLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, height);
-
-                            fp.setMargins(convertDpToPx(7, dm), convertDpToPx(37, dm), convertDpToPx(7, dm), 0);
-                            sp.setMargins(convertDpToPx(10, dm), convertDpToPx(40, dm), convertDpToPx(10, dm), 0);
-
-                            imageView.setLayoutParams(fp);
-                            mySlider.setLayoutParams(sp);
 
 
                             break;
@@ -235,8 +224,12 @@ public class SlotDetailsFragment extends Fragment {
                     Animation out = AnimationUtils.loadAnimation(getActivity(), R.anim.slide_out_bottom);
                     mTitle.setInAnimation(in);
                     mTitle.setOutAnimation(out);
-
+                    theText = (TextView)myView.findViewById(R.id.textViewSlotDetails);
+                    if (theText != null) {
+                        theText.setTypeface(XLight);
+                    }
                     new RemoteDataTask().execute();
+
                     break;
                 case 2:
                     mySlider = (SliderLayout)myView.findViewById(R.id.slider);
@@ -278,7 +271,18 @@ public class SlotDetailsFragment extends Fragment {
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
+                    ImageView imageView = (ImageView) myView.findViewById(R.id.imageViewSlotDetails);
+                    DisplayMetrics dm = getResources().getDisplayMetrics();
+                    int height = (int) (fragmentWidth * 0.44); // 0.75 if image aspect ration is 4:3, change accordingly
 
+                    RelativeLayout.LayoutParams fp = new RelativeLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, height + convertDpToPx(6,dm));
+                    RelativeLayout.LayoutParams sp = new RelativeLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, height);
+
+                    fp.setMargins(convertDpToPx(7, dm), convertDpToPx(37, dm), convertDpToPx(7, dm), 0);
+                    sp.setMargins(convertDpToPx(10, dm), convertDpToPx(40, dm), convertDpToPx(10, dm), 0);
+
+                    imageView.setLayoutParams(fp);
+                    mySlider.setLayoutParams(sp);
                     new RemoteDataTaskForJackpots().execute();
                     break;
                 default:
@@ -289,7 +293,7 @@ public class SlotDetailsFragment extends Fragment {
                     }
 
                     for(String name : file_mapsD.keySet()){
-                        TextSliderView textSliderView = new TextSliderView(getActivity());
+                        DefaultSliderView textSliderView = new DefaultSliderView(getActivity());
                         // initialize a SliderLayout
                         textSliderView
                                 .description(name)
@@ -321,6 +325,19 @@ public class SlotDetailsFragment extends Fragment {
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
+
+                    ImageView imageViewD = (ImageView) myView.findViewById(R.id.imageViewSlotDetails);
+                    DisplayMetrics dmD = getResources().getDisplayMetrics();
+                    int heightD = (int) (fragmentWidth * 0.44); // 0.75 if image aspect ration is 4:3, change accordingly
+
+                    RelativeLayout.LayoutParams fpD = new RelativeLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, heightD + convertDpToPx(6,dmD));
+                    RelativeLayout.LayoutParams spD = new RelativeLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, heightD);
+
+                    fpD.setMargins(convertDpToPx(7, dmD), convertDpToPx(37, dmD), convertDpToPx(7, dmD), 0);
+                    spD.setMargins(convertDpToPx(10, dmD), convertDpToPx(40, dmD), convertDpToPx(10, dmD), 0);
+
+                    imageViewD.setLayoutParams(fpD);
+                    mySlider.setLayoutParams(spD);
                     break;
             }
 
@@ -478,6 +495,7 @@ public class SlotDetailsFragment extends Fragment {
                         switch (Locale.getDefault().getLanguage()) {
                             case "it":
                                 theText.setText((String) object.get("ourJackpotIT"));
+
                                 break;
                             case "es":
                                 theText.setText((String) object.get("ourJackpotES"));
@@ -496,6 +514,7 @@ public class SlotDetailsFragment extends Fragment {
                                 break;
                             default:
                                 theText.setText((String) object.get("ourJackpots"));
+
                                 break;
                         }
 

@@ -1,7 +1,9 @@
 package it.casinovenezia.casinodivenezia;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -14,6 +16,17 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.parse.ParseException;
+import com.parse.ParseFile;
+import com.parse.ParseObject;
+import com.parse.ParseQuery;
+
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.Locale;
+
 /**
  * Created by massimomoro on 08/05/15.
  */
@@ -24,7 +37,9 @@ public class PokerFr extends Fragment {
 
 
     private PokerAdapter mAdapter;
-
+    private List<PokerItem> pokeritemlist = null;
+    private List<PokerItem> myEventitemlist = null;
+    List<ParseObject> ob;
     boolean mDualPane;
     int mCurCheckPosition = 0;
 
@@ -57,6 +72,38 @@ public class PokerFr extends Fragment {
 
 
     }
+    public void setOffice () {
+        if (Venue.currentVenue == 1) {
+
+            myEventitemlist = inOffice("CN");
+            mAdapter = new PokerAdapter(getActivity(),
+                    myEventitemlist);
+
+            mAdapter.notifyDataSetChanged();
+            listView.setAdapter(mAdapter);
+
+        } else {
+
+            myEventitemlist = inOffice("VE");
+            mAdapter = new PokerAdapter(getActivity(),
+                    myEventitemlist);
+            //inOffice("VE");
+            mAdapter.notifyDataSetChanged();
+            listView.setAdapter(mAdapter);
+        }
+    }
+    public ArrayList<PokerItem> inOffice(String office)    {
+        ArrayList<PokerItem> helper = new ArrayList<PokerItem>();
+        for (int i=0; i< pokeritemlist.size(); i++) {
+            PokerItem myArray = (PokerItem) pokeritemlist.get(i);
+
+            if (myArray.getOffice().equals(office)) {
+                helper.add(myArray);
+                helper.add(myArray);
+            }
+        }
+        return(helper);
+    }
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
      * fragment (e.g. upon screen orientation changes).
@@ -70,18 +117,9 @@ public class PokerFr extends Fragment {
         View rootView = inflater.inflate(R.layout.poker_fragment, container, false);
         listView = (ListView) rootView.findViewById(R.id.list_events);
 
+        new RemoteDataTask().execute();
 
 
-        mAdapter = new PokerAdapter(getActivity());
-
-        for (int i = 1; i < 12; i++) {
-            mAdapter.addItem("Row Item #" + i);
-            if (i % 4 == 0) {
-                mAdapter.addSectionHeaderItem("Section #" + i);
-            }
-        }
-
-        listView.setAdapter(mAdapter);
 
         if (savedInstanceState != null) {
             // Restore last state for checked position.
@@ -102,7 +140,7 @@ public class PokerFr extends Fragment {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                final String titoloriga = (String)parent.getItemAtPosition(position);
+                final String titoloriga = (String) parent.getItemAtPosition(position);
                 Log.d("list", "Ho cliccato sull'elemento con il titolo " + titoloriga);
                 showDetails(position);
             }
@@ -183,11 +221,66 @@ public class PokerFr extends Fragment {
         outState.putInt("curChoice", mCurCheckPosition);
     }
 
+    private class RemoteDataTask extends AsyncTask<Void, Void, Void> {
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
 
-//    @Override
-//    public void onListItemClick(ListView l, View v, int position, long id) {
-//        // Do something when a list item is clicked
-//    }
+        }
+
+        @Override
+        protected Void doInBackground(Void... params) {
+            // Create the array
+            pokeritemlist = new ArrayList<PokerItem>();
+            try {
+                // Locate the class table named "Country" in Parse.com
+                ParseQuery<ParseObject> query = new ParseQuery<ParseObject>(
+                        "Poker");
+                // Locate the column named "ranknum" in Parse.com and order list
+                // by ascending
+                query.orderByDescending("StartDate");
+                ob = query.find();
+                for (ParseObject event : ob) {
+
+                    PokerItem map = new PokerItem();
+
+                    map.setOffice((String) event.get("office"));
+                    map.setMyId((String) event.getObjectId());
+                    map.setTournamentDescription((String) event.get("TournamentDescription"));
+                    map.setTournamentDate((String) event.get("TournamentDate"));
+                    map.setTournamentsName((String) event.get("TournamentName"));
+//                    map.setTournamentsRules((String) event.get("TournamentsRules"));
+                    map.setTournamentUrl((String) event.get("TournamentURL"));
+               //     map.setPokerData((String) event.get("PokerData"));
+                    map.setStartDate(formatMyDate(event.getDate("StartDate")));
+                    map.setEndDate(formatMyDate(event.getDate("EndDate")));
+
+                    pokeritemlist.add(map);
+                }
+            } catch (ParseException e) {
+                Log.e("Error", e.getMessage());
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void result) {
+
+            // Locate the listview in listview_main.xml
+            //listView = (ListView) findViewById(R.id.list_events);
+            // Pass the results into ListViewAdapter.java
+            setOffice();
+
+        }
+    }
+
+    private String formatMyDate(Date myDate) {
+
+        SimpleDateFormat sdf = new SimpleDateFormat("EEEE dd LLLL", getResources().getConfiguration().locale);
+
+        return sdf.format(myDate);
+    }
 
 
 }

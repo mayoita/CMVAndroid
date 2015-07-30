@@ -348,6 +348,12 @@ public class HomeActivity extends ActionBarActivity implements EventDetails.OnEv
                                 e.printStackTrace();
                             }
                             break;
+                        case "it.casinovenezia.casinodivenezia.PokerFr":
+
+                            PokerFr theClassPoker = (PokerFr)theFragment;
+                            theClassPoker.setOffice();
+
+                            break;
 
                     }
                 }

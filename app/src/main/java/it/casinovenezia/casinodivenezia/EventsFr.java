@@ -338,15 +338,7 @@ public class EventsFr extends Fragment {
     private String formatMyDate(Date myDate) {
 
         SimpleDateFormat sdf = new SimpleDateFormat("EEEE dd LLLL", getResources().getConfiguration().locale);
-        //String cc = sdf.format(myDate);
-       // Date date = null;
-//        try {
-//            date = sdf.parse(myDate);
-//        } catch (ParseException e) {
-//            // handle exception here !
-//        }
-        //DateFormat dateFormat = android.text.format.DateFormat.getDateFormat(getActivity());
-        //String s = dateFormat.format(myDate);
+
         return sdf.format(myDate);
     }
 

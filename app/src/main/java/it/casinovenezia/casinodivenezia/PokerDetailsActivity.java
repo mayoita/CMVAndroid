@@ -1,11 +1,13 @@
 package it.casinovenezia.casinodivenezia;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.text.Html;
 import android.text.method.LinkMovementMethod;
 import android.util.DisplayMetrics;
 import android.util.TypedValue;
@@ -20,7 +22,12 @@ import android.widget.Toast;
 
 import com.daimajia.slider.library.SliderTypes.BaseSliderView;
 
+import org.json.JSONException;
 import org.lucasr.twowayview.TwoWayView;
+
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 
 /**
  * Created by massimomoro on 08/05/15.
@@ -30,7 +37,9 @@ public class PokerDetailsActivity extends ActionBarActivity implements BaseSlide
     private PokerDayAdapter mAdapter;
     private ListView myListView;
     private PokerCellAdapter mCellAdapter;
-
+    private int currentVisibleItemCount;
+    private int currentScrollState;
+    private TwoWayView lvTest;
     Context context = PokerDetailsActivity.this;
 
 
@@ -42,6 +51,7 @@ public class PokerDetailsActivity extends ActionBarActivity implements BaseSlide
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Intent i = getIntent();
         boolean tabletSize = getResources().getBoolean(R.bool.isTablet);
         if (tabletSize) {
 
@@ -61,6 +71,8 @@ public class PokerDetailsActivity extends ActionBarActivity implements BaseSlide
         DisplayMetrics dm = getResources().getDisplayMetrics();
         TextView titolo = (TextView)findViewById(R.id.textViewPoker);
         TextView titoloR = (TextView)findViewById(R.id.textViewPokerRule);
+        titoloR.setText(Html.fromHtml(createRules(i.getStringArrayListExtra("TournamentsRules"))));
+
         titolo.setTypeface(XLight);
         titoloR.setTypeface(XLight);
 
@@ -74,12 +86,16 @@ public class PokerDetailsActivity extends ActionBarActivity implements BaseSlide
         sp.setMargins(convertDpToPx(10, dm), convertDpToPx(40, dm), convertDpToPx(10, dm), 0);
 
         mAdapter = new PokerDayAdapter(context, width);
-        mAdapter.addItem("Item 1");
-        mAdapter.addItem("Item 2");
-        mAdapter.addItem("Item 3");
-        mAdapter.addItem("Item 4");
-        mAdapter.addItem("Item 5");
-        mAdapter.addItem("Item 6");
+        ArrayList pokerArray = i.getStringArrayListExtra("PokerData");
+        for (int k = 0; k < pokerArray.size(); k++) {
+            ArrayList f = (ArrayList) pokerArray.get(k);
+            String ff = (String) f.get(1);
+            if (!ff.equals("")) {
+                mAdapter.addItem((String) f.get(1), k);
+            }
+
+        }
+
 
         mCellAdapter = new PokerCellAdapter(context, width);
 
@@ -93,8 +109,54 @@ public class PokerDetailsActivity extends ActionBarActivity implements BaseSlide
 
 
 
-        TwoWayView lvTest = (TwoWayView) findViewById(R.id.lvItemsPoker);
+        lvTest = (TwoWayView) findViewById(R.id.lvItemsPoker);
         lvTest.setAdapter(mAdapter);
+        lvTest.setOnScrollListener(new TwoWayView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(TwoWayView view, int scrollState) {
+                String stateName = "Undefined";
+                currentScrollState = scrollState;
+                isScrollCompleted();
+                switch (scrollState) {
+                    case SCROLL_STATE_IDLE:
+                        stateName = "Idle";
+
+                        break;
+
+                    case SCROLL_STATE_TOUCH_SCROLL:
+                        stateName = "Dragging";
+                        break;
+
+                    case SCROLL_STATE_FLING:
+                        stateName = "Flinging";
+                        break;
+                }
+
+
+
+            }
+
+            @Override
+            public void onScroll(TwoWayView view, int firstVisibleItem,
+                                 int visibleItemCount, int totalItemCount) {
+
+
+
+                currentVisibleItemCount = visibleItemCount;
+            }
+            private void isScrollCompleted() {
+
+                if (currentVisibleItemCount > 0 && currentScrollState == 0) {
+                   int a =lvTest.getFirstVisiblePosition();
+                    int b =lvTest.getFirstVisiblePosition();
+                    /*** In this way I detect if there's been a scroll which has completed ***/
+                    /*** do the work! ***/
+                }
+            }
+
+        });
+
+
 
 
         if (getResources().getConfiguration().orientation
@@ -142,4 +204,16 @@ public class PokerDetailsActivity extends ActionBarActivity implements BaseSlide
         Toast.makeText(this, baseSliderView.getBundle().get("extra") + "", Toast.LENGTH_SHORT).show();
 
     }
+    public String createRules (ArrayList theList) {
+        String theRules ="";
+
+        for (int i = 0; i < theList.size(); i++) {
+
+            ArrayList a = (ArrayList) theList.get(i);
+            theRules = theRules + "<font color=#cc0029>" + a.get(0) + "</font><BR>"  + a.get(1) + "<BR><BR>";
+        }
+
+        return theRules;
+    }
+
 }

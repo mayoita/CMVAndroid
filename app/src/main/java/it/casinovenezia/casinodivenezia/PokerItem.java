@@ -2,6 +2,9 @@ package it.casinovenezia.casinodivenezia;
 
 import com.parse.ParseFile;
 
+import org.json.JSONArray;
+
+import java.util.ArrayList;
 import java.util.Date;
 
 /**
@@ -14,11 +17,11 @@ public class PokerItem {
     private String tournamentEvent;
     private String startDate;
     private String endDate;
-    private String tournamentsRules;
+    private ArrayList tournamentsRules;
     private String tournamentsName;
     private String office;
     private String tournamentUrl;
-    private String pokerData;
+    private ArrayList pokerData;
 
     public String getMyId () {return myId;}
     public void setMyId(String name) {this.myId = name;}
@@ -47,12 +50,7 @@ public class PokerItem {
         this.tournamentEvent = tournamentEvent;
     }
 
-    public String getName() {
-        return tournamentDate;
-    }
-    public void setName(String name) {
-        this.tournamentDate = name;
-    }
+
 
     public String getStartDate() {
         return startDate;
@@ -67,11 +65,11 @@ public class PokerItem {
         this.endDate = name;
     }
 
-    public String getTournamentsRules() {
+    public ArrayList getTournamentsRules() {
         return tournamentsRules;
     }
 
-    public void setTournamentsRules(String tournamentsRules) {
+    public void setTournamentsRules(ArrayList tournamentsRules) {
         this.tournamentsRules = tournamentsRules;
     }
 
@@ -99,11 +97,11 @@ public class PokerItem {
         this.tournamentUrl = tournamentUrl;
     }
 
-    public String getPokerData() {
+    public ArrayList getPokerData() {
         return pokerData;
     }
 
-    public void setPokerData(String pokerData) {
+    public void setPokerData(ArrayList pokerData) {
         this.pokerData = pokerData;
     }
 }

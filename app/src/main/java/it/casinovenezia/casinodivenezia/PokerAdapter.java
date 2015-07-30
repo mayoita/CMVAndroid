@@ -27,6 +27,7 @@ public class PokerAdapter extends BaseAdapter {
     private String formattedCurrentDate;
     private List<PokerItem> eventitemList = null;
     private ArrayList<PokerItem> arraylist;
+
     Typeface Aachen;
     enum RowType {
         LIST_ITEM, HEADER_ITEM
@@ -58,12 +59,13 @@ public class PokerAdapter extends BaseAdapter {
 
     public void addItem(PokerItem item) {
         eventitemList.add(item);
-        notifyDataSetChanged();
+
+        //notifyDataSetChanged();
     }
     public void addSectionHeaderItem(final PokerItem item) {
         eventitemList.add(item);
         sectionHeader.add(eventitemList.size() - 1);
-        notifyDataSetChanged();
+        //notifyDataSetChanged();
     }
 
     @Override
@@ -129,7 +131,9 @@ public class PokerAdapter extends BaseAdapter {
         switch (rowType) {
             case TYPE_ITEM:
                 ViewHolder holder = (ViewHolder)rowView.getTag();
-                //holder.textView.setText(mData.get(position));
+
+                holder.text.setText(arraylist.get(position).getTournamentsName());
+                holder.date.setText(arraylist.get(position).getTournamentDate());
                 //download image
                 // holder.image
                 break;

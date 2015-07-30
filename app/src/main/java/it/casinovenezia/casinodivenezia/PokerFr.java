@@ -21,6 +21,8 @@ import com.parse.ParseFile;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 
+import org.json.JSONArray;
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -140,8 +142,8 @@ public class PokerFr extends Fragment {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                final String titoloriga = (String) parent.getItemAtPosition(position);
-                Log.d("list", "Ho cliccato sull'elemento con il titolo " + titoloriga);
+             //   final String titoloriga = (String) parent.getItemAtPosition(position);
+              //  Log.d("list", "Ho cliccato sull'elemento con il titolo " + titoloriga);
                 showDetails(position);
             }
         });
@@ -210,7 +212,14 @@ public class PokerFr extends Fragment {
             // the dialog fragment with selected text.
             Intent intent = new Intent();
             intent.setClass(getActivity(), PokerDetailsActivity.class);
-            intent.putExtra("param1", demoData[index]);
+            intent.putExtra("TournamentDescription", myEventitemlist.get(index).getTournamentDescription());
+            intent.putExtra("TournamentDate", myEventitemlist.get(index).getTournamentDate());
+            intent.putExtra("TournamentName", myEventitemlist.get(index).getTournamentsName());
+            intent.putExtra("TournamentURL", myEventitemlist.get(index).getTournamentUrl());
+            intent.putExtra("StartDate", myEventitemlist.get(index).getStartDate());
+            intent.putExtra("TournamentURL", myEventitemlist.get(index).getTournamentUrl());
+            intent.putStringArrayListExtra("TournamentsRules", myEventitemlist.get(index).getTournamentsRules());
+            intent.putStringArrayListExtra("PokerData", myEventitemlist.get(index).getPokerData());
             startActivity(intent);
         }
 
@@ -249,9 +258,9 @@ public class PokerFr extends Fragment {
                     map.setTournamentDescription((String) event.get("TournamentDescription"));
                     map.setTournamentDate((String) event.get("TournamentDate"));
                     map.setTournamentsName((String) event.get("TournamentName"));
-//                    map.setTournamentsRules((String) event.get("TournamentsRules"));
+                    map.setTournamentsRules((ArrayList) event.get("TournamentsRules"));
                     map.setTournamentUrl((String) event.get("TournamentURL"));
-               //     map.setPokerData((String) event.get("PokerData"));
+                    map.setPokerData((ArrayList) event.get("PokerData"));
                     map.setStartDate(formatMyDate(event.getDate("StartDate")));
                     map.setEndDate(formatMyDate(event.getDate("EndDate")));
 
@@ -277,7 +286,7 @@ public class PokerFr extends Fragment {
 
     private String formatMyDate(Date myDate) {
 
-        SimpleDateFormat sdf = new SimpleDateFormat("EEEE dd LLLL", getResources().getConfiguration().locale);
+        SimpleDateFormat sdf = new SimpleDateFormat("dd LLLL yyyy", getResources().getConfiguration().locale);
 
         return sdf.format(myDate);
     }

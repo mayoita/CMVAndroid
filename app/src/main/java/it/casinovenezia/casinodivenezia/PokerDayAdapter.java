@@ -12,7 +12,11 @@ import android.widget.TextView;
 
 import org.lucasr.twowayview.TwoWayView;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
  * Created by massimomoro on 11/05/15.
@@ -25,6 +29,10 @@ public class PokerDayAdapter extends BaseAdapter {
     private ArrayList<String> mData = new ArrayList<String>();
     private final int sumOfMarginLeftAndRight = 60;
     private DisplayMetrics dm;
+    DateFormat formatter;
+    SimpleDateFormat sdf;
+    public  ArrayList parentIndex = new ArrayList();
+
 
     class ViewHolder {
         public TextView text;
@@ -42,10 +50,14 @@ public class PokerDayAdapter extends BaseAdapter {
         dm = context.getResources().getDisplayMetrics();
         myTypeFace = Typeface.createFromAsset(context.getAssets(), "fonts/GothamXLight.otf");
         mInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        formatter = new SimpleDateFormat("dd/MM/yy");
+        sdf = new SimpleDateFormat("EEEE dd LLLL", context.getResources().getConfiguration().locale);
+
     }
-    public void addItem(String item) {
+    public void addItem(String item, int index) {
         mData.add(item);
-        notifyDataSetChanged();
+        parentIndex.add(index);
+        //notifyDataSetChanged();
     }
 
     @Override
@@ -79,7 +91,7 @@ public class PokerDayAdapter extends BaseAdapter {
         } else {
             mViewHolder = (ViewHolder)convertView.getTag();
         }
-        mViewHolder.text.setText("MERCOLEDì 1 maggio");
+        mViewHolder.text.setText(formatMyDate(mData.get(position)));
 
         final TwoWayView.LayoutParams params = (TwoWayView.LayoutParams) convertView.getLayoutParams();
 
@@ -89,4 +101,20 @@ public class PokerDayAdapter extends BaseAdapter {
 
         return convertView;
     }
+    private String formatMyDate(String myDate) {
+
+        //SimpleDateFormat sdf = new SimpleDateFormat("EEEE dd LLLL", getResources().getConfiguration().locale);
+
+
+        Date date = null;
+        try {
+            date = (Date)formatter.parse(myDate);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        SimpleDateFormat newFormat = new SimpleDateFormat("EEEE dd LLLL");
+
+        return newFormat.format(date).toUpperCase();
+    }
+
 }

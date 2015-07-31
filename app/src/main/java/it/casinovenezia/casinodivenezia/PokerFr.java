@@ -7,6 +7,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+
 import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -60,6 +61,7 @@ public class PokerFr extends Fragment {
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
+
         try{
             /** This statement ensures that the hosting activity implements ListFragmentItemClickListener */
             ifaceItemClickListener = (ListEventItemClickListener) activity;
@@ -81,7 +83,7 @@ public class PokerFr extends Fragment {
             mAdapter = new PokerAdapter(getActivity(),
                     myEventitemlist);
 
-            mAdapter.notifyDataSetChanged();
+
             listView.setAdapter(mAdapter);
 
         } else {
@@ -90,7 +92,7 @@ public class PokerFr extends Fragment {
             mAdapter = new PokerAdapter(getActivity(),
                     myEventitemlist);
             //inOffice("VE");
-            mAdapter.notifyDataSetChanged();
+
             listView.setAdapter(mAdapter);
         }
     }
@@ -134,7 +136,7 @@ public class PokerFr extends Fragment {
             // In dual-pane mode, the list view highlights the selected item.
             listView.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
             // Make sure our UI is in the correct state.
-            showDetails(mCurCheckPosition);
+            //showDetails(mCurCheckPosition);
 
 
         }
@@ -190,9 +192,15 @@ public class PokerFr extends Fragment {
             // Check what fragment is currently shown, replace if needed.
             PokerDetails details = (PokerDetails)
                     getFragmentManager().findFragmentById(R.id.containerInLandPoker);
-            if (details == null || details.getShownIndex() != demoData[index]) {
+            if (details == null || details.getShownIndex() != myEventitemlist.get(index).getTournamentsName()) {
                 // Make new fragment to show this selection.
-                details = PokerDetails.newInstance(demoData[index]);
+                details = PokerDetails.newInstance(myEventitemlist.get(index).getTournamentDescription(),
+                        myEventitemlist.get(index).getTournamentDate(),
+                        myEventitemlist.get(index).getTournamentsName(),
+                        myEventitemlist.get(index).getTournamentUrl(),
+                        myEventitemlist.get(index).getStartDate(),
+                        myEventitemlist.get(index).getTournamentsRules(),
+                        myEventitemlist.get(index).getPokerData());
 
                 // Execute a transaction, replacing any existing fragment
                 // with this one inside the frame.
@@ -217,7 +225,6 @@ public class PokerFr extends Fragment {
             intent.putExtra("TournamentName", myEventitemlist.get(index).getTournamentsName());
             intent.putExtra("TournamentURL", myEventitemlist.get(index).getTournamentUrl());
             intent.putExtra("StartDate", myEventitemlist.get(index).getStartDate());
-            intent.putExtra("TournamentURL", myEventitemlist.get(index).getTournamentUrl());
             intent.putStringArrayListExtra("TournamentsRules", myEventitemlist.get(index).getTournamentsRules());
             intent.putStringArrayListExtra("PokerData", myEventitemlist.get(index).getPokerData());
             startActivity(intent);

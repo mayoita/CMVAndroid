@@ -1,6 +1,7 @@
 package it.casinovenezia.casinodivenezia;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.graphics.Typeface;
@@ -22,6 +23,8 @@ import com.daimajia.slider.library.SliderTypes.BaseSliderView;
 
 import org.lucasr.twowayview.TwoWayView;
 
+import java.util.ArrayList;
+
 import it.casinovenezia.TournamentDayAdapter;
 
 /**
@@ -32,6 +35,11 @@ public class TournamentDetailsActivity extends ActionBarActivity implements Base
     private TournamentDayAdapter mAdapter;
     private ListView myListView;
     private TournamentCellAdapter mCellAdapter;
+    ArrayList pokerArray;
+    int width;
+    private TwoWayView lvTest;
+    private int currentVisibleItemCount;
+    private int currentScrollState;
 
     Context context = TournamentDetailsActivity.this;
 
@@ -44,6 +52,7 @@ public class TournamentDetailsActivity extends ActionBarActivity implements Base
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Intent i = getIntent();
         boolean tabletSize = getResources().getBoolean(R.bool.isTablet);
         if (tabletSize) {
 
@@ -66,7 +75,7 @@ public class TournamentDetailsActivity extends ActionBarActivity implements Base
         titolo.setTypeface(XLight);
         titoloR.setTypeface(XLight);
 
-        int width = display.getWidth();
+        width = display.getWidth();
         int height = (int) (width * 0.66); // 0.75 if image aspect ration is 4:3, change accordingly
 
         RelativeLayout.LayoutParams fp = new RelativeLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, height + convertDpToPx(6,dm));
@@ -76,22 +85,68 @@ public class TournamentDetailsActivity extends ActionBarActivity implements Base
         sp.setMargins(convertDpToPx(10, dm), convertDpToPx(40, dm), convertDpToPx(10, dm), 0);
 
         mAdapter = new TournamentDayAdapter(context, width);
-        mAdapter.addItem("Item 1");
-        mAdapter.addItem("Item 2");
-        mAdapter.addItem("Item 3");
-        mAdapter.addItem("Item 4");
-        mAdapter.addItem("Item 5");
-        mAdapter.addItem("Item 6");
-
         mCellAdapter = new TournamentCellAdapter(context, width);
+        pokerArray = i.getStringArrayListExtra("PokerData");
+        int primo=0;
+        for (int k = 0; k < pokerArray.size(); k++) {
+            ArrayList f = (ArrayList) pokerArray.get(k);
+            String ff = (String) f.get(1);
+            if (!ff.equals("")) {
+                mAdapter.addItem((String) f.get(1), k);
+                primo = primo + 1;
+            }
+            if (primo == 1) {
+                mCellAdapter.addItem((ArrayList) pokerArray.get(k));
+            }
 
-        mCellAdapter.addItem("Item1");
-        mCellAdapter.addItem("Item2");
-        mCellAdapter.addItem("Item3");
-        mCellAdapter.addItem("Item4");
-        mCellAdapter.addItem("Item5");
-
+        }
         myListView.setAdapter(mCellAdapter);
+
+        lvTest = (TwoWayView) findViewById(R.id.lvItemsPoker);
+        lvTest.setAdapter(mAdapter);
+        lvTest.setOnScrollListener(new TwoWayView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(TwoWayView view, int scrollState) {
+                String stateName = "Undefined";
+                currentScrollState = scrollState;
+                isScrollCompleted();
+                switch (scrollState) {
+                    case SCROLL_STATE_IDLE:
+                        stateName = "Idle";
+                        break;
+                    case SCROLL_STATE_TOUCH_SCROLL:
+                        stateName = "Dragging";
+                        break;
+                    case SCROLL_STATE_FLING:
+                        stateName = "Flinging";
+                        break;
+                }
+
+
+            }
+
+            @Override
+            public void onScroll(TwoWayView view, int firstVisibleItem,
+                                 int visibleItemCount, int totalItemCount) {
+
+
+                currentVisibleItemCount = visibleItemCount;
+            }
+
+            private void isScrollCompleted() {
+
+                if (currentVisibleItemCount > 0 && currentScrollState == 0) {
+
+
+                    mCellAdapter.mData.clear();
+                    for (int k = mAdapter.getIndex(lvTest.getFirstVisiblePosition()); k < mAdapter.getIndex(lvTest.getFirstVisiblePosition() + 1); k++) {
+                        mCellAdapter.addItem((ArrayList) pokerArray.get(k));
+                    }
+                    myListView.setAdapter(mCellAdapter);
+                }
+            }
+
+        });
 
 
 

@@ -2,6 +2,7 @@ package it.casinovenezia.casinodivenezia;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -14,6 +15,16 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.parse.ParseException;
+import com.parse.ParseFile;
+import com.parse.ParseObject;
+import com.parse.ParseQuery;
+
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
 /**
  * Created by massimomoro on 13/05/15.
  */
@@ -24,6 +35,9 @@ public class TournamentFr extends Fragment {
 
 
     private TournamentAdapter mAdapter;
+    private List<TournamentItem> pokeritemlist = null;
+    private List<TournamentItem> myEventitemlist = null;
+    List<ParseObject> ob;
 
     boolean mDualPane;
     int mCurCheckPosition = 0;
@@ -72,16 +86,7 @@ public class TournamentFr extends Fragment {
 
 
 
-        mAdapter = new TournamentAdapter(getActivity());
-
-        for (int i = 1; i < 12; i++) {
-            mAdapter.addItem("Row Item #" + i);
-            if (i % 4 == 0) {
-                mAdapter.addSectionHeaderItem("Section #" + i);
-            }
-        }
-
-        listView.setAdapter(mAdapter);
+        new RemoteDataTask().execute();
 
         if (savedInstanceState != null) {
             // Restore last state for checked position.
@@ -172,7 +177,14 @@ public class TournamentFr extends Fragment {
             // the dialog fragment with selected text.
             Intent intent = new Intent();
             intent.setClass(getActivity(), TournamentDetailsActivity.class);
-            intent.putExtra("param1", demoData[index]);
+            intent.putExtra("TournamentDescription", myEventitemlist.get(index).getTournamentDescription());
+
+            intent.putExtra("TournamentName", myEventitemlist.get(index).getTournamentsName());
+            intent.putExtra("TournamentURL", myEventitemlist.get(index).getTournamentUrl());
+            intent.putExtra("StartDate", myEventitemlist.get(index).getStartDate());
+            intent.putStringArrayListExtra("TournamentsRules", myEventitemlist.get(index).getTournamentsRules());
+            intent.putStringArrayListExtra("TournamentsEvent", myEventitemlist.get(index).getTournamentEvent());
+            intent.putExtra("Type", myEventitemlist.get(index).getType());
             startActivity(intent);
         }
 
@@ -183,11 +195,99 @@ public class TournamentFr extends Fragment {
         outState.putInt("curChoice", mCurCheckPosition);
     }
 
+    public void setOffice () {
+        if (Venue.currentVenue == 1) {
 
-//    @Override
-//    public void onListItemClick(ListView l, View v, int position, long id) {
-//        // Do something when a list item is clicked
-//    }
+            myEventitemlist = inOffice("CN");
+            mAdapter = new TournamentAdapter(getActivity(),
+                    myEventitemlist);
 
+
+            listView.setAdapter(mAdapter);
+
+        } else {
+
+            myEventitemlist = inOffice("VE");
+            mAdapter = new TournamentAdapter(getActivity(),
+                    myEventitemlist);
+            //inOffice("VE");
+
+            listView.setAdapter(mAdapter);
+        }
+    }
+    public ArrayList<TournamentItem> inOffice(String office)    {
+        ArrayList<TournamentItem> helper = new ArrayList<TournamentItem>();
+        for (int i=0; i< pokeritemlist.size(); i++) {
+            TournamentItem myArray = (TournamentItem) pokeritemlist.get(i);
+
+            if (myArray.getOffice().equals(office)) {
+                helper.add(myArray);
+                helper.add(myArray);
+            }
+        }
+        return(helper);
+    }
+    private class RemoteDataTask extends AsyncTask<Void, Void, Void> {
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+
+        }
+
+        @Override
+        protected Void doInBackground(Void... params) {
+            // Create the array
+            pokeritemlist = new ArrayList<TournamentItem>();
+            try {
+                // Locate the class table named "Country" in Parse.com
+                ParseQuery<ParseObject> query = new ParseQuery<ParseObject>(
+                        "Tournaments");
+                // Locate the column named "ranknum" in Parse.com and order list
+                // by ascending
+                query.orderByDescending("StartDate");
+                ob = query.find();
+                for (ParseObject event : ob) {
+
+                    TournamentItem map = new TournamentItem();
+
+                    map.setOffice((String) event.get("office"));
+
+                    map.setTournamentDescription((String) event.get("TournamentDescription"));
+
+                    map.setTournamentsName((String) event.get("TournamentName"));
+                    map.setTournamentsRules((ArrayList) event.get("TournamentsRules"));
+                    map.setTournamentUrl((String) event.get("TournamentURL"));
+                    map.setType((String) event.get("Type"));
+                    map.setTournamentEvent((ArrayList) event.get("TournamentEvent"));
+                    map.setStartDate(formatMyDate(event.getDate("StartDate")));
+                    map.setEndDate(formatMyDate(event.getDate("EndDate")));
+                    map.setImageTournament((ParseFile) event.get("ImageTournament"));
+
+                    pokeritemlist.add(map);
+                }
+            } catch (ParseException e) {
+                Log.e("Error", e.getMessage());
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void result) {
+
+            // Locate the listview in listview_main.xml
+            //listView = (ListView) findViewById(R.id.list_events);
+            // Pass the results into ListViewAdapter.java
+            setOffice();
+
+        }
+    }
+
+    private String formatMyDate(Date myDate) {
+
+        SimpleDateFormat sdf = new SimpleDateFormat("dd LLLL yyyy", getResources().getConfiguration().locale);
+
+        return sdf.format(myDate);
+    }
 
 }

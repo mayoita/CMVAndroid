@@ -12,6 +12,8 @@ import android.widget.TextView;
 
 import org.lucasr.twowayview.TwoWayView;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 import it.casinovenezia.casinodivenezia.R;
@@ -27,6 +29,9 @@ public class TournamentDayAdapter  extends BaseAdapter {
     private ArrayList<String> mData = new ArrayList<String>();
     private final int sumOfMarginLeftAndRight = 60;
     private DisplayMetrics dm;
+    DateFormat formatter;
+    SimpleDateFormat sdf;
+    public  ArrayList parentIndex = new ArrayList();
 
     class ViewHolder {
         public TextView text;
@@ -44,10 +49,12 @@ public class TournamentDayAdapter  extends BaseAdapter {
         dm = context.getResources().getDisplayMetrics();
         myTypeFace = Typeface.createFromAsset(context.getAssets(), "fonts/GothamXLight.otf");
         mInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        formatter = new SimpleDateFormat("dd/MM/yy");
+        sdf = new SimpleDateFormat("EEEE dd LLLL", context.getResources().getConfiguration().locale);
     }
-    public void addItem(String item) {
+    public void addItem(String item,int index) {
         mData.add(item);
-        notifyDataSetChanged();
+        parentIndex.add(index);
     }
 
     @Override
@@ -59,6 +66,7 @@ public class TournamentDayAdapter  extends BaseAdapter {
     public Object getItem(int position) {
         return mData.get(position);
     }
+    public int getIndex(int position) {return (int)parentIndex.get(position);}
 
     @Override
     public long getItemId(int position) {

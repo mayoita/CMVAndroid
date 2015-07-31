@@ -28,11 +28,6 @@ public class GameDeepRuleAdapter extends BaseAdapter {
     private DisplayMetrics dm;
 
 
-    private int convertDpToPx(int dp, DisplayMetrics displayMetrics) {
-        float pixels = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, displayMetrics);
-        return Math.round(pixels);
-    }
-
     class ViewHolder {
         public TextView text;
         public TextView text2;

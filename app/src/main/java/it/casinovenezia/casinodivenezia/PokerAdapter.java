@@ -24,7 +24,6 @@ public class PokerAdapter extends BaseAdapter {
 
     private static final int TYPE_ITEM = 1;
     private static final int TYPE_SEPARATOR = 0;
-    private String formattedCurrentDate;
     private List<PokerItem> eventitemList = null;
     private ArrayList<PokerItem> arraylist;
 

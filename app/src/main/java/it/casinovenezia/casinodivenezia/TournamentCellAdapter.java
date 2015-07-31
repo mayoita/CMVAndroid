@@ -20,7 +20,7 @@ public class TournamentCellAdapter extends BaseAdapter {
     private int theWidth;
     private LayoutInflater mInflater;
     private Typeface myTypeFace;
-    private ArrayList<String> mData = new ArrayList<String>();
+    public ArrayList mData = new ArrayList();
     private final int sumOfMarginLeftAndRight = 60;
     private DisplayMetrics dm;
 
@@ -33,10 +33,7 @@ public class TournamentCellAdapter extends BaseAdapter {
         public TextView note;
 
     }
-    private int convertDpToPx(int dp, DisplayMetrics displayMetrics) {
-        float pixels = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, displayMetrics);
-        return Math.round(pixels);
-    }
+
 
     public TournamentCellAdapter(Context context, int theWidth) {
 
@@ -46,9 +43,9 @@ public class TournamentCellAdapter extends BaseAdapter {
         myTypeFace = Typeface.createFromAsset(context.getAssets(), "fonts/GothamXLight.otf");
         mInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
-    public void addItem(String item) {
+    public void addItem(ArrayList item) {
         mData.add(item);
-        notifyDataSetChanged();
+
     }
 
     @Override
@@ -70,7 +67,7 @@ public class TournamentCellAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
 
         ViewHolder mViewHolder;
-
+        ArrayList itemarray = (ArrayList) mData.get(position);
         if (convertView == null) {
             convertView = mInflater.inflate(R.layout.tournament_cell, parent, false);
             //configure view holder
@@ -86,11 +83,11 @@ public class TournamentCellAdapter extends BaseAdapter {
         } else {
             mViewHolder = (ViewHolder)convertView.getTag();
         }
-        mViewHolder.nomeTorneo.setText("POKER HOUR ON LINE");
-        mViewHolder.oraTorneo.setText("18:45");
-        mViewHolder.nomeTorneoBis.setText("FREE BONUS SUPER APRIL CLICKANDPLAY.IT");
-        mViewHolder.buy.setText("freeroll");
-        mViewHolder.note.setText("1 bonus freeroll da 2 euro per POKER GAMES in CLICKANDPLAY.IT");
+        mViewHolder.nomeTorneo.setText((String)itemarray.get(0));
+        mViewHolder.oraTorneo.setText((String)itemarray.get(0));
+        mViewHolder.nomeTorneoBis.setText((String)itemarray.get(0));
+        mViewHolder.buy.setText((String)itemarray.get(0));
+        mViewHolder.note.setText((String)itemarray.get(0));
 
 //        final TwoWayView.LayoutParams params = (TwoWayView.LayoutParams) convertView.getLayoutParams();
 //

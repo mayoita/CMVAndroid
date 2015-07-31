@@ -1,6 +1,7 @@
 package it.casinovenezia.casinodivenezia;
 
 import android.content.Context;
+import android.graphics.Typeface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import java.util.TreeSet;
 
 /**
@@ -22,47 +24,51 @@ public class TournamentAdapter extends BaseAdapter {
 
     private static final int TYPE_ITEM = 0;
     private static final int TYPE_SEPARATOR = 1;
-    private String formattedCurrentDate;
-
+    private List<TournamentItem> eventitemList = null;
+    private ArrayList<TournamentItem> arraylist;
+    Typeface Aachen;
     enum RowType {
         LIST_ITEM, HEADER_ITEM
     }
 
-    private ArrayList<String> mData = new ArrayList<String>();
+
     private TreeSet<Integer> sectionHeader = new TreeSet<Integer>();
 
 
     class ViewHolder {
 
         public ImageView image;
-        //public TextView text;
+        private TextView text;
+        private TextView date;
     }
     class ViewHolderHeader {
 
         private TextView text;
     }
 
-    public TournamentAdapter(Context context) {
+    public TournamentAdapter(Context context,List<TournamentItem> eventitemlist) {
         this.context = context;
-        Date currentDate = Calendar.getInstance().getTime();
-        java.text.SimpleDateFormat simpleDateFormat = new java.text.SimpleDateFormat("dd MMMM yyyy");
-        formattedCurrentDate = simpleDateFormat.format(currentDate);
+
         mInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        this.eventitemList = eventitemlist;
+        this.arraylist = new ArrayList<TournamentItem>();
+        this.arraylist.addAll(eventitemlist);
+        Aachen = Typeface.createFromAsset(context.getAssets(), "fonts/Aachen_Bold_Plain.ttf");
     }
 
-    public void addItem(String item) {
-        mData.add(item);
-        notifyDataSetChanged();
+    public void addItem(TournamentItem item) {
+        eventitemList.add(item);
+
     }
-    public void addSectionHeaderItem(final String item) {
-        mData.add(item);
-        sectionHeader.add(mData.size() - 1);
-        notifyDataSetChanged();
+    public void addSectionHeaderItem(final TournamentItem item) {
+        eventitemList.add(item);
+        sectionHeader.add(eventitemList.size() - 1);
+
     }
 
     @Override
     public int getCount() {
-        return mData.size();
+        return eventitemList.size();
     }
 
     @Override
@@ -72,8 +78,8 @@ public class TournamentAdapter extends BaseAdapter {
 
 
     @Override
-    public String getItem(int position) {
-        return mData.get(position);
+    public Object getItem(int position) {
+        return eventitemList.get(position);
     }
 
     @Override
@@ -84,7 +90,7 @@ public class TournamentAdapter extends BaseAdapter {
     public int getItemViewType(int position) {
 
         //int b= sectionHeader.contains(position) ? TYPE_SEPARATOR : TYPE_ITEM;
-        return RowType.values()[position % 2].ordinal();
+        return position % 2;
     }
 
     @Override
@@ -101,6 +107,10 @@ public class TournamentAdapter extends BaseAdapter {
                     ViewHolder viewHolder = new ViewHolder();
                     //viewHolder.text = (TextView) rowView.findViewById(R.id.textView1);
                     viewHolder.image = (ImageView) rowView.findViewById(R.id.image_event);
+                    viewHolder.text = (TextView) rowView.findViewById(R.id.editText4);
+                    viewHolder.text.setTypeface(Aachen);
+                    viewHolder.date = (TextView) rowView.findViewById(R.id.editText5);
+                    viewHolder.date.setTypeface(Aachen);
                     rowView.setTag(viewHolder);
                     break;
                 case TYPE_SEPARATOR:
@@ -122,11 +132,13 @@ public class TournamentAdapter extends BaseAdapter {
                 //holder.textView.setText(mData.get(position));
                 //download image
                 // holder.image
+                holder.text.setText(arraylist.get(position).getTournamentsName());
+                //holder.date.setText(arraylist.get(position).getTournamentDate());
                 break;
             case TYPE_SEPARATOR:
                 ViewHolderHeader holderHeader = (ViewHolderHeader)rowView.getTag();
 
-                holderHeader.text.setText(formattedCurrentDate);
+                holderHeader.text.setText(arraylist.get(position).getStartDate());
                 break;
         }
 

@@ -69,6 +69,7 @@ public class PokerDayAdapter extends BaseAdapter {
     public Object getItem(int position) {
         return mData.get(position);
     }
+    public int getIndex(int position) {return (int)parentIndex.get(position);}
 
     @Override
     public long getItemId(int position) {
@@ -91,7 +92,9 @@ public class PokerDayAdapter extends BaseAdapter {
         } else {
             mViewHolder = (ViewHolder)convertView.getTag();
         }
+
         mViewHolder.text.setText(formatMyDate(mData.get(position)));
+
 
         final TwoWayView.LayoutParams params = (TwoWayView.LayoutParams) convertView.getLayoutParams();
 

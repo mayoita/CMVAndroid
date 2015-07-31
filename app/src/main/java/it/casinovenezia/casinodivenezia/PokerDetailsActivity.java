@@ -40,7 +40,9 @@ public class PokerDetailsActivity extends ActionBarActivity implements BaseSlide
     private int currentVisibleItemCount;
     private int currentScrollState;
     private TwoWayView lvTest;
+    ArrayList pokerArray;
     Context context = PokerDetailsActivity.this;
+    int width;
 
 
     private int convertDpToPx(int dp, DisplayMetrics displayMetrics) {
@@ -72,11 +74,11 @@ public class PokerDetailsActivity extends ActionBarActivity implements BaseSlide
         TextView titolo = (TextView)findViewById(R.id.textViewPoker);
         TextView titoloR = (TextView)findViewById(R.id.textViewPokerRule);
         titoloR.setText(Html.fromHtml(createRules(i.getStringArrayListExtra("TournamentsRules"))));
-
+        titolo.setText((i.getStringExtra("TournamentName")));
         titolo.setTypeface(XLight);
         titoloR.setTypeface(XLight);
 
-        int width = display.getWidth();
+        width = display.getWidth();
         int height = (int) (width * 0.66); // 0.75 if image aspect ration is 4:3, change accordingly
 
         RelativeLayout.LayoutParams fp = new RelativeLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, height + convertDpToPx(6,dm));
@@ -86,28 +88,22 @@ public class PokerDetailsActivity extends ActionBarActivity implements BaseSlide
         sp.setMargins(convertDpToPx(10, dm), convertDpToPx(40, dm), convertDpToPx(10, dm), 0);
 
         mAdapter = new PokerDayAdapter(context, width);
-        ArrayList pokerArray = i.getStringArrayListExtra("PokerData");
+        mCellAdapter = new PokerCellAdapter(context, width);
+        pokerArray = i.getStringArrayListExtra("PokerData");
+        int primo=0;
         for (int k = 0; k < pokerArray.size(); k++) {
             ArrayList f = (ArrayList) pokerArray.get(k);
             String ff = (String) f.get(1);
             if (!ff.equals("")) {
                 mAdapter.addItem((String) f.get(1), k);
+                primo = primo + 1;
+            }
+            if (primo == 1) {
+                mCellAdapter.addItem((ArrayList) pokerArray.get(k));
             }
 
         }
-
-
-        mCellAdapter = new PokerCellAdapter(context, width);
-
-        mCellAdapter.addItem("Item1");
-        mCellAdapter.addItem("Item2");
-        mCellAdapter.addItem("Item3");
-        mCellAdapter.addItem("Item4");
-        mCellAdapter.addItem("Item5");
-
         myListView.setAdapter(mCellAdapter);
-
-
 
         lvTest = (TwoWayView) findViewById(R.id.lvItemsPoker);
         lvTest.setAdapter(mAdapter);
@@ -120,13 +116,10 @@ public class PokerDetailsActivity extends ActionBarActivity implements BaseSlide
                 switch (scrollState) {
                     case SCROLL_STATE_IDLE:
                         stateName = "Idle";
-
                         break;
-
                     case SCROLL_STATE_TOUCH_SCROLL:
                         stateName = "Dragging";
                         break;
-
                     case SCROLL_STATE_FLING:
                         stateName = "Flinging";
                         break;
@@ -147,10 +140,13 @@ public class PokerDetailsActivity extends ActionBarActivity implements BaseSlide
             private void isScrollCompleted() {
 
                 if (currentVisibleItemCount > 0 && currentScrollState == 0) {
-                   int a =lvTest.getFirstVisiblePosition();
-                    int b =lvTest.getFirstVisiblePosition();
-                    /*** In this way I detect if there's been a scroll which has completed ***/
-                    /*** do the work! ***/
+
+
+                    mCellAdapter.mData.clear();
+                    for (int k = mAdapter.getIndex(lvTest.getFirstVisiblePosition()); k < mAdapter.getIndex(lvTest.getFirstVisiblePosition() + 1); k++) {
+                            mCellAdapter.addItem((ArrayList) pokerArray.get(k));
+                    }
+                    myListView.setAdapter(mCellAdapter);
                 }
             }
 

@@ -354,6 +354,12 @@ public class HomeActivity extends ActionBarActivity implements EventDetails.OnEv
                             theClassPoker.setOffice();
 
                             break;
+                        case "it.casinovenezia.casinodivenezia.TournamentFr":
+
+                            TournamentFr theClassTour = (TournamentFr)theFragment;
+                            theClassTour.setOffice();
+
+                            break;
 
                     }
                 }

@@ -124,12 +124,7 @@ public void onGlobalLayout(){
         sp.setMargins(convertDpToPx(10,dm),convertDpToPx(40,dm),convertDpToPx(10,dm),0);
 
         mAdapter=new TournamentDayAdapter(getActivity(),fragmentWidth);
-        mAdapter.addItem("Item 1");
-        mAdapter.addItem("Item 2");
-        mAdapter.addItem("Item 3");
-        mAdapter.addItem("Item 4");
-        mAdapter.addItem("Item 5");
-        mAdapter.addItem("Item 6");
+
 
 
         TwoWayView lvTest=(TwoWayView)myView.findViewById(R.id.lvItemsTournament);
@@ -138,11 +133,7 @@ public void onGlobalLayout(){
 
         mCellAdapter=new TournamentCellAdapter(getActivity(),fragmentWidth);
 
-        mCellAdapter.addItem("Item1");
-        mCellAdapter.addItem("Item2");
-        mCellAdapter.addItem("Item3");
-        mCellAdapter.addItem("Item4");
-        mCellAdapter.addItem("Item5");
+
 
         myListView.setAdapter(mCellAdapter);
 

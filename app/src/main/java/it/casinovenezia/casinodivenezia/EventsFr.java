@@ -247,14 +247,14 @@ public class EventsFr extends Fragment {
         protected void onPreExecute() {
             super.onPreExecute();
             // Create a progressdialog
-            mProgressDialog = new ProgressDialog(getActivity());
+         //   mProgressDialog = new ProgressDialog(getActivity());
             // Set progressdialog title
-            mProgressDialog.setTitle("Parse.com Custom ListView Tutorial");
+         //   mProgressDialog.setTitle("Parse.com Custom ListView Tutorial");
             // Set progressdialog message
-            mProgressDialog.setMessage("Loading...");
-            mProgressDialog.setIndeterminate(false);
+           // mProgressDialog.setMessage("Loading...");
+          // mProgressDialog.setIndeterminate(false);
             // Show progressdialog
-            mProgressDialog.show();
+          //  mProgressDialog.show();
         }
 
         @Override
@@ -331,7 +331,7 @@ public class EventsFr extends Fragment {
 
 
             // Close the progressdialog
-            mProgressDialog.dismiss();
+           // mProgressDialog.dismiss();
         }
     }
 

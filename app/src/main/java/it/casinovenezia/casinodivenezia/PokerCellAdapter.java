@@ -20,7 +20,7 @@ public class PokerCellAdapter extends BaseAdapter {
     private int theWidth;
     private LayoutInflater mInflater;
     private Typeface myTypeFace;
-    private ArrayList<String> mData = new ArrayList<String>();
+    public ArrayList mData = new ArrayList();
     private final int sumOfMarginLeftAndRight = 60;
     private DisplayMetrics dm;
 
@@ -36,10 +36,7 @@ public class PokerCellAdapter extends BaseAdapter {
         public TextView note;
 
     }
-    private int convertDpToPx(int dp, DisplayMetrics displayMetrics) {
-        float pixels = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, displayMetrics);
-        return Math.round(pixels);
-    }
+
 
     public PokerCellAdapter(Context context, int theWidth) {
 
@@ -49,9 +46,9 @@ public class PokerCellAdapter extends BaseAdapter {
         myTypeFace = Typeface.createFromAsset(context.getAssets(), "fonts/GothamXLight.otf");
         mInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
-    public void addItem(String item) {
+    public void addItem(ArrayList item) {
         mData.add(item);
-        notifyDataSetChanged();
+
     }
 
     @Override
@@ -73,7 +70,7 @@ public class PokerCellAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
 
         ViewHolder mViewHolder;
-
+        ArrayList itemarray = (ArrayList) mData.get(position);
         if (convertView == null) {
             convertView = mInflater.inflate(R.layout.poker_cell, parent, false);
             //configure view holder
@@ -93,15 +90,15 @@ public class PokerCellAdapter extends BaseAdapter {
         } else {
             mViewHolder = (ViewHolder)convertView.getTag();
         }
-        mViewHolder.nomeTorneo.setText("THE CHALLENGE");
-        mViewHolder.oraTorneo.setText("19:00");
-        mViewHolder.nomeTorneoBis.setText("THE CHALLENGE \"SPRITZ SATELLITE\"");
-        mViewHolder.buy.setText("25+5");
-        mViewHolder.stack.setText("10000");
-        mViewHolder.blinds.setText("10'");
-        mViewHolder.late.setText("5");
-        mViewHolder.cap.setText("20");
-        mViewHolder.note.setText("NLH 1 RE ENTRY (satellite)");
+        mViewHolder.nomeTorneo.setText((String)itemarray.get(0));
+        mViewHolder.oraTorneo.setText((String)itemarray.get(2));
+        mViewHolder.nomeTorneoBis.setText((String)itemarray.get(3));
+        mViewHolder.buy.setText((String)itemarray.get(4));
+        mViewHolder.stack.setText((String)itemarray.get(5).toString());
+        mViewHolder.blinds.setText((String)itemarray.get(6).toString());
+        mViewHolder.late.setText((String)itemarray.get(7).toString());
+        mViewHolder.cap.setText((String)itemarray.get(8).toString());
+        mViewHolder.note.setText((String)itemarray.get(9));
 
 //        final TwoWayView.LayoutParams params = (TwoWayView.LayoutParams) convertView.getLayoutParams();
 //

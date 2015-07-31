@@ -5,6 +5,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.text.Html;
 import android.text.method.LinkMovementMethod;
 import android.util.DisplayMetrics;
 import android.util.TypedValue;
@@ -13,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -22,17 +24,29 @@ import com.daimajia.slider.library.SliderTypes.BaseSliderView;
 
 import org.lucasr.twowayview.TwoWayView;
 
+import java.util.ArrayList;
+
 /**
  * Created by massimomoro on 08/05/15.
  */
 public class PokerDetails extends Fragment implements BaseSliderView.OnSliderClickListener{
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private static final String ARG_PARAM1 = "param1";
-private static final String ARG_PARAM2 = "param2";
+private static final String TOURNAMENT_DESCRIPTION = "TournamentDescription";
+private static final String TOURNAMENT_DATE = "TournamentDate";
+        private static final String TOURNAMENT_NAME = "TournamentName";
+        private static final String TOURNAMENT_URL = "TournamentURL";
+        private static final String START_DATE = "StartDate";
+        private static final String TOURNAMENTS_RULES = "TournamentsRules";
+        private static final String POKER_DATA = "PokerData";
+
         private PokerDayAdapter mAdapter;
         private PokerCellAdapter mCellAdapter;
         private ListView myListView;
+        ArrayList pokerArray;
+        private TwoWayView lvTest;
+    private int currentVisibleItemCount;
+    private int currentScrollState;
 
 // TODO: Rename and change types of parameters
 private String mParam1;
@@ -56,17 +70,24 @@ private int convertDpToPx(int dp, DisplayMetrics displayMetrics) {
  * @return A new instance of fragment EventDetails.
  */
 // TODO: Rename and change types and number of parameters
-public static PokerDetails newInstance(String index) {
+public static PokerDetails newInstance(String tournamentDescription, String tournamentDate, String tournamentName, String tournamentUrl, String startDate, ArrayList tournamtsrules, ArrayList pokerData) {
         PokerDetails fragment = new PokerDetails();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, index);
+        args.putString(TOURNAMENT_DESCRIPTION, tournamentDescription);
+        args.putString(TOURNAMENT_DATE, tournamentDate);
+        args.putString(TOURNAMENT_NAME, tournamentName);
+        args.putString(TOURNAMENT_URL, tournamentUrl);
+        args.putString(START_DATE, startDate);
+        args.putStringArrayList(TOURNAMENTS_RULES, tournamtsrules);
+        args.putStringArrayList(POKER_DATA, pokerData);
+
 
         fragment.setArguments(args);
         return fragment;
         }
 
 public String getShownIndex() {
-        return getArguments().getString(ARG_PARAM1);
+        return getArguments().getString(TOURNAMENT_NAME);
         }
 
 public PokerDetails() {
@@ -77,7 +98,7 @@ public PokerDetails() {
 public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-        mParam1 = getArguments().getString(ARG_PARAM1);
+
 
         }
 
@@ -108,59 +129,97 @@ public void onActivityCreated(@Nullable Bundle savedInstanceState) {
 
 final View myView = getView();
         if (myView != null) {
-        myView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+            myView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
                 @Override
                 public void onGlobalLayout() {
-                        fragmentWidth = getView().getWidth();
+                    fragmentWidth = getView().getWidth();
 
-                        DisplayMetrics dm = getResources().getDisplayMetrics();
-                        int height = (int) (fragmentWidth * 0.66); // 0.75 if image aspect ration is 4:3, change accordingly
+                    mAdapter = new PokerDayAdapter(getActivity(), fragmentWidth);
+                    mCellAdapter = new PokerCellAdapter(getActivity(), fragmentWidth);
+                    pokerArray = getArguments().getStringArrayList("PokerData");
 
-                        RelativeLayout.LayoutParams fp = new RelativeLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, height + convertDpToPx(6, dm));
-                        RelativeLayout.LayoutParams sp = new RelativeLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, height);
-
-                        fp.setMargins(convertDpToPx(7, dm), convertDpToPx(37, dm), convertDpToPx(7, dm), 0);
-                        sp.setMargins(convertDpToPx(10, dm), convertDpToPx(40, dm), convertDpToPx(10, dm), 0);
-
-                        mAdapter = new PokerDayAdapter(getActivity(), fragmentWidth);
-
-
-
-                        TwoWayView lvTest = (TwoWayView) myView.findViewById(R.id.lvItemsPoker);
-                        lvTest.setAdapter(mAdapter);
-                        myListView = (ListView)myView.findViewById(R.id.listViewPoker);
-
-                        mCellAdapter = new PokerCellAdapter(getActivity(), fragmentWidth);
-
-                        mCellAdapter.addItem("Item1");
-                        mCellAdapter.addItem("Item2");
-                        mCellAdapter.addItem("Item3");
-                        mCellAdapter.addItem("Item4");
-                        mCellAdapter.addItem("Item5");
-
-                        myListView.setAdapter(mCellAdapter);
-
-
-                        if (fragmentWidth > 0) {
-                                getView().getViewTreeObserver().removeGlobalOnLayoutListener(this);
+                    int primo=0;
+                    for (int k = 0; k < pokerArray.size(); k++) {
+                        ArrayList f = (ArrayList) pokerArray.get(k);
+                        String ff = (String) f.get(1);
+                        if (!ff.equals("")) {
+                            mAdapter.addItem((String) f.get(1), k);
+                            primo = primo + 1;
                         }
+                        if (primo == 1) {
+                            mCellAdapter.addItem((ArrayList) pokerArray.get(k));
+                        }
+                    }
+                    myListView.setAdapter(mCellAdapter);
+
+                    lvTest = (TwoWayView) myView.findViewById(R.id.lvItemsPoker);
+                    lvTest.setAdapter(mAdapter);
+                    lvTest.setOnScrollListener(new TwoWayView.OnScrollListener() {
+                        @Override
+                        public void onScrollStateChanged(TwoWayView view, int scrollState) {
+                            String stateName = "Undefined";
+                            currentScrollState = scrollState;
+                            isScrollCompleted();
+                            switch (scrollState) {
+                                case SCROLL_STATE_IDLE:
+                                    stateName = "Idle";
+                                    break;
+                                case SCROLL_STATE_TOUCH_SCROLL:
+                                    stateName = "Dragging";
+                                    break;
+                                case SCROLL_STATE_FLING:
+                                    stateName = "Flinging";
+                                    break;
+                            }
+
+                        }
+
+                        @Override
+                        public void onScroll(TwoWayView view, int firstVisibleItem,
+                                             int visibleItemCount, int totalItemCount) {
+
+
+                            currentVisibleItemCount = visibleItemCount;
+                        }
+
+                        private void isScrollCompleted() {
+
+                            if (currentVisibleItemCount > 0 && currentScrollState == 0) {
+
+
+                                mCellAdapter.mData.clear();
+                                for (int k = mAdapter.getIndex(lvTest.getFirstVisiblePosition()); k < mAdapter.getIndex(lvTest.getFirstVisiblePosition() + 1); k++) {
+                                    mCellAdapter.addItem((ArrayList) pokerArray.get(k));
+                                }
+                                myListView.setAdapter(mCellAdapter);
+                            }
+                        }
+
+                    });
+
+                    if (fragmentWidth > 0) {
+                        getView().getViewTreeObserver().removeGlobalOnLayoutListener(this);
+                    }
                 }
-        });
+            });
+            myListView = (ListView)myView.findViewById(R.id.listViewPoker);
+            TextView diciotto = (TextView) myView.findViewById(R.id.diciottopiu);
+            diciotto.setMovementMethod(LinkMovementMethod.getInstance());
+            Typeface XLight = Typeface.createFromAsset(getActivity().getAssets(), "fonts/GothamXLight.otf");
+            TextView titolo = (TextView)myView.findViewById(R.id.textViewPoker);
+            TextView titoloR = (TextView)myView.findViewById(R.id.textViewPokerRule);
+            titolo.setTypeface(XLight);
+            titoloR.setTypeface(XLight);
+            titoloR.setText(Html.fromHtml(createRules(getArguments().getStringArrayList("TournamentsRules"))));
+            titolo.setText((getArguments().getString("TournamentName")));
 
 
-        TextView diciotto = (TextView) myView.findViewById(R.id.diciottopiu);
-        diciotto.setMovementMethod(LinkMovementMethod.getInstance());
-                Typeface XLight = Typeface.createFromAsset(getActivity().getAssets(), "fonts/GothamXLight.otf");
-                TextView titolo = (TextView)myView.findViewById(R.id.textViewPoker);
-                TextView titoloR = (TextView)myView.findViewById(R.id.textViewPokerRule);
-                titolo.setTypeface(XLight);
-                titoloR.setTypeface(XLight);
 
 
 
         }
 
-        }
+}
 
 // TODO: Rename method, update argument and hook method into UI event
 public void onButtonPressed(Uri uri) {
@@ -191,5 +250,16 @@ public interface OnEventsInteractionListener {
     // TODO: Update argument type and name
     public void onFragmentInteraction(Uri uri);
 }
+    public String createRules (ArrayList theList) {
+        String theRules ="";
+
+        for (int i = 0; i < theList.size(); i++) {
+
+            ArrayList a = (ArrayList) theList.get(i);
+            theRules = theRules + "<font color=#cc0029>" + a.get(0) + "</font><BR>"  + a.get(1) + "<BR><BR>";
+        }
+
+        return theRules;
+    }
 
 }

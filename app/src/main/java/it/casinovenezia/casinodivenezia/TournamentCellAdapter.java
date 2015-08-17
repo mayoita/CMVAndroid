@@ -83,11 +83,11 @@ public class TournamentCellAdapter extends BaseAdapter {
         } else {
             mViewHolder = (ViewHolder)convertView.getTag();
         }
-        mViewHolder.nomeTorneo.setText((String)itemarray.get(0));
-        mViewHolder.oraTorneo.setText((String)itemarray.get(0));
-        mViewHolder.nomeTorneoBis.setText((String)itemarray.get(0));
-        mViewHolder.buy.setText((String)itemarray.get(0));
-        mViewHolder.note.setText((String)itemarray.get(0));
+        mViewHolder.nomeTorneo.setText("POKER HOUR ON LINE");
+        mViewHolder.oraTorneo.setText((String)itemarray.get(1));
+        mViewHolder.nomeTorneoBis.setText((String)itemarray.get(2));
+        mViewHolder.buy.setText((String)itemarray.get(3));
+        mViewHolder.note.setText((String)itemarray.get(4));
 
 //        final TwoWayView.LayoutParams params = (TwoWayView.LayoutParams) convertView.getLayoutParams();
 //

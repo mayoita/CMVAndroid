@@ -49,7 +49,8 @@ public class EventsAdapter extends BaseAdapter {
     class ViewHolder {
 
         public ImageView image;
-        //public TextView text;
+        public TextView text;
+        public TextView date;
     }
     class ViewHolderHeader {
 
@@ -117,7 +118,8 @@ public class EventsAdapter extends BaseAdapter {
                     rowView = mInflater.inflate(R.layout.event_items, parent, false);
                     //configure view holder
                     ViewHolder viewHolder = new ViewHolder();
-                    //viewHolder.text = (TextView) rowView.findViewById(R.id.textView1);
+                    viewHolder.text = (TextView) rowView.findViewById(R.id.editText5);
+                    viewHolder.date = (TextView) rowView.findViewById(R.id.editText4);
                     viewHolder.image = (ImageView) rowView.findViewById(R.id.image_event);
                     rowView.setTag(viewHolder);
                     break;
@@ -139,7 +141,8 @@ public class EventsAdapter extends BaseAdapter {
                 ViewHolder holder = (ViewHolder)rowView.getTag();
                 //download image
                 loadImage(arraylist.get(position).getImageMain(), holder.image);
-
+                holder.text.setVisibility(View.GONE);
+                holder.date.setVisibility(View.GONE);
                 break;
             case TYPE_SEPARATOR:
                 ViewHolderHeader holderHeader = (ViewHolderHeader)rowView.getTag();

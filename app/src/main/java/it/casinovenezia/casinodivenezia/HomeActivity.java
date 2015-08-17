@@ -360,6 +360,12 @@ public class HomeActivity extends ActionBarActivity implements EventDetails.OnEv
                             theClassTour.setOffice();
 
                             break;
+                        case "it.casinovenezia.casinodivenezia.Restaurant":
+
+                            Restaurant theClassRestaurant = (Restaurant)theFragment;
+                            theClassRestaurant.setOffice();
+
+                            break;
 
                     }
                 }

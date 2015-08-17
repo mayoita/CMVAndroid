@@ -13,8 +13,10 @@ import android.widget.TextView;
 import org.lucasr.twowayview.TwoWayView;
 
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import it.casinovenezia.casinodivenezia.R;
 
@@ -89,7 +91,7 @@ public class TournamentDayAdapter  extends BaseAdapter {
         } else {
             mViewHolder = (ViewHolder)convertView.getTag();
         }
-        mViewHolder.text.setText("MERCOLEDì 1 maggio");
+        mViewHolder.text.setText(formatMyDate(mData.get(position)));
 
         final TwoWayView.LayoutParams params = (TwoWayView.LayoutParams) convertView.getLayoutParams();
 
@@ -98,5 +100,20 @@ public class TournamentDayAdapter  extends BaseAdapter {
         }
 
         return convertView;
+    }
+    private String formatMyDate(String myDate) {
+
+        //SimpleDateFormat sdf = new SimpleDateFormat("EEEE dd LLLL", getResources().getConfiguration().locale);
+
+
+        Date date = null;
+        try {
+            date = (Date)formatter.parse(myDate);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        SimpleDateFormat newFormat = new SimpleDateFormat("EEEE dd LLLL");
+
+        return newFormat.format(date).toUpperCase();
     }
 }

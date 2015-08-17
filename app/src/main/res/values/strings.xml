@@ -182,4 +182,20 @@
     <string name="title2">Assassin\'s Creed III</string>
     <string name="title3">Hitman Absolution</string>
     <string name="title4">Dishonored</string>
+    <string name="wagner_restaurant">WAGNER RESTAURANT</string>
+    <string name="marcopolo_restaurant">MARCO POLO RESTAURANT</string>
+    <string name="wagner_details">Dedicated to the great composer who lived in Venice in the historical
+        palazzo that today houses the city\'s casino, this restaurant is a unique privilege for visitors to
+        the gaming house. Situated on the first floor of Ca\' Vendramin Calergi, the Wagner Restaurant offers
+        the exclusive pleasure of refined dining. 150 places in 3 superb settings, the Sala Palma,
+        Sala Gialla and Sala Rossa, splendidly decorated with paintings by Palma il Giovane and frescoes
+        by Gian Battista Crosato. Timeless delicacies and traditional Venetian fish specialities.
+        Special events and music by the great composers are an added treat for our guests.</string>
+    <string name="marcopolo_details">Ideal for a meal, even a quick one, it offers a creatively
+        trendy cuisine that includes Mediterranean and Venetian meat and fish dishes, in a
+        sophisticated and glamorous setting. The kitchen is open between 7.00 pm and midnight.
+        View information on the St. Valentine\'s Day dinner at the Il Milione restaurant.\n\nLA
+        PROSCIUTTERIA\n\nProducts of the highest quality and selected wines for a meal break in
+        pursuit of good taste.\n\nLA PIZZERIA\nThe wood oven produces fanciful, smouldering delicacies
+        to suit all tastes.</string>
 </resources>

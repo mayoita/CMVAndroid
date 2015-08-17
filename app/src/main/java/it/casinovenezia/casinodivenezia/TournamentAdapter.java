@@ -9,6 +9,12 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.parse.GetDataCallback;
+import com.parse.ParseImageView;
+
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -22,10 +28,11 @@ public class TournamentAdapter extends BaseAdapter {
     private final Context context;
     private LayoutInflater mInflater;
 
-    private static final int TYPE_ITEM = 0;
-    private static final int TYPE_SEPARATOR = 1;
+    private static final int TYPE_ITEM = 1;
+    private static final int TYPE_SEPARATOR = 0;
     private List<TournamentItem> eventitemList = null;
     private ArrayList<TournamentItem> arraylist;
+
     Typeface Aachen;
     enum RowType {
         LIST_ITEM, HEADER_ITEM
@@ -37,7 +44,7 @@ public class TournamentAdapter extends BaseAdapter {
 
     class ViewHolder {
 
-        public ImageView image;
+        public ParseImageView image;
         private TextView text;
         private TextView date;
     }
@@ -54,6 +61,7 @@ public class TournamentAdapter extends BaseAdapter {
         this.arraylist = new ArrayList<TournamentItem>();
         this.arraylist.addAll(eventitemlist);
         Aachen = Typeface.createFromAsset(context.getAssets(), "fonts/Aachen_Bold_Plain.ttf");
+
     }
 
     public void addItem(TournamentItem item) {
@@ -106,7 +114,7 @@ public class TournamentAdapter extends BaseAdapter {
                     //configure view holder
                     ViewHolder viewHolder = new ViewHolder();
                     //viewHolder.text = (TextView) rowView.findViewById(R.id.textView1);
-                    viewHolder.image = (ImageView) rowView.findViewById(R.id.image_event);
+                    viewHolder.image = (ParseImageView) rowView.findViewById(R.id.image_event);
                     viewHolder.text = (TextView) rowView.findViewById(R.id.editText4);
                     viewHolder.text.setTypeface(Aachen);
                     viewHolder.date = (TextView) rowView.findViewById(R.id.editText5);
@@ -129,11 +137,24 @@ public class TournamentAdapter extends BaseAdapter {
         switch (rowType) {
             case TYPE_ITEM:
                 ViewHolder holder = (ViewHolder)rowView.getTag();
-                //holder.textView.setText(mData.get(position));
-                //download image
-                // holder.image
+                if (arraylist.get(position).getType().equals("C")) {
+                    holder.image.setParseFile(arraylist.get(position).getImageTournament());
+                    holder.image.loadInBackground(new GetDataCallback() {
+                        @Override
+                        public void done(byte[] data, com.parse.ParseException e) {
+
+                        }
+                    });
+                    holder.text.setVisibility(View.GONE);
+                    holder.date.setVisibility(View.GONE);
+                } else {
+                    holder.image.setImageResource(R.drawable.tournament_cell_background);
+
+                    holder.text.setVisibility(View.VISIBLE);
+                    holder.date.setVisibility(View.VISIBLE);
+                }
                 holder.text.setText(arraylist.get(position).getTournamentsName());
-                //holder.date.setText(arraylist.get(position).getTournamentDate());
+                holder.date.setText(arraylist.get(position).getStartDate() + " - " + arraylist.get(position).getEndDate());
                 break;
             case TYPE_SEPARATOR:
                 ViewHolderHeader holderHeader = (ViewHolderHeader)rowView.getTag();
@@ -144,4 +165,5 @@ public class TournamentAdapter extends BaseAdapter {
 
         return rowView;
     }
+
 }

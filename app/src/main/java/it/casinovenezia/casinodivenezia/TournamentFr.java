@@ -99,7 +99,7 @@ public class TournamentFr extends Fragment {
             // In dual-pane mode, the list view highlights the selected item.
             listView.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
             // Make sure our UI is in the correct state.
-            showDetails(mCurCheckPosition);
+            //showDetails(mCurCheckPosition);
 
 
         }
@@ -107,8 +107,7 @@ public class TournamentFr extends Fragment {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                final String titoloriga = (String)parent.getItemAtPosition(position);
-                Log.d("list", "Ho cliccato sull'elemento con il titolo " + titoloriga);
+
                 showDetails(position);
             }
         });
@@ -155,10 +154,15 @@ public class TournamentFr extends Fragment {
             // Check what fragment is currently shown, replace if needed.
             TournamentDetails details = (TournamentDetails)
                     getFragmentManager().findFragmentById(R.id.containerInLandTournament);
-            if (details == null || details.getShownIndex() != demoData[index]) {
+            if (details == null || details.getShownIndex() != myEventitemlist.get(index).getTournamentsName()) {
                 // Make new fragment to show this selection.
-                details = TournamentDetails.newInstance(demoData[index]);
+                details = TournamentDetails.newInstance(myEventitemlist.get(index).getTournamentDescription(),
 
+                        myEventitemlist.get(index).getTournamentsName(),
+                        myEventitemlist.get(index).getTournamentUrl(),
+                        myEventitemlist.get(index).getStartDate(),
+                        myEventitemlist.get(index).getTournamentsRules(),
+                        myEventitemlist.get(index).getTournamentEvent());
                 // Execute a transaction, replacing any existing fragment
                 // with this one inside the frame.
                 FragmentTransaction ft = getFragmentManager().beginTransaction();
@@ -178,12 +182,11 @@ public class TournamentFr extends Fragment {
             Intent intent = new Intent();
             intent.setClass(getActivity(), TournamentDetailsActivity.class);
             intent.putExtra("TournamentDescription", myEventitemlist.get(index).getTournamentDescription());
-
             intent.putExtra("TournamentName", myEventitemlist.get(index).getTournamentsName());
             intent.putExtra("TournamentURL", myEventitemlist.get(index).getTournamentUrl());
             intent.putExtra("StartDate", myEventitemlist.get(index).getStartDate());
             intent.putStringArrayListExtra("TournamentsRules", myEventitemlist.get(index).getTournamentsRules());
-            intent.putStringArrayListExtra("TournamentsEvent", myEventitemlist.get(index).getTournamentEvent());
+            intent.putStringArrayListExtra("TournamentEvent", myEventitemlist.get(index).getTournamentEvent());
             intent.putExtra("Type", myEventitemlist.get(index).getType());
             startActivity(intent);
         }
@@ -285,7 +288,7 @@ public class TournamentFr extends Fragment {
 
     private String formatMyDate(Date myDate) {
 
-        SimpleDateFormat sdf = new SimpleDateFormat("dd LLLL yyyy", getResources().getConfiguration().locale);
+        SimpleDateFormat sdf = new SimpleDateFormat("dd LLLL", getResources().getConfiguration().locale);
 
         return sdf.format(myDate);
     }

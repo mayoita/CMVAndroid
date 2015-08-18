@@ -46,10 +46,7 @@ public class PokerFr extends Fragment {
     boolean mDualPane;
     int mCurCheckPosition = 0;
 
-    String [] demoData = {"a", "b", "c", "d", "e","f", "g", "h", "i", "l"};
-
     ListEventItemClickListener ifaceItemClickListener;
-
 
 
     /** An interface for defining the callback method */
@@ -144,8 +141,7 @@ public class PokerFr extends Fragment {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-             //   final String titoloriga = (String) parent.getItemAtPosition(position);
-              //  Log.d("list", "Ho cliccato sull'elemento con il titolo " + titoloriga);
+
                 showDetails(position);
             }
         });

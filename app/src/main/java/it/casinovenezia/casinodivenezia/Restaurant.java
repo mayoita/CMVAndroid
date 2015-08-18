@@ -29,6 +29,7 @@ import com.daimajia.slider.library.SliderLayout;
 import com.daimajia.slider.library.SliderTypes.BaseSliderView;
 import com.daimajia.slider.library.SliderTypes.DefaultSliderView;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 
@@ -56,6 +57,16 @@ public class Restaurant extends Fragment implements View.OnClickListener {
     private ImageView myAnchorFrame;
     private MenuAdapter mAdapter;
     private ListView listView;
+    private int[][] arrayRestaurant = {
+            {R.drawable.r_ve_1, R.drawable.r_ve_2, R.drawable.r_ve_3, R.drawable.r_ve_4, R.drawable.r_ve_5},
+            {R.drawable.r_cn_1, R.drawable.r_cn_2, R.drawable.r_cn_3, R.drawable.r_cn_4}
+    };
+    TextView title_restaurant;
+    TextView text_restaurant;
+    TextView title_two_restaurant;
+    HashMap<String,Integer> file_maps;
+    private View myView;
+
 
     int fragmentWidth;
 
@@ -143,7 +154,7 @@ public class Restaurant extends Fragment implements View.OnClickListener {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        final View myView = getView();
+        myView = getView();
         Display display = getActivity().getWindowManager().getDefaultDisplay();
         dm = getResources().getDisplayMetrics();
         heightDisplay = display.getHeight();
@@ -170,31 +181,11 @@ public class Restaurant extends Fragment implements View.OnClickListener {
                     imageView.setLayoutParams(fp);
                     mySlider.setLayoutParams(sp);
 
-                    HashMap<String,Integer> file_maps = new HashMap<String, Integer>();
-                    file_maps.put("Hannibal",R.drawable.hannibal);
-                    file_maps.put("Big Bang Theory",R.drawable.bigbang);
-                    file_maps.put("House of Cards",R.drawable.house);
-                    file_maps.put("Game of Thrones", R.drawable.game_of_thrones);
-
-                    for(String name : file_maps.keySet()){
-                        DefaultSliderView textSliderView = new DefaultSliderView(getActivity());
-                        // initialize a SliderLayout
-                        textSliderView
-                                .description(name)
-                                .image(file_maps.get(name))
-                                .setScaleType(BaseSliderView.ScaleType.Fit);
-
-
-                        //add your extra information
-                        textSliderView.getBundle()
-                                .putString("extra",name);
-
-                        mySlider.addSlider(textSliderView);
-                    }
-                    mySlider.setPresetTransformer(SliderLayout.Transformer.Fade);
-                    mySlider.setPresetIndicator(SliderLayout.PresetIndicators.Center_Bottom);
-                    mySlider.setCustomAnimation(new DescriptionAnimation());
-                    mySlider.setDuration(4000);
+                    setSlider();
+                    //mySlider.setPresetTransformer(SliderLayout.Transformer.Fade);
+                    //mySlider.setPresetIndicator(SliderLayout.PresetIndicators.Center_Bottom);
+                   // mySlider.setCustomAnimation(new DescriptionAnimation());
+                    //mySlider.setDuration(4000);
                     if (fragmentWidth > 0) {
                         getView().getViewTreeObserver().removeGlobalOnLayoutListener(this);
                     }
@@ -204,8 +195,37 @@ public class Restaurant extends Fragment implements View.OnClickListener {
             mySlider = (SliderLayout)myView.findViewById(R.id.slider);
             TextView diciotto = (TextView) myView.findViewById(R.id.diciottopiu);
             diciotto.setMovementMethod(LinkMovementMethod.getInstance());
+            title_restaurant = (TextView)myView.findViewById(R.id.textTestaurantTitle);
+            title_two_restaurant = (TextView)myView.findViewById(R.id.textView8);
+            text_restaurant = (TextView)myView.findViewById(R.id.textView10);
 
 
+        }
+
+    }
+    public void setSlider () {
+        mySlider.removeAllSliders();
+
+        file_maps = null;
+        file_maps = new HashMap<String, Integer>();
+        for(int i = 0; i < arrayRestaurant[Venue.currentVenue].length; i++) {
+            file_maps.put("Slot"+ i,arrayRestaurant[Venue.currentVenue][i]);
+        }
+
+        for(String name : file_maps.keySet()){
+            DefaultSliderView textSliderView = new DefaultSliderView(getActivity());
+            // initialize a SliderLayout
+            textSliderView
+                    .description(name)
+                    .image(file_maps.get(name))
+                    .setScaleType(BaseSliderView.ScaleType.Fit);
+            //.setOnSliderClickListener(this);
+
+            //add your extra information
+            textSliderView.getBundle()
+                    .putString("extra", name);
+
+            mySlider.addSlider(textSliderView);
         }
 
     }
@@ -304,5 +324,21 @@ public class Restaurant extends Fragment implements View.OnClickListener {
         // TODO: Update argument type and name
         public void onFragmentInteraction(Uri uri);
     }
+    public void setOffice () {
+        if (Venue.currentVenue == 1) {
+
+            title_restaurant.setText(getString(R.string.marcopolo_restaurant));
+            title_two_restaurant.setText(getString(R.string.marcopolo_restaurant));
+            text_restaurant.setText(getString(R.string.marcopolo_details));
+            setSlider();
+        } else {
+
+            title_restaurant.setText(getString(R.string.wagner_restaurant));
+            title_two_restaurant.setText(getString(R.string.wagner_restaurant));
+            text_restaurant.setText(getString(R.string.wagner_details));
+            setSlider();
+        }
+    }
+
 
 }

@@ -32,27 +32,23 @@ import java.util.ArrayList;
 public class PokerDetails extends Fragment implements BaseSliderView.OnSliderClickListener{
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private static final String TOURNAMENT_DESCRIPTION = "TournamentDescription";
-private static final String TOURNAMENT_DATE = "TournamentDate";
-        private static final String TOURNAMENT_NAME = "TournamentName";
-        private static final String TOURNAMENT_URL = "TournamentURL";
-        private static final String START_DATE = "StartDate";
-        private static final String TOURNAMENTS_RULES = "TournamentsRules";
-        private static final String POKER_DATA = "PokerData";
+    private static final String TOURNAMENT_DESCRIPTION = "TournamentDescription";
+    private static final String TOURNAMENT_DATE = "TournamentDate";
+    private static final String TOURNAMENT_NAME = "TournamentName";
+    private static final String TOURNAMENT_URL = "TournamentURL";
+    private static final String START_DATE = "StartDate";
+    private static final String TOURNAMENTS_RULES = "TournamentsRules";
+    private static final String POKER_DATA = "PokerData";
 
-        private PokerDayAdapter mAdapter;
-        private PokerCellAdapter mCellAdapter;
-        private ListView myListView;
-        ArrayList pokerArray;
-        private TwoWayView lvTest;
+    private PokerDayAdapter mAdapter;
+    private PokerCellAdapter mCellAdapter;
+    private ListView myListView;
+    ArrayList pokerArray;
+    private TwoWayView lvTest;
     private int currentVisibleItemCount;
     private int currentScrollState;
+    int fragmentWidth;
 
-// TODO: Rename and change types of parameters
-private String mParam1;
-
-        int fragmentWidth;
-        int fragmentHeight;
 
 
 

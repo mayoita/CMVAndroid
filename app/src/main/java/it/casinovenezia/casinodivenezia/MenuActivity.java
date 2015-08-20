@@ -40,6 +40,7 @@ public class MenuActivity extends ActionBarActivity {
     private List<Object> arrayFirstCourse= new ArrayList<>();
     private List<Object> arraySecondCourse= new ArrayList<>();
     private List<Object> arrayDessert= new ArrayList<>();
+    Resources res;
 
     private int convertDpToPx(int dp, DisplayMetrics displayMetrics) {
         float pixels = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, displayMetrics);
@@ -49,7 +50,7 @@ public class MenuActivity extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-      //  loadMenu();
+
         boolean tabletSize = getResources().getBoolean(R.bool.isTablet);
         if (tabletSize) {
 
@@ -78,49 +79,10 @@ public class MenuActivity extends ActionBarActivity {
         sp.setMargins(convertDpToPx(5, dm), convertDpToPx(3, dm), convertDpToPx(5, dm), 0);
         imageView.setLayoutParams(sp);
         imageView.setLayoutParams(fp);
-        Resources res = getResources();
+        res = getResources();
         mAdapter = new MenuAdapter(this);
         listView = (ListView)findViewById(R.id.listViewMenu);
-
-        for (int i = 0; i < 4; i++) {
-
-
-
-                switch(i) {
-                    case 0:
-
-                        mAdapter.addSectionHeaderItem(res.getString(R.string.starters));
-                        for (int y = 0; y < 4; y++) {
-                            mAdapter.addItem("a");
-                        }
-                        break;
-                    case 1:
-                        mAdapter.addSectionHeaderItem(res.getString(R.string.first));
-                        for (int y = 0; y < 4; y++) {
-                            mAdapter.addItem("b");
-                        }
-                        break;
-                    case 2:
-                        mAdapter.addSectionHeaderItem(res.getString(R.string.second));
-                        for (int y = 0; y < 4; y++) {
-                            mAdapter.addItem("c");
-                        }
-                        break;
-                    case 3:
-                        mAdapter.addSectionHeaderItem(res.getString(R.string.dessert));
-                        for (int y = 0; y < 4; y++) {
-                            mAdapter.addItem("d");
-                        }
-                        break;
-                    default:
-                        mAdapter.addSectionHeaderItem(res.getString(R.string.starters));
-                }
-
-
-        }
-
-        listView.setAdapter(mAdapter);
-
+        loadMenu();
 
         if (getResources().getConfiguration().orientation
                 == Configuration.ORIENTATION_LANDSCAPE) {
@@ -163,6 +125,45 @@ public class MenuActivity extends ActionBarActivity {
                             arrayFirstCourse = object.getList("FirstCourse");
                             arraySecondCourse = object.getList("SecondCourse");
                             arrayDessert = object.getList("Dessert");
+
+                            for (int i = 0; i < 4; i++) {
+
+
+
+                                switch(i) {
+                                    case 0:
+
+                                        mAdapter.addSectionHeaderItem(res.getString(R.string.starters));
+                                        for (int y = 0; y < 4; y++) {
+                                            mAdapter.addItem(arrayStarters.get(y));
+                                        }
+                                        break;
+                                    case 1:
+                                        mAdapter.addSectionHeaderItem(res.getString(R.string.first));
+                                        for (int y = 0; y < 4; y++) {
+                                            mAdapter.addItem("b");
+                                        }
+                                        break;
+                                    case 2:
+                                        mAdapter.addSectionHeaderItem(res.getString(R.string.second));
+                                        for (int y = 0; y < 4; y++) {
+                                            mAdapter.addItem("c");
+                                        }
+                                        break;
+                                    case 3:
+                                        mAdapter.addSectionHeaderItem(res.getString(R.string.dessert));
+                                        for (int y = 0; y < 4; y++) {
+                                            mAdapter.addItem("d");
+                                        }
+                                        break;
+                                    default:
+                                        mAdapter.addSectionHeaderItem(res.getString(R.string.starters));
+                                }
+
+
+                            }
+
+                            listView.setAdapter(mAdapter);
                         } else {
                             // something went wrong
 

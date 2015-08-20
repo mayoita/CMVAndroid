@@ -27,7 +27,7 @@ public class MenuAdapter  extends BaseAdapter {
         LIST_ITEM, HEADER_ITEM
     }
 
-    private ArrayList<String> mData = new ArrayList<String>();
+    private ArrayList<Object> mData = new ArrayList<Object>();
     private TreeSet<Integer> sectionHeader = new TreeSet<Integer>();
 
 
@@ -48,7 +48,7 @@ public class MenuAdapter  extends BaseAdapter {
         mInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 
-    public void addItem(String item) {
+    public void addItem(Object item) {
         mData.add(item);
 
     }
@@ -72,7 +72,7 @@ public class MenuAdapter  extends BaseAdapter {
 
 
     @Override
-    public String getItem(int position) {
+    public Object getItem(int position) {
 
         return mData.get(position);
     }
@@ -123,13 +123,13 @@ public class MenuAdapter  extends BaseAdapter {
         switch (rowType) {
             case TYPE_ITEM:
                 ViewHolder holder = (ViewHolder)rowView.getTag();
-                holder.text.setText(mData.get(position));
+               // holder.text.setText(mData.get(position));
                 //download image
                 // holder.image
                 break;
             case TYPE_SEPARATOR:
                 ViewHolderHeader holderHeader = (ViewHolderHeader)rowView.getTag();
-                holderHeader.text.setText(mData.get(position));
+               // holderHeader.text.setText(mData.get(position));
 
                 break;
         }

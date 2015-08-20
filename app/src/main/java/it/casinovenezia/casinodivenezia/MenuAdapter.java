@@ -50,12 +50,12 @@ public class MenuAdapter  extends BaseAdapter {
 
     public void addItem(String item) {
         mData.add(item);
-        notifyDataSetChanged();
+
     }
     public void addSectionHeaderItem(final String item) {
         mData.add(item);
         sectionHeader.add(mData.size() - 1);
-        notifyDataSetChanged();
+
     }
 
     @Override
@@ -85,7 +85,6 @@ public class MenuAdapter  extends BaseAdapter {
     @Override
     public int getItemViewType(int position) {
 
-        int b= sectionHeader.contains(position) ? TYPE_SEPARATOR : TYPE_ITEM;
         return sectionHeader.contains(position) ? TYPE_SEPARATOR : TYPE_ITEM;
     }
 
@@ -124,13 +123,13 @@ public class MenuAdapter  extends BaseAdapter {
         switch (rowType) {
             case TYPE_ITEM:
                 ViewHolder holder = (ViewHolder)rowView.getTag();
-                //holder.textView.setText(mData.get(position));
+                holder.text.setText(mData.get(position));
                 //download image
                 // holder.image
                 break;
             case TYPE_SEPARATOR:
                 ViewHolderHeader holderHeader = (ViewHolderHeader)rowView.getTag();
-
+                holderHeader.text.setText(mData.get(position));
 
                 break;
         }

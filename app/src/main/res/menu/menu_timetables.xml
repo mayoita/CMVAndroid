@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:theapp="http://schemas.android.com/apk/res-auto">
+    <item android:id="@+id/action_bus"
+        android:icon="@drawable/busc"
+        android:title="@string/action_bus"
+        theapp:showAsAction="ifRoom|withText"/>
+    <item android:id="@+id/action_busV"
+        android:icon="@drawable/busv"
+        android:title="@string/action_busV"
+        theapp:showAsAction="ifRoom|withText"/>
+
+    <item android:id="@+id/action_boat"
+        android:icon="@drawable/boat"
+        android:title="@string/action_boat"
+        theapp:showAsAction="ifRoom|withText"/>
+
+</menu>

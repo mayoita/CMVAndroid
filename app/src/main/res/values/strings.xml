@@ -198,4 +198,20 @@
         PROSCIUTTERIA\n\nProducts of the highest quality and selected wines for a meal break in
         pursuit of good taste.\n\nLA PIZZERIA\nThe wood oven produces fanciful, smouldering delicacies
         to suit all tastes.</string>
+    <string name="fromMestre">FROM MESTRE</string>
+    <string name="fromCaNoghera">FROM CA\' NOGHERA</string>
+    <string name="titoloServices">EVERY DAY</string>
+    <string name="action_boat">FREE BOAT</string>
+    <string name="action_bus">MESTRE - CA\'NOGHERA</string>
+    <string name="action_busV">VENEZIA - CA\'NOGHERA</string>
+    <string name="fromVenezia">FROM VENEZIA</string>
+    <string name="subTimetablesME">Free shuttle return railway station in Mestre/Ca\'Noghera</string>
+    <string name="subTimetablesVE">Free shuttle return Piazzale Roma / Ca\'Noghera</string>
+    <string name="text_for_free_boat">Free shuttle boat from Piazzale Roma\nto Ca\' Vendramin Calergi</string>
+    <string name="titoloBoat">FREE BOAT</string>
+    <string name="secondPart">From Sundays to Thursdays\nfrom 2:50 pm to 3:50 am\nevery 20 minutes</string>
+    <string name="thirdPart">On Fridays and on Saturdays\nfrom 2:50 pm to 4:50 am\nevery 10 minutes</string>
+    <string name="fourthPart">Free shuttle boat from Ca\' Vendramin Calergi\nto Piazzale Roma</string>
+    <string name="fifthPart">From Sundays to Thursdays\nfrom 3:00 pm to 4:00 am\nevery 20 minutes</string>
+    <string name="sixthPart">On Fridays and on Saturdays\nfrom 3:00 pm to 5:00 am\nevery 10 minutes</string>
 </resources>

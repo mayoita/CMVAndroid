@@ -17,13 +17,29 @@ import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.parse.GetCallback;
+import com.parse.ParseException;
+import com.parse.ParseObject;
+import com.parse.ParseQuery;
+
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by massimomoro on 26/05/15.
  */
 public class MenuActivity extends ActionBarActivity {
 
+    private static final String CA_NOGHERA = "k5xjqXyLe7";
+    private static final String VENEZIA = "25WSnGlEDW";
+
     private MenuAdapter mAdapter;
     private ListView listView;
+    String menuId;
+    private List<Object> arrayStarters= new ArrayList<>();
+    private List<Object> arrayFirstCourse= new ArrayList<>();
+    private List<Object> arraySecondCourse= new ArrayList<>();
+    private List<Object> arrayDessert= new ArrayList<>();
 
     private int convertDpToPx(int dp, DisplayMetrics displayMetrics) {
         float pixels = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, displayMetrics);
@@ -33,6 +49,7 @@ public class MenuActivity extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+      //  loadMenu();
         boolean tabletSize = getResources().getBoolean(R.bool.isTablet);
         if (tabletSize) {
 
@@ -64,30 +81,41 @@ public class MenuActivity extends ActionBarActivity {
         Resources res = getResources();
         mAdapter = new MenuAdapter(this);
         listView = (ListView)findViewById(R.id.listViewMenu);
-        for (int i = 0; i < 16; i++) {
 
-            if (i % 4 == 0) {
+        for (int i = 0; i < 4; i++) {
+
+
+
                 switch(i) {
                     case 0:
 
                         mAdapter.addSectionHeaderItem(res.getString(R.string.starters));
+                        for (int y = 0; y < 4; y++) {
+                            mAdapter.addItem("a");
+                        }
                         break;
-                    case 4:
+                    case 1:
                         mAdapter.addSectionHeaderItem(res.getString(R.string.first));
+                        for (int y = 0; y < 4; y++) {
+                            mAdapter.addItem("b");
+                        }
                         break;
-                    case 8:
+                    case 2:
                         mAdapter.addSectionHeaderItem(res.getString(R.string.second));
+                        for (int y = 0; y < 4; y++) {
+                            mAdapter.addItem("c");
+                        }
                         break;
-                    case 12:
+                    case 3:
                         mAdapter.addSectionHeaderItem(res.getString(R.string.dessert));
+                        for (int y = 0; y < 4; y++) {
+                            mAdapter.addItem("d");
+                        }
                         break;
                     default:
                         mAdapter.addSectionHeaderItem(res.getString(R.string.starters));
                 }
 
-            } else {
-                mAdapter.addItem("Row Item #" + i);
-            }
 
         }
 
@@ -117,5 +145,30 @@ public class MenuActivity extends ActionBarActivity {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_event_details, menu);
         return true;
+    }
+
+    public void loadMenu () {
+        ParseQuery<ParseObject> query = ParseQuery.getQuery("Menu");
+        if (Venue.currentVenue == 1) {
+
+            menuId = CA_NOGHERA;
+        } else {
+            menuId = VENEZIA;
+        }
+        query.getInBackground(menuId, new GetCallback<ParseObject>() {
+                    public void done(ParseObject object, ParseException e) {
+                        if (e == null) {
+                            // object will be your game score
+                            arrayStarters = object.getList("Starters");
+                            arrayFirstCourse = object.getList("FirstCourse");
+                            arraySecondCourse = object.getList("SecondCourse");
+                            arrayDessert = object.getList("Dessert");
+                        } else {
+                            // something went wrong
+
+                        }
+                    }
+                }
+        );
     }
 }

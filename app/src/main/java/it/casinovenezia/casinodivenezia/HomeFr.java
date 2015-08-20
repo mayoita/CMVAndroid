@@ -11,6 +11,8 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.text.method.LinkMovementMethod;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
@@ -57,20 +59,11 @@ public class HomeFr extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
 
 
     }
-    //TODO:implementa il controllo sulle interfacce
-//   @Override
-//    public void onAttach(Activity activity) {
-//        super.onAttach(activity);
-//        try {
-//            mListener = (DelegateListener) activity;
-//        } catch (ClassCastException e) {
-//
-//            throw new ClassCastException(activity.getClass().getName() + " must implement onItemSelected");
-//        }
-//    }
+
 
     public static final HomeFr newInstance(String message) {
         HomeFr instance = new HomeFr();
@@ -146,6 +139,12 @@ public class HomeFr extends Fragment {
         }
         );
 
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        getActivity().getMenuInflater().inflate(R.menu.menu_main, menu);
     }
 
     public void loadStorageFestivity () {

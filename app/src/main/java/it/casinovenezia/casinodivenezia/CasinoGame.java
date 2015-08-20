@@ -13,6 +13,8 @@ import android.util.Config;
 import android.util.Log;
 import android.view.Display;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -167,6 +169,13 @@ public class CasinoGame extends Fragment implements OnBackPressedListener {
             mTitle = getArguments().getString(ARG_PARAM1);
 
         }
+        setHasOptionsMenu(true);
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        getActivity().getMenuInflater().inflate(R.menu.menu_main, menu);
     }
 
     @Override

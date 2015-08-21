@@ -8,7 +8,10 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.TreeSet;
 
 /**
@@ -27,7 +30,10 @@ public class MenuAdapter  extends BaseAdapter {
         LIST_ITEM, HEADER_ITEM
     }
 
-    private ArrayList<Object> mData = new ArrayList<Object>();
+
+    ArrayList<ArrayList<String>> outer = new ArrayList<ArrayList<String>>();
+
+
     private TreeSet<Integer> sectionHeader = new TreeSet<Integer>();
 
 
@@ -48,20 +54,26 @@ public class MenuAdapter  extends BaseAdapter {
         mInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 
-    public void addItem(Object item) {
-        mData.add(item);
+    public void addItem(String item, String itemEuro) {
+        ArrayList<String> inner = new ArrayList<String>();
+        inner.add(item);
+        inner.add(itemEuro);
+        outer.add(inner);
 
     }
-    public void addSectionHeaderItem(final String item) {
-        mData.add(item);
-        sectionHeader.add(mData.size() - 1);
+    public void addSectionHeaderItem(String item) {
+        ArrayList<String> inner = new ArrayList<String>();
+        inner.add(item);
+        inner.add("");
+        outer.add(inner);
+        sectionHeader.add(outer.size() - 1);
 
     }
 
     @Override
     public int getCount() {
 
-        return mData.size();
+        return outer.size();
     }
 
     @Override
@@ -74,7 +86,7 @@ public class MenuAdapter  extends BaseAdapter {
     @Override
     public Object getItem(int position) {
 
-        return mData.get(position);
+        return outer.get(position);
     }
 
     @Override
@@ -123,17 +135,20 @@ public class MenuAdapter  extends BaseAdapter {
         switch (rowType) {
             case TYPE_ITEM:
                 ViewHolder holder = (ViewHolder)rowView.getTag();
-               // holder.text.setText(mData.get(position));
+                holder.text.setText( outer.get(position).get(0));
+                holder.textE.setText( outer.get(position).get(1));
                 //download image
                 // holder.image
                 break;
             case TYPE_SEPARATOR:
                 ViewHolderHeader holderHeader = (ViewHolderHeader)rowView.getTag();
-               // holderHeader.text.setText(mData.get(position));
+                String a = outer.get(position).get(0);
+                holderHeader.text.setText( outer.get(position).get(0));
 
                 break;
         }
 
         return rowView;
     }
+
 }

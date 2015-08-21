@@ -18,11 +18,17 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.parse.GetCallback;
+import com.parse.GetDataCallback;
 import com.parse.ParseException;
+import com.parse.ParseFile;
+import com.parse.ParseImageView;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -41,6 +47,10 @@ public class MenuActivity extends ActionBarActivity {
     private List<Object> arraySecondCourse= new ArrayList<>();
     private List<Object> arrayDessert= new ArrayList<>();
     Resources res;
+    private ParseImageView imageView;
+    TextView date;
+    TextView name;
+
 
     private int convertDpToPx(int dp, DisplayMetrics displayMetrics) {
         float pixels = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, displayMetrics);
@@ -59,15 +69,16 @@ public class MenuActivity extends ActionBarActivity {
         }
         setContentView(R.layout.pop_menu_restaurant);
 
-
+         date = (TextView)findViewById(R.id.textView23);
+         name = (TextView)findViewById(R.id.textView25);
         TextView diciotto = (TextView) findViewById(R.id.diciottopiu);
         diciotto.setMovementMethod(LinkMovementMethod.getInstance());
         Typeface XLight = Typeface.createFromAsset(getAssets(), "fonts/GothamXLight.otf");
         Typeface Thin = Typeface.createFromAsset(getAssets(), "fonts/Giorgio-Thin.ttf");
 
         Display display = getWindowManager().getDefaultDisplay();
-        ImageView imageView = (ImageView) findViewById(R.id.imageView9);
-        ImageView imageView2 = (ImageView) findViewById(R.id.imageView10);
+        imageView = (ParseImageView) findViewById(R.id.imageView9);
+        ImageView imageViewWhite = (ImageView) findViewById(R.id.imageView10);
         DisplayMetrics dm = getResources().getDisplayMetrics();
         int width = display.getWidth();
         int height = (int) (width * 0.66); // 0.75 if image aspect ration is 4:3, change accordingly
@@ -78,7 +89,7 @@ public class MenuActivity extends ActionBarActivity {
         fp.setMargins(convertDpToPx(3, dm), convertDpToPx(0, dm), convertDpToPx(3, dm), 0);
         sp.setMargins(convertDpToPx(5, dm), convertDpToPx(3, dm), convertDpToPx(5, dm), 0);
         imageView.setLayoutParams(sp);
-        imageView.setLayoutParams(fp);
+        imageViewWhite.setLayoutParams(fp);
         res = getResources();
         mAdapter = new MenuAdapter(this);
         listView = (ListView)findViewById(R.id.listViewMenu);
@@ -120,40 +131,45 @@ public class MenuActivity extends ActionBarActivity {
         query.getInBackground(menuId, new GetCallback<ParseObject>() {
                     public void done(ParseObject object, ParseException e) {
                         if (e == null) {
-                            // object will be your game score
+                            date.setText(formatMyDate(object.getDate("StartDate")) + " - " + formatMyDate(object.getDate("EndDate")));
+                            name.setText(object.getString("Chief"));
                             arrayStarters = object.getList("Starters");
                             arrayFirstCourse = object.getList("FirstCourse");
                             arraySecondCourse = object.getList("SecondCourse");
                             arrayDessert = object.getList("Dessert");
+                            ParseFile image = (ParseFile) object.get("ImageChief");
+                            imageView.setParseFile(image);
+                            imageView.loadInBackground(new GetDataCallback() {
+                                @Override
+                                public void done(byte[] data, com.parse.ParseException e) {
 
+                                }
+                            });
                             for (int i = 0; i < 4; i++) {
-
-
-
-                                switch(i) {
+                                switch (i) {
                                     case 0:
 
                                         mAdapter.addSectionHeaderItem(res.getString(R.string.starters));
-                                        for (int y = 0; y < 4; y++) {
-                                            mAdapter.addItem(arrayStarters.get(y));
+                                        for (int y = 0; y < arrayStarters.size(); y += 2) {
+                                                mAdapter.addItem((String) arrayStarters.get(y), (String) arrayStarters.get(y + 1));
                                         }
                                         break;
                                     case 1:
                                         mAdapter.addSectionHeaderItem(res.getString(R.string.first));
-                                        for (int y = 0; y < 4; y++) {
-                                            mAdapter.addItem("b");
+                                        for (int y = 0; y < arrayFirstCourse.size(); y += 2) {
+                                            mAdapter.addItem((String) arrayFirstCourse.get(y), (String) arrayFirstCourse.get(y + 1));
                                         }
                                         break;
                                     case 2:
                                         mAdapter.addSectionHeaderItem(res.getString(R.string.second));
-                                        for (int y = 0; y < 4; y++) {
-                                            mAdapter.addItem("c");
+                                        for (int y = 0; y < arraySecondCourse.size(); y += 2) {
+                                            mAdapter.addItem((String) arraySecondCourse.get(y), (String) arraySecondCourse.get(y + 1));
                                         }
                                         break;
                                     case 3:
                                         mAdapter.addSectionHeaderItem(res.getString(R.string.dessert));
-                                        for (int y = 0; y < 4; y++) {
-                                            mAdapter.addItem("d");
+                                        for (int y = 0; y < arrayDessert.size(); y += 2) {
+                                            mAdapter.addItem((String) arrayDessert.get(y), (String) arrayDessert.get(y + 1));
                                         }
                                         break;
                                     default:
@@ -171,5 +187,12 @@ public class MenuActivity extends ActionBarActivity {
                     }
                 }
         );
+    }
+
+    private String formatMyDate(Date myDate) {
+
+        SimpleDateFormat sdf = new SimpleDateFormat("dd LLLL", getResources().getConfiguration().locale);
+
+        return sdf.format(myDate);
     }
 }

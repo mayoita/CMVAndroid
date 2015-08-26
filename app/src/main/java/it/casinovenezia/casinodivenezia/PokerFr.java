@@ -19,6 +19,7 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseFile;
 import com.parse.ParseObject;
@@ -102,12 +103,14 @@ public class PokerFr extends Fragment {
     }
     public ArrayList<PokerItem> inOffice(String office)    {
         ArrayList<PokerItem> helper = new ArrayList<PokerItem>();
-        for (int i=0; i< pokeritemlist.size(); i++) {
-            PokerItem myArray = (PokerItem) pokeritemlist.get(i);
+        if (pokeritemlist != null) {
+            for (int i = 0; i < pokeritemlist.size(); i++) {
+                PokerItem myArray = (PokerItem) pokeritemlist.get(i);
 
-            if (myArray.getOffice().equals(office)) {
-                helper.add(myArray);
-                helper.add(myArray);
+                if (myArray.getOffice().equals(office)) {
+                    helper.add(myArray);
+                    helper.add(myArray);
+                }
             }
         }
         return(helper);
@@ -125,7 +128,7 @@ public class PokerFr extends Fragment {
         View rootView = inflater.inflate(R.layout.poker_fragment, container, false);
         listView = (ListView) rootView.findViewById(R.id.list_events);
 
-        new RemoteDataTask().execute();
+        loadPoker();
 
 
 
@@ -240,66 +243,43 @@ public class PokerFr extends Fragment {
         outState.putInt("curChoice", mCurCheckPosition);
     }
 
-    private class RemoteDataTask extends AsyncTask<Void, Void, Void> {
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-
-        }
-
-        @Override
-        protected Void doInBackground(Void... params) {
-            // Create the array
-            pokeritemlist = new ArrayList<PokerItem>();
-            try {
-                // Locate the class table named "Country" in Parse.com
-                ParseQuery<ParseObject> query = new ParseQuery<ParseObject>(
-                        "Poker");
-                // Locate the column named "ranknum" in Parse.com and order list
-                // by ascending
-                query.orderByDescending("StartDate");
-                ob = query.find();
-                for (ParseObject event : ob) {
-
-                    PokerItem map = new PokerItem();
-
-                    map.setOffice((String) event.get("office"));
-                    map.setMyId((String) event.getObjectId());
-                    map.setTournamentDescription((String) event.get("TournamentDescription"));
-                    map.setTournamentDate((String) event.get("TournamentDate"));
-                    map.setTournamentsName((String) event.get("TournamentName"));
-                    map.setTournamentsRules((ArrayList) event.get("TournamentsRules"));
-                    map.setTournamentUrl((String) event.get("TournamentURL"));
-                    map.setPokerData((ArrayList) event.get("PokerData"));
-                    map.setStartDate(formatMyDate(event.getDate("StartDate")));
-                    map.setEndDate(formatMyDate(event.getDate("EndDate")));
-
-                    pokeritemlist.add(map);
-                }
-            } catch (ParseException e) {
-                Log.e("Error", e.getMessage());
-                e.printStackTrace();
-            }
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(Void result) {
-
-            // Locate the listview in listview_main.xml
-            //listView = (ListView) findViewById(R.id.list_events);
-            // Pass the results into ListViewAdapter.java
-            setOffice();
-
-        }
-    }
-
     private String formatMyDate(Date myDate) {
 
         SimpleDateFormat sdf = new SimpleDateFormat("dd LLLL yyyy", getResources().getConfiguration().locale);
 
         return sdf.format(myDate);
     }
+    public void loadPoker() {
+        ParseQuery<ParseObject> query = new ParseQuery<ParseObject>(
+                "Poker");
 
+        query.orderByDescending("StartDate");
+        query.findInBackground(new FindCallback<ParseObject>() {
+            public void done(List<ParseObject> eventList, ParseException e) {
+                if (e == null) {
+                    pokeritemlist = new ArrayList<PokerItem>();
+                    for (ParseObject event : eventList) {
+                        PokerItem map = new PokerItem();
+
+                        map.setOffice((String) event.get("office"));
+                        map.setMyId((String) event.getObjectId());
+                        map.setTournamentDescription((String) event.get("TournamentDescription"));
+                        map.setTournamentDate((String) event.get("TournamentDate"));
+                        map.setTournamentsName((String) event.get("TournamentName"));
+                        map.setTournamentsRules((ArrayList) event.get("TournamentsRules"));
+                        map.setTournamentUrl((String) event.get("TournamentURL"));
+                        map.setPokerData((ArrayList) event.get("PokerData"));
+                        map.setStartDate(formatMyDate(event.getDate("StartDate")));
+                        map.setEndDate(formatMyDate(event.getDate("EndDate")));
+
+                        pokeritemlist.add(map);
+                        setOffice();
+                    }
+                } else {
+                    Log.d("events", "Error: " + e.getMessage());
+                }
+            }
+        });
+    }
 
 }

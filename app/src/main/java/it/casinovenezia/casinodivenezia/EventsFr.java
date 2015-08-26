@@ -99,7 +99,8 @@ public class EventsFr extends Fragment {
 
         View rootView = inflater.inflate(R.layout.events_fragment, container, false);
         listView = (ListView) rootView.findViewById(R.id.list_events);
-        new RemoteDataTask().execute();
+
+        loadEvent();
 
 
         if (savedInstanceState != null) {
@@ -237,110 +238,20 @@ public class EventsFr extends Fragment {
 
     public ArrayList<EventItem> inOffice(String office)    {
         ArrayList<EventItem> helper = new ArrayList<EventItem>();
-        for (int i=0; i< eventitemlist.size(); i++) {
-            EventItem myArray = (EventItem) eventitemlist.get(i);
+        if (eventitemlist != null) {
+            for (int i = 0; i < eventitemlist.size(); i++) {
+                EventItem myArray = (EventItem) eventitemlist.get(i);
 
-            if (myArray.getOffice().equals(office)) {
-                 helper.add(myArray);
-                helper.add(myArray);
-                //mAdapter.addItem(myArray);
+                if (myArray.getOffice().equals(office)) {
+                    helper.add(myArray);
+                    helper.add(myArray);
+                    //mAdapter.addItem(myArray);
+                }
             }
         }
         return(helper);
     }
-    // RemoteDataTask AsyncTask
-    private class RemoteDataTask extends AsyncTask<Void, Void, Void> {
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-            // Create a progressdialog
-         //   mProgressDialog = new ProgressDialog(getActivity());
-            // Set progressdialog title
-         //   mProgressDialog.setTitle("Parse.com Custom ListView Tutorial");
-            // Set progressdialog message
-           // mProgressDialog.setMessage("Loading...");
-          // mProgressDialog.setIndeterminate(false);
-            // Show progressdialog
-          //  mProgressDialog.show();
-        }
 
-        @Override
-        protected Void doInBackground(Void... params) {
-            // Create the array
-            eventitemlist = new ArrayList<EventItem>();
-            try {
-                // Locate the class table named "Country" in Parse.com
-                ParseQuery<ParseObject> query = new ParseQuery<ParseObject>(
-                        "Events");
-                // Locate the column named "ranknum" in Parse.com and order list
-                // by ascending
-                query.orderByDescending("StartDate");
-                ob = query.find();
-                for (ParseObject event : ob) {
-                    // Locate images in flag column
-                    ParseFile image = (ParseFile) event.get("ImageName");
-
-                    EventItem map = new EventItem();
-                    map.setImageMain(image);
-                    map.setOffice((String) event.get("office"));
-                    map.setMyId((String) event.getObjectId());
-
-                    switch (Locale.getDefault().getLanguage()) {
-                        case "it":
-                            map.setDescription((String) event.get("DescriptionIT"));
-                            map.setName((String) event.get("NameIT"));
-                            break;
-                        case "es":
-                            map.setDescription((String) event.get("DescriptionES"));
-                            map.setName((String) event.get("NameES"));
-                            break;
-                        case "fr":
-                            map.setDescription((String) event.get("DescriptionFR"));
-                            map.setName((String) event.get("NameFR"));
-                            break;
-                        case "de":
-                            map.setDescription((String) event.get("DescriptionDE"));
-                            map.setName((String) event.get("NameDE"));
-                            break;
-                        case "ru":
-                            map.setDescription((String) event.get("DescriptionRU"));
-                            map.setName((String) event.get("NameRU"));
-                            break;
-                        case "ch":
-                            map.setDescription((String) event.get("DescriptionCH"));
-                            map.setName((String) event.get("NameCH"));
-                            break;
-                        default:
-                            map.setDescription((String) event.get("Description"));
-                            map.setName((String) event.get("Name"));
-                            break;
-                    }
-
-                    map.setStartDate(formatMyDate(event.getDate("StartDate")));
-                    map.setEndDate(event.getDate("EndDate"));
-
-                    eventitemlist.add(map);
-                }
-            } catch (ParseException e) {
-                Log.e("Error", e.getMessage());
-                e.printStackTrace();
-            }
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(Void result) {
-
-            // Locate the listview in listview_main.xml
-            //listView = (ListView) findViewById(R.id.list_events);
-            // Pass the results into ListViewAdapter.java
-            setOffice();
-
-
-            // Close the progressdialog
-           // mProgressDialog.dismiss();
-        }
-    }
 
     private String formatMyDate(Date myDate) {
 
@@ -349,5 +260,65 @@ public class EventsFr extends Fragment {
         return sdf.format(myDate);
     }
 
+    public void loadEvent () {
+        ParseQuery<ParseObject> query = new ParseQuery<ParseObject>(
+                "Events");
+        query.orderByDescending("StartDate");
+        query.findInBackground(new FindCallback<ParseObject>() {
+            public void done(List<ParseObject> eventList, ParseException e) {
+                if (e == null) {
+                    eventitemlist = new ArrayList<EventItem>();
+                    for (ParseObject event : eventList) {
+                        // Locate images in flag column
+                        ParseFile image = (ParseFile) event.get("ImageName");
+
+                        EventItem map = new EventItem();
+                        map.setImageMain(image);
+                        map.setOffice((String) event.get("office"));
+                        map.setMyId((String) event.getObjectId());
+
+                        switch (Locale.getDefault().getLanguage()) {
+                            case "it":
+                                map.setDescription((String) event.get("DescriptionIT"));
+                                map.setName((String) event.get("NameIT"));
+                                break;
+                            case "es":
+                                map.setDescription((String) event.get("DescriptionES"));
+                                map.setName((String) event.get("NameES"));
+                                break;
+                            case "fr":
+                                map.setDescription((String) event.get("DescriptionFR"));
+                                map.setName((String) event.get("NameFR"));
+                                break;
+                            case "de":
+                                map.setDescription((String) event.get("DescriptionDE"));
+                                map.setName((String) event.get("NameDE"));
+                                break;
+                            case "ru":
+                                map.setDescription((String) event.get("DescriptionRU"));
+                                map.setName((String) event.get("NameRU"));
+                                break;
+                            case "ch":
+                                map.setDescription((String) event.get("DescriptionCH"));
+                                map.setName((String) event.get("NameCH"));
+                                break;
+                            default:
+                                map.setDescription((String) event.get("Description"));
+                                map.setName((String) event.get("Name"));
+                                break;
+                        }
+
+                        map.setStartDate(formatMyDate(event.getDate("StartDate")));
+                        map.setEndDate(event.getDate("EndDate"));
+
+                        eventitemlist.add(map);
+                        setOffice();
+                    }
+                } else {
+                    Log.d("events", "Error: " + e.getMessage());
+                }
+            }
+        });
+    }
 
 }

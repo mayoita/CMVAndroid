@@ -17,6 +17,7 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseFile;
 import com.parse.ParseObject;
@@ -91,9 +92,7 @@ public class TournamentFr extends Fragment {
         View rootView = inflater.inflate(R.layout.tournament_fragment, container, false);
         listView = (ListView) rootView.findViewById(R.id.list_tournament);
 
-
-
-        new RemoteDataTask().execute();
+        loadTournament();
 
         if (savedInstanceState != null) {
             // Restore last state for checked position.
@@ -227,77 +226,60 @@ public class TournamentFr extends Fragment {
     }
     public ArrayList<TournamentItem> inOffice(String office)    {
         ArrayList<TournamentItem> helper = new ArrayList<TournamentItem>();
-        for (int i=0; i< pokeritemlist.size(); i++) {
-            TournamentItem myArray = (TournamentItem) pokeritemlist.get(i);
+        if(pokeritemlist != null) {
+            for (int i = 0; i < pokeritemlist.size(); i++) {
+                TournamentItem myArray = (TournamentItem) pokeritemlist.get(i);
 
-            if (myArray.getOffice().equals(office)) {
-                helper.add(myArray);
-                helper.add(myArray);
+                if (myArray.getOffice().equals(office)) {
+                    helper.add(myArray);
+                    helper.add(myArray);
+                }
             }
         }
         return(helper);
     }
-    private class RemoteDataTask extends AsyncTask<Void, Void, Void> {
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
 
-        }
-
-        @Override
-        protected Void doInBackground(Void... params) {
-            // Create the array
-            pokeritemlist = new ArrayList<TournamentItem>();
-            try {
-                // Locate the class table named "Country" in Parse.com
-                ParseQuery<ParseObject> query = new ParseQuery<ParseObject>(
-                        "Tournaments");
-                // Locate the column named "ranknum" in Parse.com and order list
-                // by ascending
-                query.orderByDescending("StartDate");
-                ob = query.find();
-                for (ParseObject event : ob) {
-
-                    TournamentItem map = new TournamentItem();
-
-                    map.setOffice((String) event.get("office"));
-
-                    map.setTournamentDescription((String) event.get("TournamentDescription"));
-
-                    map.setTournamentsName((String) event.get("TournamentName"));
-                    map.setTournamentsRules((ArrayList) event.get("TournamentsRules"));
-                    map.setTournamentUrl((String) event.get("TournamentURL"));
-                    map.setType((String) event.get("Type"));
-                    map.setTournamentEvent((ArrayList) event.get("TournamentEvent"));
-                    map.setStartDate(formatMyDate(event.getDate("StartDate")));
-                    map.setEndDate(formatMyDate(event.getDate("EndDate")));
-                    map.setImageTournament((ParseFile) event.get("ImageTournament"));
-
-                    pokeritemlist.add(map);
-                }
-            } catch (ParseException e) {
-                Log.e("Error", e.getMessage());
-                e.printStackTrace();
-            }
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(Void result) {
-
-            // Locate the listview in listview_main.xml
-            //listView = (ListView) findViewById(R.id.list_events);
-            // Pass the results into ListViewAdapter.java
-            setOffice();
-
-        }
-    }
 
     private String formatMyDate(Date myDate) {
 
         SimpleDateFormat sdf = new SimpleDateFormat("dd LLLL", getResources().getConfiguration().locale);
 
         return sdf.format(myDate);
+    }
+    public void loadTournament() {
+
+        ParseQuery<ParseObject> query = new ParseQuery<ParseObject>(
+                "Tournaments");
+
+        query.orderByDescending("StartDate");
+        query.findInBackground(new FindCallback<ParseObject>() {
+            public void done(List<ParseObject> eventList, ParseException e) {
+                if (e == null) {
+                    pokeritemlist = new ArrayList<TournamentItem>();
+                    for (ParseObject event : eventList) {
+                        TournamentItem map = new TournamentItem();
+
+                        map.setOffice((String) event.get("office"));
+
+                        map.setTournamentDescription((String) event.get("TournamentDescription"));
+
+                        map.setTournamentsName((String) event.get("TournamentName"));
+                        map.setTournamentsRules((ArrayList) event.get("TournamentsRules"));
+                        map.setTournamentUrl((String) event.get("TournamentURL"));
+                        map.setType((String) event.get("Type"));
+                        map.setTournamentEvent((ArrayList) event.get("TournamentEvent"));
+                        map.setStartDate(formatMyDate(event.getDate("StartDate")));
+                        map.setEndDate(formatMyDate(event.getDate("EndDate")));
+                        map.setImageTournament((ParseFile) event.get("ImageTournament"));
+
+                        pokeritemlist.add(map);
+                        setOffice();
+                    }
+                } else {
+                    Log.d("tournaments", "Error: " + e.getMessage());
+                }
+            }
+        });
     }
 
 }

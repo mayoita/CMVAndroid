@@ -1,6 +1,7 @@
 package it.casinovenezia.casinodivenezia;
 
 
+import android.app.PendingIntent;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
@@ -20,8 +21,15 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.facebook.appevents.AppEventsLogger;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GooglePlayServicesUtil;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.location.Geofence;
+import com.google.android.gms.location.GeofencingRequest;
+import com.google.android.gms.location.LocationServices;
 import com.parse.Parse;
 import com.parse.ParseException;
 import com.parse.ParseFacebookUtils;
@@ -34,6 +42,8 @@ import com.parse.ui.ParseLoginBuilder;
 import org.json.JSONException;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
 import it.casinovenezia.adapter.NavDrawerListAdapter;
 import it.casinovenezia.it.casinovenezia.model.NavDrawerItem;
@@ -74,6 +84,17 @@ public class HomeActivity extends ActionBarActivity implements EventDetails.OnEv
     private CharSequence mTitle;
     ViewPager mPager;
     public static final String PREFS_NAME = "MySubscription";
+    public String id;
+    private Geofence geofenceToAdd;
+    /**
+     * Provides the entry point to Google Play services.
+     */
+    protected GoogleApiClient mGoogleApiClient;
+    protected static final String TAG = "creating-and-monitoring-geofences";
+    /**
+     * Used when requesting to add or remove geofences.
+     */
+    private PendingIntent mGeofencePendingIntent;
 
 
 
@@ -138,6 +159,7 @@ public class HomeActivity extends ActionBarActivity implements EventDetails.OnEv
             });
         }
 
+        geofenceToAdd =geofence();
 
         setContentView(R.layout.home_main);
 
@@ -446,6 +468,13 @@ public class HomeActivity extends ActionBarActivity implements EventDetails.OnEv
 
         // Logs 'install' and 'app activate' App Events.
         AppEventsLogger.activateApp(this);
+
+        int googlePlayServicesCode = GooglePlayServicesUtil.isGooglePlayServicesAvailable(this);
+        Log.i(HomeActivity.class.getSimpleName(), "googlePlayServicesCode = " + googlePlayServicesCode);
+
+        if (googlePlayServicesCode == 1 || googlePlayServicesCode == 2 || googlePlayServicesCode == 3) {
+            GooglePlayServicesUtil.getErrorDialog(googlePlayServicesCode, this, 0).show();
+        }
     }
     @Override
     protected void onPause() {
@@ -482,5 +511,114 @@ public class HomeActivity extends ActionBarActivity implements EventDetails.OnEv
             return myadapter.getRegisteredFragment(mPager.getCurrentItem());
         }
         return null;
+    }
+    public Geofence geofence() {
+        id = Constants.VENEZIA;
+        return new Geofence.Builder()
+                .setRequestId(id)
+                .setTransitionTypes(Geofence.GEOFENCE_TRANSITION_ENTER)
+                .setCircularRegion(Constants.latitude, Constants.longitude, Constants.radius)
+                .setExpirationDuration(Geofence.NEVER_EXPIRE)
+                .build();
+    }
+    private GeofencingRequest getGeofencingRequest() {
+        List<Geofence> geofencesToAdd = new ArrayList<>();
+        geofencesToAdd.add(geofenceToAdd);
+        GeofencingRequest.Builder builder = new GeofencingRequest.Builder();
+        builder.setInitialTrigger(GeofencingRequest.INITIAL_TRIGGER_ENTER);
+        builder.addGeofences(geofencesToAdd);
+        return builder.build();
+    }
+    /**
+     * Builds a GoogleApiClient. Uses the {@code #addApi} method to request the LocationServices API.
+     */
+    protected synchronized void buildGoogleApiClient() {
+        mGoogleApiClient = new GoogleApiClient.Builder(this)
+                .addConnectionCallbacks(this)
+                .addOnConnectionFailedListener(this)
+                .addApi(LocationServices.API)
+                .build();
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        mGoogleApiClient.connect();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        mGoogleApiClient.disconnect();
+    }
+
+    /**
+     * Runs when a GoogleApiClient object successfully connects.
+     */
+    @Override
+    public void onConnected(Bundle connectionHint) {
+        Log.i(TAG, "Connected to GoogleApiClient");
+    }
+
+    @Override
+    public void onConnectionFailed(ConnectionResult result) {
+        // Refer to the javadoc for ConnectionResult to see what error codes might be returned in
+        // onConnectionFailed.
+        Log.i(TAG, "Connection failed: ConnectionResult.getErrorCode() = " + result.getErrorCode());
+    }
+
+    @Override
+    public void onConnectionSuspended(int cause) {
+        // The connection to Google Play services was lost for some reason.
+        Log.i(TAG, "Connection suspended");
+
+        // onConnected() will be called again automatically when the service reconnects
+    }
+    /**
+     * Adds geofences, which sets alerts to be notified when the device enters or exits one of the
+     * specified geofences. Handles the success or failure results returned by addGeofences().
+     */
+    public void addGeofencesButtonHandler(View view) {
+        if (!mGoogleApiClient.isConnected()) {
+            Toast.makeText(this, getString(R.string.not_connected), Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        try {
+            LocationServices.GeofencingApi.addGeofences(
+                    mGoogleApiClient,
+                    // The GeofenceRequest object.
+                    getGeofencingRequest(),
+                    // A pending intent that that is reused when calling removeGeofences(). This
+                    // pending intent is used to generate an intent when a matched geofence
+                    // transition is observed.
+                    getGeofencePendingIntent()
+            ).setResultCallback(this); // Result processed in onResult().
+        } catch (SecurityException securityException) {
+            // Catch exception generated if the app does not use ACCESS_FINE_LOCATION permission.
+            logSecurityException(securityException);
+        }
+
+    }
+    private void logSecurityException(SecurityException securityException) {
+        Log.e(TAG, "Invalid location permission. " +
+                "You need to use ACCESS_FINE_LOCATION with geofences", securityException);
+    }
+    /**
+     * Gets a PendingIntent to send with the request to add or remove Geofences. Location Services
+     * issues the Intent inside this PendingIntent whenever a geofence transition occurs for the
+     * current list of geofences.
+     *
+     * @return A PendingIntent for the IntentService that handles geofence transitions.
+     */
+    private PendingIntent getGeofencePendingIntent() {
+        // Reuse the PendingIntent if we already have it.
+        if (mGeofencePendingIntent != null) {
+            return mGeofencePendingIntent;
+        }
+        Intent intent = new Intent(this, GeofenceTransitionsIntentService.class);
+        // We use FLAG_UPDATE_CURRENT so that we get the same pending intent back when calling
+        // addGeofences() and removeGeofences().
+        return PendingIntent.getService(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
     }
 }

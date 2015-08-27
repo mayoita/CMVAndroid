@@ -146,6 +146,7 @@
                 <action android:name="com.parse.push.intent.OPEN" />
             </intent-filter>
         </receiver>
+        <service android:name=".GeofenceTransitionsIntentService"/>
     </application>
 
 </manifest>

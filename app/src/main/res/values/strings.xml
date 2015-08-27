@@ -214,4 +214,38 @@
     <string name="fourthPart">Free shuttle boat from Ca\' Vendramin Calergi\nto Piazzale Roma</string>
     <string name="fifthPart">From Sundays to Thursdays\nfrom 3:00 pm to 4:00 am\nevery 20 minutes</string>
     <string name="sixthPart">On Fridays and on Saturdays\nfrom 3:00 pm to 5:00 am\nevery 10 minutes</string>
+
+
+    <string name="title_activity_show_geofence_transitions">ShowGeofenceTransitionsActivity</string>
+    <string name="title_activity_main">MainActivity</string>
+
+    <!-- Buttons strings -->
+    <string name="add_geofences">Add geofences</string>
+    <string name="remove_geofences">Remove geofences</string>
+
+    <string name="geofences_added">Geofences added</string>
+    <string name="geofences_removed">Geofences removed</string>
+
+    <!-- Error strings -->
+    <string name="not_connected">GoogleApiClient no yet connected. Try again.</string>
+    <string name="geofence_not_available">Geofence service is not available now</string>
+    <string name="geofence_too_many_geofences">Your app has registered too many geofences</string>
+    <string name="geofence_too_many_pending_intents">
+        You have provided too many PendingIntents to the addGeofences() call
+    </string>
+    <string name="unknown_geofence_error">
+        Unknown error: the Geofence service is not available now
+    </string>
+    <string name="geofence_transition_invalid_type">
+        Geofence transition error: invalid transition type %1$d
+    </string>
+
+    <!-- Transition type strings -->
+    <string name="geofence_transition_entered">Entered</string>
+    <string name="geofence_transition_exited">Exited</string>
+    <string name="unknown_geofence_transition">Unknown Transition</string>
+
+    <string name="geofence_transition_notification_text">Click notification to return to app</string>
+    <string name="Notification.Title">Are we there yet?</string>
+    <string name="Notification.Text">We\'re at %1$s!!!</string>
 </resources>

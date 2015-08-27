@@ -1,41 +1,31 @@
 package it.casinovenezia.casinodivenezia;
 
 
-import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
-import android.content.pm.Signature;
 import android.content.res.Configuration;
 import android.content.res.TypedArray;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.util.Base64;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.facebook.appevents.AppEventsLogger;
 import com.parse.Parse;
 import com.parse.ParseException;
 import com.parse.ParseFacebookUtils;
 import com.parse.ParseInstallation;
-import com.parse.ParseObject;
 import com.parse.ParsePush;
 import com.parse.ParseTwitterUtils;
 import com.parse.SaveCallback;
@@ -43,8 +33,6 @@ import com.parse.ui.ParseLoginBuilder;
 
 import org.json.JSONException;
 
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 
 import it.casinovenezia.adapter.NavDrawerListAdapter;
@@ -85,6 +73,7 @@ public class HomeActivity extends ActionBarActivity implements EventDetails.OnEv
     //use to store App title
     private CharSequence mTitle;
     ViewPager mPager;
+    public static final String PREFS_NAME = "MySubscription";
 
 
 
@@ -104,16 +93,50 @@ public class HomeActivity extends ActionBarActivity implements EventDetails.OnEv
         ParseInstallation.getCurrentInstallation().saveInBackground();
         ParseFacebookUtils.initialize(this);
         ParseTwitterUtils.initialize("iG8JhxkUYQS0liIzwtYQ", "DCT2PL3MbHCN0RV9cx5K7iTlSdKfimaEUB8cOBELOTc");
-        ParsePush.subscribeInBackground("test", new SaveCallback() {
-            @Override
-            public void done(ParseException e) {
-                if (e == null) {
-                    Log.d("com.parse.push", "successfully subscribed to the broadcast channel.");
-                } else {
-                    Log.e("com.parse.push", "failed to subscribe for push", e);
+        SharedPreferences settings =getSharedPreferences(PREFS_NAME, 0);
+        final SharedPreferences.Editor editor = settings.edit();
+        if (!settings.contains("news")) {
+            ParsePush.subscribeInBackground("Events", new SaveCallback() {
+                @Override
+                public void done(ParseException e) {
+                    if (e == null) {
+                        Log.d("com.parse.push", "successfully subscribed to the  channels.");
+                        editor.putBoolean("news", true);
+                        editor.commit();
+                    } else {
+                        Log.e("com.parse.push", "failed to subscribe for push", e);
+                    }
                 }
-            }
-        });
+            });
+        }
+        if (!settings.contains("slot")) {
+            ParsePush.subscribeInBackground("Slots", new SaveCallback() {
+                @Override
+                public void done(ParseException e) {
+                    if (e == null) {
+                        Log.d("com.parse.push", "successfully subscribed to the  channels.");
+                        editor.putBoolean("slot", true);
+                        editor.commit();
+                    } else {
+                        Log.e("com.parse.push", "failed to subscribe for push", e);
+                    }
+                }
+            });
+        }
+        if (!settings.contains("poker")) {
+            ParsePush.subscribeInBackground("Poker", new SaveCallback() {
+                @Override
+                public void done(ParseException e) {
+                    if (e == null) {
+                        Log.d("com.parse.push", "successfully subscribed to the  channels.");
+                        editor.putBoolean("poker", true);
+                        editor.commit();
+                    } else {
+                        Log.e("com.parse.push", "failed to subscribe for push", e);
+                    }
+                }
+            });
+        }
 
 
         setContentView(R.layout.home_main);

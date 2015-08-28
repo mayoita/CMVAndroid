@@ -27,6 +27,8 @@ import com.facebook.appevents.AppEventsLogger;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.common.api.ResultCallback;
+import com.google.android.gms.common.api.Status;
 import com.google.android.gms.location.Geofence;
 import com.google.android.gms.location.GeofencingRequest;
 import com.google.android.gms.location.LocationServices;
@@ -61,7 +63,10 @@ public class HomeActivity extends ActionBarActivity implements EventDetails.OnEv
         Facebook.OnFacebookInteractionListener,
         Timetable.OnTimetableInteractionListener,
         LogIn.OnLogInInteractionListener,
-        EventsFr.ListEventItemClickListener
+        EventsFr.ListEventItemClickListener,
+        GoogleApiClient.ConnectionCallbacks,
+        GoogleApiClient.OnConnectionFailedListener,
+        ResultCallback<Status>
 
 
 
@@ -90,7 +95,7 @@ public class HomeActivity extends ActionBarActivity implements EventDetails.OnEv
      * Provides the entry point to Google Play services.
      */
     protected GoogleApiClient mGoogleApiClient;
-    protected static final String TAG = "creating-and-monitoring-geofences";
+    protected static final String TAG = "creating-geofences";
     /**
      * Used when requesting to add or remove geofences.
      */
@@ -160,6 +165,8 @@ public class HomeActivity extends ActionBarActivity implements EventDetails.OnEv
         }
 
         geofenceToAdd =geofence();
+        buildGoogleApiClient();
+
 
         setContentView(R.layout.home_main);
 
@@ -558,6 +565,7 @@ public class HomeActivity extends ActionBarActivity implements EventDetails.OnEv
     @Override
     public void onConnected(Bundle connectionHint) {
         Log.i(TAG, "Connected to GoogleApiClient");
+        addGeofences();
     }
 
     @Override
@@ -578,11 +586,7 @@ public class HomeActivity extends ActionBarActivity implements EventDetails.OnEv
      * Adds geofences, which sets alerts to be notified when the device enters or exits one of the
      * specified geofences. Handles the success or failure results returned by addGeofences().
      */
-    public void addGeofencesButtonHandler(View view) {
-        if (!mGoogleApiClient.isConnected()) {
-            Toast.makeText(this, getString(R.string.not_connected), Toast.LENGTH_SHORT).show();
-            return;
-        }
+    public void addGeofences() {
 
         try {
             LocationServices.GeofencingApi.addGeofences(
@@ -599,6 +603,16 @@ public class HomeActivity extends ActionBarActivity implements EventDetails.OnEv
             logSecurityException(securityException);
         }
 
+    }
+    public void onResult(Status status) {
+        if (status.isSuccess()) {
+            Log.i(TAG, "Geofence added");
+        } else {
+            // Get the status code for the error and log it using a user-friendly message.
+            String errorMessage = GeofenceErrorMessages.getErrorString(this,
+                    status.getStatusCode());
+            Log.e(TAG, errorMessage);
+        }
     }
     private void logSecurityException(SecurityException securityException) {
         Log.e(TAG, "Invalid location permission. " +

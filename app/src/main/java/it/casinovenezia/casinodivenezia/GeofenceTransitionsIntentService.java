@@ -9,6 +9,8 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.media.RingtoneManager;
+import android.net.Uri;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.TaskStackBuilder;
 import android.text.TextUtils;
@@ -36,6 +38,8 @@ public class GeofenceTransitionsIntentService extends IntentService  {
     @Override
     protected void onHandleIntent(Intent intent) {
 
+        SharedPreferences settings = getSharedPreferences(Constants.PREFS_NAME, 0);
+        final SharedPreferences.Editor editor = settings.edit();
 
         GeofencingEvent event = GeofencingEvent.fromIntent(intent);
         if (event.hasError()) {
@@ -46,13 +50,25 @@ public class GeofenceTransitionsIntentService extends IntentService  {
         }
         // Get the transition type.
         int transition = event.getGeofenceTransition();
-        if (transition == Geofence.GEOFENCE_TRANSITION_ENTER ) {
+        if (transition == Geofence.GEOFENCE_TRANSITION_ENTER) {
             List<String> geofenceIds = new ArrayList<>();
             for (Geofence geofence : event.getTriggeringGeofences()) {
                 geofenceIds.add(geofence.getRequestId());
             }
-            if (transition == Geofence.GEOFENCE_TRANSITION_ENTER || transition == Geofence.GEOFENCE_TRANSITION_DWELL) {
-                onEnteredGeofences(geofenceIds);
+
+            if (transition == Geofence.GEOFENCE_TRANSITION_ENTER ) {
+                if (settings.getInt("notification", 0) < 3) {
+                    if (settings.getInt("notification", 0) == 0) {
+                        editor.putInt("notification", 1);
+                        editor.commit();
+                        onEnteredGeofences(geofenceIds);
+                    } else {
+                        editor.putInt("notification", settings.getInt("notification", 0) + 1);
+                        editor.commit();
+                        onEnteredGeofences(geofenceIds);
+                    }
+                }
+
             }
         }
 
@@ -61,10 +77,9 @@ public class GeofenceTransitionsIntentService extends IntentService  {
 
     private void onEnteredGeofences(List<String> geofenceIds) {
         for (String geofenceId : geofenceIds) {
-            String geofenceName = "da controllare";
 
             // Set the notification text and send the notification
-            String contextText = String.format(this.getResources().getString(R.string.Notification_Text), geofenceName);
+            String contextText = this.getResources().getString(R.string.Notification_Text);
 
             NotificationManager notificationManager = (NotificationManager) this.getSystemService(Context.NOTIFICATION_SERVICE);
             Intent intent = new Intent(this, HomeActivity.class);
@@ -72,14 +87,17 @@ public class GeofenceTransitionsIntentService extends IntentService  {
             PendingIntent pendingNotificationIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
 
             Notification notification = new NotificationCompat.Builder(this)
-                    .setSmallIcon(R.mipmap.ic_launcher)
-                    .setContentTitle(this.getResources().getString(R.string.Notification_Title))
+                    .setSmallIcon(R.mipmap.leo)
+                   // .setContentTitle(this.getResources().getString(R.string.Notification_Title))
                     .setContentText(contextText)
                     .setContentIntent(pendingNotificationIntent)
                     .setStyle(new NotificationCompat.BigTextStyle().bigText(contextText))
                     .setPriority(NotificationCompat.PRIORITY_HIGH)
                     .setAutoCancel(true)
+                    //.setSound(alarmSound)
                     .build();
+            notification.sound = Uri.parse("android.resource://"
+                    + getPackageName() + "/" + R.raw.coins4);
             notificationManager.notify(0, notification);
 
         }

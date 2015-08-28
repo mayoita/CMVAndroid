@@ -247,5 +247,5 @@
 
     <string name="geofence_transition_notification_text">Click notification to return to app</string>
     <string name="Notification.Title">Are we there yet?</string>
-    <string name="Notification.Text">We\'re at %1$s!!!</string>
+    <string name="Notification.Text">You are close to the oldest Casinò of the world!</string>
 </resources>

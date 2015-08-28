@@ -33,8 +33,7 @@ import com.parse.SaveCallback;
 public class Subscription extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+
     private TextView mySubscription;
     private TextView news;
     private TextView slot;
@@ -42,11 +41,10 @@ public class Subscription extends Fragment {
     private ToggleButton newsT;
     private ToggleButton slotT;
     private ToggleButton pokerT;
-    public static final String PREFS_NAME = "MySubscription";
+
 
     // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+
 
     private OnSubscriptionInteractionListener mListener;
 
@@ -62,8 +60,7 @@ public class Subscription extends Fragment {
     public static Subscription newInstance(String param1, String param2) {
         Subscription fragment = new Subscription();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
+
         fragment.setArguments(args);
         return fragment;
     }
@@ -76,15 +73,14 @@ public class Subscription extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+
         }
     }
 
     @Override
     public void onStop() {
         super.onStop();
-        SharedPreferences settings = getActivity().getSharedPreferences(PREFS_NAME, 0);
+        SharedPreferences settings = getActivity().getSharedPreferences(Constants.PREFS_NAME, 0);
         final SharedPreferences.Editor editor = settings.edit();
         if (newsT.isChecked()) {
 
@@ -175,7 +171,7 @@ public class Subscription extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        SharedPreferences settings = getActivity().getSharedPreferences(PREFS_NAME, 0);
+        SharedPreferences settings = getActivity().getSharedPreferences(Constants.PREFS_NAME, 0);
 
         View rootView = inflater.inflate(R.layout.fragment_subscription, container, false);
         Typeface XLight = Typeface.createFromAsset(getActivity().getAssets(), "fonts/GothamXLight.otf");

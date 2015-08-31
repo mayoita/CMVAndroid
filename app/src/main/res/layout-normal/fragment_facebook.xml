@@ -2,6 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:fb="http://schemas.android.com/apk/res-auto"
     android:background="@drawable/bluetilebg"
     tools:context="it.casinovenezia.casinodivenezia.Facebook">
 
@@ -64,25 +65,41 @@
         android:layout_width="wrap_content"
         android:layout_height="45dp"
         android:id="@+id/facebook"
-
         android:text="@string/facebook"
-
-
         android:background="@drawable/button_login_custom_bg"
         android:textSize="20sp"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="15dp"
         android:layout_marginRight="15dp"
-        android:layout_marginLeft="15dp" />
+        android:layout_marginLeft="15dp"
+        />
 
-    <ImageView
+    <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/imageView6"
-        android:layout_below="@+id/textView4"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="10dp"
-        android:src="@drawable/facebook_rectangle" />
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:layout_above="@+id/facebook"
+        android:layout_below="@+id/textView4">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/imageView6"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="10dp"
+            android:src="@drawable/facebook_rectangle" />
+
+        <com.facebook.share.widget.LikeView
+            android:id="@+id/like_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            fb:com_facebook_style="button"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="78dp"
+            android:layout_centerInParent="true" />
+
+    </RelativeLayout>
 
 </RelativeLayout>

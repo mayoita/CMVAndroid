@@ -20,6 +20,7 @@ android {
     }
 }
 repositories {
+
     maven {
         url "https://jitpack.io"
     }
@@ -40,7 +41,7 @@ dependencies {
     // Module dependency on ParseLoginUI library sources
     compile project(':ParseLoginUI')
     // Uncomment if using Facebook Login (optional Maven dependency)
-    compile 'com.facebook.android:facebook-android-sdk:4.0.1'
+    compile 'com.facebook.android:facebook-android-sdk:4.5.0'
     compile 'com.github.moondroid.coverflow:library:1.0'
     compile 'com.google.code.gson:gson:2.3'
 }

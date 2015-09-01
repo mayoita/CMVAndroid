@@ -222,6 +222,7 @@ public class LogIn extends Fragment {
                     public void onCompleted(
                             JSONObject object,
                             GraphResponse response) {
+
                         URL imageURL = null;
                         Bitmap bitmap = null;
                         try {
@@ -243,6 +244,9 @@ public class LogIn extends Fragment {
                         // Application code
                     }
                 });
+        Bundle parameters = new Bundle();
+        parameters.putString("fields", "id,name,email,first_name, last_name");
+        request.setParameters(parameters);
 
         request.executeAsync();
 

@@ -248,4 +248,6 @@
     <string name="geofence_transition_notification_text">Click notification to return to app</string>
     <string name="Notification.Title">Are we there yet?</string>
     <string name="Notification.Text">You are close to the oldest Casinò of the world!</string>
+    <string name="title_activity_free_entrance">FREE ENTRY TICKET</string>
+    <string name="free_entrance_text">ENTRY ALLOWED TO ADULTS OVER THE AGE OF EIGTHEEN, ONLY ON PRESENTATION OF A VALID PHOTO IDENTITY CARD</string>
 </resources>

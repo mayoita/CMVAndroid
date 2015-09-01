@@ -54,9 +54,8 @@
     <Button
         android:id="@+id/create_account"
         style="@style/ParseLoginUI.Button"
-
         android:layout_marginTop="@dimen/com_parse_ui_small_vertical_spacing"
         android:text="@string/com_parse_ui_create_account_button_label" />
 
 </LinearLayout>
-<!-- From: file:/Users/massimomoro/CMVAndroid/ParseLoginUI/res/layout/com_parse_ui_parse_signup_form.xml --><!-- From: file:/Users/massimomoro/CMVAndroid/ParseLoginUI/build/intermediates/bundles/debug/res/layout/com_parse_ui_parse_signup_form.xml -->
+<!-- From: file:/Users/massimomoro/CMVAndroid/ParseLoginUI/src/main/res/layout/com_parse_ui_parse_signup_form.xml --><!-- From: file:/Users/massimomoro/CMVAndroid/ParseLoginUI/build/intermediates/bundles/debug/res/layout/com_parse_ui_parse_signup_form.xml -->

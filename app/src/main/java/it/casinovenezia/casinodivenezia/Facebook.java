@@ -98,7 +98,8 @@ public class Facebook extends Fragment {
                     toast.setGravity(Gravity.CENTER,0,0);
                     toast.show();
                 } else {
-
+                    Intent intent = new Intent(getActivity(), FreeEntrance.class);
+                    startActivity(intent);
                 }
             }
         });

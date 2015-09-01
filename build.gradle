@@ -19,3 +19,16 @@ allprojects {
         jcenter()
     }
 }
+ext {
+    compileSdkVersion = 21
+    buildToolsVersion = "21.1.2"
+
+    minSdkVersion = 16
+    targetSdkVersion = 21
+    facebookSDK = 'com.facebook.android:facebook-android-sdk:4.5.0'
+    androidSupport = 'com.android.support:support-v4:22.0.0'
+    bolts = 'com.parse.bolts:bolts-android:1.2.1'
+    parse = 'com.parse:parse-android:1.10.1'
+    parseFacebookUtilsPath = "$rootProject.projectDir/ParseLoginUI/libs/ParseFacebookUtilsV4-1.10.1.jar"
+    parseTwitterUtilsPath = "$rootProject.projectDir/ParseLoginUI/libs/ParseTwitterUtils-1.10.1.jar"
+}

@@ -37,11 +37,15 @@ dependencies {
     compile 'org.lucasr.twowayview:twowayview:0.1.4'
     compile 'com.google.android.gms:play-services:7.3.0'
     compile 'com.parse.bolts:bolts-android:1.+'
-    compile fileTree(dir: 'libs', include: 'Parse-*.jar')
+    compile 'com.parse:parse-android:1.10.1'
     // Module dependency on ParseLoginUI library sources
     compile project(':ParseLoginUI')
     // Uncomment if using Facebook Login (optional Maven dependency)
     compile 'com.facebook.android:facebook-android-sdk:4.5.0'
+
+    compile files("$rootProject.projectDir/ParseLoginUI/libs/ParseFacebookUtilsV4-1.10.1.jar")
+    compile files("$rootProject.projectDir/ParseLoginUI/libs/ParseTwitterUtils-1.10.1.jar")
     compile 'com.github.moondroid.coverflow:library:1.0'
     compile 'com.google.code.gson:gson:2.3'
+    compile  'com.google.zxing:core:2.2'
 }

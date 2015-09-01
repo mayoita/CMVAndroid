@@ -12,7 +12,7 @@
     <color name="com_parse_ui_parse_login_help_button_label">#E0E0E0</color>
     <color name="com_parse_ui_parse_login_help_button_label_focus">#CCCCCC</color>
     <color name="com_parse_ui_parse_login_help_button_label_push">#AAAAAA</color>
-    <color name="com_parse_ui_parse_login_text_hint">#FFFFFF</color>
+    <color name="com_parse_ui_parse_login_text_hint">#AAAAAA</color>
     <color name="com_parse_ui_twitter_login_button">#2DAAE2</color>
     <color name="com_parse_ui_twitter_login_button_focus">#2788BE</color>
     <color name="com_parse_ui_twitter_login_button_push">#2588B5</color>
@@ -28,10 +28,10 @@
         <item quantity="other">Password must be at least %d characters long</item>
     </plurals>
     <string name="com_parse_ui_confirm_password_input_hint">Re-enter password</string>
-    <string name="com_parse_ui_create_account_button_label">CREATE ACCOUNT</string>
+    <string name="com_parse_ui_create_account_button_label">Create account</string>
     <string name="com_parse_ui_email_input_hint">Email</string>
     <string name="com_parse_ui_email_taken_toast">Email is already taken, please reset your password instead</string>
-    <string name="com_parse_ui_facebook_login_button_label">Facebook</string>
+    <string name="com_parse_ui_facebook_login_button_label">Log in with Facebook</string>
     <string name="com_parse_ui_facebook_login_failed_toast">Facebook login failed</string>
     <string name="com_parse_ui_forgot_password_button_label"><u>Forgot password</u></string>
     <string name="com_parse_ui_invalid_email_toast">Email is invalid, please correct it and try again</string>
@@ -41,7 +41,7 @@
     <string name="com_parse_ui_login_help_email_sent">Please check your email for instructions on how to access your account</string>
     <string name="com_parse_ui_login_help_instructions">Enter your email to recover your password</string>
     <string name="com_parse_ui_login_help_login_again_button_label">Back to Login</string>
-    <string name="com_parse_ui_login_help_submit_button_label">SUBMIT</string>
+    <string name="com_parse_ui_login_help_submit_button_label">Submit</string>
     <string name="com_parse_ui_login_help_submit_failed_unknown">Failed to request password reset, please try again</string>
     <string name="com_parse_ui_login_warning_disabled_facebook_login">Layout missing Facebook login button, disabled Facebook login</string>
     <string name="com_parse_ui_login_warning_disabled_twitter_login">Layout missing Twitter login button, disabled Twitter login</string>
@@ -73,7 +73,7 @@
     <string name="com_parse_ui_progress_dialog_text">Loading...</string>
     <string name="com_parse_ui_reenter_password_toast">Please re-enter your password</string>
     <string name="com_parse_ui_signup_failed_unknown_toast">Could not sign up, please try again later</string>
-    <string name="com_parse_ui_twitter_login_button_label">Twitter</string>
+    <string name="com_parse_ui_twitter_login_button_label">Log in with Twitter</string>
     <string name="com_parse_ui_twitter_login_failed_toast">Twitter login failed</string>
     <string name="com_parse_ui_username_input_hint">Username</string>
     <string name="com_parse_ui_username_taken_toast">Username is already taken, please choose a different one</string>
@@ -93,7 +93,6 @@
     </style>
     <style name="ParseLoginUI.EditText" parent="@android:style/Widget.EditText">
         <item name="android:singleLine">true</item>
-        <item name="android:textColor">@color/com_parse_ui_parse_login_display_text</item>
     </style>
     <style name="ParseLoginUI.HelpButton" parent="@android:style/Widget.Button">
         <item name="android:layout_width">wrap_content</item>

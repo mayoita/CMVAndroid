@@ -61,13 +61,6 @@ public class PokerFr extends Fragment {
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
-
-        try{
-            /** This statement ensures that the hosting activity implements ListFragmentItemClickListener */
-            ifaceItemClickListener = (ListEventItemClickListener) activity;
-        }catch(Exception e){
-            Toast.makeText(activity.getBaseContext(), "Exception", Toast.LENGTH_SHORT).show();
-        }
     }
 
     @Override
@@ -128,7 +121,7 @@ public class PokerFr extends Fragment {
         View rootView = inflater.inflate(R.layout.poker_fragment, container, false);
         listView = (ListView) rootView.findViewById(R.id.list_events);
 
-        loadPoker();
+
 
 
 
@@ -174,7 +167,7 @@ public class PokerFr extends Fragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-
+        loadPoker();
         if (savedInstanceState != null) {
             // Restore last state for checked position.
             mCurCheckPosition = savedInstanceState.getInt("curChoice", 0);
@@ -245,7 +238,7 @@ public class PokerFr extends Fragment {
 
     private String formatMyDate(Date myDate) {
 
-        SimpleDateFormat sdf = new SimpleDateFormat("dd LLLL yyyy", getResources().getConfiguration().locale);
+        SimpleDateFormat sdf = new SimpleDateFormat("dd LLLL yyyy", StarterApplication.currentLocale);
 
         return sdf.format(myDate);
     }

@@ -33,14 +33,7 @@ import com.parse.ParseQuery;
 import java.util.HashMap;
 
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link EventDetails.OnEventsInteractionListener} interface
- * to handle interaction events.
- * Use the {@link EventDetails#newInstance} factory method to
- * create an instance of this fragment.
- */
+
 public class EventDetails extends Fragment implements BaseSliderView.OnSliderClickListener{
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -57,10 +50,6 @@ public class EventDetails extends Fragment implements BaseSliderView.OnSliderCli
     private String image2;
     private String image3;
 
-
-
-
-    private OnEventsInteractionListener mListener;
 
     private int convertDpToPx(int dp, DisplayMetrics displayMetrics) {
         float pixels = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, displayMetrics);
@@ -175,9 +164,7 @@ public class EventDetails extends Fragment implements BaseSliderView.OnSliderCli
 
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
+
     }
 
     @Override
@@ -186,22 +173,7 @@ public class EventDetails extends Fragment implements BaseSliderView.OnSliderCli
     }
 
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p/>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
-    public interface OnEventsInteractionListener {
-        void onListItemClick(ListView l, View v, int position, long id);
 
-        // TODO: Update argument type and name
-        public void onFragmentInteraction(Uri uri);
-    }
     public void loadImage(String myId) {
         ParseQuery<ParseObject> query = new ParseQuery<ParseObject>(
                 "Events");

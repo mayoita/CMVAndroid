@@ -60,12 +60,6 @@ public class TournamentFr extends Fragment {
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
-        try{
-            /** This statement ensures that the hosting activity implements ListFragmentItemClickListener */
-            ifaceItemClickListener = (ListEventItemClickListener) activity;
-        }catch(Exception e){
-            Toast.makeText(activity.getBaseContext(), "Exception", Toast.LENGTH_SHORT).show();
-        }
     }
 
     @Override
@@ -92,7 +86,7 @@ public class TournamentFr extends Fragment {
         View rootView = inflater.inflate(R.layout.tournament_fragment, container, false);
         listView = (ListView) rootView.findViewById(R.id.list_tournament);
 
-        loadTournament();
+
 
         if (savedInstanceState != null) {
             // Restore last state for checked position.
@@ -136,7 +130,7 @@ public class TournamentFr extends Fragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-
+        loadTournament();
         if (savedInstanceState != null) {
             // Restore last state for checked position.
             mCurCheckPosition = savedInstanceState.getInt("curChoice", 0);
@@ -242,7 +236,7 @@ public class TournamentFr extends Fragment {
 
     private String formatMyDate(Date myDate) {
 
-        SimpleDateFormat sdf = new SimpleDateFormat("dd LLLL", getResources().getConfiguration().locale);
+        SimpleDateFormat sdf = new SimpleDateFormat("dd LLLL", StarterApplication.currentLocale);
 
         return sdf.format(myDate);
     }

@@ -53,27 +53,16 @@ public class EventsFr extends Fragment {
     boolean mDualPane;
     int mCurCheckPosition = 0;
 
-    String [] demoData = {"a", "b", "c", "d", "e","f", "g", "h", "i", "l"};
-
-    ListEventItemClickListener ifaceItemClickListener;
-
-
 
     /** An interface for defining the callback method */
     public interface ListEventItemClickListener {
-        /** This method will be invoked when an item in the ListFragment is clicked */
-        void onListFragmentItemClick(int position);
+
     }
     /** A callback function, executed when this fragment is attached to an activity */
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
-        try{
-            /** This statement ensures that the hosting activity implements ListFragmentItemClickListener */
-            ifaceItemClickListener = (ListEventItemClickListener) activity;
-        }catch(Exception e){
-            Toast.makeText(activity.getBaseContext(), "Exception", Toast.LENGTH_SHORT).show();
-        }
+
     }
 
     @Override
@@ -100,7 +89,7 @@ public class EventsFr extends Fragment {
         View rootView = inflater.inflate(R.layout.events_fragment, container, false);
         listView = (ListView) rootView.findViewById(R.id.list_events);
 
-        loadEvent();
+
 
 
         if (savedInstanceState != null) {
@@ -146,7 +135,7 @@ public class EventsFr extends Fragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-
+        loadEvent();
         if (savedInstanceState != null) {
             // Restore last state for checked position.
             mCurCheckPosition = savedInstanceState.getInt("curChoice", 0);
@@ -255,7 +244,7 @@ public class EventsFr extends Fragment {
 
     private String formatMyDate(Date myDate) {
 
-        SimpleDateFormat sdf = new SimpleDateFormat("EEEE dd LLLL", getResources().getConfiguration().locale);
+        SimpleDateFormat sdf = new SimpleDateFormat("EEEE dd LLLL", StarterApplication.currentLocale);
 
         return sdf.format(myDate);
     }
@@ -312,7 +301,12 @@ public class EventsFr extends Fragment {
                         map.setEndDate(event.getDate("EndDate"));
 
                         eventitemlist.add(map);
-                        setOffice();
+
+                        if(isAdded()) {
+                            setOffice();
+                        } else {
+                            Log.e("isAdded", "EventsFr not added");
+                        }
                     }
                 } else {
                     Log.d("events", "Error: " + e.getMessage());

@@ -58,12 +58,17 @@ public class EventsAdapter extends BaseAdapter {
     }
 
     public EventsAdapter(Context context, List<EventItem> eventitemlist) {
-        mInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        this.context = context;
-        this.eventitemList = eventitemlist;
-        this.arraylist = new ArrayList<EventItem>();
-        this.arraylist.addAll(eventitemlist);
-
+        if (context != null) {
+            String aa = Context.LAYOUT_INFLATER_SERVICE;
+            mInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            this.context = context;
+            this.eventitemList = eventitemlist;
+            this.arraylist = new ArrayList<EventItem>();
+            this.arraylist.addAll(eventitemlist);
+        } else {
+            this.context = null;
+            Log.e("Event", "Context is null");
+        }
     }
 
     public void addItem(EventItem item) {

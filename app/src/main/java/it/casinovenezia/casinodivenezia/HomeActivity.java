@@ -1,14 +1,20 @@
 package it.casinovenezia.casinodivenezia;
 
 
+import android.app.ActionBar;
 import android.app.PendingIntent;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.content.res.TypedArray;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
@@ -54,22 +60,10 @@ import it.casinovenezia.it.casinovenezia.model.NavDrawerItem;
 /**
  * Created by massimomoro on 24/03/15.
  */
-public class HomeActivity extends ActionBarActivity implements EventDetails.OnEventsInteractionListener,
-        CasinoGame.OnGameInteractionListener, GameDetailsFragment.OnClickDeepRule,
-
-        Restaurant.OnRestaurantInteractionListener,
-        Map.OnMapInteractionListener,
-        Newsletter.OnNewsletterInteractionListener,
-        Subscription.OnSubscriptionInteractionListener,
-        Facebook.OnFacebookInteractionListener,
-        Timetable.OnTimetableInteractionListener,
-        LogIn.OnLogInInteractionListener,
-        EventsFr.ListEventItemClickListener,
+public class HomeActivity extends ActionBarActivity implements
         GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener,
         ResultCallback<Status>
-
-
 
 {
     protected OnBackPressedListener onBackPressedListener;
@@ -89,7 +83,8 @@ public class HomeActivity extends ActionBarActivity implements EventDetails.OnEv
     //use to store App title
     private CharSequence mTitle;
     ViewPager mPager;
-    public static final String PREFS_NAME = "MySubscription";
+
+
     public String id;
     private Geofence geofenceToAdd;
     /**
@@ -102,11 +97,30 @@ public class HomeActivity extends ActionBarActivity implements EventDetails.OnEv
      */
     private PendingIntent mGeofencePendingIntent;
 
+    private ColorAnimationDrawable mActionBarBackground;
+    private final Handler mHandler = new Handler();
+    private Drawable.Callback mDrawableCallback = new Drawable.Callback() {
+        @Override
+        public void invalidateDrawable(Drawable who) {
+            getActionBar().setBackgroundDrawable(who);
+        }
 
+        @Override
+        public void scheduleDrawable(Drawable who, Runnable what, long when) {
+            mHandler.postAtTime(what, when);
+        }
+
+        @Override
+        public void unscheduleDrawable(Drawable who, Runnable what) {
+            mHandler.removeCallbacks(what);
+        }
+    };
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mActionBarBackground = new ColorAnimationDrawable();
+
 
         boolean tabletSize = getResources().getBoolean(R.bool.isTablet);
         if (tabletSize) {
@@ -114,14 +128,8 @@ public class HomeActivity extends ActionBarActivity implements EventDetails.OnEv
         } else {
             setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         }
-        FacebookSdk.sdkInitialize(getApplicationContext());
-        //Parse.enableLocalDatastore(this);
 
-        Parse.initialize(this, "yO3MBzW9liNCaiAfXWGb3NtZJ3VhXyy4Zh8rR5ck", "KImYuYCrJ9j3IbDI3W2KtDXCXwmfqsRDCn5Em6A9");
-        ParseInstallation.getCurrentInstallation().saveInBackground();
-        ParseFacebookUtils.initialize(this);
-        ParseTwitterUtils.initialize("iG8JhxkUYQS0liIzwtYQ", "DCT2PL3MbHCN0RV9cx5K7iTlSdKfimaEUB8cOBELOTc");
-        SharedPreferences settings =getSharedPreferences(PREFS_NAME, 0);
+        SharedPreferences settings =getSharedPreferences(Constants.PREFS_NAME, 0);
         final SharedPreferences.Editor editor = settings.edit();
         if (!settings.contains("news")) {
             ParsePush.subscribeInBackground("Events", new SaveCallback() {
@@ -198,7 +206,7 @@ public class HomeActivity extends ActionBarActivity implements EventDetails.OnEv
         // What's hot, We  will add a counter here
         navDrawerItems.add(new NavDrawerItem(navMenuTitles[5], navMenuIcons.getResourceId(5, -1)));
         navDrawerItems.add(new NavDrawerItem(navMenuTitles[6], navMenuIcons.getResourceId(6, -1)));
-        navDrawerItems.add(new NavDrawerItem(navMenuTitles[7], navMenuIcons.getResourceId(7, -1)));
+
 
         // Recycle the typed array
         navMenuIcons.recycle();
@@ -263,13 +271,11 @@ public class HomeActivity extends ActionBarActivity implements EventDetails.OnEv
             case 4:
                 fragment = new Mobile();
                 break;
+
             case 5:
-                fragment = new Vpc();
-                break;
-            case 6:
                 fragment = new Subscription();
                 break;
-            case 7:
+            case 6:
                 fragment = new Timetable();
                 break;
 
@@ -293,20 +299,8 @@ public class HomeActivity extends ActionBarActivity implements EventDetails.OnEv
         }
     }
 
-    @Override
-    public void onListItemClick(ListView l, View v, int position, long id) {
-        Log.e("MainActivity", "Error in creating fragment");
-    }
 
-    @Override
-    public void onFragmentInteraction(Uri uri) {
-        Log.e("MainActivity", "Error in creating fragment");
-    }
 
-    @Override
-    public void onListFragmentItemClick(int position) {
-        Log.e("MainActivity", "Error in creating fragment");
-    }
 
 
     private class DrawerItemClickListener implements ListView.OnItemClickListener {
@@ -379,10 +373,25 @@ public class HomeActivity extends ActionBarActivity implements EventDetails.OnEv
         if (Venue.currentVenue == 0) {
             Venue.currentVenue = 1;
             checkFragment(0);
-
+            getSupportActionBar().setBackgroundDrawable(getResources().getDrawable(R.color.green));
+            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN_MR1) {
+                mActionBarBackground.setCallback(mDrawableCallback);
+            } else {
+                getSupportActionBar().setBackgroundDrawable(mActionBarBackground);
+            }
+           // mActionBarBackground.theColor(getResources().getColor(R.color.red_brand), getResources().getColor(R.color.green));
+          //  mActionBarBackground.start();
         } else {
+            getSupportActionBar().setBackgroundDrawable(getResources().getDrawable(R.color.red_brand));
             Venue.currentVenue = 0;
             checkFragment(1);
+            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN_MR1) {
+                mActionBarBackground.setCallback(mDrawableCallback);
+            } else {
+                getSupportActionBar().setBackgroundDrawable(mActionBarBackground);
+            }
+         //   mActionBarBackground.theColor(getResources().getColor(R.color.green), getResources().getColor(R.color.red_brand));
+          //  mActionBarBackground.start();
         }
 
     }

@@ -60,11 +60,7 @@ public class GameDetailsFragment extends Fragment {
     private int OverMarginForDeepRuleTopBottom = 200;
     private int OverMarginForDeepRule = 80;
 
-    OnClickDeepRule mCallback;
-    // Container Activity must implement this interface
-    public interface OnClickDeepRule {
-        public void openPopWindow(View v);
-    }
+
 
     private OnEventsInteractionListener mListener;
 
@@ -111,12 +107,7 @@ public class GameDetailsFragment extends Fragment {
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
-        try {
-            mCallback = (OnClickDeepRule) activity;
-        } catch (ClassCastException e) {
-            throw new ClassCastException(activity.toString()
-                    + " must implement OnHeadlineSelectedListener");
-        }
+
     }
 
     @Override

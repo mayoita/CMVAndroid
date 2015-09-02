@@ -46,7 +46,7 @@ public class Facebook extends Fragment {
     LikeView likeView;
     int likeState;
     int[] currentState;
-    private OnFacebookInteractionListener mListener;
+
 
     /**
      * Use this factory method to create a new instance of
@@ -169,26 +169,19 @@ public class Facebook extends Fragment {
     }
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
+
     }
 
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
-        try {
-            mListener = (OnFacebookInteractionListener) activity;
-        } catch (ClassCastException e) {
-            throw new ClassCastException(activity.toString()
-                    + " must implement OnFragmentInteractionListener");
-        }
+
     }
 
     @Override
     public void onDetach() {
         super.onDetach();
-        mListener = null;
+
     }
 
     /**

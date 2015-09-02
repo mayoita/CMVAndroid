@@ -27,6 +27,7 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
     <application
+        android:name=".StarterApplication"
         android:allowBackup="true"
         android:icon="@drawable/appicon"
         android:label="@string/app_name"
@@ -36,7 +37,7 @@
             android:value="@integer/google_play_services_version" />
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyAMYvAclEavowTb2iOYf6t57Hz9hBxUGK8" />
+            android:value="AIzaSyBrHur8ZaVUML-PHpTzFtrQXDorn3gsBt4" />
 
         <uses-feature
             android:glEsVersion="0x00020000"
@@ -161,6 +162,9 @@
             android:name=".FreeEntrance"
             android:label="@string/title_activity_free_entrance" >
         </activity>
+        <meta-data
+            android:name="com.parse.push.notification_icon"
+            android:resource="@mipmap/leo" />
     </application>
 
 </manifest>

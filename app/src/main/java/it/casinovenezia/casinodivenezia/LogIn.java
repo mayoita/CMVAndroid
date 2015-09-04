@@ -13,8 +13,11 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.ActionBarActivity;
 import android.text.method.LinkMovementMethod;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -75,6 +78,7 @@ public class LogIn extends Fragment {
         if (getArguments() != null) {
 
         }
+        setHasOptionsMenu(true);
     }
 
     @Override
@@ -253,56 +257,17 @@ public class LogIn extends Fragment {
         Drawable res = getResources().getDrawable(R.drawable.loginimage);
         pic.setImageDrawable(res);
     }
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        getActivity().getMenuInflater().inflate(R.menu.menu_main, menu);
+    }
 
-//    private void onLoginButtonClicked() {
-//
-//        List<String> permissions = Arrays.asList("public_profile", "user_about_me", "user_relationships", "user_birthday", "user_location", "email");
-//        ParseFacebookUtils.logInInBackground(permissions, this, new LogInCallback() {
-//            @Override
-//            public void done(ParseUser pUser, ParseException err) {
-//
-//                if (email != null) {
-//                    pUser.put("email", email);
-//                }
-//                if (fName != null) {
-//                    pUser.put("firstName", fName);
-//                }
-//                if (lName != null) {
-//                    pUser.put("lastName", lName);
-//                }
-//                if (birthday != null) {
-//                    pUser.put("birthday", birthday);
-//                }
-//                if (relationship != null) {
-//                    pUser.put("relationship", relationship);
-//                }
-//
-//                pUser.saveInBackground();
-//
-//
-//                if (pUser == null) {
-//                    Log.d("The Bar App", "Uh oh. The user cancelled the Facebook login.");
-//                } else if (pUser.isNew()) {
-//                    Log.d("The Bar App", "User signed up and logged in through Facebook!");
-//                    showNextActivity();
-//                } else {
-//                    Log.d("The Bar App", "User logged in through Facebook!");
-//                    showNextActivity();
-//                }
-//            }
-//        });
-//
-//        com.facebook.Request.executeMeRequestAsync(ParseFacebookUtils.getSession(), new com.facebook.Request.GraphUserCallback() {
-//
-//            @Override
-//            public void onCompleted(GraphUser user, Response response) {
-//                email = user.getProperty("email").toString();
-//                fName = user.getFirstName();
-//                lName = user.getLastName();
-//
-//
-//
-//            }
-//        });
-//    }
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        android.support.v7.app.ActionBar action_bar = ((ActionBarActivity)getActivity()).getSupportActionBar();
+        action_bar.setDisplayShowCustomEnabled(false);
+        action_bar.setDisplayShowTitleEnabled(true);
+    }
 }

@@ -7,6 +7,7 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -29,14 +30,6 @@ import java.util.Calendar;
 import java.util.List;
 
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link Timetable.OnTimetableInteractionListener} interface
- * to handle interaction events.
- * Use the {@link Timetable#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class Timetable extends Fragment {
 
     private static final String TAG = "BUS";
@@ -90,9 +83,7 @@ public class Timetable extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
-        if (getArguments() != null) {
 
-        }
     }
 
     @Override
@@ -108,6 +99,7 @@ public class Timetable extends Fragment {
         getActivity().getMenuInflater().inflate(R.menu.menu_timetables, menu);
         //super.onCreateOptionsMenu(menu, inflater);
     }
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -179,6 +171,9 @@ public class Timetable extends Fragment {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        android.support.v7.app.ActionBar action_bar = ((ActionBarActivity)getActivity()).getSupportActionBar();
+        action_bar.setDisplayShowCustomEnabled(false);
+        action_bar.setDisplayShowTitleEnabled(true);
         Typeface XLight = Typeface.createFromAsset(getActivity().getAssets(), "fonts/GothamXLight.otf");
         myView = getView();
         fragmentWidth = getView().getWidth();
@@ -335,5 +330,6 @@ public class Timetable extends Fragment {
 
         }
     }
+
 
 }

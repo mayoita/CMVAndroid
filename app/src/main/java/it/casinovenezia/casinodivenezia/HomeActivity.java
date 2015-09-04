@@ -22,10 +22,12 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -219,10 +221,26 @@ public class HomeActivity extends ActionBarActivity implements
 
         // Set the list's click listener
         mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
-
+        android.support.v7.app.ActionBar action_bar = getSupportActionBar();
         // enabling action bar app icon and behaving it as toggle button
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setHomeButtonEnabled(true);
+        action_bar.setDisplayHomeAsUpEnabled(true);
+        //action_bar.setHomeButtonEnabled(true);
+        action_bar.setDisplayShowTitleEnabled(false);
+        //action_bar.setDisplayShowHomeEnabled(false);
+       // action_bar.setDisplayShowTitleEnabled(false);
+        LayoutInflater mInflater = LayoutInflater.from(this);
+        View custom_view = mInflater.inflate(R.layout.custom_actionbar, null);
+        ImageView changeVenueButton = (ImageView)custom_view.findViewById(R.id.changeVenue);
+        changeVenueButton.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+                changeVenue();
+            }
+        });
+        android.support.v7.app.ActionBar.LayoutParams lp1 = new android.support.v7.app.ActionBar.LayoutParams(android.support.v7.app.ActionBar.LayoutParams.MATCH_PARENT, android.support.v7.app.ActionBar.LayoutParams.MATCH_PARENT);
+        action_bar.setDisplayShowCustomEnabled(true);
+        action_bar.setCustomView(custom_view, lp1);
 
         // ActionBarDrawerToggle ties together the the proper interactions
         // between the sliding drawer and the action bar app icon
@@ -313,7 +331,7 @@ public class HomeActivity extends ActionBarActivity implements
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        //getMenuInflater().inflate(R.menu.menu_main, menu);
+      //  getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
 
@@ -322,7 +340,7 @@ public class HomeActivity extends ActionBarActivity implements
     public boolean onPrepareOptionsMenu(Menu menu) {
         // If the nav drawer is open, hide action items related to the content view
         boolean drawerOpen = mDrawerLayout.isDrawerOpen(mDrawerList);
-      //  menu.findItem(R.id.action_settings).setVisible(!drawerOpen);
+     //   menu.findItem(R.id.action_settings).setVisible(!drawerOpen);
         return super.onPrepareOptionsMenu(menu);
     }
 
@@ -337,11 +355,7 @@ public class HomeActivity extends ActionBarActivity implements
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         switch (item.getItemId()) {
-            case R.id.action_changevenue:
-                changeVenue();
-                return true;
-            case R.id.action_settings:
-                return true;
+
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -373,23 +387,23 @@ public class HomeActivity extends ActionBarActivity implements
         if (Venue.currentVenue == 0) {
             Venue.currentVenue = 1;
             checkFragment(0);
-            getSupportActionBar().setBackgroundDrawable(getResources().getDrawable(R.color.green));
-            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN_MR1) {
-                mActionBarBackground.setCallback(mDrawableCallback);
-            } else {
-                getSupportActionBar().setBackgroundDrawable(mActionBarBackground);
-            }
+            getSupportActionBar().setBackgroundDrawable(getResources().getDrawable(R.color.black)); //green));
+//            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN_MR1) {
+//                mActionBarBackground.setCallback(mDrawableCallback);
+//            } else {
+//                getSupportActionBar().setBackgroundDrawable(mActionBarBackground);
+//            }
            // mActionBarBackground.theColor(getResources().getColor(R.color.red_brand), getResources().getColor(R.color.green));
           //  mActionBarBackground.start();
         } else {
-            getSupportActionBar().setBackgroundDrawable(getResources().getDrawable(R.color.red_brand));
+            getSupportActionBar().setBackgroundDrawable(getResources().getDrawable(R.color.black)); //red_brand));
             Venue.currentVenue = 0;
             checkFragment(1);
-            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN_MR1) {
-                mActionBarBackground.setCallback(mDrawableCallback);
-            } else {
-                getSupportActionBar().setBackgroundDrawable(mActionBarBackground);
-            }
+//            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN_MR1) {
+//                mActionBarBackground.setCallback(mDrawableCallback);
+//            } else {
+//                getSupportActionBar().setBackgroundDrawable(mActionBarBackground);
+//            }
          //   mActionBarBackground.theColor(getResources().getColor(R.color.green), getResources().getColor(R.color.red_brand));
           //  mActionBarBackground.start();
         }

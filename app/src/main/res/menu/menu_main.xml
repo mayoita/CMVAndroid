@@ -4,8 +4,9 @@
     xmlns:theapp="http://schemas.android.com/apk/res-auto">
 
     <item android:id="@+id/action_changevenue"
-        android:icon="@drawable/changesite"
+       android:icon="@drawable/changesite_blank"
         android:title="@string/action_change"
+        android:enabled="false"
         theapp:showAsAction="ifRoom|withText"/>
 
 

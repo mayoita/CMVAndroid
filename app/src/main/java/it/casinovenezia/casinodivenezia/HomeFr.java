@@ -22,6 +22,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
+import com.helpshift.Helpshift;
 import com.parse.GetCallback;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
@@ -100,9 +101,8 @@ public class HomeFr extends Fragment {
         helpshiftButton = (ImageButton) rootView.findViewById(R.id.helpshift);
         helpshiftButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                Toast.makeText(getActivity(),
-                        "Help is clicked !", Toast.LENGTH_SHORT).show();
+            public void onClick(View view) {
+                Helpshift.showConversation(getActivity());
             }
         });
 

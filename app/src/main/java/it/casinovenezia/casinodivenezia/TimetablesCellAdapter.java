@@ -39,7 +39,7 @@ public class TimetablesCellAdapter extends BaseAdapter {
         this.context = context;
         this.theWidth = theWidth;
         mData = theData;
-        dm = context.getResources().getDisplayMetrics();
+
         myTypeFace = Typeface.createFromAsset(context.getAssets(), "fonts/GothamXLight.otf");
         mInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }

@@ -22,7 +22,7 @@ import java.util.List;
  * Created by massimomoro on 27/03/15.
  */
 public class HomeMainFr extends Fragment {
-
+    public static PagerTitleStrip title_strip;
     public static final String EXTRA_MESSAGE = "EXTRA_MESSAGE";
     MyPageAdapter pageAdapter;
     ViewPager mPager;
@@ -57,13 +57,18 @@ public class HomeMainFr extends Fragment {
         List<Fragment> fragments = getFragments();
 
 
-        PagerTitleStrip _Title = (PagerTitleStrip)getView().findViewById(R.id.pager_title_strip);
+        title_strip = (PagerTitleStrip)getView().findViewById(R.id.pager_title_strip);
         Typeface font = Typeface.createFromAsset(getActivity().getBaseContext().getAssets(), "fonts/GothamXLight.otf");
-        for (int counter = 0 ; counter<_Title.getChildCount(); counter++) {
+        for (int counter = 0 ; counter<title_strip.getChildCount(); counter++) {
 
-            if (_Title.getChildAt(counter) instanceof TextView) {
-                ((TextView)_Title.getChildAt(counter)).setTypeface(font);
-                ((TextView)_Title.getChildAt(counter)).setTextColor(getResources().getColor(R.color.red));
+            if (title_strip.getChildAt(counter) instanceof TextView) {
+
+                ((TextView)title_strip.getChildAt(counter)).setTypeface(font);
+                if (Venue.currentVenue == 0) {
+                    ((TextView) title_strip.getChildAt(counter)).setTextColor(getResources().getColor(R.color.red_brand));
+                } else {
+                    ((TextView) title_strip.getChildAt(counter)).setTextColor(getResources().getColor(R.color.green));
+                }
             }
         }
 

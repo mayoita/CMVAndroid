@@ -20,11 +20,11 @@ allprojects {
     }
 }
 ext {
-    compileSdkVersion = 21
+    compileSdkVersion = 23
     buildToolsVersion = "21.1.2"
 
     minSdkVersion = 16
-    targetSdkVersion = 21
+    targetSdkVersion = 23
     facebookSDK = 'com.facebook.android:facebook-android-sdk:4.5.0'
     androidSupport = 'com.android.support:support-v4:22.0.0'
     bolts = 'com.parse.bolts:bolts-android:1.2.1'

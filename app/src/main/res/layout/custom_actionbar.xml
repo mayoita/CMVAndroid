@@ -7,7 +7,7 @@
         android:id="@+id/changeVenue"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/cmv_button_center"
+        android:src="@drawable/cmv_ve_button_center"
         />
 
 </RelativeLayout>

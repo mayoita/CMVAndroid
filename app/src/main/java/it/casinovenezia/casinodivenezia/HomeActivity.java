@@ -29,6 +29,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.facebook.FacebookSdk;
@@ -85,7 +86,7 @@ public class HomeActivity extends ActionBarActivity implements
     //use to store App title
     private CharSequence mTitle;
     ViewPager mPager;
-
+    ImageView changeVenueButton;
 
     public String id;
     private Geofence geofenceToAdd;
@@ -230,7 +231,7 @@ public class HomeActivity extends ActionBarActivity implements
        // action_bar.setDisplayShowTitleEnabled(false);
         LayoutInflater mInflater = LayoutInflater.from(this);
         View custom_view = mInflater.inflate(R.layout.custom_actionbar, null);
-        ImageView changeVenueButton = (ImageView)custom_view.findViewById(R.id.changeVenue);
+        changeVenueButton = (ImageView)custom_view.findViewById(R.id.changeVenue);
         changeVenueButton.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -387,25 +388,25 @@ public class HomeActivity extends ActionBarActivity implements
         if (Venue.currentVenue == 0) {
             Venue.currentVenue = 1;
             checkFragment(0);
-            getSupportActionBar().setBackgroundDrawable(getResources().getDrawable(R.color.black)); //green));
-//            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN_MR1) {
-//                mActionBarBackground.setCallback(mDrawableCallback);
-//            } else {
-//                getSupportActionBar().setBackgroundDrawable(mActionBarBackground);
-//            }
-           // mActionBarBackground.theColor(getResources().getColor(R.color.red_brand), getResources().getColor(R.color.green));
-          //  mActionBarBackground.start();
+            changeVenueButton.setImageResource(R.drawable.cmv_button_center);
+          //  getSupportActionBar().setBackgroundDrawable(getResources().getDrawable(R.color.black)); //green));
+            for (int counter = 0 ; counter<HomeMainFr.title_strip.getChildCount(); counter++) {
+
+                if (HomeMainFr.title_strip.getChildAt(counter) instanceof TextView) {
+                    ((TextView)HomeMainFr.title_strip.getChildAt(counter)).setTextColor(getResources().getColor(R.color.green));
+                }
+            }
         } else {
-            getSupportActionBar().setBackgroundDrawable(getResources().getDrawable(R.color.black)); //red_brand));
+         //   getSupportActionBar().setBackgroundDrawable(getResources().getDrawable(R.color.black)); //red_brand));
             Venue.currentVenue = 0;
             checkFragment(1);
-//            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN_MR1) {
-//                mActionBarBackground.setCallback(mDrawableCallback);
-//            } else {
-//                getSupportActionBar().setBackgroundDrawable(mActionBarBackground);
-//            }
-         //   mActionBarBackground.theColor(getResources().getColor(R.color.green), getResources().getColor(R.color.red_brand));
-          //  mActionBarBackground.start();
+            changeVenueButton.setImageResource(R.drawable.cmv_ve_button_center);
+            for (int counter = 0 ; counter<HomeMainFr.title_strip.getChildCount(); counter++) {
+
+                if (HomeMainFr.title_strip.getChildAt(counter) instanceof TextView) {
+                    ((TextView)HomeMainFr.title_strip.getChildAt(counter)).setTextColor(getResources().getColor(R.color.red_brand));
+                }
+            }
         }
 
     }

@@ -9,7 +9,7 @@ import com.parse.ParseFacebookUtils;
 import com.parse.ParseInstallation;
 import com.parse.ParseTwitterUtils;
 import com.parse.ParseUser;
-
+import com.helpshift.Helpshift;
 import java.util.Locale;
 
 /**
@@ -17,6 +17,9 @@ import java.util.Locale;
  */
 public class StarterApplication extends Application{
 public static Locale currentLocale;
+    private final String HELPSHIFT_API_KEY = "75b10c6c105e8bebefc95729c56e33ae";
+    private final String HELPSHIFT_DOMAIN = "casinovenezia.helpshift.com";
+    private final String HELPSHIFT_APP_ID = "casinovenezia_platform_20131218091253899-f3f796e2d4b9e99";
     @Override
     public void onCreate() {
         super.onCreate();
@@ -34,5 +37,9 @@ public static Locale currentLocale;
         // Optionally enable public read access.
         // defaultACL.setPublicReadAccess(true);
         ParseACL.setDefaultACL(defaultACL, true);
+        Helpshift.install(this, // "this" should be the application object
+                HELPSHIFT_API_KEY,
+                HELPSHIFT_DOMAIN,
+                HELPSHIFT_APP_ID);
     }
 }

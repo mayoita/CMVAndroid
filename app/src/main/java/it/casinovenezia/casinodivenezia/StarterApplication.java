@@ -1,6 +1,7 @@
 package it.casinovenezia.casinodivenezia;
 
 import android.app.Application;
+import android.os.Build;
 
 import com.facebook.FacebookSdk;
 import com.parse.Parse;
@@ -30,7 +31,10 @@ public static Locale currentLocale;
         Parse.initialize(this, "yO3MBzW9liNCaiAfXWGb3NtZJ3VhXyy4Zh8rR5ck", "KImYuYCrJ9j3IbDI3W2KtDXCXwmfqsRDCn5Em6A9");
         ParseInstallation.getCurrentInstallation().saveInBackground();
         ParseFacebookUtils.initialize(this);
-        ParseTwitterUtils.initialize("iG8JhxkUYQS0liIzwtYQ", "DCT2PL3MbHCN0RV9cx5K7iTlSdKfimaEUB8cOBELOTc");
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            ParseTwitterUtils.initialize("iG8JhxkUYQS0liIzwtYQ", "DCT2PL3MbHCN0RV9cx5K7iTlSdKfimaEUB8cOBELOTc");
+        }
 
         //ParseUser.enableAutomaticUser();
         ParseACL defaultACL = new ParseACL();

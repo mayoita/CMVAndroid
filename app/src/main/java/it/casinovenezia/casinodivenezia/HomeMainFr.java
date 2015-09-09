@@ -22,7 +22,7 @@ import java.util.List;
  * Created by massimomoro on 27/03/15.
  */
 public class HomeMainFr extends Fragment {
-    public static PagerTitleStrip title_strip;
+    public static android.support.v4.view.PagerTitleStripV22 title_strip;
     public static final String EXTRA_MESSAGE = "EXTRA_MESSAGE";
     MyPageAdapter pageAdapter;
     ViewPager mPager;
@@ -57,7 +57,7 @@ public class HomeMainFr extends Fragment {
         List<Fragment> fragments = getFragments();
 
 
-        title_strip = (PagerTitleStrip)getView().findViewById(R.id.pager_title_strip);
+        title_strip = (android.support.v4.view.PagerTitleStripV22)getView().findViewById(R.id.pager_title_strip);
         Typeface font = Typeface.createFromAsset(getActivity().getBaseContext().getAssets(), "fonts/GothamXLight.otf");
         for (int counter = 0 ; counter<title_strip.getChildCount(); counter++) {
 
@@ -76,32 +76,7 @@ public class HomeMainFr extends Fragment {
         mPager = (ViewPager) getView().findViewById(R.id.viewpager);
         mPager.setAdapter(pageAdapter);
 
-//        mPager.setOnPageChangeListener(
-//                new ViewPager.SimpleOnPageChangeListener() {
-//                    @Override
-//                    public void onPageSelected(int position) {
-//                        // When swiping between pages, select the
-//                        // corresponding tab.
-//                        getSupportActionBar().setSelectedNavigationItem(position);
-//                    }
-//                });
-
-
     }
-
-
-
-//    @Override
-//    public void onActivityCreated(Bundle savedInstanceState) {
-//        super.onActivityCreated(savedInstanceState);
-//
-//        List<Fragment> fragments = getFragments();
-//        pageAdapter = new MyPageAdapter(getFragmentManager(),fragments);
-//
-//        mPager = (ViewPager) getView().findViewById(R.id.viewpager);
-//        mPager.setAdapter(pageAdapter);
-//    }
-
 
     public class MyPageAdapter extends FragmentStatePagerAdapter {
 

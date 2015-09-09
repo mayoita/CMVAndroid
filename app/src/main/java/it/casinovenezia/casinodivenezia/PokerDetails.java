@@ -208,11 +208,6 @@ final View myView = getView();
             titoloR.setTypeface(XLight);
             titoloR.setText(Html.fromHtml(createRules(getArguments().getStringArrayList("TournamentsRules"))));
             titolo.setText((getArguments().getString("TournamentName")));
-
-
-
-
-
         }
 
 }

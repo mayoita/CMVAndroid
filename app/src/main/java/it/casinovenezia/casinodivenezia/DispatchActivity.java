@@ -2,13 +2,14 @@ package it.casinovenezia.casinodivenezia;
 
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 
 import com.parse.ParseUser;
 
 /**
  * Created by massimomoro on 01/06/15.
  */
-public class DispatchActivity extends ActionBarActivity {
+public class DispatchActivity extends AppCompatActivity {
 
     public DispatchActivity() {
     }

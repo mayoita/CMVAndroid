@@ -16,7 +16,9 @@
 
         android:paddingLeft="30dp"
         android:paddingRight="30dp"
-        android:paddingTop="10dp" />
+        android:paddingTop="10dp"
+        android:layout_below="@+id/diciottopiu"
+        android:layout_centerHorizontal="true" />
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -29,9 +31,9 @@
         android:layout_height="wrap_content"
         android:id="@+id/imageView4"
         android:src="@drawable/loginsmallshadow"
-        android:layout_below="@+id/diciottopiu"
+        android:layout_below="@+id/homebanner"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="60dp" />
+        android:layout_marginTop="10dp" />
 
     <it.casinovenezia.casinodivenezia.CircularImageView
         android:id="@+id/circular_image_view"

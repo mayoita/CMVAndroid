@@ -81,6 +81,10 @@
             android:label="@string/info_activiy_text" >
         </activity>
         <activity
+            android:name=".TimeTableActivity"
+            android:label="@string/time_table" >
+        </activity>
+        <activity
             android:name=".SignUpActivity"
             android:label="@string/title_activity_sign_up" >
         </activity>

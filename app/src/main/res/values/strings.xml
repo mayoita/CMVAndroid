@@ -61,7 +61,7 @@
     <string name="eventsnew">EVENTS NEWS</string>
     <string name="slotnews">SLOT NEWS</string>
     <string name="pokernews">POKER NEWS</string>
-    <string name="title_activity_event_details">EventDetailsActivity</string>
+    <string name="title_activity_event_details">Event</string>
     <string name="lore">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
         ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
         aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in
@@ -249,4 +249,5 @@
     <string name="Notification.Text">You are close to the oldest Casinò of the world!</string>
     <string name="title_activity_free_entrance">FREE ENTRY TICKET</string>
     <string name="free_entrance_text">ENTRY ALLOWED TO ADULTS OVER THE AGE OF EIGTHEEN, ONLY ON PRESENTATION OF A VALID PHOTO IDENTITY CARD</string>
+    <string name="time_table">TIMETABLES</string>
 </resources>

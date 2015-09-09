@@ -6,6 +6,7 @@ import android.content.res.Resources;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.text.method.LinkMovementMethod;
 import android.util.DisplayMetrics;
 import android.util.TypedValue;
@@ -34,7 +35,7 @@ import java.util.List;
 /**
  * Created by massimomoro on 26/05/15.
  */
-public class MenuActivity extends ActionBarActivity {
+public class MenuActivity extends AppCompatActivity {
 
     private static final String CA_NOGHERA = "k5xjqXyLe7";
     private static final String VENEZIA = "25WSnGlEDW";

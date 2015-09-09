@@ -3,6 +3,7 @@ package it.casinovenezia.casinodivenezia;
 
 import android.app.ActionBar;
 import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
@@ -15,12 +16,14 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.multidex.MultiDex;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -63,7 +66,7 @@ import it.casinovenezia.it.casinovenezia.model.NavDrawerItem;
 /**
  * Created by massimomoro on 24/03/15.
  */
-public class HomeActivity extends ActionBarActivity implements
+public class HomeActivity extends AppCompatActivity implements
         GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener,
         ResultCallback<Status>
@@ -99,8 +102,6 @@ public class HomeActivity extends ActionBarActivity implements
      * Used when requesting to add or remove geofences.
      */
     private PendingIntent mGeofencePendingIntent;
-
-    private ColorAnimationDrawable mActionBarBackground;
     private final Handler mHandler = new Handler();
     private Drawable.Callback mDrawableCallback = new Drawable.Callback() {
         @Override
@@ -118,11 +119,16 @@ public class HomeActivity extends ActionBarActivity implements
             mHandler.removeCallbacks(what);
         }
     };
+    @Override
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(base);
+        MultiDex.install(this);
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mActionBarBackground = new ColorAnimationDrawable();
+
 
 
         boolean tabletSize = getResources().getBoolean(R.bool.isTablet);
@@ -288,7 +294,9 @@ public class HomeActivity extends ActionBarActivity implements
                 fragment = new Facebook();
                 break;
             case 4:
-                fragment = new Mobile();
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.clickandplay.it"));
+                startActivity(browserIntent);
+
                 break;
 
             case 5:
@@ -313,6 +321,7 @@ public class HomeActivity extends ActionBarActivity implements
             setTitle(navMenuTitles[position]);
             mDrawerLayout.closeDrawer(mDrawerList);
         } else {
+            mDrawerLayout.closeDrawer(mDrawerList);
             // error in creating fragment
             Log.e("MainActivity", "Error in creating fragment");
         }
@@ -487,6 +496,10 @@ public class HomeActivity extends ActionBarActivity implements
     }
     public void openInfo(View v) {
         Intent intent = new Intent(this, InfoActivity.class);
+        startActivity(intent);
+    }
+    public void openTimetable(View v) {
+        Intent intent = new Intent(this, TimeTableActivity.class);
         startActivity(intent);
     }
 

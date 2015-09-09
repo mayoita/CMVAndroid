@@ -86,7 +86,8 @@ android:background="@drawable/blacktilebg">
         android:layout_above="@+id/info"
         android:layout_alignLeft="@+id/imageView7"
         android:layout_alignRight="@+id/imageView7"
-        android:layout_marginBottom="10dp" />
+        android:layout_marginBottom="10dp"
+        android:onClick="openTimetable"/>
     <Button
         android:layout_width="wrap_content"
         android:layout_height="45dp"

@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 import android.graphics.Matrix;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.DisplayMetrics;
 import android.util.TypedValue;
 import android.view.Display;
@@ -26,7 +27,7 @@ import com.google.zxing.common.BitMatrix;
 
 import java.util.*;
 
-public class FreeEntrance extends ActionBarActivity {
+public class FreeEntrance extends AppCompatActivity {
 
 
 

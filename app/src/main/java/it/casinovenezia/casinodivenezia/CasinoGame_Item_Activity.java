@@ -6,6 +6,7 @@ import android.content.pm.ActivityInfo;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.text.method.LinkMovementMethod;
 import android.util.DisplayMetrics;
@@ -31,7 +32,7 @@ import org.lucasr.twowayview.TwoWayView;
 /**
  * Created by massimomoro on 04/05/15.
  */
-public class CasinoGame_Item_Activity extends ActionBarActivity  {
+public class CasinoGame_Item_Activity extends AppCompatActivity {
     private GameRuleAdapter mAdapter;
 
     private TextView myTexttitle;

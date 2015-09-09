@@ -5,6 +5,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -30,16 +31,6 @@ public class Map extends Fragment implements OnMapReadyCallback {
     private static final String ARG_PARAM1 = "title";
     private GoogleMap map;
     private LatLngBounds.Builder builder;
-
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-
-     * @return A new instance of fragment Map.
-     */
 
     public static Map newInstance(String param1) {
         Map fragment = new Map();
@@ -86,15 +77,6 @@ public class Map extends Fragment implements OnMapReadyCallback {
         builder.include(noghera.getPosition());
         builder.include(vendramin.getPosition());
         map.setMyLocationEnabled(true);
-       // LatLngBounds bounds = builder.build();
-       // int padding = 10; // offset from edges of the map in pixels
-        //CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(bounds, padding);
-        //map.moveCamera(cu);
-         //Move the camera instantly to hamburg with a zoom of 15.
-        //map.moveCamera(CameraUpdateFactory.newLatLngZoom(CaVendramin, 15));
-        //map.setMyLocationEnabled(true);
-        // Zoom in, animating the camera.
-        //map.animateCamera(CameraUpdateFactory.zoomTo(12), 2000, null);
         map.setOnCameraChangeListener(new GoogleMap.OnCameraChangeListener() {
 
             @Override
@@ -110,12 +92,6 @@ public class Map extends Fragment implements OnMapReadyCallback {
 
 
     @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
-
-    }
-
-    @Override
     public void onDetach() {
         super.onDetach();
 
@@ -124,7 +100,7 @@ public class Map extends Fragment implements OnMapReadyCallback {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        android.support.v7.app.ActionBar action_bar = ((ActionBarActivity)getActivity()).getSupportActionBar();
+        android.support.v7.app.ActionBar action_bar = ((AppCompatActivity)getActivity()).getSupportActionBar();
         action_bar.setDisplayShowCustomEnabled(true);
 
     }

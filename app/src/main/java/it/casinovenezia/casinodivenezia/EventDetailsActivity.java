@@ -11,6 +11,7 @@ import android.graphics.drawable.Drawable;
 import android.media.Image;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.text.method.LinkMovementMethod;
 import android.util.Base64;
 import android.util.DisplayMetrics;
@@ -43,7 +44,7 @@ import java.util.Date;
 import java.util.HashMap;
 
 
-public class EventDetailsActivity extends ActionBarActivity implements BaseSliderView.OnSliderClickListener{
+public class EventDetailsActivity extends AppCompatActivity implements BaseSliderView.OnSliderClickListener{
 
     private SliderLayout mySlider;
     private String image1;
@@ -115,22 +116,13 @@ public class EventDetailsActivity extends ActionBarActivity implements BaseSlide
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_event_details, menu);
+
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
 
         return super.onOptionsItemSelected(item);
     }

@@ -1,0 +1,236 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:it.casinovenezia.casinodivenezia="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bluetilebg"
+    tools:context="it.casinovenezia.casinodivenezia.Newsletter">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/imageView2"
+        android:src="@drawable/bggradient"
+        android:scaleType="centerCrop"/>
+    <ImageView
+        android:layout_width="500dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageView4"
+        android:src="@drawable/loginsmallshadow"
+        android:layout_below="@+id/newsletter"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="35dp" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="18+"
+        android:id="@+id/diciottoetichetta"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        android:paddingLeft="2dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/diciottopiu"
+        android:text="@string/link"
+        android:textSize="16sp"
+        android:textColor="@color/white"
+        android:layout_toRightOf="@+id/diciottoetichetta"
+        android:layout_alignBottom="@+id/diciottoetichetta"
+        android:paddingRight="2dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true" />
+
+    <it.casinovenezia.casinodivenezia.CustomMenuTitleView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/newsletter"
+        android:id="@+id/newsletter"
+        android:layout_below="@+id/diciottoetichetta"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:textColor="@color/white"
+        android:textSize="40sp"
+        it.casinovenezia.casinodivenezia:typeface="GothamXLight.otf"/>
+
+    <it.casinovenezia.casinodivenezia.CustomEditText
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:id="@+id/editText"
+        android:layout_below="@+id/imageView4"
+        android:layout_marginTop="20dp"
+        android:layout_alignRight="@+id/imageView4"
+        android:layout_alignEnd="@+id/imageView4"
+        android:layout_alignLeft="@+id/imageView4"
+        android:layout_alignStart="@+id/imageView4"
+        android:hint="@string/email_nl"
+        android:textColor="@color/white"
+        android:gravity="center_vertical|center_horizontal"
+        android:ellipsize="start"
+        android:textColorHint="@color/white"
+        it.casinovenezia.casinodivenezia:typeface="GothamXLight.otf"
+        android:background="@drawable/textview_bg_white"
+        android:textSize="25sp" />
+
+    <it.casinovenezia.casinodivenezia.CustomEditText
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:id="@+id/editText2"
+        android:layout_below="@+id/editText"
+        android:layout_alignRight="@+id/imageView4"
+        android:layout_alignEnd="@+id/imageView4"
+        android:layout_alignLeft="@+id/imageView4"
+        android:layout_alignStart="@+id/imageView4"
+        android:layout_marginTop="2dp"
+        android:hint="@string/name_nl"
+        android:textColor="@color/white"
+        android:gravity="center_vertical|center_horizontal"
+        android:ellipsize="start"
+        android:textColorHint="@color/white"
+        it.casinovenezia.casinodivenezia:typeface="GothamXLight.otf"
+        android:background="@drawable/textview_bg_white"
+        android:textSize="25sp" />
+
+    <it.casinovenezia.casinodivenezia.CustomEditText
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:id="@+id/editText3"
+        android:layout_below="@+id/editText2"
+        android:layout_alignRight="@+id/imageView4"
+        android:layout_alignEnd="@+id/imageView4"
+        android:layout_alignLeft="@+id/imageView4"
+        android:layout_alignStart="@+id/imageView4"
+        android:layout_marginTop="2dp"
+        android:hint="@string/surname_nl"
+        android:textColor="@color/white"
+        android:gravity="center_vertical|center_horizontal"
+        android:ellipsize="start"
+        android:textColorHint="@color/white"
+        it.casinovenezia.casinodivenezia:typeface="GothamXLight.otf"
+        android:background="@drawable/textview_bg_white"
+        android:textSize="25sp" />
+
+    <ImageView
+        android:layout_width="500dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageView5"
+        android:layout_below="@+id/editText3"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:src="@drawable/loginsmallshadow2"/>
+
+
+    <it.casinovenezia.casinodivenezia.CustomMenuTitleView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/willing"
+        android:id="@+id/textView"
+        android:layout_alignTop="@+id/toggleButton"
+        android:layout_toRightOf="@+id/toggleButton"
+        android:layout_alignRight="@+id/editText3"
+        android:layout_alignEnd="@+id/editText3"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        it.casinovenezia.casinodivenezia:typeface="GothamXLight.otf"
+        android:paddingLeft="10dp" />
+
+
+    <it.casinovenezia.casinodivenezia.CustomMenuTitleView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/confirm"
+        android:id="@+id/textView2"
+        android:layout_alignTop="@+id/toggleButton2"
+        android:layout_alignLeft="@+id/textView"
+        android:layout_alignStart="@+id/textView"
+        android:layout_alignRight="@+id/textView"
+        android:layout_alignEnd="@+id/textView"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        it.casinovenezia.casinodivenezia:typeface="GothamXLight.otf"
+        android:paddingLeft="10dp" />
+
+
+
+    <it.casinovenezia.casinodivenezia.CustomMenuTitleView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/allow"
+        android:id="@+id/textView3"
+        android:layout_alignTop="@+id/toggleButton3"
+        android:layout_toRightOf="@+id/toggleButton3"
+        android:layout_alignRight="@+id/textView2"
+        android:layout_alignEnd="@+id/textView2"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        it.casinovenezia.casinodivenezia:typeface="GothamXLight.otf"
+        android:paddingLeft="10dp" />
+
+    <LinearLayout
+        android:id="@+id/btnLL"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="20dp">
+        <Button
+            android:id="@+id/unsubscribe"
+            android:layout_width="0dp"
+            android:layout_height="45dp"
+            android:layout_weight="1"
+            android:text="@string/unsubscribe"
+            android:background="@drawable/button_login_custom_bg"
+            android:textSize="15sp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp" />
+
+        <Button
+            android:id="@+id/subscribe"
+            android:layout_width="0dp"
+            android:layout_height="45dp"
+            android:layout_weight="1"
+            android:text="@string/subscribe"
+            android:background="@drawable/button_login_custom_bg"
+            android:textSize="15sp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp" />
+    </LinearLayout>
+
+    <ToggleButton
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:text="New ToggleButton"
+        android:id="@+id/toggleButton"
+        android:background="@drawable/toggle_switch"
+        android:textOff=""
+        android:textOn=""
+        android:layout_above="@+id/toggleButton2"
+        android:layout_alignLeft="@+id/imageView5"
+        android:layout_alignStart="@+id/imageView5"
+        android:layout_marginBottom="25dp" />
+    <ToggleButton
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:text="New ToggleButton2"
+        android:id="@+id/toggleButton2"
+        android:background="@drawable/toggle_switch"
+        android:textOff=""
+        android:textOn=""
+        android:layout_above="@+id/toggleButton3"
+        android:layout_toLeftOf="@+id/textView2"
+        android:layout_toStartOf="@+id/textView2"
+        android:layout_marginBottom="25dp" />
+    <ToggleButton
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:text="New ToggleButton3"
+        android:id="@+id/toggleButton3"
+        android:background="@drawable/toggle_switch"
+        android:textOff=""
+        android:textOn=""
+        android:layout_above="@+id/btnLL"
+        android:layout_alignLeft="@+id/imageView5"
+        android:layout_alignStart="@+id/imageView5"
+        android:layout_marginBottom="70dp" />
+
+</RelativeLayout>

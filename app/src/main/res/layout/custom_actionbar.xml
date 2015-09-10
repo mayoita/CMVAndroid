@@ -2,12 +2,22 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <ImageView
-        android:layout_centerInParent="true"
-        android:id="@+id/changeVenue"
+    <com.andexert.library.RippleView
+        android:id="@+id/more"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/cmv_ve_button_center"
-        />
+        android:layout_centerInParent="true"
+        rv_rippleDuration= "100"
+        rv_centered="true">
+
+        <ImageView
+            android:id="@+id/changeVenue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/cmv_ve_button_center"
+            android:layout_centerInParent="true"
+         />
+
+    </com.andexert.library.RippleView>
 
 </RelativeLayout>

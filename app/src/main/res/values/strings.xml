@@ -250,4 +250,5 @@
     <string name="title_activity_free_entrance">FREE ENTRY TICKET</string>
     <string name="free_entrance_text">ENTRY ALLOWED TO ADULTS OVER THE AGE OF EIGTHEEN, ONLY ON PRESENTATION OF A VALID PHOTO IDENTITY CARD</string>
     <string name="time_table">TIMETABLES</string>
+    <string name="contactUsText">Contact Us</string>
 </resources>

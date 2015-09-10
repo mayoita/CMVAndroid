@@ -90,7 +90,7 @@ public class HomeActivity extends AppCompatActivity implements
     private CharSequence mTitle;
     ViewPager mPager;
     ImageView changeVenueButton;
-
+    public static Boolean hasBeenSeen = false;
     public String id;
     private Geofence geofenceToAdd;
     /**
@@ -140,6 +140,18 @@ public class HomeActivity extends AppCompatActivity implements
 
         SharedPreferences settings =getSharedPreferences(Constants.PREFS_NAME, 0);
         final SharedPreferences.Editor editor = settings.edit();
+        if (!settings.contains("contactUs")) {
+            editor.putInt("contactUs",1);
+            editor.commit();
+        } else {
+            if (settings.getInt("contactUs",0) < 3) {
+                editor.putInt("contactUs", settings.getInt("cotactUs", 0) + 1);
+                int a = settings.getInt("cotactUs", 0);
+                editor.commit();
+            } else {
+                hasBeenSeen = true;
+            }
+        }
         if (!settings.contains("news")) {
             ParsePush.subscribeInBackground("Events", new SaveCallback() {
                 @Override

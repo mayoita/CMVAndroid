@@ -17,6 +17,8 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -54,6 +56,7 @@ public class HomeFr extends Fragment {
     private Boolean VPS2 = false;
 
 
+
     //Container Activity must implement this interface
 //    public interface DelegateListener {
 //        public void onItemSelected(Uri articleUri);
@@ -84,7 +87,19 @@ public class HomeFr extends Fragment {
         Typeface XLight = Typeface.createFromAsset(getActivity().getAssets(), "fonts/GothamXLight.otf");
         Typeface Thin = Typeface.createFromAsset(getActivity().getAssets(), "fonts/Giorgio-Thin.ttf");
         venue.setTypeface(XLight);
-
+        TextView contactustext = (TextView)rootView.findViewById(R.id.contactustext);
+        ImageView contactus = (ImageView)rootView.findViewById(R.id.contactUs);
+        if(!HomeActivity.hasBeenSeen) {
+            contactus.setVisibility(View.VISIBLE);
+            contactustext.setVisibility(View.VISIBLE);
+            Animation animation2 = new AlphaAnimation(1.0f, 0.0f);
+            animation2.setDuration(1000);
+            animation2.setStartOffset(1500);
+            animation2.setFillAfter(true);
+            contactus.setAnimation(animation2);
+            contactustext.setAnimation(animation2);
+            HomeActivity.hasBeenSeen = true;
+        }
         apertoDalle = (TextView) rootView.findViewById(R.id.apertodalle);
         apertoDalle.setTypeface(XLight);
 
@@ -124,22 +139,22 @@ public class HomeFr extends Fragment {
         action_bar.setDisplayShowTitleEnabled(false);
         Resources res = getResources();
         loadStorageFestivity();
-        loadFestivity(res.getString(R.string.todayOpen),res.getString(R.string.todayOpenVenice));
+        loadFestivity(res.getString(R.string.todayOpen), res.getString(R.string.todayOpenVenice));
         ParseQuery<ParseObject> query = ParseQuery.getQuery("Jackpot");
         query.getInBackground("ykIRbhqKUn", new GetCallback<ParseObject>() {
-                     public void done(ParseObject object, ParseException e) {
-                if (e == null) {
-                    // object will be your game score
+                    public void done(ParseObject object, ParseException e) {
+                        if (e == null) {
+                            // object will be your game score
 
-                    double d = Double.parseDouble(object.getString("jackpot"));
-                    jackpotamount.setText(DecimalFormat.getCurrencyInstance(Locale.GERMANY).format(d));
+                            double d = Double.parseDouble(object.getString("jackpot"));
+                            jackpotamount.setText(DecimalFormat.getCurrencyInstance(Locale.GERMANY).format(d));
 
-                } else {
-                    // something went wrong
+                        } else {
+                            // something went wrong
 
+                        }
+                    }
                 }
-            }
-        }
         );
 
     }

@@ -1,0 +1,111 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:background="@drawable/blacktilebg">
+<TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="18+"
+    android:id="@+id/diciottoetichetta"
+    android:textColor="@color/white"
+    android:textSize="16sp"
+    android:paddingLeft="2dp"/>
+
+<TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:id="@+id/diciottopiu"
+    android:text="@string/link"
+    android:textSize="16sp"
+    android:textColor="@color/white"
+    android:layout_toRightOf="@+id/diciottoetichetta"
+    android:layout_alignBottom="@+id/diciottoetichetta"
+    android:paddingRight="2dp"
+    android:layout_alignParentEnd="true" />
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textSize="40sp"
+        android:text="@string/map"
+        android:textColor="@color/white"
+        android:textIsSelectable="true"
+        android:textAlignment="center"
+        android:gravity="center"
+        android:layout_weight="1"
+        android:layout_below="@+id/diciottoetichetta"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="5dp"
+        android:id="@+id/textView26" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/directions"
+        android:id="@+id/textView29"
+        android:layout_below="@+id/textView26"
+        android:layout_centerHorizontal="true"
+        android:textColor="@color/white"
+        android:textSize="20sp" />
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:id="@+id/imageView7"
+        android:layout_marginLeft="7dp"
+        android:layout_marginRight="7dp"
+        android:background="@color/white"
+        android:layout_below="@+id/textView29"
+        android:layout_above="@+id/orari"
+        android:layout_marginBottom="20dp" />
+    <fragment
+        android:id="@+id/map"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:name="com.google.android.gms.maps.SupportMapFragment"
+        android:layout_alignLeft="@+id/imageView7"
+        android:layout_alignStart="@+id/imageView7"
+        android:layout_alignRight="@+id/imageView7"
+        android:layout_alignEnd="@+id/imageView7"
+        android:layout_alignTop="@+id/imageView7"
+        android:layout_alignBottom="@+id/imageView7"
+        android:layout_margin="3dp" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="45dp"
+        android:id="@+id/orari"
+
+        android:text="@string/orari"
+
+
+        android:background="@drawable/button_map_bg"
+        android:textSize="25sp"
+        android:layout_alignParentBottom="false"
+        android:textColor="@color/white"
+        android:layout_above="@+id/info"
+        android:layout_alignLeft="@+id/imageView7"
+        android:layout_alignRight="@+id/imageView7"
+        android:layout_marginBottom="10dp"
+        android:onClick="openTimetable"/>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="45dp"
+        android:id="@+id/info"
+
+        android:text="@string/info_map"
+
+
+        android:background="@drawable/button_map_bg"
+        android:textSize="25sp"
+        android:textColor="@color/white"
+        android:layout_alignParentBottom="true"
+        android:layout_alignStart="@+id/orari"
+        android:layout_marginBottom="10dp"
+        android:layout_alignLeft="@+id/imageView7"
+        android:layout_alignRight="@+id/imageView7"
+        android:onClick="openInfo"/>
+
+
+</RelativeLayout>

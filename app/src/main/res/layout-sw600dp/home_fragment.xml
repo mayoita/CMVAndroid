@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:id="@+id/relativeHome"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/imageView"
+        android:src="@drawable/backve"
+        android:scaleType="fitXY" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="18+"
+        android:id="@+id/diciottoetichetta"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        android:paddingLeft="2dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/diciottopiu"
+        android:text="@string/link"
+        android:textSize="12sp"
+        android:textColor="@color/white"
+
+        android:layout_toRightOf="@+id/diciottoetichetta"
+        android:layout_alignBottom="@+id/diciottoetichetta"
+        android:layout_alignParentRight="true" />
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="New Button"
+        android:id="@+id/helpshift"
+        android:layout_alignParentRight="true"
+        android:src="@drawable/helpshifticon"
+        android:background="@null"
+        android:paddingRight="2dp"
+        android:paddingTop="2dp"
+        android:layout_alignBottom="@+id/homebanner" />
+
+    <ImageView
+
+        android:id="@+id/homebanner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/homebanner"
+
+        android:paddingLeft="30dp"
+        android:paddingRight="30dp"
+        android:paddingTop="10dp"
+        android:layout_alignParentTop="false"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/diciottopiu"
+        android:layout_marginTop="5dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/cavendramin"
+        android:id="@+id/cavendramin"
+        android:layout_below="@+id/homebanner"
+        android:textSize="20sp"
+        android:textColor="@color/white"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="5dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/apertodalle"
+        android:id="@+id/apertodalle"
+        android:layout_alignParentBottom="true"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        android:layout_centerHorizontal="true"
+        android:paddingBottom="10dp"
+        android:layout_marginBottom="20dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/jackpotamount"
+        android:id="@+id/jackpotamount"
+        android:textColor="@color/white"
+        android:textSize="40sp"
+        android:paddingBottom="-10dp"
+        android:layout_above="@+id/apertodalle"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="5dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/jackpot"
+        android:id="@+id/jackpotLabel"
+        android:layout_above="@+id/jackpotamount"
+        android:textSize="45sp"
+        android:layout_centerHorizontal="true"
+        android:paddingBottom="0dp"
+        android:layout_marginBottom="-10dp" />
+
+
+</RelativeLayout>

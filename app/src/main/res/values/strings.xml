@@ -9,7 +9,7 @@
     <string name="jackpotamount">x.xxx.xxx,xx €</string>
     <string name="jackpot">JACKPOT</string>
     <string name="link">UNDER 18 ARE NOT ALLOWED TO GAMBLE. GAMBLING CAN BE PATHOLOGICALLY ADDICTIVE.<a href="http://www.casinovenezia.it/en/probability-winning.html">GO TO PROBABILITY OF WINNING</a></string>
-    <string name="action_change">Change venue</string>
+    <string name="action_change"></string>
     <string name="home_label">HOME</string>
     <string name="events_label">EVENTS</string>
     <string name="casino_label">CASINÒ</string>
@@ -21,10 +21,10 @@
         <item>HOME</item>
         <item>LOG IN</item>
         <item>NEWSLETTER</item>
-        <item>CLICK "LIKE" ON FACEBOOK</item>
+        <item>TIMETABLES</item>
         <item>CASINÒ MOBILE</item>
         <item>MY SUBSCRIPTION</item>
-        <item>TIMETABLES</item>
+        <item>CLICK "LIKE" ON FACEBOOK</item>
     </string-array>
     <string name="drawer_open">Open navigation drawer</string>
     <string name="drawer_close">Close navigation drawer</string>
@@ -34,11 +34,11 @@
         <item>@drawable/home</item>
         <item>@drawable/login</item>
         <item>@drawable/newsletter</item>
-        <item>@drawable/like</item>
+        <item>@drawable/timetables</item>
         <item>@drawable/mobile</item>
         <item>@drawable/vpc</item>
         <item>@drawable/subscription</item>
-        <item>@drawable/timetables</item>
+        <item>@drawable/like</item>
     </array>
 
 <!-- TODO: Remove or change this placeholder text -->
@@ -90,7 +90,9 @@
     <string name="title_activity_slot_details">SLOT</string>
     <string name="text_for_game_general">Experiencing the pleasure of gambling and of the challenge in a refined and intriguing location. This is what the Casinò di Venezia’s two venues have to offer, each complete, but with their own unique character.\n\nAnd you can play online from your own home.</string>
     <string name="title_activity_poker_item">POKER</string>
-    <string name="text_for_game_general_poker">TEXT FOR POKER</string>
+    <string name="text_for_game_general_poker">The Casinò di Venezia provides opportunities for taking part in national and international competitions.\nThe venue at Ca\' Vendramin Calergi, for example,
+        stages the Italian Chemin de Fer Championships (12 rounds a year), the prize winning contests of Chemin de Fer (6 galas a year) and French Roulette tournaments (5 matches a year).\n\nCa\' Noghera, on the other hand,
+        stages Texas Hold \’em Poker tournaments every day with online qualifications.\nIn both venues, moreover, it is possible to take part in the Texas Hold \’em Poker international championships that take place regularly at least once a month.</string>
     <string name="torneo">TORNEO</string>
     <string name="ora">Ora</string>
     <string name="buy">BUY IN</string>
@@ -99,7 +101,9 @@
     <string name="late">LATE</string>
     <string name="cap">CAP</string>
     <string name="note">NOTE</string>
-    <string name="text_for_game_general_tournament">TEXT FOR TOURNAMENT</string>
+    <string name="text_for_game_general_tournament">The Casinò di Venezia provides opportunities for taking part in national and international competitions.\nThe venue at Ca\' Vendramin Calergi, for example,
+        stages the Italian Chemin de Fer Championships (12 rounds a year), the prize winning contests of Chemin de Fer (6 galas a year) and French Roulette tournaments (5 matches a year).\n\nCa\' Noghera, on the other hand,
+        stages Texas Hold \’em Poker tournaments every day with online qualifications.\nIn both venues, moreover, it is possible to take part in the Texas Hold \’em Poker international championships that take place regularly at least once a month.</string>
     <string name="title_activity_tournament_item">TOURNAMENT</string>
     <string name="telUno">+390415297230 (from 9.30 am - 5.30 pm)</string>
     <string name="telDue">+390415297201 (7.30 pm - midnight)</string>

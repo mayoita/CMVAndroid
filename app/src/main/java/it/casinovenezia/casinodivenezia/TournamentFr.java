@@ -202,20 +202,20 @@ public class TournamentFr extends Fragment {
         if (Venue.currentVenue == 1) {
 
             myEventitemlist = inOffice("CN");
-            mAdapter = new TournamentAdapter(getActivity(),
-                    myEventitemlist);
-
-
-            listView.setAdapter(mAdapter);
+            if (getActivity() != null) {
+                mAdapter = new TournamentAdapter(getActivity(),
+                        myEventitemlist);
+                listView.setAdapter(mAdapter);
+            }
 
         } else {
 
             myEventitemlist = inOffice("VE");
-            mAdapter = new TournamentAdapter(getActivity(),
-                    myEventitemlist);
-            //inOffice("VE");
-
-            listView.setAdapter(mAdapter);
+            if (getActivity() != null) {
+                mAdapter = new TournamentAdapter(getActivity(),
+                        myEventitemlist);
+                listView.setAdapter(mAdapter);
+            }
         }
     }
     public ArrayList<TournamentItem> inOffice(String office)    {

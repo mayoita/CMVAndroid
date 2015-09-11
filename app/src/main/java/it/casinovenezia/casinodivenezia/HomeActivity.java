@@ -25,6 +25,7 @@ import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -145,9 +146,9 @@ public class HomeActivity extends AppCompatActivity implements
             editor.commit();
         } else {
             if (settings.getInt("contactUs",0) < 3) {
-                editor.putInt("contactUs", settings.getInt("cotactUs", 0) + 1);
-                int a = settings.getInt("cotactUs", 0);
-                editor.commit();
+
+                editor.putInt("contactUs", settings.getInt("contactUs", 0) + 1).commit();
+
             } else {
                 hasBeenSeen = true;
             }
@@ -158,8 +159,8 @@ public class HomeActivity extends AppCompatActivity implements
                 public void done(ParseException e) {
                     if (e == null) {
                         Log.d("com.parse.push", "successfully subscribed to the  channels.");
-                        editor.putBoolean("news", true);
-                        editor.commit();
+                        editor.putBoolean("news", true).commit();
+
                     } else {
                         Log.e("com.parse.push", "failed to subscribe for push", e);
                     }
@@ -172,8 +173,8 @@ public class HomeActivity extends AppCompatActivity implements
                 public void done(ParseException e) {
                     if (e == null) {
                         Log.d("com.parse.push", "successfully subscribed to the  channels.");
-                        editor.putBoolean("slot", true);
-                        editor.commit();
+                        editor.putBoolean("slot", true).commit();
+
                     } else {
                         Log.e("com.parse.push", "failed to subscribe for push", e);
                     }
@@ -186,8 +187,8 @@ public class HomeActivity extends AppCompatActivity implements
                 public void done(ParseException e) {
                     if (e == null) {
                         Log.d("com.parse.push", "successfully subscribed to the  channels.");
-                        editor.putBoolean("poker", true);
-                        editor.commit();
+                        editor.putBoolean("poker", true).commit();
+
                     } else {
                         Log.e("com.parse.push", "failed to subscribe for push", e);
                     }
@@ -303,7 +304,7 @@ public class HomeActivity extends AppCompatActivity implements
                 fragment = new Newsletter();
                 break;
             case 3:
-                fragment = new Facebook();
+                fragment = new Timetable();
                 break;
             case 4:
                 Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.clickandplay.it"));
@@ -315,7 +316,7 @@ public class HomeActivity extends AppCompatActivity implements
                 fragment = new Subscription();
                 break;
             case 6:
-                fragment = new Timetable();
+                fragment = new Facebook();
                 break;
 
             default:
@@ -685,5 +686,10 @@ public class HomeActivity extends AppCompatActivity implements
         // We use FLAG_UPDATE_CURRENT so that we get the same pending intent back when calling
         // addGeofences() and removeGeofences().
         return PendingIntent.getService(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+    }
+    public void openDrawer (View v) {
+
+        mDrawerLayout.openDrawer(Gravity.LEFT);
+
     }
 }

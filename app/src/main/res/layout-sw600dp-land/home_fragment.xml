@@ -104,5 +104,53 @@
         android:paddingBottom="0dp"
         android:layout_marginBottom="-10dp" />
 
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/contactUs"
 
+        android:src="@drawable/contactus"
+        android:layout_alignRight="@+id/helpshift"
+        android:layout_below="@+id/helpshift"
+        android:layout_marginRight="-5dp"
+        android:visibility="gone" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/contactUsText"
+        android:id="@+id/contactustext"
+        android:layout_alignBottom="@+id/contactUs"
+        android:layout_alignLeft="@+id/contactUs"
+        android:layout_marginLeft="26dp"
+        android:layout_marginBottom="13dp"
+        android:textSize="15sp"
+        android:layout_alignRight="@+id/contactUs"
+        android:layout_marginRight="40dp"
+        android:gravity="center_horizontal"
+        android:visibility="gone" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageView3"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:src="@drawable/homelike"
+        android:layout_below="@+id/homebanner"
+        android:layout_marginTop="185dp"
+        android:onClick="openDrawer"
+        android:visibility="gone" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/arrow"
+        android:layout_alignTop="@+id/imageView3"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:src="@drawable/frecciahome"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="5dp"
+        android:visibility="gone" />
 </RelativeLayout>

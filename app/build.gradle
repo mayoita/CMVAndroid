@@ -40,7 +40,7 @@ dependencies {
 
     compile 'com.squareup.picasso:picasso:2.3.2'
     compile 'com.nineoldandroids:library:2.4.0'
-    compile 'com.daimajia.slider:library:1.1.2@aar'
+
     compile 'org.lucasr.twowayview:twowayview:0.1.4'
     compile 'com.google.android.gms:play-services:7.8.0'
     compile 'com.parse.bolts:bolts-android:1.2.1'
@@ -57,5 +57,9 @@ dependencies {
     compile  'com.google.zxing:core:2.2'
     compile 'com.helpshift:android-aar:3.10.0'
     compile 'com.github.traex:RippleEffect:v1.3'
-
+    compile 'com.nineoldandroids:library:2.4.0'
+    compile 'com.daimajia.easing:library:1.0.1@aar'
+    compile 'com.daimajia.androidanimations:library:1.1.3@aar'
+    compile 'com.daimajia.slider:library:1.1.2@aar'
+    compile 'com.facebook.rebound:rebound:0.3.8'
 }

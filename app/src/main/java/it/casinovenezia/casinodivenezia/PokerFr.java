@@ -78,20 +78,20 @@ public class PokerFr extends Fragment {
         if (Venue.currentVenue == 1) {
 
             myEventitemlist = inOffice("CN");
-            mAdapter = new PokerAdapter(getActivity(),
-                    myEventitemlist);
-
-
-            listView.setAdapter(mAdapter);
+            if (getActivity() != null) {
+                mAdapter = new PokerAdapter(getActivity(),
+                        myEventitemlist);
+                listView.setAdapter(mAdapter);
+            }
 
         } else {
 
             myEventitemlist = inOffice("VE");
-            mAdapter = new PokerAdapter(getActivity(),
-                    myEventitemlist);
-            //inOffice("VE");
-
-            listView.setAdapter(mAdapter);
+            if (getActivity() != null) {
+                mAdapter = new PokerAdapter(getActivity(),
+                        myEventitemlist);
+                listView.setAdapter(mAdapter);
+            }
         }
     }
     public ArrayList<PokerItem> inOffice(String office)    {

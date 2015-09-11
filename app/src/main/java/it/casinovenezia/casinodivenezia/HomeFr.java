@@ -25,6 +25,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
+import com.daimajia.androidanimations.library.Techniques;
+import com.daimajia.androidanimations.library.YoYo;
 import com.helpshift.Helpshift;
 import com.parse.GetCallback;
 import com.parse.ParseObject;
@@ -89,17 +91,31 @@ public class HomeFr extends Fragment {
         venue.setTypeface(XLight);
         TextView contactustext = (TextView)rootView.findViewById(R.id.contactustext);
         ImageView contactus = (ImageView)rootView.findViewById(R.id.contactUs);
+        ImageView fb_back = (ImageView)rootView.findViewById(R.id.imageView3);
+        ImageView arrow = (ImageView)rootView.findViewById(R.id.arrow);
         if(!HomeActivity.hasBeenSeen) {
             contactus.setVisibility(View.VISIBLE);
             contactustext.setVisibility(View.VISIBLE);
+            fb_back.setVisibility(View.VISIBLE);
+            arrow.setVisibility(View.VISIBLE);
             Animation animation2 = new AlphaAnimation(1.0f, 0.0f);
             animation2.setDuration(1000);
-            animation2.setStartOffset(1500);
+            animation2.setStartOffset(2000);
             animation2.setFillAfter(true);
             contactus.setAnimation(animation2);
             contactustext.setAnimation(animation2);
             HomeActivity.hasBeenSeen = true;
+
+            YoYo.with(Techniques.Shake)
+                    .duration(700)
+                    .playOn(rootView.findViewById(R.id.arrow));
+            fb_back.setAnimation(animation2);
+            arrow.setAnimation(animation2);
         }
+
+        YoYo.with(Techniques.Shake)
+                .duration(700)
+                .playOn(rootView.findViewById(R.id.arrow));
         apertoDalle = (TextView) rootView.findViewById(R.id.apertodalle);
         apertoDalle.setTypeface(XLight);
 

@@ -8,7 +8,8 @@
 
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:layout_weight="1" >
+        android:layout_weight="1"
+        android:background="@color/black">
         >
     </ListView>
     <RelativeLayout
@@ -25,8 +26,11 @@
             android:id="@+id/text_for_general_tournament"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
-            android:textColor="@color/white"
+            android:textColor="@color/yellow_brand"
             android:textSize="25dp"
-            android:layout_marginTop="30dp" />
+            android:layout_marginTop="30dp"
+            android:layout_marginRight="30dp"
+            android:layout_marginLeft="30dp"
+            android:gravity="center" />
     </RelativeLayout>
 </LinearLayout>

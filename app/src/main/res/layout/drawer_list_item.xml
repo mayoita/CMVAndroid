@@ -10,7 +10,7 @@
         android:layout_width="25dp"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_marginLeft="12dp"
+        android:layout_marginLeft="-30dp"
         android:layout_marginRight="12dp"
         android:contentDescription="@string/desc_list_item_icon"
         android:src="@drawable/ic_home"
@@ -20,13 +20,13 @@
         android:id="@+id/text1"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:layout_toRightOf="@id/icon"
         android:minHeight="?android:attr/listPreferredItemHeightSmall"
         android:textAppearance="?android:attr/textAppearanceListItemSmall"
         android:textColor="@color/white"
         android:gravity="center_vertical"
         it.casinovenezia.casinodivenezia:typeface="Giorgio-Thin.ttf"
-        android:paddingRight="40dp"/>
+        android:paddingRight="40dp"
+        android:layout_marginLeft="48dp" />
 
 
 </RelativeLayout>

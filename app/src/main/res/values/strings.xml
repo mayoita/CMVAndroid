@@ -25,6 +25,7 @@
         <item>CASINÒ MOBILE</item>
         <item>MY SUBSCRIPTION</item>
         <item>CLICK "LIKE" ON FACEBOOK</item>
+        <item></item>
     </string-array>
     <string name="drawer_open">Open navigation drawer</string>
     <string name="drawer_close">Close navigation drawer</string>
@@ -36,9 +37,9 @@
         <item>@drawable/newsletter</item>
         <item>@drawable/timetables</item>
         <item>@drawable/mobile</item>
-        <item>@drawable/vpc</item>
         <item>@drawable/subscription</item>
         <item>@drawable/like</item>
+        <item>@drawable/homeempty</item>
     </array>
 
 <!-- TODO: Remove or change this placeholder text -->

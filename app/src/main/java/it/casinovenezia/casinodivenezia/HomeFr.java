@@ -1,6 +1,8 @@
 package it.casinovenezia.casinodivenezia;
 
 
+import android.content.Context;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.LinearGradient;
@@ -12,6 +14,7 @@ import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.text.method.LinkMovementMethod;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -27,6 +30,14 @@ import android.widget.Toast;
 
 import com.daimajia.androidanimations.library.Techniques;
 import com.daimajia.androidanimations.library.YoYo;
+import com.facebook.rebound.Spring;
+import com.facebook.rebound.SpringConfig;
+import com.facebook.rebound.SpringConfigRegistry;
+import com.facebook.rebound.SpringListener;
+import com.facebook.rebound.SpringSystem;
+import com.facebook.rebound.SpringUtil;
+import com.facebook.rebound.ui.SpringConfiguratorView;
+import com.facebook.rebound.ui.Util;
 import com.helpshift.Helpshift;
 import com.parse.GetCallback;
 import com.parse.ParseObject;
@@ -41,6 +52,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
+import android.os.Handler;
 
 /**
  * Created by massimomoro on 25/03/15.
@@ -57,19 +69,11 @@ public class HomeFr extends Fragment {
     private List<Object> arrayFestivity= new ArrayList<>();
     private Boolean VPS2 = false;
 
-
-
-    //Container Activity must implement this interface
-//    public interface DelegateListener {
-//        public void onItemSelected(Uri articleUri);
-//    }
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
     }
-
 
     public static final HomeFr newInstance(String message) {
         HomeFr instance = new HomeFr();
@@ -91,8 +95,9 @@ public class HomeFr extends Fragment {
         venue.setTypeface(XLight);
         TextView contactustext = (TextView)rootView.findViewById(R.id.contactustext);
         ImageView contactus = (ImageView)rootView.findViewById(R.id.contactUs);
-        ImageView fb_back = (ImageView)rootView.findViewById(R.id.imageView3);
+        ImageView fb_back = (ImageView) rootView.findViewById(R.id.imageView3);
         ImageView arrow = (ImageView)rootView.findViewById(R.id.arrow);
+
         if(!HomeActivity.hasBeenSeen) {
             contactus.setVisibility(View.VISIBLE);
             contactustext.setVisibility(View.VISIBLE);
@@ -113,16 +118,11 @@ public class HomeFr extends Fragment {
             arrow.setAnimation(animation2);
         }
 
-        YoYo.with(Techniques.Shake)
-                .duration(700)
-                .playOn(rootView.findViewById(R.id.arrow));
         apertoDalle = (TextView) rootView.findViewById(R.id.apertodalle);
         apertoDalle.setTypeface(XLight);
 
         jackpotamount = (TextView) rootView.findViewById(R.id.jackpotamount);
         jackpotamount.setTypeface(Thin);
-
-
 
         TextView jackpotLabel = (TextView) rootView.findViewById(R.id.jackpotLabel);
         jackpotLabel.setTypeface(XLight);

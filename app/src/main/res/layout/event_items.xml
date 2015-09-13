@@ -35,4 +35,18 @@
         android:textColor="@color/white"
         android:textSize="20dp" />
 
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/speak"
+        android:layout_alignParentBottom="false"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="false"
+        android:src="@drawable/speak"
+        android:layout_marginLeft="3dp"
+        android:layout_marginTop="3dp"
+        android:layout_alignParentTop="true"
+        android:visibility="gone" />
+
+
 </RelativeLayout>

@@ -79,12 +79,13 @@ public class HomeActivity extends AppCompatActivity implements
     private String[] navMenuTitles;
     private TypedArray navMenuIcons;
     private ArrayList<NavDrawerItem> navDrawerItems;
+    private ArrayList<NavDrawerItem> navDrawerItemsEmpty;
     private NavDrawerListAdapter adapter;
-
+    private NavDrawerListAdapter adapterEmpty;
     private DrawerLayout mDrawerLayout;
     private ListView mDrawerList;
     private ActionBarDrawerToggle mDrawerToggle;
-
+    private boolean isDrawerOpen = false;
     //nav drawer title
     private CharSequence mDrawerTitle;
     //use to store App title
@@ -213,7 +214,7 @@ public class HomeActivity extends AppCompatActivity implements
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mDrawerList = (ListView) findViewById(R.id.left_drawer);
         navDrawerItems = new ArrayList<NavDrawerItem>();
-
+        navDrawerItemsEmpty = new ArrayList<NavDrawerItem>();
         // adding nav drawer items to array
         // Home
         navDrawerItems.add(new NavDrawerItem(navMenuTitles[0], navMenuIcons.getResourceId(0, -1)));
@@ -229,6 +230,18 @@ public class HomeActivity extends AppCompatActivity implements
         navDrawerItems.add(new NavDrawerItem(navMenuTitles[5], navMenuIcons.getResourceId(5, -1)));
         navDrawerItems.add(new NavDrawerItem(navMenuTitles[6], navMenuIcons.getResourceId(6, -1)));
 
+        navDrawerItemsEmpty.add(new NavDrawerItem(navMenuTitles[0], navMenuIcons.getResourceId(7, -1)));
+        // Find People
+        navDrawerItemsEmpty.add(new NavDrawerItem(navMenuTitles[1], navMenuIcons.getResourceId(7, -1)));
+        // Photos
+        navDrawerItemsEmpty.add(new NavDrawerItem(navMenuTitles[2], navMenuIcons.getResourceId(7, -1)));
+        // Communities, Will add a counter here
+        navDrawerItemsEmpty.add(new NavDrawerItem(navMenuTitles[3], navMenuIcons.getResourceId(7, -1)));
+        // Pages
+        navDrawerItemsEmpty.add(new NavDrawerItem(navMenuTitles[4], navMenuIcons.getResourceId(7, -1)));
+        // What's hot, We  will add a counter here
+        navDrawerItemsEmpty.add(new NavDrawerItem(navMenuTitles[5], navMenuIcons.getResourceId(7, -1)));
+        navDrawerItemsEmpty.add(new NavDrawerItem(navMenuTitles[6], navMenuIcons.getResourceId(7, -1)));
 
         // Recycle the typed array
         navMenuIcons.recycle();
@@ -236,7 +249,9 @@ public class HomeActivity extends AppCompatActivity implements
         // setting the nav drawer list adapter
         adapter = new NavDrawerListAdapter(getApplicationContext(),
                 navDrawerItems);
-        mDrawerList.setAdapter(adapter);
+        adapterEmpty = new NavDrawerListAdapter(getApplicationContext(),
+                navDrawerItemsEmpty);
+        mDrawerList.setAdapter(adapterEmpty);
 
 
         // Set the list's click listener
@@ -274,12 +289,33 @@ public class HomeActivity extends AppCompatActivity implements
         ) {
             public void onDrawerClosed(View view) {
                 getSupportActionBar().setTitle(mTitle);
-                invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
+                invalidateOptionsMenu();
+                mDrawerList.setAdapter(adapterEmpty);
             }
 
             public void onDrawerOpened(View drawerView) {
                 getSupportActionBar().setTitle(mDrawerTitle);
-                invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
+                invalidateOptionsMenu();
+                mDrawerList.setAdapter(adapter);
+
+            }
+
+            public void onDrawerSlide(View drawerView, float slideOffset) {
+
+
+
+//                NavDrawerListAdapter.ViewHolder customView = (NavDrawerListAdapter.ViewHolder) mDrawerList.getAdapter().getView(0, null, null).getTag();
+//                View c = (View) mDrawerList.getChildAt(0);
+//                ImageView a = (ImageView) c.findViewById(R.id.icon);
+
+                //float moveFactor = 36.0f*slideOffset;
+
+                changeVenueButton.setAlpha(1-slideOffset);
+                changeVenueButton.setScaleX(1 - slideOffset);
+                changeVenueButton.setScaleY(1-slideOffset);
+                //dddd.setX(moveFactor);
+                //a.setX(moveFactor);
+
             }
         };
         mDrawerLayout.setDrawerListener(mDrawerToggle);

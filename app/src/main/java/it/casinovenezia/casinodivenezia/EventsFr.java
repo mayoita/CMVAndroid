@@ -205,6 +205,9 @@ public class EventsFr extends Fragment {
 
 
     public void setOffice () {
+        if (EventsAdapter.engine != null) {
+            EventsAdapter.engine.stop();
+        }
         if (Venue.currentVenue == 1) {
 
             myEventitemlist = inOffice("CN");
@@ -270,30 +273,37 @@ public class EventsFr extends Fragment {
                             case "it":
                                 map.setDescription((String) event.get("DescriptionIT"));
                                 map.setName((String) event.get("NameIT"));
+                                map.setMemo((String)event.get("memoIT"));
                                 break;
                             case "es":
                                 map.setDescription((String) event.get("DescriptionES"));
                                 map.setName((String) event.get("NameES"));
+                                map.setMemo((String) event.get("memoES"));
                                 break;
                             case "fr":
                                 map.setDescription((String) event.get("DescriptionFR"));
                                 map.setName((String) event.get("NameFR"));
+                                map.setMemo((String) event.get("memoFR"));
                                 break;
                             case "de":
                                 map.setDescription((String) event.get("DescriptionDE"));
                                 map.setName((String) event.get("NameDE"));
+                                map.setMemo((String) event.get("memoDE"));
                                 break;
                             case "ru":
                                 map.setDescription((String) event.get("DescriptionRU"));
                                 map.setName((String) event.get("NameRU"));
+                                map.setMemo((String) event.get("memoRU"));
                                 break;
                             case "ch":
-                                map.setDescription((String) event.get("DescriptionCH"));
-                                map.setName((String) event.get("NameCH"));
+                                map.setDescription((String) event.get("DescriptionZH"));
+                                map.setName((String) event.get("NameZH"));
+                                map.setMemo((String) event.get("memoZH"));
                                 break;
                             default:
                                 map.setDescription((String) event.get("Description"));
                                 map.setName((String) event.get("Name"));
+                                map.setMemo((String) event.get("memo"));
                                 break;
                         }
 
@@ -315,4 +325,9 @@ public class EventsFr extends Fragment {
         });
     }
 
+    @Override
+    public void onStop() {
+        super.onStop();
+        EventsAdapter.engine.shutdown();
+    }
 }

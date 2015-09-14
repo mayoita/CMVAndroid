@@ -63,7 +63,7 @@
 
                 <ImageView
                     android:layout_width="match_parent"
-                    android:layout_height="206dp"
+                    android:layout_height="412dp"
                     android:id="@+id/imageView7"
                     android:layout_marginTop="10dp"
                     android:layout_marginLeft="7dp"
@@ -73,7 +73,7 @@
                 <com.daimajia.slider.library.SliderLayout
                     android:id="@+id/slider"
                     android:layout_width="match_parent"
-                    android:layout_height="200dp"
+                    android:layout_height="400dp"
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
                     android:layout_marginTop="13dp" />

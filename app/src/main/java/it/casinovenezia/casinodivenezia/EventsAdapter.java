@@ -15,6 +15,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.facebook.rebound.Spring;
@@ -53,25 +54,60 @@ public class EventsAdapter extends BaseAdapter implements TextToSpeech.OnInitLis
     private static final SpringConfig SPRING_CONFIG = SpringConfig.fromOrigamiTensionAndFriction(10, 3);
     private static final int MAX = 300;
     private static final int MIN = 500;
-    private TextToSpeech engine;
+    public static TextToSpeech engine;
     private TextToSpeech tts;
+    private ViewHolder isSpeaking;
     @Override
     public void onInit(int status) {
         Log.d("Speech", "OnInit - Status [" + status + "]");
 
         if (status == TextToSpeech.SUCCESS) {
             Log.d("Speech", "Success!");
-            engine.setLanguage(StarterApplication.currentLocale);
+//            engine.setLanguage(StarterApplication.currentLocale);
         }
     }
 
-    private void speakOut() {
+    private void speakOut(String text, ViewHolder view) {
 
-        String text = "Prova di lettura";
 
+        String utteranceId=this.hashCode() + "";
         HashMap<String, String> map = new HashMap<String, String>();
-        map.put(TextToSpeech.Engine.KEY_PARAM_UTTERANCE_ID, "Hello");
-        engine.speak(text, TextToSpeech.QUEUE_FLUSH, map);
+        map.put(TextToSpeech.Engine.KEY_PARAM_UTTERANCE_ID, utteranceId);
+        if (isSpeaking != null){
+            if (view != isSpeaking) {
+                if (engine.isSpeaking()) {
+                    engine.stop();
+                    isSpeaking.speak.setImageResource(R.drawable.speak);
+                    engine.speak(text, TextToSpeech.QUEUE_FLUSH, map);
+                    isSpeaking = view;
+                    view.speak.setImageResource(R.drawable.speak_f);
+                } else{
+                    engine.speak(text, TextToSpeech.QUEUE_FLUSH, map);
+                    view.speak.setImageResource(R.drawable.speak_f);
+                    isSpeaking = view;
+                }
+            }else{
+                if (engine.isSpeaking()) {
+                    engine.stop();
+                    view.speak.setImageResource(R.drawable.speak);
+                } else{
+                    engine.speak(text, TextToSpeech.QUEUE_FLUSH, map);;
+                    view.speak.setImageResource(R.drawable.speak_f);
+                    isSpeaking = view;
+                }
+            }
+        } else {
+            if (engine.isSpeaking()) {
+                engine.stop();
+                view.speak.setImageResource(R.drawable.speak);
+                isSpeaking= null;
+            } else{
+                engine.speak(text, TextToSpeech.QUEUE_FLUSH, map);
+                view.speak.setImageResource(R.drawable.speak_f);
+                isSpeaking = view;
+            }
+        }
+
     }
 
 
@@ -109,6 +145,25 @@ public class EventsAdapter extends BaseAdapter implements TextToSpeech.OnInitLis
             this.context = null;
             Log.e("Event", "Context is null");
         }
+        engine = new TextToSpeech(this.context, this);
+        engine.setOnUtteranceProgressListener(new UtteranceProgressListener() {
+            @Override
+            public void onStart(String utteranceId) {
+
+            }
+
+            @Override
+            public void onDone(String utteranceId) {
+//                if (isSpeaking != null) {
+//                    isSpeaking.speak.setImageResource(R.drawable.speak);
+//                }
+            }
+
+            @Override
+            public void onError(String utteranceId) {
+
+            }
+        });
     }
 
     public void addItem(EventItem item) {
@@ -152,7 +207,7 @@ public class EventsAdapter extends BaseAdapter implements TextToSpeech.OnInitLis
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
 
         View rowView = convertView;
         int rowType = getItemViewType(position);
@@ -162,7 +217,7 @@ public class EventsAdapter extends BaseAdapter implements TextToSpeech.OnInitLis
                 case TYPE_ITEM:
                     rowView = mInflater.inflate(R.layout.event_items, parent, false);
                     //configure view holder
-                    ViewHolder viewHolder = new ViewHolder();
+                    final ViewHolder viewHolder = new ViewHolder();
                     viewHolder.text = (TextView) rowView.findViewById(R.id.editText5);
                     viewHolder.date = (TextView) rowView.findViewById(R.id.editText4);
                     viewHolder.image = (ImageView) rowView.findViewById(R.id.image_event);
@@ -184,35 +239,25 @@ public class EventsAdapter extends BaseAdapter implements TextToSpeech.OnInitLis
         }
         switch (rowType) {
             case TYPE_ITEM:
-                ViewHolder holder = (ViewHolder)rowView.getTag();
-                engine = new TextToSpeech(this.context, this);
-                engine.setOnUtteranceProgressListener(new UtteranceProgressListener() {
-                    @Override
-                    public void onStart(String utteranceId) {
+                final ViewHolder holder = (ViewHolder)rowView.getTag();
 
-                    }
-
-                    @Override
-                    public void onDone(String utteranceId) {
-                        Log.i("d","f");
-                    }
-
-                    @Override
-                    public void onError(String utteranceId) {
-
-                    }
-                });
-                holder.speak.setVisibility(View.VISIBLE);
+                final String textToSpeach = arraylist.get(position).getMemo();
+                if (textToSpeach != null) {
+                    holder.speak.setVisibility(View.VISIBLE);
+                }
                 holder.speak.setOnClickListener(new View.OnClickListener() {
-
                     @Override
                     public void onClick(View arg0) {
-                        speakOut();
+
+                        if (textToSpeach != null)
+                        speakOut(textToSpeach,holder);
 
                     }
-
                 });
                 holder.image.setImageResource(R.drawable.default_event);
+               // if(holder.)
+
+                holder.speak.setImageResource(R.drawable.speak);
                 //download image
                 loadImage(arraylist.get(position).getImageMain(), holder.image);
                 holder.text.setVisibility(View.GONE);

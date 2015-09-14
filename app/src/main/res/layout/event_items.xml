@@ -34,19 +34,25 @@
         android:layout_alignLeft="@+id/editText4"
         android:textColor="@color/white"
         android:textSize="20dp" />
-
+    <com.andexert.library.RippleView
+        android:id="@+id/more"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        rv_rippleDuration= "100"
+        rv_centered="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="3dp"
+        android:layout_marginLeft="3dp"
+        android:layout_alignParentLeft="true">
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/speak"
-        android:layout_alignParentBottom="false"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="false"
         android:src="@drawable/speak"
-        android:layout_marginLeft="3dp"
-        android:layout_marginTop="3dp"
         android:layout_alignParentTop="true"
         android:visibility="gone" />
-
-
+    </com.andexert.library.RippleView>
 </RelativeLayout>

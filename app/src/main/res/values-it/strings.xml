@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">"Casinò di Venezia "</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="cavendramin">CÀ VENDRAMIN CALERGI</string>
+    <string name="apertodalle">APERTO DALLE xx:x ALLE xx:xx</string>
+    <string name="jackpotamount">x.xxx.xxx,xx €</string>
+    <string name="jackpot">JACKPOT</string>
+    <string name="link">DIVIETO DI GIOCO AI MINORI DI 18 ANNI. IL GIOCO PUÒ CAUSARE DIPENDENZA PATOLOGICA.<a href="http://www.casinovenezia.it/it/probabilita-di-vincita.html">VAI ALLE PROBABILITÀ DI VINCITA</a></string>
+    <string name="action_change"></string>
+    <string name="home_label">HOME</string>
+    <string name="events_label">EVENTI</string>
+    <string name="casino_label">CASINÒ</string>
+    <string name="poker_label">POKER</string>
+    <string name="tournament_label">TORNEI</string>
+    <string name="restaurant_label">RISTORANTI</string>
+    <string name="map_label">MAPPA</string>
+    <string-array name="nav_drawer_items">
+        <item>HOME</item>
+        <item>LOG IN</item>
+        <item>NEWSLETTER</item>
+        <item>SERVIZI DI TRASPORTO DEDICATI</item>
+        <item>CASINÒ MOBILE</item>
+        <item>LE MIE ISCRIZIONI</item>
+        <item>CLICCA "LIKE" SU FACEBOOK</item>
+        <item></item>
+    </string-array>
+    <string name="drawer_open">Open navigation drawer</string>
+    <string name="drawer_close">Close navigation drawer</string>
+    <string name="desc_list_item_icon">Item Icon</string>
+
+    <array name="nav_drawer_icons">
+        <item>@drawable/home</item>
+        <item>@drawable/login</item>
+        <item>@drawable/newsletter</item>
+        <item>@drawable/timetables</item>
+        <item>@drawable/mobile</item>
+        <item>@drawable/subscription</item>
+        <item>@drawable/like</item>
+        <item>@drawable/homeempty</item>
+    </array>
+
+<!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="please">ESEGUI IL LOGIN O REGISTRATI</string>
+    <string name="loginsignup">LOG IN / REGISTRAZIONE</string>
+    <string name="newsletter">NEWSLETTER</string>
+    <string name="email_nl">E-MAIL</string>
+    <string name="name_nl">NOME</string>
+    <string name="surname_nl">COGNOME</string>
+    <string name="willing">Sì, sono d\'accordo di ricevere la Newsletter Casinò di Venezia all\'indirizzo sopra indicato.</string>
+    <string name="confirm">Confermo di essere maggiorenne.</string>
+    <string name="allow">Al fine di consentire il servizio richiesto autorizzo al trattamento dei miei dati ai sensi del D.lgs. 196/2003.</string>
+    <string name="unsubscribe">DISISCRIZIONE</string>
+    <string name="subscribe">ISCRIZIONE</string>
+    <string name="click">METTI "LIKE" SU FACEBOOK E OTTIENI UN INGRESSO OMAGGIO!</string>
+    <string name="ingresso">INGRESSO CONSENTITO AI SOLI MAGGIORENNI SU PRESENTAZIONE DI DOCUMENTO D\'IDENTITÀ VALIDO.</string>
+    <string name="facebook">IL TUO INGRESSO OMAGGIO</string>
+    <string name="mysubscription">LE MIE ISCRIZIONI</string>
+    <string name="eventsnew">NEWS EVENTI</string>
+    <string name="slotnews">NEWS SLOT</string>
+    <string name="pokernews">NEWS POKER</string>
+    <string name="title_activity_event_details">EVENTO</string>
+    <string name="lore">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
+        ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+        aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in
+        voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+        Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+        Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+        Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</string>
+    <string name="table_games">GIOCHI AI TAVOLI</string>
+    <string name="slot_games">GIOCHI ELETTRONICI</string>
+    <string name="online_games">GIOCHI ONLINE</string>
+    <string name="fair">FAIR ROULETTE</string>
+    <string name="black">BLACK JACK</string>
+    <string name="texas">TEXAS HOLD\'EM POKER</string>
+    <string name="punto">PUNTO BANCO</string>
+    <string name="carribean">CARRIBEAN STUD POKER</string>
+    <string name="francese">ROULETTE FRANCESE</string>
+    <string name="chemin">CHEMIN DE FER</string>
+    <string name="trente">MIDI TRENTE ET QUARANTE</string>
+    <string name="what">IL PARCO SLOT</string>
+    <string name="whatnew">>LE NOVITÀ SLOT</string>LE NOVITÀ SLOT/string>
+    <string name="rooms">LE SALE SLOT</string>
+    <string name="jackpot_slot">I NOSTRI JACKPOT</string>
+    <string name="title_activity_game_item">GAME</string>
+    <string name="close_rule">CLOSE</string>
+    <string name="title_activity_slot_details">SLOT</string>
+    <string name="text_for_game_general">Vivere il piacere del gioco e della sfida in una cornice raffinata e coinvolgente.\nÈ l\'opportunità offerta dalle due sedi del Casinò di Venezia, ognuna completa, ma con un carattere originale.\nE, da casa, il gioco on line.</string>
+    <string name="title_activity_poker_item">POKER</string>
+    <string name="text_for_game_general_poker">Al Casinò di Venezia è possibile partecipare a competizioni nazionali e internazionali.\nNella sede di Ca\' Vendramin Calergi, ad esempio, si svolgono il Campionato Italiano di Chemin de fer (12 manches all’anno), gli incontri a premi di Chemin de Fer (6 galà all’anno) e i tornei di Roulette Francese (5 manches all’anno).\n\nA Ca\' Noghera invece, si giocano ogni giorno tornei di Texas Hold \'em Poker con qualificazioni online.\nIn entrambe le sedi inoltre, è possibile partecipare ai campionati internazionali di Texas Hold \'em Poker che si svolgono regolarmente almeno una volta al mese.</string>
+    <string name="torneo">TORNEO</string>
+    <string name="ora">Ora</string>
+    <string name="buy">BUY IN</string>
+    <string name="stack">STACK</string>
+    <string name="blind">BLINDS</string>
+    <string name="late">LATE</string>
+    <string name="cap">CAP</string>
+    <string name="note">NOTE</string>
+    <string name="text_for_game_general_tournament">TAl Casinò di Venezia è possibile partecipare a competizioni nazionali e internazionali.\nNella sede di Ca\' Vendramin Calergi, ad esempio, si svolgono il Campionato Italiano di Chemin de fer (12 manches all’anno), gli incontri a premi di Chemin de Fer (6 galà all’anno) e i tornei di Roulette Francese (5 manches all’anno).\n\nA Ca\' Noghera invece, si giocano ogni giorno tornei di Texas Hold \'em Poker con qualificazioni online.\nIn entrambe le sedi inoltre, è possibile partecipare ai campionati internazionali di Texas Hold \'em Poker che si svolgono regolarmente almeno una volta al mese.</string>
+    <string name="title_activity_tournament_item">TORNEO</string>
+    <string name="telUno">+390415297230 (ore 9.30 - 17.30)</string>
+    <string name="telDue">+390415297201 (19.30 - 24.00)</string>
+    <string name="openingtime">Orari d\'apertura:</string>
+    <string name="openingtimeTx">19.30 - 24.00</string>
+    <string name="closed">Chiuso:</string>
+    <string name="closedTx">24 e 25 dicembre</string>
+    <string name="creditCardLabel">Carte di credito</string>
+    <string name="fromtoMenu">dal 26 al 5 marzo 2015</string>
+    <string name="nome_chef">VALERIO VERGINE</string>
+    <string name="title_activity_menu">MENU</string>
+    <string name="starters">ANTIPASTI</string>
+    <string name="first">PRIMO PIATTO</string>
+    <string name="second">SECONDO PIATTO</string>
+    <string name="dessert">DESSERT</string>
+    <string name="orari">SERVIZI DI TRASPORTO DEDICATI</string>
+    <string name="map">MAPPA</string>
+    <string name="info_map">INFO</string>
+    <string name="directions">(clicca sull\'icona per ottenere le indicazioni stradali)</string>
+    <string formatted="false" name="info_text">Le due sedi del Casinò di Venezia, Ca\’ Vendramin Calergi e Ca\’ Noghera, sono aperte tutti i giorni dell\'anno esclusi il 24 e il 25 dicembre.\nL\'accesso alle sale da gioco del Casinò di Venezia è consentito esclusivamente ai maggiorenni in possesso di un documento d\'identità:\nvengono ritenuti validi la carta d\'identità, la patente di guida, il passaporto.\n\nTessera d\'ingresso da € 5 (senza servizi).\nTessera d\'ingresso da € 10: un ingresso da 10 € lode.\n\nLa tessera d\'ingresso da € 10 comprende i servizi:\n
+- gettone o ticket ez-pay del valore di € 10,00 non convertibili in omaggio giocabili ai tavoli da gioco o alle slot machines;\n- guardaroba;\n- parcheggio (per la sede di Ca\' Noghera gratuito; per la sede di Venezia: € 10,00 presso ASM e Garage San Marco);\n- navetta di terraferma: Casinò di Ca\' Noghera - Venezia Piazzale Roma e viceversa.\n- navetta di terraferma: Mestre Ferrovia – Casinò di Ca\’ Noghera e viceversa.\n- navetta acquea: Piazzale Roma - Ca\' Vendramin Calergi e viceversa.\n\nSe sei ospite di un albergo a Venezia richiedi il coupon d\'ingresso omaggio.\n\nUn regalo attende tutti i clienti che vengono a giocare al Casinò nel giorno del loro compleanno.\n\nOgni mese tante promozioni e occasioni speciali per organizzare una vista alle nostre sedi. Regali dalle collezioni a marchio Casinò di Venezia. Offerta di drink e snack, benefit di gioco con ticket slot o gettoni tavoli in omaggio.\nScopri la promozione del mese.\n\nMODALITÀ DI PAGAMENTO\n\n
+Per gli acquisti di mezzi di gioco si accettano:\n- pagamenti in valuta italiana entro il limite stabilito dalla normativa vigente\n- pagamenti in valuta estera entro il limite stabilito dalla normativa vigente negli orari di apertura giochi ai tavoli (dalle ore 15.30 fino a chiusura giochi)\n- pagamenti con carte di credito: Pagobancomat, Visa , Mastercard, Maestro.\n\nI pagamenti dei crediti di gioco e delle vincite potranno avvenire in contanti nei limiti di legge oppure a mezzo assegni all\'ordine del cliente non trasferibili o con mezzi di gioco.\n\nAll\'interno delle sedi del Casinò di Venezia sono operative postazioni di cassa, postazioni pos/carte di credito e servizi bancari bancomat.\n\nUso del denaro contante\nIl D.L. 06 dicembre 2011, n. 201 pubblicato sulla G.U. (n. 284 del 06 dicembre 2011) ha ulteriormente limitato l\’uso del contante nelle transazioni, pertanto all\’interno della casa da gioco i trasferimenti di denaro contante da e verso la clientela, potranno avvenire solo per importi inferiori a 1.000 euro.</string>
+    <string name="info_titolo">MODALITÀ D\'INGRESSO</string>
+    <string name="info_activiy_text">INFO</string>
+    <string name="title_activity_sign_up">SignUpActivity</string>
+    <string name="title_activity_login">Log in</string>
+    <string name="title_activity_signup">Registrazione</string>
+    <string name="prompt_username">Username</string>
+    <string name="prompt_password">Password</string>
+    <string name="prompt_password_again">Reinseriscu Password</string>
+    <string name="error_intro">"Per piacere "</string>
+    <string name="error_blank_username">inserisci uno username</string>
+    <string name="error_blank_password">inserisci la password</string>
+    <string name="error_mismatched_passwords">reinserisci la password</string>
+    <string name="error_join">", e "</string>
+    <string name="error_end">.</string>
+    <string name="progress_login">Logging you in&#8230;</string>
+    <string name="progress_signup">Signing you up&#8230;</string>
+    <string name="signup">Registrazione</string>
+    <string name="forgot">DIMENTICATO ?</string>
+    <string name="you_can">PUOI FARE IL LOG IN CON</string>
+    <string name="parse_app_id">yO3MBzW9liNCaiAfXWGb3NtZJ3VhXyy4Zh8rR5ck</string>
+    <string name="parse_client_key">KImYuYCrJ9j3IbDI3W2KtDXCXwmfqsRDCn5Em6A9</string>
+    <string name="facebook_app_id">724548800932026</string>
+    <string-array name="my_facebook_permissions">
+        <item>public_profile</item>
+        <item>email</item>
+    </string-array>
+    <string name="profile_title_logged_in">Sei loggato come</string>
+    <string name="profile_logout_button_label">Log out</string>
+    <string name="profile_title_logged_out">Devi essere loggato per vedere il tuo profilo</string>
+    <string name="profile_login_button_label">Log in</string>
+    <string name="myEmail">EMAIL</string>
+    <string name="welcome">BENVENUTO</string>
+    <string name="dont_have">NON HAI ANCORA UN ACCOUNT?</string>
+    <string name="login">LOG IN</string>
+    <string name="todayIsClosed">Oggi è chiuso</string>
+    <string name="todayOpen">Oggi aperto 11:00 - 3:15</string>
+    <string name="todayOpenVenice">Oggi aperto 11:00 - 02:45</string>
+    <string name="canogheratime1">Oggi aperto 11:00 - 03:45</string>
+    <string name="canogheratime2">Oggi aperto 11:00 - 03:15</string>
+    <string name="veneziatime1">Oggi aperto 11.00 - 03.15</string>
+    <string name="veneziatime2">Oggi aperto 11:00 - 02:45</string>
+    <string name="text_for_event_general">Musica live, concerti, disco club, spettacoli, intrattenimento, piano bar e proposte di ristorazione dall\'happy hour alla cena di gala organizzate direttamente nelle due sedi del Casinò di Venezia.\nUn mix di gioco e di entertainment per serate speciali all\'insegna del gioco e divertimento.</string>
+    <string name="lore_news">Un\’offerta in costante evoluzione, per garantire sempre il meglio della moderna tecnologia, alla ricerca continua di una maggiore soddisfazione del cliente.</string>
+    <string name="wagner_restaurant">RISTORANTE WAGNER</string>
+    <string name="marcopolo_restaurant">RISTORANTE MARCO POLO</string>
+    <string name="wagner_details">Un omaggio al grande compositore che soggiornò a Venezia nello storico Palazzo che ospita il casinò e un privilegio incomparabile per i visitatori della casa da gioco. Il Ristorante Wagner, al piano nobile di Ca\' Vendramin Calergi, offre il piacere esclusivo di una cena raffinata. 150 posti in tre ambienti d\'eccezione: Sala Palma, Sala Gialla e Sala Rossa, impreziosite da tele di Palma il Giovane e affreschi di Gian Battista Crosato. Prelibatezze d\'ogni tempo e specialità a base di pesce, nella tipica tradizione culinaria lagunare. Eventi unici e musica dei grandi Maestri, come ulteriore delizia per gli ospiti del ristorante.</string>
+    <string name="marcopolo_details">Adatto per un pasto anche veloce propone cucina creativa e di tendenza ma anche mediterranea e della tradizione veneziana, carne e pesce, in un ambiente sofisticato e glamour.\nLa cucina è aperta dalle ore 19.00 alle 24.00.</string>
+    <string name="fromMestre">DA MESTRE</string>
+    <string name="fromCaNoghera">DA CA\' NOGHERA</string>
+    <string name="titoloServices">OGNI GIORNO</string>
+    <string name="action_boat">NAVETTA ACQUEA</string>
+    <string name="action_bus">MESTRE - CA\'NOGHERA</string>
+    <string name="action_busV">VENEZIA - CA\'NOGHERA</string>
+    <string name="fromVenezia">DA VENEZIA</string>
+    <string name="subTimetablesME">Navetta gratuita da Stazione Ferroviaria Mestre a Ca\’ Noghera</string>
+    <string name="subTimetablesVE">Navetta gratuita da Piazzale Roma a Ca\’ Noghera e viceversa</string>
+    <string name="text_for_free_boat">Navetta gratuita da Piazzale Roma a Ca\' Vendramin Calergi </string>
+    <string name="titoloBoat">NAVETTA ACQUEA</string>
+    <string name="secondPart">Dalla domenica al giovedì:\ndalle ore 14:50 alle 03:50\ncorse ogni 20 minuti</string>
+    <string name="thirdPart">Venerdì e sabato:\ndalle ore 14:50 alle 04:50\ncorse ogni 10 minuti</string>
+    <string name="fourthPart">Navetta gratuita da Ca\' Vendramin Calergi a Piazzale Roma</string>
+    <string name="fifthPart">Dalla domenica al giovedì:\ndalle ore 15:00 alle 04:00\ncorse ogni 20 minuti</string>
+    <string name="sixthPart">Venerdì e sabato:\ndalle ore 15:00 alle 05:00\ncorse ogni 10 minuti</string>
+
+
+    <string name="title_activity_show_geofence_transitions">ShowGeofenceTransitionsActivity</string>
+    <string name="title_activity_main">MainActivity</string>
+
+    <!-- Buttons strings -->
+    <string name="add_geofences">Add geofences</string>
+    <string name="remove_geofences">Remove geofences</string>
+
+    <string name="geofences_added">Geofences added</string>
+    <string name="geofences_removed">Geofences removed</string>
+
+    <!-- Error strings -->
+    <string name="not_connected">GoogleApiClient no yet connected. Try again.</string>
+    <string name="geofence_not_available">Geofence service is not available now</string>
+    <string name="geofence_too_many_geofences">Your app has registered too many geofences</string>
+    <string name="geofence_too_many_pending_intents">
+        You have provided too many PendingIntents to the addGeofences() call
+    </string>
+    <string name="unknown_geofence_error">
+        Unknown error: the Geofence service is not available now
+    </string>
+    <string name="geofence_transition_invalid_type">
+        Geofence transition error: invalid transition type %1$d
+    </string>
+
+    <!-- Transition type strings -->
+    <string name="geofence_transition_entered">Entered</string>
+    <string name="geofence_transition_exited">Exited</string>
+    <string name="unknown_geofence_transition">Unknown Transition</string>
+
+    <string name="geofence_transition_notification_text">Clicca sulla notifica per ritornare all\'App</string>
+    <string name="Notification.Title">Are we there yet?</string>
+    <string name="Notification.Text">Sei vicino al Casinò più antico del mondo!</string>
+    <string name="title_activity_free_entrance">BIGLIETTO D\'INGRESSO OMAGGIO</string>
+    <string name="free_entrance_text">ENTRY ALLOWED TO ADULTS OVER THE AGE OF EIGTHEEN, ONLY ON PRESENTATION OF A VALID PHOTO IDENTITY CARD</string>
+    <string name="time_table">SERVIZI DI TRASPORTO DEDICATI</string>
+    <string name="contactUsText">Contattaci</string>
+</resources>

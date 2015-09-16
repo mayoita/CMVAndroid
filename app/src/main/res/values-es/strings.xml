@@ -50,9 +50,9 @@
     <string name="email_nl">EMAIL</string>
     <string name="name_nl">NOMBRE</string>
     <string name="surname_nl">APELLIDO</string>
-    <string name="willing">Yes, I am willing to receive the Venice Casino Newsletter at the address shown above.</string>
-    <string name="confirm">I confirm that I am 18 years of age or older.</string>
-    <string name="allow">To allow the requested service, I consent to the processing of my personal data in accordance with Legislative Decree 196/2003.</string>
+    <string name="willing">Sí, estoy dispuesto a recibir el boletín informativo de Venice Casino en la dirección arriba indicada.</string>
+    <string name="confirm">Confirmo que soy mayor de 18 años.</string>
+    <string name="allow">Para permitir el servicio solicitado, doy mi consentimiento para el tratamiento de mis datos personales de acuerdo con el Decreto Legislativo 196/2003.</string>
     <string name="unsubscribe">DESINSCRITO</string>
     <string name="subscribe">REGISTRADO</string>
     <string name="click">HAZ CLIC EN ME GUSTA EN FACEBOOK Y OBTÉn TU ENTRADA GRATUITA!</string>
@@ -126,7 +126,7 @@
     <string name="map">MAP</string>
     <string name="info_map">INFO</string>
     <string name="directions">(haga clic en los iconos para obtener direcciones)</string>
-    <string formatted="false" name="info_text">Las dos sedes del casino de Venecia, Ca\'Vendramin Calergi y Ca' Noghera, están abiertos todos los días del año excepto el 24 y 25 de diciembre.\n
+    <string formatted="false" name="info_text">Las dos sedes del casino de Venecia, Ca\'Vendramin Calergi y Ca\' Noghera, están abiertos todos los días del año excepto el 24 y 25 de diciembre.\n
         La entrada a la sala de juegos del Casino de Venecia solo está permitida a los adultos en posesión de un documento de identidad: son documentos válidos el carnet de identidad, el carnet de conducir y el pasaporte.\n
         Tarjeta de ingreso de 5 € (sin servicios).\n
         Tarjeta de ingreso de 10 €: un ingreso 10 €.\n
@@ -186,7 +186,7 @@
     <string name="wagner_restaurant">RESTAURANTE WAGNER</string>
     <string name="marcopolo_restaurant">RESTAURANTE MARCO POLO</string>
     <string name="wagner_details">Un homenaje al gran compositor que se hospedó en Venecia en el histórico Palazzo que alberga el casino y representa un privilegio incomparable para los visitantes de la casa de juegos.\n
-        El Restaurante Wagner, situado en la planta principal del Ca'Vendramin Calergi, ofrece el placer exclusivo de disfrutar de una cena refinada.\n
+        El Restaurante Wagner, situado en la planta principal del Ca\'Vendramin Calergi, ofrece el placer exclusivo de disfrutar de una cena refinada.\n
         Posee un aforo para 150 personas distribuido en tres ambientes de excepción: Sala Palma, Sala Gialla (sala amarilla) y Sala Rossa (sala roja), decoradas con pinturas de Palma el Joven y frescos de Gian Battista Crosato.\n
         Delicias de tiempos ancestrales y especialidades a base de pescado, típicas de la tradición culinaria de la laguna.\n
         En honor a los comensales del restaurante, su velada se verá amenizada con eventos únicos y la música de grandes maestros.</string>
@@ -197,19 +197,19 @@
     <string name="fromMestre">DESDE MESTRE</string>
     <string name="fromCaNoghera">DESDE CA\' NOGHERA</string>
     <string name="titoloServices">TODOS LOS DÍAS</string>
-    <string name="action_boat">FREE BOAT</string>
+    <string name="action_boat">BARCO GRATUITO</string>
     <string name="action_bus">MESTRE - CA\'NOGHERA</string>
     <string name="action_busV">VENEZIA - CA\'NOGHERA</string>
     <string name="fromVenezia">DESDE VENEZIA</string>
     <string name="subTimetablesME">Free shuttle return railway station in Mestre/Ca\'Noghera</string>
     <string name="subTimetablesVE">Free shuttle return Piazzale Roma / Ca\'Noghera</string>
     <string name="text_for_free_boat">Free shuttle boat from Piazzale Roma\nto Ca\' Vendramin Calergi</string>
-    <string name="titoloBoat">FREE BOAT</string>
+    <string name="titoloBoat">BARCO GRATUITO</string>
     <string name="secondPart">From Sundays to Thursdays\nfrom 2:50 pm to 3:50 am\nevery 20 minutes</string>
     <string name="thirdPart">On Fridays and on Saturdays\nfrom 2:50 pm to 4:50 am\nevery 10 minutes</string>
-    <string name="fourthPart">Free shuttle boat from Ca\' Vendramin Calergi\nto Piazzale Roma</string>
-    <string name="fifthPart">From Sundays to Thursdays\nfrom 3:00 pm to 4:00 am\nevery 20 minutes</string>
-    <string name="sixthPart">On Fridays and on Saturdays\nfrom 3:00 pm to 5:00 am\nevery 10 minutes</string>
+    <string name="fourthPart">BARCO GRATUITO DESDE Ca\' Vendramin Calergi\nA Piazzale Roma</string>
+    <string name="fifthPart">DE DOMINGOS A JUEVES\nDE 3:00 PM A 4:00 AM\nCADA 20 MINUTOS</string>
+    <string name="sixthPart">LOS VIERNES Y SÁBADOS\nDE 3:00 PM A 5:00 AM\nADA 10 MINUTOS</string>
 
 
     <string name="title_activity_show_geofence_transitions">ShowGeofenceTransitionsActivity</string>

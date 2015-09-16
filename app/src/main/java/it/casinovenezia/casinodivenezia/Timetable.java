@@ -59,15 +59,6 @@ public class Timetable extends Fragment {
     TextView fifthPart;
     TextView sisthPart;
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment Timetable.
-     */
-    // TODO: Rename and change types and number of parameters
     public static Timetable newInstance(String param1, String param2) {
         Timetable fragment = new Timetable();
         Bundle args = new Bundle();

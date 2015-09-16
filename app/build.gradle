@@ -1,13 +1,13 @@
 apply plugin: 'com.android.application'
-
+apply plugin: 'com.parse'
 android {
-    compileSdkVersion 23
-    buildToolsVersion "21.1.2"
+    compileSdkVersion rootProject.ext.compileSdkVersion
+    buildToolsVersion rootProject.ext.buildToolsVersion
 
     defaultConfig {
         applicationId "it.casinovenezia.casinodivenezia"
-        minSdkVersion 16
-        targetSdkVersion 23
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
         versionName "1.0"
         multiDexEnabled true
@@ -30,7 +30,12 @@ repositories {
         url "https://jitpack.io"
     }
 }
-
+parse {
+    applicationId "yO3MBzW9liNCaiAfXWGb3NtZJ3VhXyy4Zh8rR5ck"
+    masterKey "gVNcEkDaLaMJSuAKnQVZu6UFaQ0zRwQ3TpdZYSE4"
+    // This makes it automatic. Otherwise you would have to run e.g. gradlew parseUploadSymbolsRelease.
+    uploadSymbols true
+}
 dependencies {
     compile 'com.android.support:multidex:1.0.1'
     compile fileTree(dir: 'libs', include: ['*.jar'])
@@ -49,7 +54,7 @@ dependencies {
     compile project(':ParseLoginUI')
     // Uncomment if using Facebook Login (optional Maven dependency)
     compile 'com.facebook.android:facebook-android-sdk:4.5.0'
-
+    compile fileTree(dir: 'libs', include: 'ParseCrashReporting-*.jar')
     compile files("$rootProject.projectDir/ParseLoginUI/libs/ParseFacebookUtilsV4-1.10.1.jar")
     compile files("$rootProject.projectDir/ParseLoginUI/libs/ParseTwitterUtils-1.10.1.jar")
     compile 'com.github.moondroid.coverflow:library:1.0'

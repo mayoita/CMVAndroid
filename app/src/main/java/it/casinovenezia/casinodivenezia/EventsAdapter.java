@@ -39,7 +39,7 @@ import java.util.TreeSet;
 /**
  * Created by massimomoro on 14/04/15.
  */
-public class EventsAdapter extends BaseAdapter implements TextToSpeech.OnInitListener {
+public class EventsAdapter extends BaseAdapter  {
     private final Context context;
     private LayoutInflater mInflater;
     private ProgressDialog progressDialog;
@@ -54,18 +54,9 @@ public class EventsAdapter extends BaseAdapter implements TextToSpeech.OnInitLis
     private static final SpringConfig SPRING_CONFIG = SpringConfig.fromOrigamiTensionAndFriction(10, 3);
     private static final int MAX = 300;
     private static final int MIN = 500;
-    public static TextToSpeech engine;
-    private TextToSpeech tts;
-    private ViewHolder isSpeaking;
-    @Override
-    public void onInit(int status) {
-        Log.d("Speech", "OnInit - Status [" + status + "]");
 
-        if (status == TextToSpeech.SUCCESS) {
-            Log.d("Speech", "Success!");
-//            engine.setLanguage(StarterApplication.currentLocale);
-        }
-    }
+
+    private ViewHolder isSpeaking;
 
     private void speakOut(String text, ViewHolder view) {
 
@@ -75,34 +66,34 @@ public class EventsAdapter extends BaseAdapter implements TextToSpeech.OnInitLis
         map.put(TextToSpeech.Engine.KEY_PARAM_UTTERANCE_ID, utteranceId);
         if (isSpeaking != null){
             if (view != isSpeaking) {
-                if (engine.isSpeaking()) {
-                    engine.stop();
+                if (EventsFr.engine.isSpeaking()) {
+                    EventsFr.engine.stop();
                     isSpeaking.speak.setImageResource(R.drawable.speak);
-                    engine.speak(text, TextToSpeech.QUEUE_FLUSH, map);
+                    EventsFr.engine.speak(text, TextToSpeech.QUEUE_FLUSH, map);
                     isSpeaking = view;
                     view.speak.setImageResource(R.drawable.speak_f);
                 } else{
-                    engine.speak(text, TextToSpeech.QUEUE_FLUSH, map);
+                    EventsFr.engine.speak(text, TextToSpeech.QUEUE_FLUSH, map);
                     view.speak.setImageResource(R.drawable.speak_f);
                     isSpeaking = view;
                 }
             }else{
-                if (engine.isSpeaking()) {
-                    engine.stop();
+                if (EventsFr.engine.isSpeaking()) {
+                    EventsFr.engine.stop();
                     view.speak.setImageResource(R.drawable.speak);
                 } else{
-                    engine.speak(text, TextToSpeech.QUEUE_FLUSH, map);;
+                    EventsFr.engine.speak(text, TextToSpeech.QUEUE_FLUSH, map);;
                     view.speak.setImageResource(R.drawable.speak_f);
                     isSpeaking = view;
                 }
             }
         } else {
-            if (engine.isSpeaking()) {
-                engine.stop();
+            if (EventsFr.engine.isSpeaking()) {
+                EventsFr.engine.stop();
                 view.speak.setImageResource(R.drawable.speak);
-                isSpeaking= null;
+                isSpeaking= view;
             } else{
-                engine.speak(text, TextToSpeech.QUEUE_FLUSH, map);
+                EventsFr.engine.speak(text, TextToSpeech.QUEUE_FLUSH, map);
                 view.speak.setImageResource(R.drawable.speak_f);
                 isSpeaking = view;
             }
@@ -145,25 +136,7 @@ public class EventsAdapter extends BaseAdapter implements TextToSpeech.OnInitLis
             this.context = null;
             Log.e("Event", "Context is null");
         }
-        engine = new TextToSpeech(this.context, this);
-        engine.setOnUtteranceProgressListener(new UtteranceProgressListener() {
-            @Override
-            public void onStart(String utteranceId) {
 
-            }
-
-            @Override
-            public void onDone(String utteranceId) {
-//                if (isSpeaking != null) {
-//                    isSpeaking.speak.setImageResource(R.drawable.speak);
-//                }
-            }
-
-            @Override
-            public void onError(String utteranceId) {
-
-            }
-        });
     }
 
     public void addItem(EventItem item) {

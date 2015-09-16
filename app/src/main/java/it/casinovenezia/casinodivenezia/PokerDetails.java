@@ -30,7 +30,7 @@ import java.util.ArrayList;
  * Created by massimomoro on 08/05/15.
  */
 public class PokerDetails extends Fragment implements BaseSliderView.OnSliderClickListener{
-// TODO: Rename parameter arguments, choose names that match
+// TODO: la data non è localizzata
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String TOURNAMENT_DESCRIPTION = "TournamentDescription";
     private static final String TOURNAMENT_DATE = "TournamentDate";
@@ -59,13 +59,7 @@ private int convertDpToPx(int dp, DisplayMetrics displayMetrics) {
         return Math.round(pixels);
         }
 
-/**
- * Use this factory method to create a new instance of
- * this fragment using the provided parameters.
- *
- * @return A new instance of fragment EventDetails.
- */
-// TODO: Rename and change types and number of parameters
+
 public static PokerDetails newInstance(String tournamentDescription, String tournamentDate, String tournamentName, String tournamentUrl, String startDate, ArrayList tournamtsrules, ArrayList pokerData) {
         PokerDetails fragment = new PokerDetails();
         Bundle args = new Bundle();

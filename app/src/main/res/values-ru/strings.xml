@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">"Casinò di Venezia "</string>
+    <string name="action_settings">Settings</string>
+    <string name="cavendramin">CÀ VENDRAMIN CALERGI</string>
+    <string name="apertodalle">ОТКРЫТО С xx:xx ДО xx:xx</string>
+    <string name="jackpotamount">x.xxx.xxx,xx €</string>
+    <string name="jackpot">JACKPOT</string>
+    <string name="link">ЗАПРЕЩАЕТСЯ ИГРАТЬ ЛИЦАМ, НЕ ДОСТИГНУВШИМ 18 ЛЕТ. ИГРА МОЖЕТ ВЫЗВАТЬ ПАТОЛОГИЧЕСКУЮ ЗАВИСИМОСТЬ.<a href="http://www.casinovenezia.it/en/probability-winning.html">Перейти к шансы на победу</a></string>
+    <string name="action_change"></string>
+    <string name="home_label">ГЛАВНАЯ</string>
+    <string name="events_label">МЕРОПРИЯТИЯ</string>
+    <string name="casino_label">CASINÒ</string>
+    <string name="poker_label">POKER</string>
+    <string name="tournament_label">ТУРНИРЫ</string>
+    <string name="restaurant_label">РЕСТОРАН</string>
+    <string name="map_label">КАРТА</string>
+    <string-array name="nav_drawer_items">
+        <item>ГЛАВНАЯ</item>
+        <item>ВОЙТИ</item>
+        <item>НОВОСТНАЯ РАССЫЛКА</item>
+        <item>РАСПИСАНИЕ</item>
+        <item>CASINÒ MOBILE</item>
+        <item>МОИ ПОДПИСКИ</item>
+        <item>ОТМЕТЬТЕ НАШУ СТРАНИЦУ КАК ПОНРАВИВШУЮСЯ НА FACEBOOK</item>
+        <item></item>
+    </string-array>
+    <string name="drawer_open">Open navigation drawer</string>
+    <string name="drawer_close">Close navigation drawer</string>
+    <string name="desc_list_item_icon">Item Icon</string>
+
+    <array name="nav_drawer_icons">
+        <item>@drawable/home</item>
+        <item>@drawable/login</item>
+        <item>@drawable/newsletter</item>
+        <item>@drawable/timetables</item>
+        <item>@drawable/mobile</item>
+        <item>@drawable/subscription</item>
+        <item>@drawable/like</item>
+        <item>@drawable/homeempty</item>
+    </array>
+
+    <string name="please">PLEASE LOGIN OR SIGN UP</string>
+    <string name="loginsignup">LOG IN / SIGN UP</string>
+    <string name="newsletter">НОВОСТНАЯ РАССЫЛКА</string>
+    <string name="email_nl">EMAIL</string>
+    <string name="name_nl">ИМЯ</string>
+    <string name="surname_nl">ФАМИЛИЯ</string>
+    <string name="willing">Да, я хочу получать информационную рассылку от Venice Casino по адресу, указанному выше.</string>
+    <string name="confirm">Я подтверждаю, что я достиг 18 лет.</string>
+    <string name="allow">Чтобы получить доступ к запрашиваемой услуге, я даю согласие на обработку моих персональных данных в соответствии с Законом 196/2003.</string>
+    <string name="unsubscribe">ОТПИСАТЬСЯ</string>
+    <string name="subscribe">ПОДПИСАТЬСЯ</string>
+    <string name="click">НАЖМИТЕ \"LIKE\" НА НАШЕЙ СТРАНИЦЕ В FACEBOOK И ПОЛУЧИТЕ БЕСПЛАТНЫЙ ВХОД!</string>
+    <string name="ingresso">ВХОД РАЗРЕШЕН ТОЛЬКО СОВЕРШЕННОЛЕТНИМ ПРИ НАЛИЧИИ ДЕЙСТВИТЕЛЬНОГО ДОКУМЕНТА, УДОСТОВЕРЯЮЩЕГО ЛИЧНОСТЬ.</string>
+    <string name="facebook">БЕСПЛАТНЫЙ ВХОД ДЛЯ ВАС</string>
+    <string name="mysubscription">МОИ ПОДПИСКИ</string>
+    <string name="eventsnew">НОВОСТИ О МЕРОПРИЯТИЯХ</string>
+    <string name="slotnews">НОВОСТИ СЛОТОВ</string>
+    <string name="pokernews">НОВОСТИ ПОКЕРА</string>
+    <string name="title_activity_event_details">Event</string>
+    <string name="lore">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
+        ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+        aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in
+        voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+        Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+        Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+        Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</string>
+    <string name="table_games">Настольные игры</string>
+    <string name="slot_games">Электронные игры</string>
+    <string name="online_games">Игры в режиме он-лайн</string>
+    <string name="fair">FAIR ROULETTE</string>
+    <string name="black">BLACK JACK</string>
+    <string name="texas">TEXAS HOLD\'EM POKER</string>
+    <string name="punto">PUNTO BANCO</string>
+    <string name="carribean">CARRIBEAN STUD POKER</string>
+    <string name="francese">FRENCH ROULETTE</string>
+    <string name="chemin">CHEMIN DE FER</string>
+    <string name="trente">MIDI TRENTE ET QUARANTE</string>
+    <string name="what">ПАРК СЛОТОВ</string>
+    <string name="whatnew">НОВЫЕ СЛОТЫ</string>
+    <string name="rooms">НАШИ ДЖЕКПОТЫ</string>
+    <string name="jackpot_slot">ЗАЛ СЛОТОВ</string>
+    <string name="title_activity_game_item">GAME</string>
+    <string name="close_rule">CLOSE</string>
+    <string name="title_activity_slot_details">SLOT</string>
+    <string name="text_for_game_general">Удовольствие и азарт игры в изысканной и приятной обстановке.\rЭто вариант, предлагаемый двумя казино-домами в Венеции, полностью укомплектованных и обладающих каждый своей особенной индивидуальностью.\n
+        А дома – игра в режиме онлайн..</string>
+    <string name="title_activity_poker_item">POKER</string>
+    <string name="text_for_game_general_poker">В казино-доме в Венеции можно принять участие в национальных и международных турнирах.\n
+        В доме Ca\' Vendramin Calergi, например, проводятся чемпионат Италии по игре Chemin de fer (12 партий в год), премиальные игры в Chemin de Fer (6 гала в год) и турниры игры во французскую рулетку (5 партий в год).\n
+        Что касается Ca\' Noghera, то здесь ежедневно проводятся турниры техасскому покеру Hold \'em с онлайн-квалификациями.\n
+        В обоих домах также можно принять участие в международных чемпионатах по техасскому покеру Hold \'em, которые регулярно проводятся хотя бы раз в месяц.</string>
+    <string name="torneo">TORNEO</string>
+    <string name="ora">Ora</string>
+    <string name="buy">BUY IN</string>
+    <string name="stack">STACK</string>
+    <string name="blind">BLINDS</string>
+    <string name="late">LATE</string>
+    <string name="cap">CAP</string>
+    <string name="note">NOTE</string>
+    <string name="text_for_game_general_tournament">В казино-доме в Венеции можно принять участие в национальных и международных турнирах.\n
+        В доме Ca\' Vendramin Calergi, например, проводятся чемпионат Италии по игре Chemin de fer (12 партий в год), премиальные игры в Chemin de Fer (6 гала в год) и турниры игры во французскую рулетку (5 партий в год).\n
+        Что касается Ca\' Noghera, то здесь ежедневно проводятся турниры техасскому покеру Hold \'em с онлайн-квалификациями.\n
+        В обоих домах также можно принять участие в международных чемпионатах по техасскому покеру Hold \'em, которые регулярно проводятся хотя бы раз в месяц.</string>
+    <string name="title_activity_tournament_item">ТУРНИРЫ</string>
+    <string name="telUno">+390415297230 (с 9:30 до 17:30)</string>
+    <string name="telDue">+390415297201 (с 19.30 до полуночи)</string>
+    <string name="openingtime">Часы работы:</string>
+    <string name="openingtimeTx">с 19.30 до полуночи</string>
+    <string name="closed">Закрыто:</string>
+    <string name="closedTx">24 и 25 декабря</string>
+    <string name="creditCardLabel">Кредитные карты</string>
+    <string name="fromtoMenu">from 26 to 5 march 2015</string>
+    <string name="nome_chef">VALERIO VERGINE</string>
+    <string name="title_activity_menu">MENU</string>
+    <string name="starters">Starters</string>
+    <string name="first">First Course</string>
+    <string name="second">Second Course</string>
+    <string name="dessert">Dessert</string>
+    <string name="orari">РАСПИСАНИЕ</string>
+    <string name="map">KAPTA</string>
+    <string name="info_map">INFO</string>
+    <string name="directions">(нажмите на иконки, чтобы получить направление)</string>
+    <string formatted="false" name="info_text">Два игровых дома в Венеции, казино Ca\' Vendramin Calergi и Ca\’ Noghera, открыты каждый день круглый год, за исключением 24 и 25 декабря\n
+        Вход в игровые комнаты венецианского казино разрешен только взрослым при наличии идентифицирующего документа: допускаются действительное удостоверение личности, водительские права, паспорт\n
+        Карточка входа за 5 € (без услуг).\n
+        Карточка входа за 10 €: вход за 10 € похвалы\nКарточка вххода за 10 € включает в себя услуги:\n
+        - жетон или билет ez-pay стоимостью 10,00 неконвертируемых евро с подарок для игры на игровых столах или автоматах;\n
+        - шкафчик;\n- место на парковке (в Ca\' Noghera бесплатно; в каино в Венеции - скидка 50% на место в ASM или гараже San Marco с понедельника по пятницу, кроме выходных, праздничных и предпраздничных дней);\n
+        - трансфер до материка: Казино Ca\' Noghera - площадь Рима в Венеции и наоборот.\n
+        - трансфер до материка: Местре Железная дорога - казино Ca\’ Noghera и наоборот.\n
+        - трансфер по воде: Площадь Рима - Ca \'Vendramin Calergi и наоборот.\n
+        Если вы остановились в отеле в Венеции, попросите купон на вход в подарок.\n
+        Всех клиентов, пришедшиз играть в казино на свой день рождения ожидает особенный подарок.\n
+        Ежемесячные акции и специальные мероприятия для организации посещения наших игровых домов. Подарки из коллекций бренда казино Венеции. Напитки и закуски, игра с билетом слот или жетоном для игры за столами в подарок.</string>
+    <string name="info_titolo">СПОСОБ ВХОДА</string>
+    <string name="info_activiy_text">INFO</string>
+    <string name="title_activity_sign_up">SignUpActivity</string>
+    <string name="title_activity_login">ВОЙТИ</string>
+    <string name="title_activity_signup">Sign up</string>
+    <string name="prompt_username">ИМЯ ПОЛЬЗОВАТЕЛЯ</string>
+    <string name="prompt_password">ПАРОЛЬ</string>
+    <string name="prompt_password_again">пароль еще раз</string>
+    <string name="error_intro">"Please "</string>
+    <string name="error_blank_username">введите имя пользователя</string>
+    <string name="error_blank_password">Введите пароль</string>
+    <string name="error_mismatched_passwords">введите тот же пароль дважды</string>
+    <string name="error_join">", и "</string>
+    <string name="error_end">.</string>
+    <string name="progress_login">Logging you in&#8230;</string>
+    <string name="progress_signup">Signing you up&#8230;</string>
+    <string name="signup">Sign Up</string>
+    <string name="forgot">ЗАБЫЛИ ?</string>
+    <string name="you_can">ВЫ ТАКЖЕ МОЖЕТЕ ВОЙТИ С ПОМОЩЬЮ</string>
+    <string name="parse_app_id">yO3MBzW9liNCaiAfXWGb3NtZJ3VhXyy4Zh8rR5ck</string>
+    <string name="parse_client_key">KImYuYCrJ9j3IbDI3W2KtDXCXwmfqsRDCn5Em6A9</string>
+    <string name="facebook_app_id">724548800932026</string>
+    <string-array name="my_facebook_permissions">
+        <item>public_profile</item>
+        <item>email</item>
+    </string-array>
+    <string name="profile_title_logged_in">Your are logged in as</string>
+    <string name="profile_logout_button_label">ВЫЙТИ</string>
+    <string name="profile_title_logged_out">You must be logged in to view your profile</string>
+    <string name="profile_login_button_label">ВОЙТИ</string>
+    <string name="myEmail">EMAIL</string>
+    <string name="welcome">WELCOME</string>
+    <string name="dont_have">DON\'T HAVE AN ACCOUNT YET?</string>
+    <string name="login">ВОЙТИ</string>
+    <string name="todayIsClosed">Сегодня закрыто</string>
+    <string name="todayOpen">ОТКРЫТО С 11:00 ДО 3:15</string>
+    <string name="todayOpenVenice">ОТКРЫТО С 11:00 ДО 2:45</string>
+    <string name="canogheratime1">ОТКРЫТО С 11:00 ДО 3:45</string>
+    <string name="canogheratime2">ОТКРЫТО С 11:00 ДО 3:15</string>
+    <string name="veneziatime1">ОТКРЫТО С 11:00 ДО 3:15</string>
+    <string name="veneziatime2">ОТКРЫТО С 11:00 ДО 2:45</string>
+    <string name="text_for_event_general">Live music, concerts, disco club, performances, entertainment, bar area and refreshments ranging from Happy Hours to gala dinners.\n\nA mix of games and entertainment for special evenings of fun devoted to teaching the game.</string>
+    <string name="lore_news">Our offering is under constant evolution to guarantee the best in modern technology, in our constant desire to offer the best customer satisfaction.</string>
+    <string name="title1">God of War Ascension</string>
+    <string name="title2">Assassin\'s Creed III</string>
+    <string name="title3">Hitman Absolution</string>
+    <string name="title4">Dishonored</string>
+    <string name="wagner_restaurant">РЕСТОРАН WAGNER</string>
+    <string name="marcopolo_restaurant">РЕСТОРАН MARCO POLO</string>
+    <string name="wagner_details">Дань великому композитору, который проживал в Венеции в историческом здании, в котором находится казино и несравненная привилегия для посетителей игорного дома.\n
+        Ресторан Wagner на главном этаже Ca\' Vendramin Calergi предлагает получить эксклюзивное удовольствие от изысканного ужина.\n
+        150 мест в трех превосходных комнатах: зал Пальма, Желтый и Красный залы, украшенные картинами Пальмы Младшего и фресками Джана Баттисты Крозато.\n
+        Деликатесы различных эпох и блюда из морепродуктов в интерпретации типичном традиционной кухни лагуны.\n
+        Уникальные мероприятия и музыка великих маэстро как дополнительный праздник для гостей ресторана.</string>
+    <string name="marcopolo_details">Подходит и для быстрого перекуса. Предлагает своим гостям оригинальные и популярные блюда, а также блюда средиземноморской и традиционной венецианской кухни, мясные и рыбные блюда в изысканной и гламурной обстановке.\nКухня работает с 19.00 до 24.00.\n\n
+        ПРОШУТТЕРИЯ\n\nПродукты высокого качества и отборные вина для невероятно вкусного обеденного перерыва\n\n
+        ПИЦЦЕРИЯ\n\nВычурные лакомства на любой вкус.</string>
+    <string name="fromMestre">ИЗ МЕСТРЕ</string>
+    <string name="fromCaNoghera">ИЗ CA\' NOGHERA</string>
+    <string name="titoloServices">КАЖДЫЙ ДЕНЬ</string>
+    <string name="action_boat">БЕСПЛАТНАЯ ЛОДКА</string>
+    <string name="action_bus">MESTRE - CA\'NOGHERA</string>
+    <string name="action_busV">VENEZIA - CA\'NOGHERA</string>
+    <string name="fromVenezia">ИЗ ВЕНЕЦИИ</string>
+    <string name="subTimetablesME">трансфер до материка: Казино Ca\' Noghera - площадь Рима в Венеции и наоборот</string>
+    <string name="subTimetablesVE">трансфер до материка: Местре Железная дорога - казино Ca\’ Noghera и наоборот</string>
+    <string name="text_for_free_boat">трансфер по воде: Площадь Рима - Ca \'Vendramin Calergi</string>
+    <string name="titoloBoat">БЕСПЛАТНАЯ ЛОДКА</string>
+    <string name="secondPart">С ВОСКРЕСЕНИЯ ПО ЧЕТВЕРГ\nС 14:50 ДО 3:50\nКАЖДЫЕ 20 МИНУТ</string>
+    <string name="thirdPart">ПО ПЯТНИЦАМ И СУББОТАМ\nС 14:50 ДО 4:50\nКАЖДЫЕ 10 МИНУТ</string>
+    <string name="fourthPart">трансфер по воде: Ca \'Vendramin Calergi - Площадь Рима</string>
+    <string name="fifthPart">С ВОСКРЕСЕНИЯ ПО ЧЕТВЕРГ\nС 15:00 ДО 4:00\nКАЖДЫЕ 20 МИНУТ</string>
+    <string name="sixthPart">ПО ПЯТНИЦАМ И СУББОТАМ\nС 15:00 ДО 5:00\nКАЖДЫЕ 10 МИНУТ</string>
+
+
+    <string name="title_activity_show_geofence_transitions">ShowGeofenceTransitionsActivity</string>
+    <string name="title_activity_main">MainActivity</string>
+
+    <!-- Buttons strings -->
+    <string name="add_geofences">Add geofences</string>
+    <string name="remove_geofences">Remove geofences</string>
+
+    <string name="geofences_added">Geofences added</string>
+    <string name="geofences_removed">Geofences removed</string>
+
+    <!-- Error strings -->
+    <string name="not_connected">GoogleApiClient no yet connected. Try again.</string>
+    <string name="geofence_not_available">Geofence service is not available now</string>
+    <string name="geofence_too_many_geofences">Your app has registered too many geofences</string>
+    <string name="geofence_too_many_pending_intents">
+        You have provided too many PendingIntents to the addGeofences() call
+    </string>
+    <string name="unknown_geofence_error">
+        Unknown error: the Geofence service is not available now
+    </string>
+    <string name="geofence_transition_invalid_type">
+        Geofence transition error: invalid transition type %1$d
+    </string>
+
+    <!-- Transition type strings -->
+    <string name="geofence_transition_entered">Entered</string>
+    <string name="geofence_transition_exited">Exited</string>
+    <string name="unknown_geofence_transition">Unknown Transition</string>
+
+    <string name="geofence_transition_notification_text">Click notification to return to app</string>
+    <string name="Notification.Text">Вы всего в нескольких шагах от старейшего казино в мире!</string>
+    <string name="title_activity_free_entrance">ВХОД СВОБОДНЫЙ</string>
+    <string name="free_entrance_text">ВХОД РАЗРЕШЕН ТОЛЬКО СОВЕРШЕННОЛЕТНИМ ПРИ НАЛИЧИИ ДЕЙСТВИТЕЛЬНОГО ДОКУМЕНТА, УДОСТОВЕРЯЮЩЕГО ЛИЧНОСТЬ</string>
+    <string name="time_table">РАСПИСАНИЕ</string>
+    <string name="contactUsText">Свяжитесь с нами</string>
+    <string name="like_us">ПОЖАЛУЙСТА, ОТМЕТЬТЕ НАШУ СТРАНИЦУ КАК ПОНРАВИВШУЮСЯ НА FACEBOOK!</string>
+</resources>

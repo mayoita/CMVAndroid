@@ -26,7 +26,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/diciottopiu"
         android:text="@string/link"
-        android:textSize="8sp"
+        android:textSize="12sp"
         android:textColor="@color/white"
         android:layout_toRightOf="@+id/diciottoetichetta"
         android:layout_alignBottom="@+id/diciottoetichetta"
@@ -37,18 +37,21 @@
         android:layout_height="wrap_content"
         android:text="@string/wagner_restaurant"
         android:id="@+id/textTestaurantTitle"
-        android:textSize="20sp"
+        android:textSize="40sp"
         android:textColor="@color/white"
         android:layout_marginLeft="7dp"
         android:nestedScrollingEnabled="false"
-        android:layout_marginTop="25dp" />
+        android:layout_marginTop="25dp"
+        android:layout_centerHorizontal="true" />
     <ScrollView
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:fillViewport="false"
-        android:layout_marginTop="50dp"
-        android:id="@+id/myScrollEvent">
+        android:layout_marginTop="10dp"
+        android:id="@+id/myScrollEvent"
+        android:layout_alignParentBottom="true"
+        android:layout_below="@+id/textTestaurantTitle">
         <FrameLayout
             android:id="@+id/event_details"
             android:layout_width="match_parent"
@@ -73,10 +76,15 @@
                 <com.daimajia.slider.library.SliderLayout
                     android:id="@+id/slider"
                     android:layout_width="match_parent"
-                    android:layout_height="400dp"
+                    android:layout_height="match_parent"
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
-                    android:layout_marginTop="13dp" />
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_alignTop="@+id/imageView7"
+                    android:layout_alignBottom="@+id/imageView7"
+                    android:layout_alignLeft="@+id/imageView7"
+                    android:layout_alignRight="@+id/imageView7" />
 
 
                 <ImageButton
@@ -112,14 +120,15 @@
                     android:orientation="vertical"
                     android:layout_below="@+id/imageView7"
                     android:layout_alignLeft="@+id/slider"
-                    android:layout_alignStart="@+id/slider">
+                    android:layout_alignStart="@+id/slider"
+                    android:weightSum="1">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/wagner_restaurant"
                         android:id="@+id/textView8"
-                        android:textSize="18sp"
+                        android:textSize="25dp"
                         android:textColor="@color/yellow_brand"
                         android:layout_marginLeft="3dp"
                         android:nestedScrollingEnabled="false"
@@ -134,7 +143,8 @@
                         android:textColor="@color/white"
                         android:layout_marginLeft="3dp"
                         android:layout_marginRight="3dp"
-                        android:layout_marginTop="10dp" />
+                        android:layout_marginTop="10dp"
+                        android:layout_weight="3.09" />
                 </LinearLayout>
 
 

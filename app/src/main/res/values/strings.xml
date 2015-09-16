@@ -2,7 +2,6 @@
 <resources>
 
     <string name="app_name">"Casinò di Venezia "</string>
-    <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
     <string name="cavendramin">CÀ VENDRAMIN CALERGI</string>
     <string name="apertodalle">OPEN FROM xx:x TO xx:xx</string>
@@ -42,8 +41,6 @@
         <item>@drawable/homeempty</item>
     </array>
 
-<!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="please">PLEASE LOGIN OR SIGN UP</string>
     <string name="loginsignup">LOG IN / SIGN UP</string>
     <string name="newsletter">NEWSLETTER</string>
@@ -132,7 +129,7 @@
         Casinò di Ca\' Noghera - Venice Piazzale Roma and vice versa;\n- road shuttle service: Mestre Railway Station –Ca\’ Noghera Casino and vice versa;\n-
         waterways shuttle service: Piazzale Roma - Ca\' Vendramin Calergi and vice versa.\n\nIf you are staying in a hotel in Venice why not ask for a Free Entry Coupon.\n\n
         There\’s a gift waiting for everyone who comes to gamble at the Casino on their birthday.\n\nThere are lots of different promotions and special occasions every month for organising a
-        visit to our two venues. Gifts from the Casinò di Venezia\’s own branded collections. An offer of drinks and snacks, gambling benefits with slot machine tickets or gaming table chips,
+        visit to our two venues. Gifts from the Casinò di Venezia\’s own branded collections. An offer of drinks &amp; snacks, gambling benefits with slot machine tickets or gaming table chips,
         free.\nFind out about the promotion of the month.\n\n\nMETHODS OF PAYMENT\n\nFor the purchase of means of gambling, we accept:\n- payment in Italian or foreign currency, up to the maximum
         limit prescribed by current legislation (during the gambling at tables opening times)\n- payment with the following forms of credit cards: Pagobancomat Cash card; Visa; MasterCard, Maestro,
         China Union Pay.\nPayment of gambling credits or winnings can be made in cash, within the limits prescribed by law, with non-transferable cheques made payable to the client or in the form
@@ -250,10 +247,10 @@
     <string name="unknown_geofence_transition">Unknown Transition</string>
 
     <string name="geofence_transition_notification_text">Click notification to return to app</string>
-    <string name="Notification.Title">Are we there yet?</string>
     <string name="Notification.Text">You are close to the oldest Casinò of the world!</string>
     <string name="title_activity_free_entrance">FREE ENTRY TICKET</string>
     <string name="free_entrance_text">ENTRY ALLOWED TO ADULTS OVER THE AGE OF EIGTHEEN, ONLY ON PRESENTATION OF A VALID PHOTO IDENTITY CARD</string>
     <string name="time_table">TIMETABLES</string>
     <string name="contactUsText">Contact Us</string>
+    <string name="like_us">Please \"LIKE\" us on Facebook!</string>
 </resources>

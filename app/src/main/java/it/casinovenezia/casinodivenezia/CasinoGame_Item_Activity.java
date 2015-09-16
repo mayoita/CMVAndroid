@@ -258,7 +258,7 @@ public class CasinoGame_Item_Activity extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
-                // TODO Auto-generated method stub
+
                 popupWindow.dismiss();
             }});
 

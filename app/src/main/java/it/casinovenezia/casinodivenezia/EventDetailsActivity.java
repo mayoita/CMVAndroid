@@ -141,10 +141,7 @@ public class EventDetailsActivity extends AppCompatActivity implements BaseSlide
 
                     public void done(ParseObject object,
                                      ParseException e) {
-                        // TODO Auto-generated method stub
 
-                        // Locate the column named "ImageName" and set
-                        // the string
                         ParseFile image1F = (ParseFile) object
                                 .get("ImageEvent1");
                         ParseFile image2F = (ParseFile) object

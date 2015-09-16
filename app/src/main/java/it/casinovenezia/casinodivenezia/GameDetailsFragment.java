@@ -34,8 +34,6 @@ public class GameDetailsFragment extends Fragment {
 
     private static final String MY_ARRAY = "theDataArray";
 
-
-    // TODO: Rename and change types of parameters
     private String mParam1;
     private TextView myTexttitle;
     private DisplayMetrics dm;
@@ -69,13 +67,6 @@ public class GameDetailsFragment extends Fragment {
         return Math.round(pixels);
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @return A new instance of fragment EventDetails.
-     */
-    // TODO: Rename and change types and number of parameters
     public static GameDetailsFragment newInstance(String myArray) {
         GameDetailsFragment fragment = new GameDetailsFragment();
         Bundle args = new Bundle();
@@ -273,7 +264,6 @@ public class GameDetailsFragment extends Fragment {
 
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
         if (mListener != null) {
             mListener.onFragmentInteraction(uri);
@@ -296,7 +286,6 @@ public class GameDetailsFragment extends Fragment {
     public interface OnEventsInteractionListener {
         void onListItemClick(ListView l, View v, int position, long id);
 
-        // TODO: Update argument type and name
         public void onFragmentInteraction(Uri uri);
     }
     public void openPopWindow(View v) {
@@ -343,7 +332,6 @@ public class GameDetailsFragment extends Fragment {
 
             @Override
             public void onClick(View v) {
-                // TODO Auto-generated method stub
                 popupWindow.dismiss();
             }});
 

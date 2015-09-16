@@ -42,8 +42,6 @@
         <item>@drawable/homeempty</item>
     </array>
 
-<!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="please">ESEGUI IL LOGIN O REGISTRATI</string>
     <string name="loginsignup">LOG IN / REGISTRAZIONE</string>
     <string name="newsletter">NEWSLETTER</string>
@@ -100,7 +98,7 @@
     <string name="late">LATE</string>
     <string name="cap">CAP</string>
     <string name="note">NOTE</string>
-    <string name="text_for_game_general_tournament">TAl Casinò di Venezia è possibile partecipare a competizioni nazionali e internazionali.\nNella sede di Ca\' Vendramin Calergi, ad esempio, si svolgono il Campionato Italiano di Chemin de fer (12 manches all’anno), gli incontri a premi di Chemin de Fer (6 galà all’anno) e i tornei di Roulette Francese (5 manches all’anno).\n\nA Ca\' Noghera invece, si giocano ogni giorno tornei di Texas Hold \'em Poker con qualificazioni online.\nIn entrambe le sedi inoltre, è possibile partecipare ai campionati internazionali di Texas Hold \'em Poker che si svolgono regolarmente almeno una volta al mese.</string>
+    <string name="text_for_game_general_tournament">Al Casinò di Venezia è possibile partecipare a competizioni nazionali e internazionali.\nNella sede di Ca\' Vendramin Calergi, ad esempio, si svolgono il Campionato Italiano di Chemin de fer (12 manches all’anno), gli incontri a premi di Chemin de Fer (6 galà all’anno) e i tornei di Roulette Francese (5 manches all’anno).\n\nA Ca\' Noghera invece, si giocano ogni giorno tornei di Texas Hold \'em Poker con qualificazioni online.\nIn entrambe le sedi inoltre, è possibile partecipare ai campionati internazionali di Texas Hold \'em Poker che si svolgono regolarmente almeno una volta al mese.</string>
     <string name="title_activity_tournament_item">TORNEO</string>
     <string name="telUno">+390415297230 (ore 9.30 - 17.30)</string>
     <string name="telDue">+390415297201 (19.30 - 24.00)</string>
@@ -221,7 +219,8 @@ Per gli acquisti di mezzi di gioco si accettano:\n- pagamenti in valuta italiana
     <string name="Notification.Title">Are we there yet?</string>
     <string name="Notification.Text">Sei vicino al Casinò più antico del mondo!</string>
     <string name="title_activity_free_entrance">BIGLIETTO D\'INGRESSO OMAGGIO</string>
-    <string name="free_entrance_text">ENTRY ALLOWED TO ADULTS OVER THE AGE OF EIGTHEEN, ONLY ON PRESENTATION OF A VALID PHOTO IDENTITY CARD</string>
+    <string name="free_entrance_text">INGRESSO CONSENTITO AI SOLI MAGGIORENNI SU PRESENTAZIONE DI DOCUMENTO D\'IDENTITA VALIDO.</string>
     <string name="time_table">SERVIZI DI TRASPORTO DEDICATI</string>
     <string name="contactUsText">Contattaci</string>
+    <string name="like_us">Clicca \"LIKE\" su Facebook!</string>
 </resources>

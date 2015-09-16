@@ -6,6 +6,8 @@ import android.os.Build;
 import com.facebook.FacebookSdk;
 import com.parse.Parse;
 import com.parse.ParseACL;
+import com.parse.ParseAnalytics;
+import com.parse.ParseCrashReporting;
 import com.parse.ParseFacebookUtils;
 import com.parse.ParseInstallation;
 import com.parse.ParseTwitterUtils;
@@ -27,8 +29,10 @@ public static Locale currentLocale;
         currentLocale=getResources().getConfiguration().locale;
         FacebookSdk.sdkInitialize(this);
         Parse.enableLocalDatastore(this);
-
+        // Enable Crash Reporting
+        ParseCrashReporting.enable(this);
         Parse.initialize(this, "yO3MBzW9liNCaiAfXWGb3NtZJ3VhXyy4Zh8rR5ck", "KImYuYCrJ9j3IbDI3W2KtDXCXwmfqsRDCn5Em6A9");
+
         ParseInstallation.getCurrentInstallation().saveInBackground();
         ParseFacebookUtils.initialize(this);
 
@@ -45,5 +49,6 @@ public static Locale currentLocale;
                 HELPSHIFT_API_KEY,
                 HELPSHIFT_DOMAIN,
                 HELPSHIFT_APP_ID);
+
     }
 }

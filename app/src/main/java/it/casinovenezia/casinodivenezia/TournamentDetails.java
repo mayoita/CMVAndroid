@@ -30,8 +30,7 @@ import it.casinovenezia.TournamentDayAdapter;
  * Created by massimomoro on 13/05/15.
  */
 public class TournamentDetails extends Fragment implements BaseSliderView.OnSliderClickListener{
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+
     private static final String TOURNAMENT_DESCRIPTION = "TournamentDescription";
     private static final String TOURNAMENT_NAME = "TournamentName";
     private static final String TOURNAMENT_URL = "TournamentURL";
@@ -56,13 +55,7 @@ private int convertDpToPx(int dp,DisplayMetrics displayMetrics){
         return Math.round(pixels);
         }
 
-/**
- * Use this factory method to create a new instance of
- * this fragment using the provided parameters.
- *
- * @return A new instance of fragment EventDetails.
- */
-// TODO: Rename and change types and number of parameters
+
 public static TournamentDetails newInstance(String tournamentDescription, String tournamentName, String tournamentUrl, String startDate, ArrayList tournamtsrules, ArrayList tournamentEvent){
         TournamentDetails fragment=new TournamentDetails();
         Bundle args=new Bundle();
@@ -211,7 +204,6 @@ public void onActivityCreated(@Nullable Bundle savedInstanceState){
 
 }
 
-// TODO: Rename method, update argument and hook method into UI event
 public void onButtonPressed(Uri uri){
         if(mListener!=null){
         mListener.onFragmentInteraction(uri);
@@ -237,7 +229,6 @@ public void onSliderClick(BaseSliderView baseSliderView){
 public interface OnEventsInteractionListener {
     void onListItemClick(ListView l, View v, int position, long id);
 
-    // TODO: Update argument type and name
     public void onFragmentInteraction(Uri uri);
 }
 }

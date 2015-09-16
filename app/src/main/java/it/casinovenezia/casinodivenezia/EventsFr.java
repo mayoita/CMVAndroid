@@ -7,6 +7,8 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Parcelable;
+import android.speech.tts.TextToSpeech;
+import android.speech.tts.UtteranceProgressListener;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -39,7 +41,7 @@ import java.util.Locale;
 /**
  * Created by massimomoro on 25/03/15.
  */
-public class EventsFr extends Fragment {
+public class EventsFr extends Fragment implements TextToSpeech.OnInitListener{
 
     public static final String EXTRA_MESSAGE = "EXTRA_MESSAGE";
     private ListView listView;
@@ -47,11 +49,22 @@ public class EventsFr extends Fragment {
     private EventsAdapter mAdapter;
     private List<EventItem> eventitemlist = null;
     private List<EventItem> myEventitemlist = null;
+    public static TextToSpeech engine;
 
     ProgressDialog mProgressDialog;
 
     boolean mDualPane;
     int mCurCheckPosition = 0;
+
+    @Override
+    public void onInit(int status) {
+        Log.d("Speech", "OnInit - Status [" + status + "]");
+
+        if (status == TextToSpeech.SUCCESS) {
+            Log.d("Speech", "Success!");
+            engine.setLanguage(StarterApplication.currentLocale);
+        }
+    }
 
 
     /** An interface for defining the callback method */
@@ -205,8 +218,8 @@ public class EventsFr extends Fragment {
 
 
     public void setOffice () {
-        if (EventsAdapter.engine != null) {
-            EventsAdapter.engine.stop();
+        if (EventsFr.engine != null) {
+            EventsFr.engine.stop();
         }
         if (Venue.currentVenue == 1) {
 
@@ -312,11 +325,12 @@ public class EventsFr extends Fragment {
 
                         eventitemlist.add(map);
 
-                        if(isAdded()) {
-                            setOffice();
-                        } else {
-                            Log.e("isAdded", "EventsFr not added");
-                        }
+
+                    }
+                    if(isAdded()) {
+                        setOffice();
+                    } else {
+                        Log.e("isAdded", "EventsFr not added");
                     }
                 } else {
                     Log.d("events", "Error: " + e.getMessage());
@@ -328,6 +342,32 @@ public class EventsFr extends Fragment {
     @Override
     public void onStop() {
         super.onStop();
-        EventsAdapter.engine.shutdown();
+      engine.shutdown();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (mAdapter != null)
+        mAdapter.notifyDataSetChanged();
+        engine = new TextToSpeech(getContext(), this);
+        engine.setOnUtteranceProgressListener(new UtteranceProgressListener() {
+            @Override
+            public void onStart(String utteranceId) {
+
+            }
+
+            @Override
+            public void onDone(String utteranceId) {
+//                if (isSpeaking != null) {
+//                    isSpeaking.speak.setImageResource(R.drawable.speak);
+//                }
+            }
+
+            @Override
+            public void onError(String utteranceId) {
+
+            }
+        });
     }
 }

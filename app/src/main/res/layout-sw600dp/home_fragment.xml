@@ -37,11 +37,13 @@
         android:text="New Button"
         android:id="@+id/helpshift"
         android:layout_alignParentRight="true"
-        android:src="@drawable/helpshifticon"
         android:background="@null"
         android:paddingRight="2dp"
         android:paddingTop="2dp"
-        android:layout_alignBottom="@+id/homebanner" />
+        android:layout_alignBottom="@+id/homebanner"
+        android:src="@drawable/helpshifticon"
+        android:layout_marginBottom="5dp"
+        android:layout_marginRight="3dp" />
 
     <ImageView
 

@@ -2,6 +2,7 @@ package it.casinovenezia.casinodivenezia;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
@@ -152,6 +153,7 @@ public class Restaurant extends Fragment implements View.OnClickListener {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        final boolean tabletSize = getResources().getBoolean(R.bool.isTablet);
 
         myView = getView();
         Display display = getActivity().getWindowManager().getDefaultDisplay();
@@ -177,8 +179,10 @@ public class Restaurant extends Fragment implements View.OnClickListener {
 
                     fp.setMargins(convertDpToPx(7,dm) ,convertDpToPx(5,dm), convertDpToPx(7,dm), 0);
                     sp.setMargins(convertDpToPx(10,dm) ,convertDpToPx(8,dm), convertDpToPx(10,dm), 0);
-                    imageView.setLayoutParams(fp);
-                    mySlider.setLayoutParams(sp);
+                    if(!tabletSize) {
+                        imageView.setLayoutParams(fp);
+                        mySlider.setLayoutParams(sp);
+                    }
 
                     setSlider();
                     //mySlider.setPresetTransformer(SliderLayout.Transformer.Fade);
@@ -245,7 +249,7 @@ public class Restaurant extends Fragment implements View.OnClickListener {
 
             @Override
             public void onClick(View v) {
-                // TODO Auto-generated method stub
+
                 popupWindow.dismiss();
             }});
 
@@ -290,7 +294,6 @@ public class Restaurant extends Fragment implements View.OnClickListener {
 //
 //            @Override
 //            public void onClick(View v) {
-//                // TODO Auto-generated method stub
 //                popupWindow.dismiss();
 //            }});
 //
@@ -320,7 +323,7 @@ public class Restaurant extends Fragment implements View.OnClickListener {
      * >Communicating with Other Fragments</a> for more information.
      */
     public interface OnRestaurantInteractionListener {
-        // TODO: Update argument type and name
+
         public void onFragmentInteraction(Uri uri);
     }
     public void setOffice () {

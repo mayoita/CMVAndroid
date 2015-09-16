@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black"
+    android:id="@+id/myLay"
+    android:clickable="false">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="18+"
+        android:id="@+id/diciottoetichetta"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        android:paddingLeft="2dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/diciottopiu"
+        android:text="@string/link"
+        android:textSize="12sp"
+        android:textColor="@color/white"
+        android:layout_toRightOf="@+id/diciottoetichetta"
+        android:layout_alignBottom="@+id/diciottoetichetta"
+        android:paddingRight="2dp"
+        android:layout_alignParentEnd="true" />
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textSize="40sp"
+        android:text="MENU"
+        android:textColor="@color/white"
+        android:textIsSelectable="true"
+        android:textAlignment="center"
+        android:gravity="center"
+        android:layout_weight="1"
+        android:layout_below="@+id/diciottoetichetta"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="5dp"
+        android:id="@+id/textView26" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="210dp"
+        android:layout_below="@+id/textView26"
+        android:layout_alignEnd="@+id/diciottopiu"
+        android:layout_marginTop="5dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="false"
+        android:layout_alignParentLeft="false"
+        android:background="@drawable/paper_texture">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="400dp"
+            android:id="@+id/imageView10"
+            android:layout_marginTop="0dp"
+            android:layout_marginLeft="3dp"
+            android:layout_marginRight="3dp"
+            android:background="@color/white" />
+
+        <com.parse.ParseImageView
+            android:layout_width="wrap_content"
+            android:layout_height="394dp"
+            android:id="@+id/imageView9"
+            android:src="@drawable/default_event"
+            android:scaleType="fitXY"
+            android:layout_marginTop="3dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_alignRight="@+id/imageView10"
+            android:layout_alignLeft="@+id/imageView10" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/fromtoMenu"
+            android:id="@+id/textView23"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:layout_marginLeft="5dp"
+            android:layout_below="@+id/imageView9"
+            android:layout_marginTop="5dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="CHEF: "
+            android:id="@+id/textView24"
+            android:layout_alignTop="@+id/imageView10"
+            android:layout_alignLeft="@+id/imageView10"
+            android:layout_alignStart="@+id/imageView10"
+            android:layout_marginLeft="5dp"
+            android:textColor="@color/white"
+            android:layout_marginTop="5dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/nome_chef"
+            android:id="@+id/textView25"
+            android:layout_alignTop="@+id/imageView10"
+            android:layout_toRightOf="@+id/textView24"
+            android:layout_toEndOf="@+id/textView24"
+            android:textColor="@color/white"
+            android:layout_marginTop="5dp" />
+
+        <ListView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="4"
+            android:id="@+id/listViewMenu"
+            android:layout_below="@+id/textView23"
+            android:layout_marginLeft="3dp"
+            android:layout_marginRight="3dp" />
+    </RelativeLayout>
+
+
+</RelativeLayout>

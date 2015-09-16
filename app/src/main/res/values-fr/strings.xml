@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">"Casinò di Venezia "</string>
+    <string name="action_settings">Settings</string>
+    <string name="cavendramin">CÀ VENDRAMIN CALERGI</string>
+    <string name="apertodalle">OUVERT DE xxhxx À xxhxx</string>
+    <string name="jackpotamount">x.xxx.xxx,xx €</string>
+    <string name="jackpot">JACKPOT</string>
+    <string name="link">JEUX INTERDITS AU MOINS DE 18 ANS. LE JEU PEUT ENGENDRER UNE DÉPENDANCE PATHOLOGIQUE.<a href="http://www.casinovenezia.it/en/probability-winning.html">ALLER À LA CHANCES DE GAGNER.</a></string>
+    <string name="action_change"></string>
+    <string name="home_label">ACCUEIL</string>
+    <string name="events_label">ÉVÈNEMENTS</string>
+    <string name="casino_label">CASINÒ</string>
+    <string name="poker_label">POKER</string>
+    <string name="tournament_label">TOURNOIS</string>
+    <string name="restaurant_label">RESTAURANT</string>
+    <string name="map_label">MAP</string>
+    <string-array name="nav_drawer_items">
+        <item>ACCUEIL</item>
+        <item>SE CONNECTER</item>
+        <item>BULLETIN D\'INFORMATIONS</item>
+        <item>TIMETABLES</item>
+        <item>CASINÒ MOBILE</item>
+        <item>MES ABONNEMENTS</item>
+        <item>CLIQUEZ SUR LIKE SUR FACEBOOK</item>
+        <item></item>
+    </string-array>
+    <string name="drawer_open">Open navigation drawer</string>
+    <string name="drawer_close">Close navigation drawer</string>
+    <string name="desc_list_item_icon">Item Icon</string>
+
+    <array name="nav_drawer_icons">
+        <item>@drawable/home</item>
+        <item>@drawable/login</item>
+        <item>@drawable/newsletter</item>
+        <item>@drawable/timetables</item>
+        <item>@drawable/mobile</item>
+        <item>@drawable/subscription</item>
+        <item>@drawable/like</item>
+        <item>@drawable/homeempty</item>
+    </array>
+
+    <string name="please">PLEASE LOGIN OR SIGN UP</string>
+    <string name="loginsignup">LOG IN / SIGN UP</string>
+    <string name="newsletter">BULLETIN D\'INFORMATION</string>
+    <string name="email_nl">E-MAIL</string>
+    <string name="name_nl">PRÉNOM</string>
+    <string name="surname_nl">NOM DE FAMILLE</string>
+    <string name="willing">Oui, je désire recevoir le bulletin d\'information du Casino de Venise à l\'adresse indiquée ci-dessus.</string>
+    <string name="confirm">Je confirme que j\'ai au moins 18 ans.</string>
+    <string name="allow">Afin d\'autoriser le service demandé, je consens au traitement de mes données personnelles conformément au décret législatif 196/2003.</string>
+    <string name="unsubscribe">SE DESABONNER</string>
+    <string name="subscribe">S\'ABBONER</string>
+    <string name="click">CLIQUEZ SUR LIKE SUR FACEBOOK ET OBTENEZ VOTRE ENTRÉE GRATUITE!</string>
+    <string name="ingresso">ENTRÉE AUTORISÉE UNIQUEMENT AUX MAJEURS SUR PRÉSENTATION D\'UNE PIÈCE D\'INDENTITÉ VALIDE.</string>
+    <string name="facebook">VOTRE ENTRÉE GRATUITE</string>
+    <string name="mysubscription">MES ABONNEMENTS</string>
+    <string name="eventsnew">NOUVELLES DES ÉVÈNEMENTS</string>
+    <string name="slotnews">NOUVELLES SUR LES MACHINES À SOUS</string>
+    <string name="pokernews">NOUVELLES DU POKER</string>
+    <string name="title_activity_event_details">ÈVÈNEMENT</string>
+    <string name="lore">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
+        ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+        aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in
+        voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+        Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+        Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+        Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</string>
+    <string name="table_games">JEUX DE TABLE</string>
+    <string name="slot_games">JEUX ÉLECTRONIQUES</string>
+    <string name="online_games">JEUX EN LIGNE</string>
+    <string name="fair">FAIR ROULETTE</string>
+    <string name="black">BLACK JACK</string>
+    <string name="texas">TEXAS HOLD\'EM POKER</string>
+    <string name="punto">PUNTO BANCO</string>
+    <string name="carribean">CARRIBEAN STUD POKER</string>
+    <string name="francese">FRENCH ROULETTE</string>
+    <string name="chemin">CHEMIN DE FER</string>
+    <string name="trente">MIDI TRENTE ET QUARANTE</string>
+    <string name="what">LE PARC DE MACHINES À SOUS</string>
+    <string name="whatnew">LES NOUVELLES  MACHINES À SOUS</string>
+    <string name="rooms">SLOT MACHINE ROOMS</string>
+    <string name="jackpot_slot">NOS GROS LOTS</string>
+    <string name="title_activity_game_item">JEUX</string>
+    <string name="close_rule">FERMÉ</string>
+    <string name="title_activity_slot_details">JEUX ÉLECTRONIQUES</string>
+    <string name="text_for_game_general">Vivre le plaisir du jeu et du défi dans un décor raffiné et agréable.\n
+        Voilà l\'opportunité qu\'offrent les deux sites du Casino de Venise, chacun étant complet, mais avec son caractère original.\n
+        Et son propre jeu en ligne.</string>
+    <string name="title_activity_poker_item">POKER</string>
+    <string name="text_for_game_general_poker">Au Casino de Venise, vous pouvez participer à des compétitions nationales et internationales.\n
+        Au palais Ca\' Vendramin Calergi, par exemple, se déroule le Championnat italien de Chemin de fer (12 manches par an), les rencontres avec prix du Chemin de Fer (6 galas par an) et les tournois de Roulette française (5 manches par an).\n
+        Au Ca\' Noghera sont organisés chaque année des tournois de Texas Hold \'em Poker avec des qualifications en ligne.\n
+        Par ailleurs, il est possible de participer dans les deux endroits aux championnats internationaux de Texas Hold \'em Poker, qui ont lieu au moins une fois par mois.</string>
+    <string name="torneo">TORNEO</string>
+    <string name="ora">Ora</string>
+    <string name="buy">BUY IN</string>
+    <string name="stack">STACK</string>
+    <string name="blind">BLINDS</string>
+    <string name="late">LATE</string>
+    <string name="cap">CAP</string>
+    <string name="note">NOTE</string>
+    <string name="text_for_game_general_tournament">Au Casino de Venise, vous pouvez participer à des compétitions nationales et internationales.\n
+        Au palais Ca\' Vendramin Calergi, par exemple, se déroule le Championnat italien de Chemin de fer (12 manches par an), les rencontres avec prix du Chemin de Fer (6 galas par an) et les tournois de Roulette française (5 manches par an).\n
+        Au Ca\' Noghera sont organisés chaque année des tournois de Texas Hold \'em Poker avec des qualifications en ligne.\n
+        Par ailleurs, il est possible de participer dans les deux endroits aux championnats internationaux de Texas Hold \'em Poker, qui ont lieu au moins une fois par mois.</string>
+    <string name="title_activity_tournament_item">TOURNOIS</string>
+    <string name="telUno">+390415297230 (de 09h30 à 17h30)</string>
+    <string name="telDue">+390415297201 (de 19h30 à minuit)</string>
+    <string name="openingtime">Heures d\'ouverture:</string>
+    <string name="openingtimeTx">19h30 à minuit</string>
+    <string name="closed">Fermé:</string>
+    <string name="closedTx">24 et 25 décembre</string>
+    <string name="creditCardLabel">Cartes de crédit</string>
+    <string name="fromtoMenu">from 26 to 5 march 2015</string>
+    <string name="nome_chef">VALERIO VERGINE</string>
+    <string name="title_activity_menu">MENU</string>
+    <string name="starters">Starters</string>
+    <string name="first">First Course</string>
+    <string name="second">Second Course</string>
+    <string name="dessert">Dessert</string>
+    <string name="orari">HEURES BUS / NAVETTE</string>
+    <string name="map">CARTE</string>
+    <string name="info_map">INFO</string>
+    <string name="directions">(cliquez sur les icônes pour obtenir les directions)</string>
+    <string formatted="false" name="info_text">Le deux sites du Casino de Venise, Ca \'Vendramin Calergi et Ca\' Noghera, sont ouverts tous les jours de l\'année sauf les 24 et 25 Décembre.\n\n
+        L\'accès aux salles de jeux du Casino de Venise est autorisé uniquement aux adultes en possession d\'une pièce d\'identité:\n
+        sont considérés comme valide la carte d\'identité, permis de conduire, passeport.\n\n
+        Carte d\'entrée à partir de 5 € (sans services);\n
+        Carte d\'entrée à partir de € 10: une bonne entrée de 10 €;\n\n
+        La carte d\'entrée de 10 € comprend les services:\n
+        - jeton ou billet ez-pay d\'une valeur de 10,00 € non convertible gratuit et jouable sur les tables de jeu ou les machines à sous;\n
+        - vestiaire;\n
+        - stationnement (pour le site Ca \'Noghera gratuit; pour le site de Venise réduction de 50% près ASM et Garage San Marco, du lundi au vendredi, jours fériés et veille de jours fériés exclus);\n
+        - navette vers le continent: Casino de Ca \'Noghera - Piazzale Roma de Venise et vice versa.\n
+        - navette vers le continent: Mestre Railway - Casino Ca \'Noghera et vice versa.\n
+        - navette fluviale: Piazzale Roma - Ca \'Vendramin Calergi et vice versa.\n\n
+        Si vous êtes un client d\'un hôtel à Venise demandez le coupon d\'entrée gratuit.\n\n
+        Un cadeau attend tous les clients qui viennent jouer au casino le jour de leur anniversaire.\n
+        Tous les mois de nombreuses promotions et des occasions spéciales pour organiser une visite des nos sites. Cadeaux des collections de la marque Casinò di Venezia.\n
+        Offre de boissons et snacks, avantages de jouer avec des pièces de machine à sous ou des jetons de table gratuits.</string>
+    <string name="info_titolo">CONDITIONS D’ENTRÉE</string>
+    <string name="info_activiy_text">INFO</string>
+    <string name="title_activity_sign_up">SignUpActivity</string>
+    <string name="title_activity_login">Log in</string>
+    <string name="title_activity_signup">Sign up</string>
+    <string name="prompt_username">NOM D\'UTILISATEUR</string>
+    <string name="prompt_password">MOT DE PASSE</string>
+    <string name="prompt_password_again">Mot de passe à nouveau</string>
+    <string name="error_intro">"Please "</string>
+    <string name="error_blank_username">Entrer un identifiant</string>
+    <string name="error_blank_password">Entrer un mot de passe</string>
+    <string name="error_mismatched_passwords">Entrez le même mot de passe</string>
+    <string name="error_join">", et "</string>
+    <string name="error_end">.</string>
+    <string name="progress_login">Logging you in&#8230;</string>
+    <string name="progress_signup">Signing you up&#8230;</string>
+    <string name="signup">Sign Up</string>
+    <string name="forgot">OUBLIÉ ?</string>
+    <string name="you_can">VOUS POUVEZ VOUS CONNECTER AUSSI AVEC</string>
+    <string name="parse_app_id">yO3MBzW9liNCaiAfXWGb3NtZJ3VhXyy4Zh8rR5ck</string>
+    <string name="parse_client_key">KImYuYCrJ9j3IbDI3W2KtDXCXwmfqsRDCn5Em6A9</string>
+    <string name="facebook_app_id">724548800932026</string>
+    <string-array name="my_facebook_permissions">
+        <item>public_profile</item>
+        <item>email</item>
+    </string-array>
+    <string name="profile_title_logged_in">Your are logged in as</string>
+    <string name="profile_logout_button_label">SE DÉCONNECTER</string>
+    <string name="profile_title_logged_out">You must be logged in to view your profile</string>
+    <string name="profile_login_button_label">SE CONNECTER</string>
+    <string name="myEmail">E-MAIL</string>
+    <string name="welcome">BIENVENUE</string>
+    <string name="dont_have">VOUS N\'AVEZ PAS ENCORE DE COMPTE?</string>
+    <string name="login">SE CONNECTER</string>
+    <string name="todayIsClosed">Fermé aujourd\'hui</string>
+    <string name="todayOpen">OUVERT DE 11h00 À 03h15</string>
+    <string name="todayOpenVenice">OUVERT DE 11h00 À 02h45</string>
+    <string name="canogheratime1">OUVERT DE 11h00 À 03h45</string>
+    <string name="canogheratime2">OUVERT DE 11h00 À 03h15</string>
+    <string name="veneziatime1">OUVERT DE 11h00 À 03h15</string>
+    <string name="veneziatime2">OUVERT DE 11h00 À 02h45</string>
+    <string name="text_for_event_general">Musique live, concerts, discothèques, spectacles, divertissement, piano bar et un restaurant suggestions de l\'happy hour au dîner de gala organisée directement dans les deux endroits du Casino de Venise.\n
+        Un mélange de jeu et de divertissement pour les soirées spéciales de plaisir et de divertissement.</string>
+    <string name="title1">God of War Ascension</string>
+    <string name="title2">Assassin\'s Creed III</string>
+    <string name="title3">Hitman Absolution</string>
+    <string name="title4">Dishonored</string>
+    <string name="wagner_restaurant">RESTAURANT WAGNER</string>
+    <string name="marcopolo_restaurant">RESTAURANT MARCO POLO</string>
+    <string name="wagner_details">Un hommage au grand compositeur qui a vécu à Venise dans le palais historique qui abrite le casino et un privilège incomparable pour les visiteurs du casino.\n
+        Le Ristorante Wagner, à l\'étage principal de Ca \'Vendramin Calergi, offre le plaisir exclusif d\'un dîner raffiné.\n
+        150 couverts répartis dans trois ambiances d\'exception: Salle Palma, Salle Jaune et la Salle Rouge, décorées avec des toiles de Palma le Jeune et des fresques de Gian Battista Crosato.\n
+        Spécialités gastronomiques de tous les temps et spécialités de poisson, dans la typique tradition culinaire lacustre.\n
+        Des événements uniques et de la musique des grands maîtres, comme un délice supplémentaire pour les clients du restaurant.</string>
+    <string name="marcopolo_details">Adapté également pour un repas rapide, il propose une cuisine créative et tendance, mais aussi méditerranéenne et de la tradition vénitienne, viandes et poissons, dans un cadre sophistiqué et glamour.\n
+        La cuisine est ouverte de 19h00 à 24h00.\n\n
+        LA PROSCIUTTERIA\n\nProduits de haute qualité et des vins sélectionnés pour une pause déjeuner à l\'enseigne du bon goût.\n\n
+        LA PIZZERIA\n\nGourmandises extravagantes et fumantes pour tous les goûts.</string>
+    <string name="fromMestre">DEPUIS MESTRE</string>
+    <string name="fromCaNoghera">DEPUIS CA\' NOGHERA</string>
+    <string name="titoloServices">TOUS LES JOURS</string>
+    <string name="action_boat">NAVETTE GRATUITE</string>
+    <string name="action_bus">MESTRE - CA\'NOGHERA</string>
+    <string name="action_busV">VENEZIA - CA\'NOGHERA</string>
+    <string name="fromVenezia">DEPUIS VENEZIA</string>
+    <string name="subTimetablesME">Navette vers le continent: Mestre Railway - Casino Ca \'Noghera et vice versa.</string>
+    <string name="subTimetablesVE">Navette fluviale: Piazzale Roma - Ca \'Vendramin Calergi et vice versa.</string>
+    <string name="text_for_free_boat">Navette fluviale: Piazzale Roma - Ca \'Vendramin Calergi.</string>
+    <string name="titoloBoat">NAVETTE GRATUITE</string>
+    <string name="secondPart">DU DIMANCHE AU JEUDI\nDE 14h50 A 3h50\nTOUTES LES 20 MINUTES</string>
+    <string name="thirdPart">LES VENDREDIS ET SAMEDIS\nDE 14h50 A 4h50\nTOUTES LES 10 MINUTES</string>
+    <string name="fourthPart">Navette fluviale: Ca \'Vendramin Calergi - Piazzale Roma</string>
+    <string name="fifthPart">DU DIMANCHE AU JEUDI\nDE 15h00 A 4h00\nTOUTES LES 20 MINUTES</string>
+    <string name="sixthPart">LES VENDREDIS ET SAMEDIS\nDE 15h00 A 5h00\nTOUTES LES 10 MINUTES</string>
+
+
+    <string name="title_activity_show_geofence_transitions">ShowGeofenceTransitionsActivity</string>
+    <string name="title_activity_main">MainActivity</string>
+
+    <!-- Buttons strings -->
+    <string name="add_geofences">Add geofences</string>
+    <string name="remove_geofences">Remove geofences</string>
+
+    <string name="geofences_added">Geofences added</string>
+    <string name="geofences_removed">Geofences removed</string>
+
+    <!-- Error strings -->
+    <string name="not_connected">GoogleApiClient no yet connected. Try again.</string>
+    <string name="geofence_not_available">Geofence service is not available now</string>
+    <string name="geofence_too_many_geofences">Your app has registered too many geofences</string>
+    <string name="geofence_too_many_pending_intents">
+        You have provided too many PendingIntents to the addGeofences() call
+    </string>
+    <string name="unknown_geofence_error">
+        Unknown error: the Geofence service is not available now
+    </string>
+    <string name="geofence_transition_invalid_type">
+        Geofence transition error: invalid transition type %1$d
+    </string>
+
+    <!-- Transition type strings -->
+    <string name="geofence_transition_entered">Entered</string>
+    <string name="geofence_transition_exited">Exited</string>
+    <string name="unknown_geofence_transition">Unknown Transition</string>
+
+    <string name="geofence_transition_notification_text">Click notification to return to app</string>
+    <string name="Notification.Text">Vous êtes à quelques pas du casino le plus ancien du monde!</string>
+    <string name="title_activity_free_entrance">ENTRÉE GRATUITE</string>
+    <string name="free_entrance_text">ENTRÉE AUTORISÉE UNIQUEMENT AUX MAJEURS SUR PRÉSENTATION D\'UNE PIÈCE D\'INDENTITÉ VALIDE</string>
+    <string name="time_table">HEURES BUS / NAVETTE</string>
+    <string name="contactUsText">Nous contacter</string>
+    <string name="like_us">MERCI DE CLIQUER "LIKE" SUR FACEBOOK!</string>
+</resources>

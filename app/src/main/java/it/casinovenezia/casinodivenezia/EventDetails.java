@@ -35,15 +35,11 @@ import java.util.HashMap;
 
 
 public class EventDetails extends Fragment implements BaseSliderView.OnSliderClickListener{
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+
     private static final String NAME = "name";
     private static final String DESCRIPTION = "description";
     private static final String DATE = "date";
     private static final String OBJECTID = "objectId";
-
-    // TODO: Rename and change types of parameters
-
     private SliderLayout mySlider;
     int fragmentWidth;
     private String image1;
@@ -56,13 +52,6 @@ public class EventDetails extends Fragment implements BaseSliderView.OnSliderCli
         return Math.round(pixels);
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @return A new instance of fragment EventDetails.
-     */
-    // TODO: Rename and change types and number of parameters
     public static EventDetails newInstance(String name, String description, String date, String objecyId) {
         EventDetails fragment = new EventDetails();
         Bundle args = new Bundle();
@@ -162,7 +151,6 @@ public class EventDetails extends Fragment implements BaseSliderView.OnSliderCli
 
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
 
     }
@@ -183,10 +171,7 @@ public class EventDetails extends Fragment implements BaseSliderView.OnSliderCli
 
                     public void done(ParseObject object,
                                      ParseException e) {
-                        // TODO Auto-generated method stub
 
-                        // Locate the column named "ImageName" and set
-                        // the string
                         ParseFile image1F = (ParseFile) object
                                 .get("ImageEvent1");
                         ParseFile image2F = (ParseFile) object

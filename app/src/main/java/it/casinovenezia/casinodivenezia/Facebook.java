@@ -43,16 +43,6 @@ public class Facebook extends Fragment {
     int likeState;
     int[] currentState;
 
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment Facebook.
-     */
-    // TODO: Rename and change types and number of parameters
     public static Facebook newInstance(String param1, String param2) {
         Facebook fragment = new Facebook();
         Bundle args = new Bundle();
@@ -87,10 +77,9 @@ public class Facebook extends Fragment {
                 checkBGColorOfLikeView();
                 if (currentState.length == 4) {
                     Context context = getActivity().getApplicationContext();
-                    CharSequence text = "Please like us on Facebook!";
                     int duration = Toast.LENGTH_SHORT;
 
-                    Toast toast = Toast.makeText(context, text, duration);
+                    Toast toast = Toast.makeText(context, R.string.like_us, duration);
                     toast.setGravity(Gravity.CENTER,0,0);
                     toast.show();
                 } else {
@@ -163,7 +152,7 @@ public class Facebook extends Fragment {
         currentState = background.getState();
         likeState = currentState[0];
     }
-    // TODO: Rename method, update argument and hook method into UI event
+
     public void onButtonPressed(Uri uri) {
 
     }

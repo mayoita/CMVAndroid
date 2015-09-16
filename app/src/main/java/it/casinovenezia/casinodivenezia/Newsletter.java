@@ -34,7 +34,7 @@ public class Newsletter extends Fragment {
     private Button unsubscribe;
     private Button subscribe;
 
-    // TODO: Rename and change types and number of parameters
+    // TODO:implementare codice
     public static Newsletter newInstance(String param1, String param2) {
         Newsletter fragment = new Newsletter();
         Bundle args = new Bundle();

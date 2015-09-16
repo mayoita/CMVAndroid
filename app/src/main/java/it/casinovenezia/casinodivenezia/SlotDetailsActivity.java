@@ -366,7 +366,7 @@ public class SlotDetailsActivity extends AppCompatActivity {
             mCoverFlow.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    //TODO CoverFlow item clicked
+
                      //mTitle.setText(getResources().getString(mData.get(position).titleResId));
                 }
             });
@@ -374,14 +374,13 @@ public class SlotDetailsActivity extends AppCompatActivity {
             mCoverFlow.setOnScrollPositionListener(new FeatureCoverFlow.OnScrollPositionListener() {
                 @Override
                 public void onScrolledToPosition(int position) {
-                    //TODO CoverFlow stopped to position
 
                     mTitle.setText(eventitemlist.get(position).getStartDate() + " - " + eventitemlist.get(position).getNameIT());
                 }
 
                 @Override
                 public void onScrolling() {
-                    //TODO CoverFlow began scrolling
+
                     mTitle.setText("");
                 }
             });

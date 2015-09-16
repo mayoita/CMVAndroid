@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">"Casinò di Venezia "</string>
+    <string name="action_settings">Settings</string>
+    <string name="cavendramin">CÀ VENDRAMIN CALERGI</string>
+    <string name="apertodalle">VON xx:x BIS xx:xx UHR GEÖFFNET</string>
+    <string name="jackpotamount">x.xxx.xxx,xx €</string>
+    <string name="jackpot">JACKPOT</string>
+    <string name="link">SPIELVERBOT FÜR MINDERJÄHRIGE UNTER 18 JAHREN. DAS GLÜCKSSPIEL KANN PATHOLOGISCHE ABHÄNGIGKEIT VERURSACHEN.<a href="http://www.casinovenezia.it/en/probability-winning.html">ZU DEN GEWINNCHANCEN</a></string>
+    <string name="action_change"></string>
+    <string name="home_label">STARTSEITE</string>
+    <string name="events_label">VERANSTALTUNGEN</string>
+    <string name="casino_label">CASINÒ</string>
+    <string name="poker_label">POKER</string>
+    <string name="tournament_label">TURNIERE</string>
+    <string name="restaurant_label">RESTAURANT</string>
+    <string name="map_label">KARTE</string>
+    <string-array name="nav_drawer_items">
+        <item>HOME</item>
+        <item>LOG IN</item>
+        <item>NEWSLETTER</item>
+        <item>FAHRPLÄNE BUS/SHUTTLE</item>
+        <item>CASINÒ MOBILE</item>
+        <item>MEINE ABONNEMENTS</item>
+        <item>KLICKEN SIE \"GEFÄLLT MIR\" AUF FACEBOOK</item>
+        <item></item>
+    </string-array>
+    <string name="drawer_open">Open navigation drawer</string>
+    <string name="drawer_close">Close navigation drawer</string>
+    <string name="desc_list_item_icon">Item Icon</string>
+
+    <array name="nav_drawer_icons">
+        <item>@drawable/home</item>
+        <item>@drawable/login</item>
+        <item>@drawable/newsletter</item>
+        <item>@drawable/timetables</item>
+        <item>@drawable/mobile</item>
+        <item>@drawable/subscription</item>
+        <item>@drawable/like</item>
+        <item>@drawable/homeempty</item>
+    </array>
+
+<!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="please">PLEASE LOGIN OR SIGN UP</string>
+    <string name="loginsignup">LOG IN / SIGN UP</string>
+    <string name="newsletter">NEWSLETTER</string>
+    <string name="email_nl">E-MAIL</string>
+    <string name="name_nl">VORNAME</string>
+    <string name="surname_nl">NACHNAME</string>
+    <string name="willing">Ja, ich bin bereit, den Newsletter Casino Venedig unter der oben genannten Adresse zu erhalten</string>
+    <string name="confirm">Ich bestätige, dass ich mindestens 18 Jahre alt oder älter bin..</string>
+    <string name="allow">m den angeforderten Dienst zu ermöglichen, stimme ich der Verarbeitung meiner personenbezogenen Daten gemäß Gesetzesverordnung 196/2003 zu.</string>
+    <string name="unsubscribe">KUNDIGEN</string>
+    <string name="subscribe">ABONNIEREN</string>
+    <string name="click">GEBEN SIE UNS AUF FACEBOOK IHR \"LIKE\" ZEICHEN UND SIE ERHALTEN FREIEN EINTRITT!</string>
+    <string name="ingresso">ZUTRITT NUR FÜR ERWACHSENE GEGEN VORLAGE EINES GÜLTIGEN AUSWEISES</string>
+    <string name="facebook">IHR FREIER EINTRITT</string>
+    <string name="mysubscription">MEINE ABONNEMENTS</string>
+    <string name="eventsnew">EVENT-NACHRICHTEN</string>
+    <string name="slotnews">SPIELAUTOMATEN NACHRICHTEN</string>
+    <string name="pokernews">POKERNACHRICHTEN</string>
+    <string name="title_activity_event_details">Event</string>
+    <string name="lore">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
+        ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+        aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in
+        voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+        Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+        Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+        Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</string>
+    <string name="table_games">SPIELE AN DEN TISCHEN</string>
+    <string name="slot_games">ELEKTRONISCHE SPIELE</string>
+    <string name="online_games">ONLINE GAMES</string>
+    <string name="fair">FAIR ROULETTE</string>
+    <string name="black">BLACK JACK</string>
+    <string name="texas">TEXAS HOLD\'EM POKER</string>
+    <string name="punto">PUNTO BANCO</string>
+    <string name="carribean">CARRIBEAN STUD POKER</string>
+    <string name="francese">FRENCH ROULETTE</string>
+    <string name="chemin">CHEMIN DE FER</string>
+    <string name="trente">MIDI TRENTE ET QUARANTE</string>
+    <string name="what">SLOTPARK</string>
+    <string name="whatnew">DIE NEUESTEN SLOTS</string>
+    <string name="rooms">SLOTSPIELHALLEN</string>
+    <string name="jackpot_slot">UNSERE JACKPOTS</string>
+    <string name="title_activity_game_item">SPIEL</string>
+    <string name="close_rule">GESCHLOSSEN</string>
+    <string name="title_activity_slot_details">SLOT</string>
+    <string name="text_for_game_general">Erleben Sie das Vergnügen des Spiels und der Herausforderung in einer außergewöhnlichen und eindrucksvollen Umgebung.\nSie haben die Möglichkeit, vom Angebot der beiden Standorte des Casinos von Venedig Gebrauch zu machen. Beide sind vollständig ausgestattet, aber jeder hat seinen einzigartigen Charakter.\nUnd von zu Hause aus können Sie online spielen.</string>
+    <string name="title_activity_poker_item">POKERSTUNDE</string>
+    <string name="text_for_game_general_poker">Im Casino von Venedig kann man an nationalen und internationalen Wettbewerben teilnehmen.\n
+Im Ca\' Vendramin Calergi finden beispielsweise die italienischen Meisterschaften in Chemin de fer statt (12 Durchgänge pro Jahr), Treffen für die Preisverleihung von Chemin de Fer (6 Gala-Events pro Jahr) und die Turniere des Französischen Roulette (5 Durchgänge pro Jahr).\n
+Im Ca\' Noghera hingegen werden jeden Tag Turniere von Texas Hold\'em Poker mit Online-Qualifikationen gespielt.\n
+An beiden Orten können Sie außerdem an der internationalen Meisterschaft von Texas Hold\'em Poker teilnehmen, die regelmäßig mindestens einmal im Monat stattfinden.</string>
+    <string name="torneo">TORNEO</string>
+    <string name="ora">Ora</string>
+    <string name="buy">BUY IN</string>
+    <string name="stack">STACK</string>
+    <string name="blind">BLINDS</string>
+    <string name="late">LATE</string>
+    <string name="cap">CAP</string>
+    <string name="note">NOTE</string>
+    <string name="text_for_game_general_tournament">Im Casino von Venedig kann man an nationalen und internationalen Wettbewerben teilnehmen.\n
+Im Ca\' Vendramin Calergi finden beispielsweise die italienischen Meisterschaften in Chemin de fer statt (12 Durchgänge pro Jahr), Treffen für die Preisverleihung von Chemin de Fer (6 Gala-Events pro Jahr) und die Turniere des Französischen Roulette (5 Durchgänge pro Jahr).\n
+Im Ca\' Noghera hingegen werden jeden Tag Turniere von Texas Hold\'em Poker mit Online-Qualifikationen gespielt.\n
+An beiden Orten können Sie außerdem an der internationalen Meisterschaft von Texas Hold\'em Poker teilnehmen, die regelmäßig mindestens einmal im Monat stattfinden.</string>
+    <string name="title_activity_tournament_item">TOURNAMENT</string>
+    <string name="telUno">+390415297230 (von 9:30 morgens bis 17:30)</string>
+    <string name="telDue">+390415297201 (19:30 bis Mitternacht)</string>
+    <string name="openingtime">Öffnungszeiten:</string>
+    <string name="openingtimeTx">19.30 bis Mitternacht</string>
+    <string name="closed">Geschlossen:</string>
+    <string name="closedTx">24. und 25. Dezember</string>
+    <string name="creditCardLabel">Kreditkarten</string>
+    <string name="fromtoMenu">from 26 to 5 march 2015</string>
+    <string name="nome_chef">VALERIO VERGINE</string>
+    <string name="title_activity_menu">MENU</string>
+    <string name="starters">Starters</string>
+    <string name="first">First Course</string>
+    <string name="second">Second Course</string>
+    <string name="dessert">Dessert</string>
+    <string name="orari">FAHRPLÄNE BUS/SHUTTLE</string>
+    <string name="info_map">INFO</string>
+    <string name="directions">(Klicken Sie auf die Symbole, um eine Wegbeschreibung zu erhalten)</string>
+    <string formatted="false" name="info_text">Die beiden Standorte des Spielcasinos von Venedig, Ca\' Vendramin Calergi und Ca\' Noghera sind jeden Tag des Jahres geöffnet, außer am 24. und 25. Dezember.\nDer Zugang zu den Spielsälen des Spielcasinos von Venedig ist ausschließlich Erwachsenen im Besitz eines amtlichen Ausweises erlaubt: anerkannt wird ein gültiger Personalausweis, Führerschein oder Reisepass\nEintrittskarte zu 5 € (ohne Dienstleistungen)\nEintrittskarte zu 10 €: ein Eintritt zu 10 € mit Auszeichnung\ nDie Eintrittskarte zu 10 €  schließt Serviceleistungen ein:\n- Chip oder Ticket EZ-Pay im Wert von 10,00 €, nicht rücktauschbar, kostenlos, zum Spielen an den Spieltischen oder Spielautomaten;\n- Garderobe;\n- Parkplatz (für Ca\' Noghera kostenlos; für den Standort Venedig 50% Rabbat bei der ASM und Garage San Marco von Montag bis Freitag, Wochenenden und Feiertage ausgeschlossen);\n-Shuttle zum Festland: Spielcasino Ca\' Noghera - Piazzale Roma in Venedig und umgekehrt. \n- Shuttle zum Festland: Mestre Bahnhof - Spielcasino Ca\' Noghera und umgekehrt.\n- Wasser-Shuttle: Piazzale Roma - Ca\' Vendramin Calergi und umgekehrt.\nWenn Sie Gast eines Hotels in Venedig sind, fragen Sie nach dem Gratis-Eintritt-Coupon.\nEin Geschenk wartet auf alle Kunden, die an ihrem Geburtstag zum Spielen ins Spielcasino kommen.\nJeden Monat viele Sonderaktionen und spezielle Gelegenheiten, um einen Besuch in unseren Spielcasinos zu organisieren. Geschenke aus den Marken-Sammlungen vom Casino in Venedig. Angebot an Drinks &amp; Snacks, günstige Spielangebote mit Slot-Ticket oder Frei-Chips für die Spieltische.</string>
+    <string name="info_titolo">EINTRITTMÖGLICHKEITEN</string>
+    <string name="info_activiy_text">INFO</string>
+    <string name="title_activity_sign_up">SignUpActivity</string>
+    <string name="title_activity_login">Einloggen</string>
+    <string name="title_activity_signup">REGISTRIEREN</string>
+    <string name="prompt_username">Username</string>
+    <string name="prompt_password">PASSWORT</string>
+    <string name="prompt_password_again">Passwort erneut</string>
+    <string name="error_intro">"Please "</string>
+    <string name="error_blank_username">Geben Sie einen Benutzernamen</string>
+    <string name="error_blank_password">Geben sie ein Passwort ein</string>
+    <string name="error_mismatched_passwords">Geben Sie zweimal das gleiche Passwort</string>
+    <string name="error_join">", and "</string>
+    <string name="error_end">.</string>
+    <string name="progress_login">Logging you in&#8230;</string>
+    <string name="progress_signup">Signing you up&#8230;</string>
+    <string name="signup">Sign Up</string>
+    <string name="forgot">VERGESSEN ?</string>
+    <string name="you_can">Können Sie sich einloggen MIT</string>
+    <string name="parse_app_id">yO3MBzW9liNCaiAfXWGb3NtZJ3VhXyy4Zh8rR5ck</string>
+    <string name="parse_client_key">KImYuYCrJ9j3IbDI3W2KtDXCXwmfqsRDCn5Em6A9</string>
+    <string name="facebook_app_id">724548800932026</string>
+    <string-array name="my_facebook_permissions">
+        <item>public_profile</item>
+        <item>email</item>
+    </string-array>
+    <string name="profile_title_logged_in">Your are logged in as</string>
+    <string name="profile_logout_button_label">Abmelden</string>
+    <string name="profile_title_logged_out">You must be logged in to view your profile</string>
+    <string name="profile_login_button_label">Einloggen</string>
+    <string name="myEmail">EMAIL</string>
+    <string name="welcome">WILLKOMMEN</string>
+    <string name="dont_have">SIE HABEN NOCH KEINEN ACCOUNT?</string>
+    <string name="login">LOG IN</string>
+    <string name="todayIsClosed">Heute geschlossen</string>
+    <string name="todayOpen">VON 11:00 BIS 03.15 UHR GEÖFFNET</string>
+    <string name="todayOpenVenice">VON 11:00 BIS 02.45 UHR GEÖFFNET</string>
+    <string name="canogheratime1">VON 11:00 BIS 03.45 UHR GEÖFFNET</string>
+    <string name="canogheratime2">VON 11:00 BIS 03.15 UHR GEÖFFNET</string>
+    <string name="veneziatime1">VON 11:00 BIS 03.15 UHR GEÖFFNET</string>
+    <string name="veneziatime2">VON 11:00 BIS 02.45 UHR GEÖFFNET</string>
+    <string name="text_for_event_general">Live-Musik, Konzerte, Diskotheken, Shows, Unterhaltung, Piano-Bar und Restaurantempfehlungen aus der Happy Hour an der Gala-Dinner direkt in den beiden Standorten des Casinos von Venedig organisiert.\nEin Mix aus Gaming und Entertainment für besondere Abende voller Spaß und Unterhaltung.</string>
+    <string name="lore_news">Our offering is under constant evolution to guarantee the best in modern technology, in our constant desire to offer the best customer satisfaction.</string>
+    <string name="title1">God of War Ascension</string>
+    <string name="title2">Assassin\'s Creed III</string>
+    <string name="title3">Hitman Absolution</string>
+    <string name="title4">Dishonored</string>
+    <string name="wagner_restaurant">WAGNER RESTAURANT</string>
+    <string name="marcopolo_restaurant">MARCO POLO RESTAURANT</string>
+    <string name="wagner_details">Eine Hommage an den großen Komponisten, der in Venedig in diesem historischen Gebäude gewohnt hat, wo das Spielcasino untergebracht ist; ein unvergleichliches Privileg für die Besucher des Spielcasinos.
+Das Restaurant Wagner, in der Beletage des Ca\' Vendramin Calergi, bietet das exklusive Vergnügen eines vornehmen Abendessens.
+150 Plätze in drei außergewöhnlichen Räumen: Der Palma-Saal, der gelbe Saal (Sala Gialla) und der rote Saal (Sala Rossa), mit Gemälden von Palma dem Jüngeren und Fresken von Gian Battista Crosato geschmückt.
+Köstlichkeiten aus allen Epochen und Fischspezialitäten, nach der typischen kulinarischen Tradition in der Lagune. Einzigartige Veranstaltungen und Musik großer Meister, als zusätzlicher Genuss für die Gäste des Restaurants</string>
+    <string name="marcopolo_details">Geeignet auch für eine schnelle Mahlzeit, serviert kreative Trendy-Küche, aber auch mediterrane und traditionelle venezianische Küche, Fleisch und Fisch, in einem anspruchsvollen und glamourösen Ambiente.\nDie Küche ist von 19.00 bis 24.00 geöffnet.\n\nDIE PROSCIUTTERIA\n\nProdukte von hoher Qualität und erlesene Weine für eine Mittagspause im Zeichen des guten Geschmacks\n\nDIE PIZZERIA\n\nSchmackhafte Leckereien für jeden Geschmack.</string>
+    <string name="fromMestre">VON MESTRE</string>
+    <string name="fromCaNoghera">VON CA\' NOGHERA</string>
+    <string name="titoloServices">TÄGLICH</string>
+    <string name="action_boat">KOSTENLOSE SCHIFFFAHRT</string>
+    <string name="action_bus">MESTRE - CA\'NOGHERA</string>
+    <string name="action_busV">VENEZIA - CA\'NOGHERA</string>
+    <string name="fromVenezia">VON VENEZIA</string>
+    <string name="subTimetablesME">Shuttle zum Festland: Mestre Bahnhof - Spielcasino Ca\' Noghera und umgekehrt</string>
+    <string name="subTimetablesVE">Shuttle zum Festland: Spielcasino Ca\' Noghera - Piazzale Roma in Venedig und umgekehrt</string>
+    <string name="text_for_free_boat">Wasser-Shuttle: Piazzale Roma - Ca\' Vendramin Calergi</string>
+    <string name="titoloBoat">KOSTENLOSE SCHIFFFAHRT</string>
+    <string name="secondPart">VON SONNTAG BIS DONNERSTAG\nVON 14:50  BIS 3:50\nALLE 20 MINUTEN</string>
+    <string name="thirdPart">FREITAGS UND SAMSTAGS\nVON 14:50 BIS 4:50\nALLE 10 MINUTEN</string>
+    <string name="fourthPart">Wasser-Shuttle:Ca\' Vendramin Calergi - Piazzale Roma</string>
+    <string name="fifthPart">VON SONNTAG BIS DONNERSTAG\nVON 15.00 BIS 04.00 UHR\nALLE 20 MINUTEN</string>
+    <string name="sixthPart">FREITAGS UND SAMSTAGS\nVON 15:00 BIS 5:00 \nALLE 10 MINUTEN</string>
+
+
+    <string name="title_activity_show_geofence_transitions">ShowGeofenceTransitionsActivity</string>
+    <string name="title_activity_main">MainActivity</string>
+
+    <!-- Buttons strings -->
+    <string name="add_geofences">Add geofences</string>
+    <string name="remove_geofences">Remove geofences</string>
+
+    <string name="geofences_added">Geofences added</string>
+    <string name="geofences_removed">Geofences removed</string>
+
+    <!-- Error strings -->
+    <string name="not_connected">GoogleApiClient no yet connected. Try again.</string>
+    <string name="geofence_not_available">Geofence service is not available now</string>
+    <string name="geofence_too_many_geofences">Your app has registered too many geofences</string>
+    <string name="geofence_too_many_pending_intents">
+        You have provided too many PendingIntents to the addGeofences() call
+    </string>
+    <string name="unknown_geofence_error">
+        Unknown error: the Geofence service is not available now
+    </string>
+    <string name="geofence_transition_invalid_type">
+        Geofence transition error: invalid transition type %1$d
+    </string>
+
+    <!-- Transition type strings -->
+    <string name="geofence_transition_entered">Entered</string>
+    <string name="geofence_transition_exited">Exited</string>
+    <string name="unknown_geofence_transition">Unknown Transition</string>
+
+    <string name="geofence_transition_notification_text">Click notification to return to app</string>
+    <string name="Notification.Text">Sie sind nur wenige Schritte vom ältesten Spielcasino der Welt entfernt!</string>
+    <string name="title_activity_free_entrance">EINTRITT FREI</string>
+    <string name="free_entrance_text">ZUTRITT NUR FÜR ERWACHSENE GEGEN VORLAGE EINES GÜLTIGEN AUSWEISES</string>
+    <string name="time_table">FAHRPLÄNE</string>
+    <string name="contactUsText">Kontaktieren Sie uns</string>
+    <string name="like_us">BITTE KLICKEN SIE \"GEFÄLLT MIR\"  AUF FACEBOOK</string>
+    <string name="map">KARTE</string>
+</resources>

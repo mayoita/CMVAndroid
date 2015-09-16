@@ -276,10 +276,6 @@ public class CasinoGame extends Fragment implements OnBackPressedListener {
         return rootView;
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-
-    }
 
 
 
@@ -320,7 +316,7 @@ public class CasinoGame extends Fragment implements OnBackPressedListener {
      * >Communicating with Other Fragments</a> for more information.
      */
     public interface OnGameInteractionListener {
-        // TODO: Update argument type and name
+
         public void onFragmentInteraction(Uri uri);
     }
 public void openPop(View v) {

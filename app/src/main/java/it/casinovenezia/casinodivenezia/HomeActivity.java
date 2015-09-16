@@ -47,6 +47,7 @@ import com.google.android.gms.location.Geofence;
 import com.google.android.gms.location.GeofencingRequest;
 import com.google.android.gms.location.LocationServices;
 import com.parse.Parse;
+import com.parse.ParseAnalytics;
 import com.parse.ParseException;
 import com.parse.ParseFacebookUtils;
 import com.parse.ParseInstallation;
@@ -131,7 +132,7 @@ public class HomeActivity extends AppCompatActivity implements
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-
+        ParseAnalytics.trackAppOpenedInBackground(getIntent());
 
         boolean tabletSize = getResources().getBoolean(R.bool.isTablet);
         if (tabletSize) {

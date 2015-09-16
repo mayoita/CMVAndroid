@@ -37,18 +37,21 @@
         android:layout_height="wrap_content"
         android:text="@string/wagner_restaurant"
         android:id="@+id/textTestaurantTitle"
-        android:textSize="20sp"
+        android:textSize="40sp"
         android:textColor="@color/white"
         android:layout_marginLeft="7dp"
         android:nestedScrollingEnabled="false"
-        android:layout_marginTop="25dp" />
+        android:layout_marginTop="25dp"
+        android:layout_centerHorizontal="true" />
     <ScrollView
-        android:layout_width="fill_parent"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:fillViewport="false"
-        android:layout_marginTop="50dp"
-        android:id="@+id/myScrollEvent">
+        android:id="@+id/myScrollEvent"
+
+        android:layout_below="@+id/textTestaurantTitle"
+        android:layout_alignParentBottom="true">
         <FrameLayout
             android:id="@+id/event_details"
             android:layout_width="match_parent"
@@ -63,7 +66,7 @@
 
                 <ImageView
                     android:layout_width="match_parent"
-                    android:layout_height="412dp"
+                    android:layout_height="400dp"
                     android:id="@+id/imageView7"
                     android:layout_marginTop="10dp"
                     android:layout_marginLeft="150dp"
@@ -73,10 +76,15 @@
                 <com.daimajia.slider.library.SliderLayout
                     android:id="@+id/slider"
                     android:layout_width="match_parent"
-                    android:layout_height="200dp"
+                    android:layout_height="match_parent"
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
-                    android:layout_marginTop="13dp" />
+                    android:layout_marginTop="10dp"
+                    android:layout_alignLeft="@+id/imageView7"
+                    android:layout_alignRight="@+id/imageView7"
+                    android:layout_alignTop="@+id/imageView7"
+                    android:layout_alignBottom="@+id/imageView7"
+                    android:layout_marginBottom="10dp" />
 
 
                 <ImageButton
@@ -111,8 +119,14 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
                     android:layout_below="@+id/imageView7"
-                    android:layout_alignLeft="@+id/slider"
-                    android:layout_alignStart="@+id/slider">
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
+                    android:layout_alignParentTop="false"
+                    android:layout_alignParentBottom="false"
+                    android:layout_alignParentEnd="false"
+                    android:layout_alignParentStart="false">
 
                     <TextView
                         android:layout_width="wrap_content"

@@ -41,7 +41,9 @@
         android:background="@null"
         android:paddingRight="2dp"
         android:paddingTop="2dp"
-        android:layout_alignBottom="@+id/homebanner" />
+        android:layout_alignBottom="@+id/homebanner"
+        android:layout_marginBottom="5dp"
+        android:layout_marginRight="10dp" />
 
     <ImageView
 

@@ -266,8 +266,9 @@ public class PokerFr extends Fragment {
                         map.setEndDate(formatMyDate(event.getDate("EndDate")));
 
                         pokeritemlist.add(map);
-                        setOffice();
+
                     }
+                    setOffice();
                 } else {
                     Log.d("events", "Error: " + e.getMessage());
                 }

@@ -267,8 +267,9 @@ public class TournamentFr extends Fragment {
                         map.setImageTournament((ParseFile) event.get("ImageTournament"));
 
                         pokeritemlist.add(map);
-                        setOffice();
+
                     }
+                    setOffice();
                 } else {
                     Log.d("tournaments", "Error: " + e.getMessage());
                 }

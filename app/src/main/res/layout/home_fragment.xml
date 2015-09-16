@@ -38,7 +38,7 @@
         android:text="New Button"
         android:id="@+id/helpshift"
         android:layout_alignParentRight="true"
-        android:src="@drawable/helpshifticon"
+        android:src="@drawable/helpshifthcon_notablet"
         android:background="@null"
         android:paddingRight="2dp"
         android:paddingTop="2dp"/>

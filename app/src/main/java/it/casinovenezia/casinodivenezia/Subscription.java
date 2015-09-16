@@ -27,8 +27,7 @@ import com.parse.SaveCallback;
 
 
 public class Subscription extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+
 
     private TextView mySubscription;
     private TextView news;
@@ -39,7 +38,6 @@ public class Subscription extends Fragment {
     private ToggleButton pokerT;
 
 
-    // TODO: Rename and change types and number of parameters
     public static Subscription newInstance(String param1, String param2) {
         Subscription fragment = new Subscription();
         Bundle args = new Bundle();

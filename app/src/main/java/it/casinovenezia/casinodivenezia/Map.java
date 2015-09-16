@@ -56,37 +56,37 @@ public class Map extends Fragment implements OnMapReadyCallback {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_map, null, false);
-//        map = ((SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map)).getMap();
-//
-//
-//        Marker noghera = map.addMarker(new MarkerOptions()
-//                .position(CaNoghera)
-//                .snippet("Ca'Noghera")
-//                .title("Ca'Noghera")
-//                .rotation((float) 180.0)
-//
-//                .icon(BitmapDescriptorFactory
-//                        .fromResource(R.drawable.canogherathumbnail2)));
-//        Marker vendramin = map.addMarker(new MarkerOptions()
-//                .position(CaVendramin)
-//                .title("Ca' Vendramin Calergi")
-//                .snippet("Ca'Vendramin Calergi")
-//                .icon(BitmapDescriptorFactory
-//                        .fromResource(R.drawable.veneziathumbnail2)));
-//        builder = new LatLngBounds.Builder();
-//        builder.include(noghera.getPosition());
-//        builder.include(vendramin.getPosition());
-//        map.setMyLocationEnabled(true);
-//        map.setOnCameraChangeListener(new GoogleMap.OnCameraChangeListener() {
-//
-//            @Override
-//            public void onCameraChange(CameraPosition arg0) {
-//                // Move camera.
-//                map.moveCamera(CameraUpdateFactory.newLatLngBounds(builder.build(), 50));
-//                // Remove listener to prevent position reset on camera move.
-//                map.setOnCameraChangeListener(null);
-//            }
-//        });
+        map = ((SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map)).getMap();
+
+
+        Marker noghera = map.addMarker(new MarkerOptions()
+                .position(CaNoghera)
+                .snippet("Ca'Noghera")
+                .title("Ca'Noghera")
+                .rotation((float) 180.0)
+
+                .icon(BitmapDescriptorFactory
+                        .fromResource(R.drawable.canogherathumbnail2)));
+        Marker vendramin = map.addMarker(new MarkerOptions()
+                .position(CaVendramin)
+                .title("Ca' Vendramin Calergi")
+                .snippet("Ca'Vendramin Calergi")
+                .icon(BitmapDescriptorFactory
+                        .fromResource(R.drawable.veneziathumbnail2)));
+        builder = new LatLngBounds.Builder();
+        builder.include(noghera.getPosition());
+        builder.include(vendramin.getPosition());
+        map.setMyLocationEnabled(true);
+        map.setOnCameraChangeListener(new GoogleMap.OnCameraChangeListener() {
+
+            @Override
+            public void onCameraChange(CameraPosition arg0) {
+                // Move camera.
+                map.moveCamera(CameraUpdateFactory.newLatLngBounds(builder.build(), 50));
+                // Remove listener to prevent position reset on camera move.
+                map.setOnCameraChangeListener(null);
+            }
+        });
         return v;
     }
 

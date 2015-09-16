@@ -55,13 +55,11 @@ import it.moondroid.coverflow.components.ui.containers.FeatureCoverFlow;
  * Created by massimomoro on 05/05/15.
  */
 public class SlotDetailsFragment extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+
     private static final String MY_ARRAY = "theDataArray";
     private static final String MY_INDEX = "theIndex";
 
 
-    // TODO: Rename and change types of parameters
     private String mParam1;
     private SliderLayout mySlider;
     private CoverFlowAdapter mAdapter;
@@ -101,13 +99,6 @@ public class SlotDetailsFragment extends Fragment {
         return Math.round(pixels);
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @return A new instance of fragment EventDetails.
-     */
-    // TODO: Rename and change types and number of parameters
     public static SlotDetailsFragment newInstance(String myArray, int index) {
         SlotDetailsFragment fragment = new SlotDetailsFragment();
         Bundle args = new Bundle();
@@ -345,7 +336,6 @@ public class SlotDetailsFragment extends Fragment {
 
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
         if (mListener != null) {
             mListener.onFragmentInteraction(uri);
@@ -368,7 +358,6 @@ public class SlotDetailsFragment extends Fragment {
     public interface OnEventsInteractionListener {
         void onListItemClick(ListView l, View v, int position, long id);
 
-        // TODO: Update argument type and name
         public void onFragmentInteraction(Uri uri);
     }
     private class RemoteDataTask extends AsyncTask<Void, Void, Void> {
@@ -448,7 +437,6 @@ public class SlotDetailsFragment extends Fragment {
             mCoverFlow.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    //TODO CoverFlow item clicked
                     //mTitle.setText(getResources().getString(mData.get(position).titleResId));
                 }
             });
@@ -456,14 +444,13 @@ public class SlotDetailsFragment extends Fragment {
             mCoverFlow.setOnScrollPositionListener(new FeatureCoverFlow.OnScrollPositionListener() {
                 @Override
                 public void onScrolledToPosition(int position) {
-                    //TODO CoverFlow stopped to position
 
                     mTitle.setText(eventitemlist.get(position).getStartDate() + " - " + eventitemlist.get(position).getNameIT());
                 }
 
                 @Override
                 public void onScrolling() {
-                    //TODO CoverFlow began scrolling
+
                     mTitle.setText("");
                 }
             });

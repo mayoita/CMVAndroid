@@ -60,14 +60,15 @@ import it.moondroid.coverflow.components.ui.containers.FeatureCoverFlow;
  * Created by massimomoro on 05/05/15.
  */
 public class SlotDetailsActivity extends AppCompatActivity {
-
+    private String[] slot_array;
+    private String[] slot_array_title;
     private SliderLayout mySlider;
     private FeatureCoverFlow mCoverFlow;
     private CoverFlowAdapter mAdapter;
     DisplayMetrics dm;
     private ArrayList<GameEntity> mData = new ArrayList<>(0);
     private TextSwitcher mTitle;
-    JSONArray myData;
+
     List<ParseObject> ob;
     private List<EventItem> eventitemlist = null;
     TextView theText;
@@ -97,17 +98,12 @@ public class SlotDetailsActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        slot_array = getResources().getStringArray(R.array.slot_array);
+        slot_array_title = getResources().getStringArray(R.array.slot_array_title);
         final Typeface XLight = Typeface.createFromAsset(getAssets(), "fonts/GothamXLight.otf");
         Intent intent = getIntent();
         String jsonArray = intent.getStringExtra("jsonArray");
         int theIndex = intent.getIntExtra("index",0);
-        try {
-            myData = new JSONArray(jsonArray);
-
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
 
         boolean tabletSize = getResources().getBoolean(R.bool.isTablet);
         if (tabletSize) {
@@ -235,16 +231,9 @@ public class SlotDetailsActivity extends AppCompatActivity {
         theText.setTypeface(XLight);
         theTitle.setTypeface(XLight);
 
-        try {
-            theText.setText(myData.getJSONArray(2).getString(1));
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        try {
-            theTitle.setText(myData.getString(0));
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
+        theText.setText(slot_array[theIndex]);
+        theTitle.setText(slot_array_title[theIndex]);
+
 
 
         if (getResources().getConfiguration().orientation

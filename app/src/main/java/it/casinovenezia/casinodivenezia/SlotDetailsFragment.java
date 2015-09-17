@@ -59,13 +59,14 @@ public class SlotDetailsFragment extends Fragment {
     private static final String MY_ARRAY = "theDataArray";
     private static final String MY_INDEX = "theIndex";
 
-
+    private String[] slot_array;
+    private String[] slot_array_title;
     private String mParam1;
     private SliderLayout mySlider;
     private CoverFlowAdapter mAdapter;
     private FeatureCoverFlow mCoverFlow;
     int fragmentWidth;
-    JSONArray myData;
+
     DisplayMetrics dm;
     int theIndex;
     Typeface XLight;
@@ -120,9 +121,7 @@ public class SlotDetailsFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(MY_ARRAY);
             theIndex = getArguments().getInt(MY_INDEX);
-
         }
         Display display = getActivity().getWindowManager().getDefaultDisplay();
         fragmentWidth= display.getWidth();
@@ -169,36 +168,15 @@ public class SlotDetailsFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-
+        slot_array = getResources().getStringArray(R.array.slot_array);
+        slot_array_title = getResources().getStringArray(R.array.slot_array_title);
         myView = getView();
 
         XLight = Typeface.createFromAsset(getActivity().getAssets(), "fonts/GothamXLight.otf");
         dm = getResources().getDisplayMetrics();
-        try {
-            myData = new JSONArray(mParam1);
 
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
         if (myView != null) {
-            myView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
-                @Override
-                public void onGlobalLayout() {
-                    switch (theIndex) {
-                        case 1:
-                            break;
 
-                        default:
-                            //fragmentWidth = myView.getWidth();
-
-
-
-
-                            break;
-                    }
-
-                }
-            });
             switch (theIndex) {
                 case 1:
                     mTitle = (TextSwitcher) myView.findViewById(R.id.title);
@@ -252,16 +230,9 @@ public class SlotDetailsFragment extends Fragment {
                     theText.setTypeface(XLight);
                     theTitle.setTypeface(XLight);
 
-                    try {
-                        theText.setText(myData.getJSONArray(2).getString(1));
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-                    try {
-                        theTitle.setText(myData.getString(0));
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
+                    theText.setText(slot_array[theIndex]);
+                    theTitle.setText(slot_array_title[theIndex]);
+
                     ImageView imageView = (ImageView) myView.findViewById(R.id.imageViewSlotDetails);
                     DisplayMetrics dm = getResources().getDisplayMetrics();
                     int height = (int) (fragmentWidth * 0.44); // 0.75 if image aspect ration is 4:3, change accordingly
@@ -306,16 +277,9 @@ public class SlotDetailsFragment extends Fragment {
                     theText.setTypeface(XLight);
                     theTitleD.setTypeface(XLight);
 
-                    try {
-                        theText.setText(myData.getJSONArray(2).getString(1));
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-                    try {
-                        theTitleD.setText(myData.getString(0));
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
+                    theText.setText(slot_array[theIndex]);
+                    theTitleD.setText(slot_array_title[theIndex]);
+
 
                     ImageView imageViewD = (ImageView) myView.findViewById(R.id.imageViewSlotDetails);
                     DisplayMetrics dmD = getResources().getDisplayMetrics();
@@ -336,25 +300,6 @@ public class SlotDetailsFragment extends Fragment {
 
     }
 
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
-    }
-
-
-
-
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p/>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
     public interface OnEventsInteractionListener {
         void onListItemClick(ListView l, View v, int position, long id);
 

@@ -80,10 +80,10 @@
     <string name="francese">FRENCH ROULETTE</string>
     <string name="chemin">CHEMIN DE FER</string>
     <string name="trente">MIDI TRENTE ET QUARANTE</string>
-    <string name="what">WHAT WE OFFER</string>
-    <string name="whatnew">WHAT\'S NEW</string>
-    <string name="rooms">SLOT MACHINE ROOMS</string>
-    <string name="jackpot_slot">OUR JACKPOTS</string>
+    <string name="what">PARQUE SLOT</string>
+    <string name="whatnew">NOVEDADES SLOT</string>
+    <string name="rooms">SALAS SLOT</string>
+    <string name="jackpot_slot">NUESTROS JACKPOT</string>
     <string name="title_activity_game_item">GAME</string>
     <string name="close_rule">CLOSE</string>
     <string name="title_activity_slot_details">SLOT</string>
@@ -247,4 +247,20 @@
     <string name="time_table">HORARIO DEL BUS/TRANSBORDADOR</string>
     <string name="contactUsText">Contáctenos</string>
     <string name="like_us">POR FAVOR HAGA CLIC EN ME GUSTA EN FACEBOOK!</string>
+    <string name="offer">Para jugar con nuestras máquinas se necesita un mínimo de un céntimo de euro hasta hacer múltiples apuestas de 10,00 euros llegando a apuestas máximas de 500,00 euros.</string>
+    <string name="what_new">Una oferta que evoluciona constantemente con tal de garantizar lo mejor de la tecnología moderna en pos de una mayor satisfacción por parte del cliente.</string>
+    <string name="slot_rooms">Ca\'Noghera, el primer casino de estilo americano en Italia: 4.000 metros cuadrados de salas slot y servicios auxiliares para el juego. Ca\'Vendramin Calergi: encontrará una oferta en donde la tecnología más puntera se integra perfectamente en un ambiente clásico y extraordinario</string>
+    <string-array name="slot_array">
+        <item name="offer">Para jugar con nuestras máquinas se necesita un mínimo de un céntimo de euro hasta hacer múltiples apuestas de 10,00 euros llegando a apuestas máximas de 500,00 euros.</item>
+        <item name="what_new">Una oferta que evoluciona constantemente con tal de garantizar lo mejor de la tecnología moderna en pos de una mayor satisfacción por parte del cliente.</item>
+        <item></item>
+        <item name="slot_rooms">Ca\'Noghera, el primer casino de estilo americano en Italia: 4.000 metros cuadrados de salas slot y servicios auxiliares para el juego. Ca\'Vendramin Calergi: encontrará una oferta en donde la tecnología más puntera se integra perfectamente en un ambiente clásico y extraordinario</item>
+    </string-array>
+    <string-array name="slot_array_title">
+        <item name="what">PARQUE SLOT</item>
+        <item name="whatnew">NOVEDADES SLOT</item>
+        <item name="jackpot_slot">NUESTROS JACKPOT</item>
+        <item name="rooms">SALAS SLOT</item>
+
+    </string-array>
 </resources>

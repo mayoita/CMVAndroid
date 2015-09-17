@@ -30,6 +30,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 
@@ -406,12 +407,7 @@ public void openPop(View v) {
                     case 1:
                         Intent intentSlot = new Intent();
                         intentSlot.setClass(getActivity(), SlotDetailsActivity.class);
-                        try {
-                            intentSlot.putExtra("jsonArray", myjArr.getJSONArray(index).toString());
-                            intentSlot.putExtra("index", index);
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
+                        intentSlot.putExtra("index", index);
                         startActivity(intentSlot);
                         break;
                     default:
@@ -425,9 +421,15 @@ public void openPop(View v) {
 
     public String loadJSONFromAsset() {
         String json = null;
-        try {
+        InputStream is;
 
-            InputStream is = getActivity().getAssets().open("base/GameDBase.json");
+        try {
+            if (Locale.getDefault().getLanguage().equals("it") ) {
+                 is = getActivity().getAssets().open("base/GameDBase_it.json");
+            } else {
+                 is = getActivity().getAssets().open("base/GameDBase.json");
+            }
+
 
             int size = is.available();
 
@@ -467,11 +469,11 @@ public void openPop(View v) {
                         mAdapter.titleArray = arraySlotsTitle;
                         mAdapter.notifyDataSetChanged();
 
-                        try {
-                            myjArr = gameList.getJSONArray("Slot").getJSONArray(0).getJSONArray(Venue.currentVenue + 2);
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
+//                        try {
+//                            myjArr = gameList.getJSONArray("Slot").getJSONArray(0).getJSONArray(Venue.currentVenue + 2);
+//                        } catch (JSONException e) {
+//                            e.printStackTrace();
+//                        }
                         break;
                 }
 

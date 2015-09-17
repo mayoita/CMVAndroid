@@ -81,11 +81,11 @@
     <string name="chemin">CHEMIN DE FER</string>
     <string name="trente">MIDI TRENTE ET QUARANTE</string>
     <string name="what">IL PARCO SLOT</string>
-    <string name="whatnew">>LE NOVITÀ SLOT</string>LE NOVITÀ SLOT/string>
+    <string name="whatnew">LE NOVITÀ SLOT</string>LE NOVITÀ SLOT/string>
     <string name="rooms">LE SALE SLOT</string>
     <string name="jackpot_slot">I NOSTRI JACKPOT</string>
     <string name="title_activity_game_item">GAME</string>
-    <string name="close_rule">CLOSE</string>
+    <string name="close_rule">CHIUDI</string>
     <string name="title_activity_slot_details">SLOT</string>
     <string name="text_for_game_general">Vivere il piacere del gioco e della sfida in una cornice raffinata e coinvolgente.\nÈ l\'opportunità offerta dalle due sedi del Casinò di Venezia, ognuna completa, ma con un carattere originale.\nE, da casa, il gioco on line.</string>
     <string name="title_activity_poker_item">POKER</string>
@@ -223,4 +223,21 @@ Per gli acquisti di mezzi di gioco si accettano:\n- pagamenti in valuta italiana
     <string name="time_table">SERVIZI DI TRASPORTO DEDICATI</string>
     <string name="contactUsText">Contattaci</string>
     <string name="like_us">Clicca \"LIKE\" su Facebook!</string>
+    <string name="offer">Alle nostre macchine si gioca da un minimo di un centesimo di euro fino a puntate multiple su base 10,00 euro, con puntate massime da 500,00 euro.</string>
+    <string name="what_new">Un\’offerta in costante evoluzione, per garantire sempre il meglio della moderna tecnologia, alla ricerca continua di una maggiore soddisfazione del cliente.</string>
+    <string name="slot_rooms">Ca\' Noghera, il primo casinò all\’americana in Italia: 4000 metri quadri di sale slot e servizi accessori al gioco.\n\nCa\'Vendramin Calergi: un\’offerta in cui la tecnologia all\’avanguardia si integra perfettamente in un ambiente antico e straordinario</string>
+    <string-array name="slot_array">
+        <item>Alle nostre macchine si gioca da un minimo di un centesimo di euro fino a puntate multiple su base 10,00 euro, con puntate massime da 500,00 euro.</item>
+        <item>Un\’offerta in costante evoluzione, per garantire sempre il meglio della moderna tecnologia, alla ricerca continua di una maggiore soddisfazione del cliente.</item>
+        <item></item>
+        <item>Ca\' Noghera, il primo casinò all\’americana in Italia: 4000 metri quadri di sale slot e servizi accessori al gioco.\n\nCa\'Vendramin Calergi: un\’offerta in cui la tecnologia all\’avanguardia si integra perfettamente in un ambiente antico e straordinario</item>
+    </string-array>
+    <string-array name="slot_array_title">
+        <item name="what">IL PARCO SLOT</item>
+        <item name="whatnew">LE NOVITÀ SLOT</item>
+        <item name="jackpot_slot">I NOSTRI JACKPOT</item>
+        <item name="rooms">LE SALE SLOT</item>
+    </string-array>
+
+
 </resources>

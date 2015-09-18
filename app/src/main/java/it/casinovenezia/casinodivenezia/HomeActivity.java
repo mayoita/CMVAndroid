@@ -467,7 +467,6 @@ public class HomeActivity extends AppCompatActivity implements
                 }
             }
         }
-
     }
 
     private void checkFragment (int venue) {

@@ -79,7 +79,9 @@ public class EventDetailsActivity extends AppCompatActivity implements BaseSlide
         TextView diciotto = (TextView) findViewById(R.id.diciottopiu);
         diciotto.setMovementMethod(LinkMovementMethod.getInstance());
         Typeface XLight = Typeface.createFromAsset(getAssets(), "fonts/GothamXLight.otf");
-        Typeface Thin = Typeface.createFromAsset(getAssets(), "fonts/Giorgio-Thin.ttf");
+        name.setTypeface(XLight);
+        date.setTypeface(XLight);
+        description.setTypeface(XLight);
         loadImage(i.getStringExtra("objectId"));
         Display display = getWindowManager().getDefaultDisplay();
         ImageView imageView = (ImageView) findViewById(R.id.imageView7);

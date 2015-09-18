@@ -5,6 +5,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.text.Html;
 import android.text.method.LinkMovementMethod;
 import android.util.DisplayMetrics;
 import android.util.TypedValue;
@@ -37,6 +38,7 @@ public class TournamentDetails extends Fragment implements BaseSliderView.OnSlid
     private static final String START_DATE = "StartDate";
     private static final String TOURNAMENTS_RULES = "TournamentsRules";
     private static final String TOURNAMENT_EVENT = "TournamentEvent";
+    private static final String TOURNAMENT_TYPE = "TournamentType";
     private TournamentDayAdapter mAdapter;
     private TournamentCellAdapter mCellAdapter;
     private ListView myListView;
@@ -56,7 +58,7 @@ private int convertDpToPx(int dp,DisplayMetrics displayMetrics){
         }
 
 
-public static TournamentDetails newInstance(String tournamentDescription, String tournamentName, String tournamentUrl, String startDate, ArrayList tournamtsrules, ArrayList tournamentEvent){
+public static TournamentDetails newInstance(String tournamentDescription, String tournamentName, String tournamentUrl, String startDate, ArrayList tournamtsrules, ArrayList tournamentEvent, String typeTournament){
         TournamentDetails fragment=new TournamentDetails();
         Bundle args=new Bundle();
         args.putString(TOURNAMENT_DESCRIPTION, tournamentDescription);
@@ -65,7 +67,7 @@ public static TournamentDetails newInstance(String tournamentDescription, String
         args.putString(START_DATE, startDate);
         args.putStringArrayList(TOURNAMENTS_RULES, tournamtsrules);
         args.putStringArrayList(TOURNAMENT_EVENT, tournamentEvent);
-
+        args.putString(TOURNAMENT_TYPE, typeTournament);
         fragment.setArguments(args);
         return fragment;
         }
@@ -102,8 +104,15 @@ public View onCreateView(LayoutInflater inflater,ViewGroup container,
         // the view hierarchy; it would just never be used.
         return null;
         }
-        View rootView=inflater.inflate(R.layout.activity_tournament_details,container,false);
+        View rootView;
+    if (getArguments().getString(TOURNAMENT_TYPE).equals("P")) {
+        rootView=inflater.inflate(R.layout.activity_tournament_details, container, false);
+        myListView=(ListView)rootView.findViewById(R.id.listViewTournament);
 
+    } else {
+        rootView=inflater.inflate(R.layout.activity_tournament_details_bis, container, false);
+
+    }
         return rootView;
         }
 
@@ -121,67 +130,67 @@ public void onActivityCreated(@Nullable Bundle savedInstanceState){
                             mAdapter = new TournamentDayAdapter(getActivity(), fragmentWidth);
                             mCellAdapter = new TournamentCellAdapter(getActivity(), fragmentWidth);
                             pokerArray = getArguments().getStringArrayList("TournamentEvent");
-
-                            int primo=0;
-                            for (int k = 0; k < pokerArray.size(); k++) {
-                                ArrayList f = (ArrayList) pokerArray.get(k);
-                                String ff = (String) f.get(1);
-                                if (!ff.equals("")) {
-                                    mAdapter.addItem((String) f.get(1), k);
-                                    primo = primo + 1;
-                                }
-                                if (primo == 1) {
-                                    mCellAdapter.addItem((ArrayList) pokerArray.get(k));
-                                }
-                            }
-                            myListView.setAdapter(mCellAdapter);
-
-                            lvTest = (TwoWayView) myView.findViewById(R.id.lvItemsTournament);
-                            lvTest.setAdapter(mAdapter);
-                            lvTest.setOnScrollListener(new TwoWayView.OnScrollListener() {
-                                @Override
-                                public void onScrollStateChanged(TwoWayView view, int scrollState) {
-                                    String stateName = "Undefined";
-                                    currentScrollState = scrollState;
-                                    isScrollCompleted();
-                                    switch (scrollState) {
-                                        case SCROLL_STATE_IDLE:
-                                            stateName = "Idle";
-                                            break;
-                                        case SCROLL_STATE_TOUCH_SCROLL:
-                                            stateName = "Dragging";
-                                            break;
-                                        case SCROLL_STATE_FLING:
-                                            stateName = "Flinging";
-                                            break;
+                            if (getArguments().getString(TOURNAMENT_TYPE).equals("P")) {
+                                int primo = 0;
+                                for (int k = 0; k < pokerArray.size(); k++) {
+                                    ArrayList f = (ArrayList) pokerArray.get(k);
+                                    String ff = (String) f.get(0);
+                                    if (!ff.equals("")) {
+                                        mAdapter.addItem((String) f.get(0), k);
+                                        primo = primo + 1;
                                     }
-
+                                    if (primo == 1) {
+                                        mCellAdapter.addItem((ArrayList) pokerArray.get(k));
+                                    }
                                 }
+                                myListView.setAdapter(mCellAdapter);
 
-                                @Override
-                                public void onScroll(TwoWayView view, int firstVisibleItem,
-                                                     int visibleItemCount, int totalItemCount) {
-
-
-                                    currentVisibleItemCount = visibleItemCount;
-                                }
-
-                                private void isScrollCompleted() {
-
-                                    if (currentVisibleItemCount > 0 && currentScrollState == 0) {
-
-
-                                        mCellAdapter.mData.clear();
-                                        for (int k = mAdapter.getIndex(lvTest.getFirstVisiblePosition()); k < mAdapter.getIndex(lvTest.getFirstVisiblePosition() + 1); k++) {
-                                            mCellAdapter.addItem((ArrayList) pokerArray.get(k));
+                                lvTest = (TwoWayView) myView.findViewById(R.id.lvItemsTournament);
+                                lvTest.setAdapter(mAdapter);
+                                lvTest.setOnScrollListener(new TwoWayView.OnScrollListener() {
+                                    @Override
+                                    public void onScrollStateChanged(TwoWayView view, int scrollState) {
+                                        String stateName = "Undefined";
+                                        currentScrollState = scrollState;
+                                        isScrollCompleted();
+                                        switch (scrollState) {
+                                            case SCROLL_STATE_IDLE:
+                                                stateName = "Idle";
+                                                break;
+                                            case SCROLL_STATE_TOUCH_SCROLL:
+                                                stateName = "Dragging";
+                                                break;
+                                            case SCROLL_STATE_FLING:
+                                                stateName = "Flinging";
+                                                break;
                                         }
-                                        myListView.setAdapter(mCellAdapter);
+
                                     }
-                                }
 
-                            });
+                                    @Override
+                                    public void onScroll(TwoWayView view, int firstVisibleItem,
+                                                         int visibleItemCount, int totalItemCount) {
 
 
+                                        currentVisibleItemCount = visibleItemCount;
+                                    }
+
+                                    private void isScrollCompleted() {
+
+                                        if (currentVisibleItemCount > 0 && currentScrollState == 0) {
+
+
+                                            mCellAdapter.mData.clear();
+                                            for (int k = mAdapter.getIndex(lvTest.getFirstVisiblePosition()); k < mAdapter.getIndex(lvTest.getFirstVisiblePosition() + 1); k++) {
+                                                mCellAdapter.addItem((ArrayList) pokerArray.get(k));
+                                            }
+                                            myListView.setAdapter(mCellAdapter);
+                                        }
+                                    }
+
+                                });
+
+                            }
 
 
                             if(fragmentWidth>0){
@@ -190,7 +199,7 @@ public void onActivityCreated(@Nullable Bundle savedInstanceState){
                         }
                 });
 
-                myListView=(ListView)myView.findViewById(R.id.listViewTournament);
+
                 TextView diciotto=(TextView)myView.findViewById(R.id.diciottopiu);
                 diciotto.setMovementMethod(LinkMovementMethod.getInstance());
                 Typeface XLight=Typeface.createFromAsset(getActivity().getAssets(),"fonts/GothamXLight.otf");
@@ -198,17 +207,28 @@ public void onActivityCreated(@Nullable Bundle savedInstanceState){
                 TextView titoloR=(TextView)myView.findViewById(R.id.textViewTournamentRule);
                 titolo.setTypeface(XLight);
                 titoloR.setTypeface(XLight);
-
+            if (getArguments().getStringArrayList(TOURNAMENTS_RULES) != null) {
+                titoloR.setText(getArguments().getString(TOURNAMENT_DESCRIPTION) + "\n\n" +  Html.fromHtml(createRules(getArguments().getStringArrayList(TOURNAMENTS_RULES))));
+            } else {
+                titoloR.setText(getArguments().getString(TOURNAMENT_DESCRIPTION));
+            }
+            titolo.setText((getArguments().getString(TOURNAMENT_NAME)));
 
         }
 
 }
 
-public void onButtonPressed(Uri uri){
-        if(mListener!=null){
-        mListener.onFragmentInteraction(uri);
+    public String createRules (ArrayList theList) {
+        String theRules ="";
+
+        for (int i = 0; i < theList.size(); i++) {
+
+            ArrayList a = (ArrayList) theList.get(i);
+            theRules = theRules + "<font color=#cc0029>" + a.get(0) + "</font><BR>"  + a.get(1) + "<BR><BR>";
         }
-        }
+
+        return theRules;
+    }
 
 @Override
 public void onSliderClick(BaseSliderView baseSliderView){

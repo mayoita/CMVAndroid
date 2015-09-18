@@ -156,13 +156,14 @@ public class TournamentFr extends Fragment {
                     getFragmentManager().findFragmentById(R.id.containerInLandTournament);
             if (details == null || details.getShownIndex() != myEventitemlist.get(index).getTournamentsName()) {
                 // Make new fragment to show this selection.
-                details = TournamentDetails.newInstance(myEventitemlist.get(index).getTournamentDescription(),
-
+                details = TournamentDetails.newInstance(
+                        myEventitemlist.get(index).getTournamentDescription(),
                         myEventitemlist.get(index).getTournamentsName(),
                         myEventitemlist.get(index).getTournamentUrl(),
                         myEventitemlist.get(index).getStartDate(),
                         myEventitemlist.get(index).getTournamentsRules(),
-                        myEventitemlist.get(index).getTournamentEvent());
+                        myEventitemlist.get(index).getTournamentEvent(),
+                        myEventitemlist.get(index).getType());
                 // Execute a transaction, replacing any existing fragment
                 // with this one inside the frame.
                 FragmentTransaction ft = getFragmentManager().beginTransaction();

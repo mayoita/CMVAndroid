@@ -12,7 +12,14 @@ android {
         versionName "1.0"
         multiDexEnabled true
     }
-
+    signingConfigs {
+        release {
+            storeFile file("CMVAndroid.jks")
+            storePassword "punitore6872"
+            keyAlias "CMVAlias"
+            keyPassword "punitore6872"
+        }
+    }
     buildTypes {
         release {
             minifyEnabled false

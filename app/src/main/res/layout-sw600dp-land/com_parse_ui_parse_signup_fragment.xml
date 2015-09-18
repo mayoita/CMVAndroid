@@ -23,6 +23,8 @@
         android:layout_toRightOf="@+id/diciottoetichetta"
         android:layout_alignBottom="@+id/diciottoetichetta"
         android:paddingRight="2dp"
+        android:layout_alignTop="@+id/diciottoetichetta"
+        android:gravity="center_vertical"
         />
 
     <ImageView

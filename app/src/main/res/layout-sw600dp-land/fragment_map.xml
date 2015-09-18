@@ -22,7 +22,8 @@ android:background="@drawable/blacktilebg">
     android:layout_toRightOf="@+id/diciottoetichetta"
     android:layout_alignBottom="@+id/diciottoetichetta"
     android:paddingRight="2dp"
-    android:layout_alignParentEnd="true" />
+    android:layout_alignTop="@+id/diciottoetichetta"
+    android:gravity="center_vertical" />
     <TextView
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"

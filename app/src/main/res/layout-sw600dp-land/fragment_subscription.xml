@@ -26,7 +26,9 @@
         android:layout_alignBottom="@+id/diciottoetichetta"
         android:paddingRight="2dp"
         android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true" />
+        android:layout_alignParentRight="true"
+        android:layout_alignTop="@+id/diciottoetichetta"
+        android:gravity="center_vertical"/>
 
     <it.casinovenezia.casinodivenezia.CustomMenuTitleView
         android:layout_width="wrap_content"

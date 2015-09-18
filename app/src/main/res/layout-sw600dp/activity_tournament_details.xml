@@ -1,0 +1,141 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/blackpokertilebg">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="18+"
+        android:id="@+id/diciottoetichetta"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        android:paddingLeft="2dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/diciottopiu"
+        android:text="@string/link"
+        android:textSize="11sp"
+        android:textColor="@color/white"
+        android:layout_toRightOf="@+id/diciottoetichetta"
+        android:layout_alignBottom="@+id/diciottoetichetta"
+        android:paddingRight="2dp"
+        android:layout_alignTop="@+id/diciottoetichetta"
+        android:gravity="center_vertical"
+        android:layout_marginLeft="2dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Titolo"
+        android:id="@+id/textViewTournament"
+        android:textSize="40sp"
+        android:textColor="@color/white"
+        android:layout_gravity="center_horizontal"
+        android:layout_below="@+id/diciottopiu"
+        android:layout_centerHorizontal="true"
+        android:gravity="center" />
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:id="@+id/imageView8"
+        android:scaleType="fitXY"
+        android:src="@drawable/poker_day"
+        android:layout_below="@+id/textViewTournament" />
+
+    <org.lucasr.twowayview.TwoWayView
+        android:id="@+id/lvItemsTournament"
+        style="@style/TwoWayView"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:drawSelectorOnTop="false"
+        tools:context=".MainActivity"
+
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_below="@+id/textViewTournament" />
+
+    <ImageView
+        android:layout_width="20dp"
+        android:layout_height="50dp"
+        android:id="@+id/leftArrow"
+
+        android:src="@drawable/arrowleft_rd"
+        android:layout_alignParentTop="false"
+        android:layout_alignParentLeft="false"
+        android:layout_alignParentStart="false"
+        android:layout_alignTop="@+id/imageView8"
+        android:layout_alignLeft="@+id/imageView8" />
+
+    <ImageView
+        android:layout_width="20dp"
+        android:layout_height="50dp"
+        android:id="@+id/rightArrow"
+
+        android:src="@drawable/arrowright_rd"
+        android:layout_alignParentTop="false"
+        android:layout_alignParentRight="false"
+        android:layout_alignParentEnd="true"
+        android:layout_alignRight="@+id/imageView8"
+        android:layout_alignTop="@+id/imageView8" />
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_below="@+id/imageView8"
+        android:layout_marginTop="5dp"
+        android:id="@+id/linearLayout">
+
+        <ListView
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:id="@+id/listViewTournament"
+            android:layout_marginTop="5dp"
+            android:layout_weight="1" />
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:fillViewport="false"
+        android:layout_marginTop="5dp"
+        android:id="@+id/myScrollEvent"
+        android:layout_below="@+id/linearLayout">
+        <FrameLayout
+            android:id="@+id/poker_details"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            >
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/lore"
+                    android:id="@+id/textViewTournamentRule"
+                    android:textSize="20sp"
+                    android:textColor="@color/white"
+
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp" />
+
+
+            </RelativeLayout>
+
+        </FrameLayout>
+
+
+    </ScrollView>
+
+
+</RelativeLayout>

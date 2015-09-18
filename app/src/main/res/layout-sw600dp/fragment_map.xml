@@ -10,7 +10,8 @@ android:background="@drawable/blacktilebg">
     android:id="@+id/diciottoetichetta"
     android:textColor="@color/white"
     android:textSize="16sp"
-    android:paddingLeft="2dp"/>
+    android:paddingLeft="2dp"
+    />
 
 <TextView
     android:layout_width="wrap_content"
@@ -22,7 +23,8 @@ android:background="@drawable/blacktilebg">
     android:layout_toRightOf="@+id/diciottoetichetta"
     android:layout_alignBottom="@+id/diciottoetichetta"
     android:paddingRight="2dp"
-    android:layout_alignParentEnd="true" />
+    android:layout_alignTop="@+id/diciottoetichetta"
+    android:gravity="center_vertical" />
     <TextView
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
@@ -37,7 +39,8 @@ android:background="@drawable/blacktilebg">
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_marginTop="5dp"
-        android:id="@+id/textView26" />
+        android:id="@+id/textView26"
+        />
 
     <TextView
         android:layout_width="wrap_content"

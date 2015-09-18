@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:focusableInTouchMode="true"
+    android:background="@drawable/greentilebg"
+    android:id="@+id/gameLandFragment">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="18+"
+        android:id="@+id/diciottoetichetta"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        android:paddingLeft="2dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/diciottopiu"
+        android:text="@string/link"
+        android:textSize="11sp"
+        android:textColor="@color/white"
+        android:layout_toRightOf="@+id/diciottoetichetta"
+        android:layout_alignBottom="@+id/diciottoetichetta"
+        android:paddingRight="2dp"
+        android:layout_alignTop="@+id/diciottoetichetta"
+        android:gravity="center_vertical" />
+
+    <it.casinovenezia.casinodivenezia.AutoResizeTextView
+        android:layout_width="match_parent"
+        android:layout_height="25dp"
+        android:text="FAIR ROULETTE"
+        android:id="@+id/textViewTitleGame"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="22dp"
+        android:textColor="@color/white"
+        android:textSize="100sp"
+        android:ellipsize="none"
+        android:maxLines="1"
+        android:gravity="center"/>
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:fillViewport="false"
+        android:layout_marginTop="55dp"
+        android:id="@+id/myScrollEvent">
+        <FrameLayout
+            android:id="@+id/event_details"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            >
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="206dp"
+                    android:id="@+id/imageViewWhite"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="7dp"
+                    android:layout_marginRight="7dp"
+                    android:background="@color/white" />
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="206dp"
+                    android:id="@+id/imageViewGame"
+                    android:layout_marginTop="13dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:background="@color/green_game_bg" />
+
+                <org.lucasr.twowayview.TwoWayView
+                    android:id="@+id/lvItems"
+                    style="@style/TwoWayView"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:drawSelectorOnTop="false"
+                    tools:context=".MainActivity"
+                    android:layout_below="@+id/imageViewWhite"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginRight="30dp" />
+
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_below="@+id/lvItems"
+                    >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/lore"
+                        android:id="@+id/textViewGame"
+                        android:textSize="20sp"
+                        android:textColor="@color/white"
+                        android:layout_marginLeft="7dp"
+                        android:layout_marginRight="7dp"
+                        android:layout_marginTop="10dp" />
+                </LinearLayout>
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="50dp"
+                    android:id="@+id/leftArrow"
+
+                    android:layout_below="@+id/imageViewWhite"
+                    android:layout_alignLeft="@+id/imageViewWhite"
+                    android:layout_alignStart="@+id/imageViewWhite"
+                    android:src="@drawable/arrowleft"
+                    android:layout_marginTop="5dp" />
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="50dp"
+                    android:id="@+id/rightArrow"
+                    android:layout_below="@+id/imageViewWhite"
+                    android:layout_alignRight="@+id/imageViewWhite"
+                    android:layout_alignEnd="@+id/imageViewWhite"
+                    android:layout_marginTop="5dp"
+                    android:src="@drawable/arrowright" />
+
+
+            </RelativeLayout>
+
+        </FrameLayout>
+
+
+    </ScrollView>
+</RelativeLayout>

@@ -4,26 +4,26 @@
     <string name="app_name">"Casinò di Venezia "</string>
     <string name="action_settings">Settings</string>
     <string name="cavendramin">CÀ VENDRAMIN CALERGI</string>
-    <string name="apertodalle">OPEN FROM xx:x TO xx:xx</string>
+    <string name="apertodalle">营业时间为xx:xx至凌晨xx:xx</string>
     <string name="jackpotamount">x.xxx.xxx,xx €</string>
     <string name="jackpot">JACKPOT</string>
-    <string name="link">UNDER 18 ARE NOT ALLOWED TO GAMBLE. GAMBLING CAN BE PATHOLOGICALLY ADDICTIVE.<a href="http://www.casinovenezia.it/en/probability-winning.html">GO TO PROBABILITY OF WINNING</a></string>
+    <string name="link">未满18岁游客不得入内。游戏可能会对赌博引起病态依赖性.<a href="http://www.casinovenezia.it/en/probability-winning.html">胜算</a></string>
     <string name="action_change"></string>
-    <string name="home_label">HOME</string>
-    <string name="events_label">EVENTS</string>
+    <string name="home_label">主页</string>
+    <string name="events_label">活动</string>
     <string name="casino_label">CASINÒ</string>
-    <string name="poker_label">POKER</string>
-    <string name="tournament_label">TOURNAMENTS</string>
-    <string name="restaurant_label">RESTAURANT</string>
-    <string name="map_label">MAP</string>
+    <string name="poker_label">扑克时间</string>
+    <string name="tournament_label">赛事</string>
+    <string name="restaurant_label">马可波罗餐厅</string>
+    <string name="map_label">地图</string>
     <string-array name="nav_drawer_items">
-        <item>HOME</item>
-        <item>LOG IN</item>
-        <item>NEWSLETTER</item>
-        <item>TIMETABLES</item>
+        <item>主页</item>
+        <item>登录</item>
+        <item>资讯</item>
+        <item>公交车/ 船时刻表</item>
         <item>CASINÒ MOBILE</item>
-        <item>MY SUBSCRIPTION</item>
-        <item>CLICK "LIKE" ON FACEBOOK</item>
+        <item>我的订阅"</item>
+        <item>点击FACEBOOK连接</item>
         <item></item>
     </string-array>
     <string name="drawer_open">Open navigation drawer</string>
@@ -41,24 +41,24 @@
         <item>@drawable/homeempty</item>
     </array>
 
-    <string name="please">PLEASE LOGIN OR SIGN UP</string>
-    <string name="loginsignup">LOG IN / SIGN UP</string>
-    <string name="newsletter">NEWSLETTER</string>
-    <string name="email_nl">EMAIL</string>
-    <string name="name_nl">NAME</string>
+    <string name="please">请登录或注册</string>
+    <string name="loginsignup">请登录或注册</string>
+    <string name="newsletter">资讯</string>
+    <string name="email_nl">电子邮件</string>
+    <string name="name_nl">姓名</string>
     <string name="surname_nl">SURNAME</string>
-    <string name="willing">Yes, I am willing to receive the Venice Casino Newsletter at the address shown above.</string>
-    <string name="confirm">I confirm that I am 18 years of age or older.</string>
-    <string name="allow">To allow the requested service, I consent to the processing of my personal data in accordance with Legislative Decree 196/2003.</string>
-    <string name="unsubscribe">UNSUBSCRIBE</string>
-    <string name="subscribe">SUBSCRIBE</string>
-    <string name="click">LIKE US ON FACEBOOK AND GET YOUR FREE ENTRY!</string>
-    <string name="ingresso">ENTRY ALLOWED TO ADULTS OVER THE AGE OF EIGHTEEN. ONLY ON PRESENTATION OF A VALID PHOTO IDENTITY CARD.</string>
-    <string name="facebook">YOUR FREE ENTRY</string>
-    <string name="mysubscription">MY SUBSCRIPTION</string>
-    <string name="eventsnew">EVENTS NEWS</string>
-    <string name="slotnews">SLOT NEWS</string>
-    <string name="pokernews">POKER NEWS</string>
+    <string name="willing">是的，我愿意用以上显示的地址接收威尼斯赌场的新闻简报</string>
+    <string name="confirm">我确认我已年满18岁</string>
+    <string name="allow">为使申请的服务能够提供，我同意按照法令196/2003处理我的个人资料</string>
+    <string name="unsubscribe">退订</string>
+    <string name="subscribe">订阅</string>
+    <string name="click">在FACEBOOK上喜欢我们获得您的免费入场券！</string>
+    <string name="ingresso">入场券仅允许年满十八岁的成人使用。仅在出示有效的带照片身份证件后方可入内。</string>
+    <string name="facebook">您的免费入场券</string>
+    <string name="mysubscription">我的订阅</string>
+    <string name="eventsnew">活动新闻</string>
+    <string name="slotnews">老虎机新闻</string>
+    <string name="pokernews">扑克新闻</string>
     <string name="title_activity_event_details">Event</string>
     <string name="lore">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
         ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
@@ -68,9 +68,9 @@
         Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
         Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
         Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</string>
-    <string name="table_games">TABLE GAMES</string>
-    <string name="slot_games">ELETRONIC GAMES</string>
-    <string name="online_games">ONLINE GAMES</string>
+    <string name="table_games">桌面游戏</string>
+    <string name="slot_games">电子游戏</string>
+    <string name="online_games">在线游戏</string>
     <string name="fair">FAIR ROULETTE</string>
     <string name="black">BLACK JACK</string>
     <string name="texas">TEXAS HOLD\'EM POKER</string>
@@ -83,15 +83,13 @@
     <string name="whatnew">关于老虎机的新闻</string>
     <string name="rooms">老虎机大厅</string>
     <string name="jackpot_slot">我们的彩池</string>
-    <string name="title_activity_game_item">GAME</string>
-    <string name="close_rule">CLOSE</string>
-    <string name="title_activity_slot_details">SLOT</string>
-    <string name="text_for_game_general">Experiencing the pleasure of gambling and of the challenge in a refined and intriguing location. This is what the Casinò di Venezia’s two venues have to offer, each complete, but with their own unique character.\n\nAnd you can play online from your own home.</string>
-    <string name="title_activity_poker_item">POKER</string>
-    <string name="text_for_game_general_poker">The Casinò di Venezia provides opportunities for taking part in national and international competitions.\nThe venue at Ca\' Vendramin Calergi, for example,
-        stages the Italian Chemin de Fer Championships (12 rounds a year), the prize winning contests of Chemin de Fer (6 galas a year) and French Roulette tournaments (5 matches a year).\n\nCa\' Noghera, on the other hand,
-        stages Texas Hold \’em Poker tournaments every day with online qualifications.\nIn both venues, moreover, it is possible to take part in the Texas Hold \’em Poker international championships that take place regularly at least once a month.</string>
-    <string name="torneo">TORNEO</string>
+    <string name="title_activity_game_item">游戏</string>
+    <string name="close_rule">关闭</string>
+    <string name="title_activity_slot_details">老虎机</string>
+    <string name="text_for_game_general">体验游戏的乐趣，迎接精彩诱人的挑战。\n由威尼斯赌场（两家分店）提供的绝佳机遇，原汁原味。\n在家中即可开始在线游戏。</string>
+    <string name="title_activity_poker_item">扑克</string>
+    <string name="text_for_game_general_poker">在威尼斯赌场您可以参加国内和国际竞赛。\n例如，在文德拉明·卡莱吉宫分店举办意大利百家乐锦标赛（每年12次），百家乐竞奖赛（每年6次）和法式轮盘锦标赛（每年5次）。\n而在诺凯拉宫，通过在线资格赛后可以参加每日德州扑克锦标赛。\n您在两家分店都可以参加每个月至少举办一次的德州扑克国际锦标赛。</string>
+    <string name="torneo">比赛</string>
     <string name="ora">Ora</string>
     <string name="buy">BUY IN</string>
     <string name="stack">STACK</string>
@@ -99,17 +97,18 @@
     <string name="late">LATE</string>
     <string name="cap">CAP</string>
     <string name="note">NOTE</string>
-    <string name="text_for_game_general_tournament">The Casinò di Venezia provides opportunities for taking part in national and international competitions.\nThe venue at Ca\' Vendramin Calergi, for example,
-        stages the Italian Chemin de Fer Championships (12 rounds a year), the prize winning contests of Chemin de Fer (6 galas a year) and French Roulette tournaments (5 matches a year).\n\nCa\' Noghera, on the other hand,
-        stages Texas Hold \’em Poker tournaments every day with online qualifications.\nIn both venues, moreover, it is possible to take part in the Texas Hold \’em Poker international championships that take place regularly at least once a month.</string>
-    <string name="title_activity_tournament_item">TOURNAMENT</string>
-    <string name="telUno">+390415297230 (from 9.30 am - 5.30 pm)</string>
-    <string name="telDue">+390415297201 (7.30 pm - midnight)</string>
-    <string name="openingtime">Opening times:</string>
-    <string name="openingtimeTx">7.30 pm - midnight</string>
-    <string name="closed">Closed:</string>
-    <string name="closedTx">December 24 and 25</string>
-    <string name="creditCardLabel">Credit cards</string>
+    <string name="text_for_game_general_tournament">在威尼斯赌场您可以参加国内和国际竞赛。\n
+        例如，在文德拉明·卡莱吉宫分店举办意大利百家乐锦标赛（每年12次），百家乐竞奖赛（每年6次）和法式轮盘锦标赛（每年5次）。\n
+        而在诺凯拉宫，通过在线资格赛后可以参加每日德州扑克锦标赛。\n
+        您在两家分店都可以参加每个月至少举办一次的德州扑克国际锦标赛。</string>
+    <string name="title_activity_tournament_item">赛事</string>
+    <string name="telUno">+390415297230 (上午9:30至17:30)</string>
+    <string name="telDue">+390415297201 (19.30至24:00)</string>
+    <string name="openingtime">开放时间:</string>
+    <string name="openingtimeTx">19.30至24:00t</string>
+    <string name="closed">关闭:</string>
+    <string name="closedTx">12月24日和25日</string>
+    <string name="creditCardLabel">信用卡</string>
     <string name="fromtoMenu">from 26 to 5 march 2015</string>
     <string name="nome_chef">VALERIO VERGINE</string>
     <string name="title_activity_menu">MENU</string>
@@ -117,44 +116,43 @@
     <string name="first">First Course</string>
     <string name="second">Second Course</string>
     <string name="dessert">Dessert</string>
-    <string name="orari">TIMETABLES</string>
-    <string name="map">MAP</string>
-    <string name="info_map">INFO</string>
-    <string name="directions">(click on icons to get directions)</string>
-    <string formatted="false" name="info_text">With the exception of December 24 and 25 the Casinò di Venezia\’s two venues, Ca\’ Vendramin Calergi and Ca\’ Noghera are open all year round.\n
-        Access to the Casinò di Venezia\’s games rooms is restricted to adults only who are in possession of a valid ID document:\n\nacceptable forms of identification include either an ID Card,
-        a driving licence or a passport.\n\n€5.00 Admission Card (services excluded);\n€10.00 Admission Card: a €10 admission.\n\nThe €10.00 Admission Card includes services:\n-
-        The gift of a non convertible chip or ez-pay ticket worth € 10.00 for use at the gaming tables or on the slot machines;\n- cloakroom;\n- parking (at Ca\' Noghera it\'s free of charge;
-        in Venice there is a 50% discount at the ASM and Garage San Marco from Monday to Friday, but Sundays, public holidays and the day before these are excluded);\n- road shuttle service:
-        Casinò di Ca\' Noghera - Venice Piazzale Roma and vice versa;\n- road shuttle service: Mestre Railway Station –Ca\’ Noghera Casino and vice versa;\n-
-        waterways shuttle service: Piazzale Roma - Ca\' Vendramin Calergi and vice versa.\n\nIf you are staying in a hotel in Venice why not ask for a Free Entry Coupon.\n\n
-        There\’s a gift waiting for everyone who comes to gamble at the Casino on their birthday.\n\nThere are lots of different promotions and special occasions every month for organising a
-        visit to our two venues. Gifts from the Casinò di Venezia\’s own branded collections. An offer of drinks &amp; snacks, gambling benefits with slot machine tickets or gaming table chips,
-        free.\nFind out about the promotion of the month.\n\n\nMETHODS OF PAYMENT\n\nFor the purchase of means of gambling, we accept:\n- payment in Italian or foreign currency, up to the maximum
-        limit prescribed by current legislation (during the gambling at tables opening times)\n- payment with the following forms of credit cards: Pagobancomat Cash card; Visa; MasterCard, Maestro,
-        China Union Pay.\nPayment of gambling credits or winnings can be made in cash, within the limits prescribed by law, with non-transferable cheques made payable to the client or in the form
-        of a means of gambling.\n\nEach of the Casinò di Venezia\’s venues has cashier and POS/credit card and cash card banking service points.\n\nThe use of cash\nLegislative Decree No. 201 of
-        December 06 2013, published in the Official Gazette (No. 284 of December 06 2011) placed a limit on the use of ready cash for any transactions. As a result of this, therefore,
-        the transfer of cash to and from clients within the gaming house can only be for amounts of less than €1000.00.</string>
-    <string name="info_titolo">WAYS OF GAINING ADMISSION TO THE CASINO</string>
-    <string name="info_activiy_text">INFO</string>
+    <string name="orari">公交车/ 船时刻表</string>
+    <string name="map">地图</string>
+    <string name="info_map">信息</string>
+    <string name="directions">(点击图标来获得方向)</string>
+    <string formatted="false" name="info_text">进入方法\n此威尼斯赌场有文德拉明宫赌场(CA\’VENDRAMIN)和卡诺凯拉宫赌场(CA\’NOGHERA)两个赌场，除了12月24日和25日外，每年全天开放。\n
+        威尼斯赌场的博彩厅只允许成年人进入，并需要持有有效证件：有效的身份证、驾驶证、护照均可。\n
+        价值5欧元的卡（无服务）。\n
+        价值10欧元的卡：10欧元的进场费\n包括服务在内的10欧元卡：\n
+        价值不可兑换的10欧元筹码或EZ-票，可免费玩桌面赌博或老虎机; \n
+        -衣柜; \n
+        -停车场（卡诺凯拉宫赌场免费;周一到周五，威尼斯ASM和圣马可车库的位置减少50％，周末和节假日除外）; \n
+        穿梭于大陆间的船：卡诺凯拉宫赌场 -  威尼斯罗马广场，或者反方向。\n
+        - 穿梭于大陆间的班车：梅斯特雷火车站\n- 卡诺凯拉宫赌场，或者反方向。\n
+        -水上快艇：罗马广场 \n
+        - 文德拉明宫赌场，或者反方向。\n
+        如果你是威尼斯酒店的客人，可以获得一份入场券。\n
+        如果遇到生日那天来赌场，还可以获得一份独特的礼物。\n
+        我们赌场每个月都会举行许多促销活动以及特殊场合的参观。赠送您威尼斯赌场的收藏品。免费提供饮料和零食、老虎机票或筹码。</string>
+    <string name="info_titolo">进入方法</string>
+    <string name="info_activiy_text">信息</string>
     <string name="title_activity_sign_up">SignUpActivity</string>
-    <string name="title_activity_login">Log in</string>
-    <string name="title_activity_signup">Sign up</string>
-    <string name="prompt_username">Username</string>
-    <string name="prompt_password">Password</string>
-    <string name="prompt_password_again">Password Again</string>
+    <string name="title_activity_login">登录</string>
+    <string name="title_activity_signup">注册</string>
+    <string name="prompt_username">用户名</string>
+    <string name="prompt_password">密码</string>
+    <string name="prompt_password_again">确认密码</string>
     <string name="error_intro">"Please "</string>
-    <string name="error_blank_username">enter a username</string>
-    <string name="error_blank_password">enter a password</string>
+    <string name="error_blank_username">输入用户名</string>
+    <string name="error_blank_password">输入密码</string>
     <string name="error_mismatched_passwords">enter the same password twice</string>
     <string name="error_join">", and "</string>
     <string name="error_end">.</string>
     <string name="progress_login">Logging you in&#8230;</string>
     <string name="progress_signup">Signing you up&#8230;</string>
-    <string name="signup">Sign Up</string>
-    <string name="forgot">FORGOT ?</string>
-    <string name="you_can">YOU CAN LOG IN WITH</string>
+    <string name="signup">注册</string>
+    <string name="forgot">忘了 ?</string>
+    <string name="you_can">您也可以登录</string>
     <string name="parse_app_id">yO3MBzW9liNCaiAfXWGb3NtZJ3VhXyy4Zh8rR5ck</string>
     <string name="parse_client_key">KImYuYCrJ9j3IbDI3W2KtDXCXwmfqsRDCn5Em6A9</string>
     <string name="facebook_app_id">724548800932026</string>
@@ -163,58 +161,55 @@
         <item>email</item>
     </string-array>
     <string name="profile_title_logged_in">Your are logged in as</string>
-    <string name="profile_logout_button_label">Log out</string>
+    <string name="profile_logout_button_label">登出</string>
     <string name="profile_title_logged_out">You must be logged in to view your profile</string>
-    <string name="profile_login_button_label">Log in</string>
-    <string name="myEmail">EMAIL</string>
-    <string name="welcome">WELCOME</string>
-    <string name="dont_have">DON\'T HAVE AN ACCOUNT YET?</string>
-    <string name="login">LOG IN</string>
-    <string name="todayIsClosed">Today is closed</string>
-    <string name="todayOpen">Today open 11:00 am - 3:15 am</string>
-    <string name="todayOpenVenice">Today open 11:00 am - 02:45 am</string>
-    <string name="canogheratime1">Today open 11:00 am - 03:45 am</string>
-    <string name="canogheratime2">Today open 11:00 am - 03:15 am</string>
-    <string name="veneziatime1">Today open 11.00 am - 03.15 am</string>
-    <string name="veneziatime2">Today open 11:00 am - 02:45 am</string>
+    <string name="profile_login_button_label">登录</string>
+    <string name="myEmail">电子邮件</string>
+    <string name="welcome">欢迎</string>
+    <string name="dont_have">您还没有帐号?</string>
+    <string name="login">登录</string>
+    <string name="todayIsClosed">今日暂停</string>
+    <string name="todayOpen">营业时间为11:00至凌晨3:15</string>
+    <string name="todayOpenVenice">营业时间为11:00至凌晨2:45</string>
+    <string name="canogheratime1">营业时间为11:00至3:45</string>
+    <string name="canogheratime2">营业时间为11:00至凌晨3:15</string>
+    <string name="veneziatime1">营业时间为11:00至凌晨3:15</string>
+    <string name="veneziatime2">营业时间为11:00至凌晨2:45</string>
     <string name="text_for_event_general">Live music, concerts, disco club, performances, entertainment, bar area and refreshments ranging from Happy Hours to gala dinners.\n\nA mix of games and entertainment for special evenings of fun devoted to teaching the game.</string>
     <string name="lore_news">Our offering is under constant evolution to guarantee the best in modern technology, in our constant desire to offer the best customer satisfaction.</string>
     <string name="title1">God of War Ascension</string>
     <string name="title2">Assassin\'s Creed III</string>
     <string name="title3">Hitman Absolution</string>
     <string name="title4">Dishonored</string>
-    <string name="wagner_restaurant">WAGNER RESTAURANT</string>
-    <string name="marcopolo_restaurant">MARCO POLO RESTAURANT</string>
-    <string name="wagner_details">Dedicated to the great composer who lived in Venice in the historical
-        palazzo that today houses the city\'s casino, this restaurant is a unique privilege for visitors to
-        the gaming house. Situated on the first floor of Ca\' Vendramin Calergi, the Wagner Restaurant offers
-        the exclusive pleasure of refined dining. 150 places in 3 superb settings, the Sala Palma,
-        Sala Gialla and Sala Rossa, splendidly decorated with paintings by Palma il Giovane and frescoes
-        by Gian Battista Crosato. Timeless delicacies and traditional Venetian fish specialities.
-        Special events and music by the great composers are an added treat for our guests.</string>
-    <string name="marcopolo_details">Ideal for a meal, even a quick one, it offers a creatively
-        trendy cuisine that includes Mediterranean and Venetian meat and fish dishes, in a
-        sophisticated and glamorous setting. The kitchen is open between 7.00 pm and midnight.
-        View information on the St. Valentine\'s Day dinner at the Il Milione restaurant.\n\nLA
-        PROSCIUTTERIA\n\nProducts of the highest quality and selected wines for a meal break in
-        pursuit of good taste.\n\nLA PIZZERIA\nThe wood oven produces fanciful, smouldering delicacies
-        to suit all tastes.</string>
-    <string name="fromMestre">FROM MESTRE</string>
-    <string name="fromCaNoghera">FROM CA\' NOGHERA</string>
-    <string name="titoloServices">EVERY DAY</string>
-    <string name="action_boat">FREE BOAT</string>
+    <string name="wagner_restaurant">瓦格纳餐厅</string>
+    <string name="marcopolo_restaurant">马可波罗餐厅</string>
+    <string name="wagner_details">威尼斯历史悠久宫殿曾作为伟大作曲家的住宅，
+        现如今已经成为该城的赌场，并且游客在此能享受到无与伦比的特权。
+        位于文德拉明宫赌场主层的瓦格纳餐厅，为游客提供精致独特的美食。
+        设有150个席位的非凡三间大厅内：由帕尔马雅戈尔的油画以及吉安•巴蒂斯塔克罗萨托的壁画进行装饰的帕尔马厅、黄厅和红厅。
+        泻湖区典型的烹饪传统是以特色海鲜为主料。参与独特的活动事件以及聆听大师级别的音乐，则作为餐厅客人额外的乐事。</string>
+    <string name="marcopolo_details">内，享用一顿将创意和时尚相结合的地中海以及威尼斯传统的鱼肉美食快餐。\n
+        开放时间为19.00至24.00。\n\n
+        火腿店 \n
+        精选的火腿以及高品质葡萄酒触动了享用午餐的味蕾\n\n\n
+        披萨店 \n
+        为大家提供美味的热气腾腾的披萨。</string>
+    <string name="fromMestre">从 MESTRE</string>
+    <string name="fromCaNoghera">从 CA\' NOGHERA</string>
+    <string name="titoloServices">每天</string>
+    <string name="action_boat">免费乘船</string>
     <string name="action_bus">MESTRE - CA\'NOGHERA</string>
     <string name="action_busV">VENEZIA - CA\'NOGHERA</string>
-    <string name="fromVenezia">FROM VENEZIA</string>
+    <string name="fromVenezia">从 VENEZIA</string>
     <string name="subTimetablesME">Free shuttle return railway station in Mestre/Ca\'Noghera</string>
     <string name="subTimetablesVE">Free shuttle return Piazzale Roma / Ca\'Noghera</string>
     <string name="text_for_free_boat">Free shuttle boat from Piazzale Roma\nto Ca\' Vendramin Calergi</string>
-    <string name="titoloBoat">FREE BOAT</string>
-    <string name="secondPart">From Sundays to Thursdays\nfrom 2:50 pm to 3:50 am\nevery 20 minutes</string>
-    <string name="thirdPart">On Fridays and on Saturdays\nfrom 2:50 pm to 4:50 am\nevery 10 minutes</string>
+    <string name="titoloBoat">免费乘船</string>
+    <string name="secondPart">周日至周四\n从下午2:50到凌晨3:50\n每20分钟</string>
+    <string name="thirdPart">在周五和周六\n从下午2:50到凌晨4:50\n每10分钟</string>
     <string name="fourthPart">Free shuttle boat from Ca\' Vendramin Calergi\nto Piazzale Roma</string>
-    <string name="fifthPart">From Sundays to Thursdays\nfrom 3:00 pm to 4:00 am\nevery 20 minutes</string>
-    <string name="sixthPart">On Fridays and on Saturdays\nfrom 3:00 pm to 5:00 am\nevery 10 minutes</string>
+    <string name="fifthPart">周日至周四\n从下午3:00到凌晨4:00\n每20分钟</string>
+    <string name="sixthPart">在周五和周六\n从下午3:00到凌晨5:00\n每10分钟</string>
 
 
     <string name="title_activity_show_geofence_transitions">ShowGeofenceTransitionsActivity</string>
@@ -247,12 +242,12 @@
     <string name="unknown_geofence_transition">Unknown Transition</string>
 
     <string name="geofence_transition_notification_text">Click notification to return to app</string>
-    <string name="Notification.Text">You are close to the oldest Casinò of the world!</string>
-    <string name="title_activity_free_entrance">FREE ENTRY TICKET</string>
-    <string name="free_entrance_text">ENTRY ALLOWED TO ADULTS OVER THE AGE OF EIGTHEEN, ONLY ON PRESENTATION OF A VALID PHOTO IDENTITY CARD</string>
-    <string name="time_table">TIMETABLES</string>
-    <string name="contactUsText">Contact Us</string>
-    <string name="like_us">Please \"LIKE\" us on Facebook!</string>
+    <string name="Notification.Text">你离世界上最古老的赌场，仅有几步之遥了!</string>
+    <string name="title_activity_free_entrance">免费进入</string>
+    <string name="free_entrance_text">必须已经是成年人，且持有有效的ID才可以进入</string>
+    <string name="time_table">公交车/ 船时刻表</string>
+    <string name="contactUsText">联系我们</string>
+    <string name="like_us">请点击LIKE连接</string>
     <string name="offer">我们的机器分为从1欧分到10.00欧元的多个投注点，最大赌注能够到达500,00欧元.</string>
     <string name="what_new">不断地进行更新以保证最先进的现代科技，不断地寻求更高的客户满意度.</string>
     <string name="slot_rooms">卡诺凯拉宫赌场，美国在意大利的第一个赌场：4000平方米的赌博老虎机以及相关的配套赌博服务。\n\n文德拉明宫赌场：将最先进的技术完美地和古老非凡的赌博艺术相结合</string>

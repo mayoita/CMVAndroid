@@ -19,17 +19,12 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Tracker;
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link Newsletter.OnNewsletterInteractionListener} interface
- * to handle interaction events.
- * Use the {@link Newsletter#newInstance} factory method to
- * create an instance of this fragment.
- */
+
 public class Newsletter extends Fragment {
-
+    private Tracker mTracker;
     private CustomMenuTitleView newsletterTitle;
     private Button unsubscribe;
     private Button subscribe;
@@ -50,9 +45,15 @@ public class Newsletter extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        StarterApplication application = (StarterApplication) getActivity().getApplication();
+        mTracker = application.getDefaultTracker();
     }
-
+    @Override
+    public void onResume() {
+        super.onResume();
+        mTracker.setScreenName("Newsletter");
+        mTracker.send(new HitBuilders.ScreenViewBuilder().build());
+    }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {

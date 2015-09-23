@@ -169,6 +169,7 @@ public class TournamentFr extends Fragment {
                 FragmentTransaction ft = getFragmentManager().beginTransaction();
                 //  if (index == 0) {
                 ft.replace(R.id.containerInLandTournament, details);
+                ft.addToBackStack(null);
                 // } else {
                 // ft.replace(R.id.a_item, details);
                 //}

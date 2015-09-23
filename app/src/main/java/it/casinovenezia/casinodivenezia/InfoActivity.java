@@ -12,14 +12,25 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Tracker;
+
 /**
  * Created by massimomoro on 01/06/15.
  */
 public class InfoActivity extends AppCompatActivity {
-
+    private Tracker mTracker;
+    @Override
+    public void onResume() {
+        super.onResume();
+        mTracker.setScreenName("InfoMapVE");
+        mTracker.send(new HitBuilders.ScreenViewBuilder().build());
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        StarterApplication application = (StarterApplication) getApplication();
+        mTracker = application.getDefaultTracker();
         boolean tabletSize = getResources().getBoolean(R.bool.isTablet);
         if (tabletSize) {
 

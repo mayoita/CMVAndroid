@@ -28,6 +28,8 @@ import android.widget.TextView;
 import com.facebook.AccessToken;
 import com.facebook.GraphResponse;
 import com.facebook.GraphRequest;
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Tracker;
 import com.parse.ParseFacebookUtils;
 import com.parse.ParseTwitterUtils;
 import com.parse.ParseUser;
@@ -44,7 +46,7 @@ import java.net.URL;
 
 public class LogIn extends Fragment {
     private static final int LOGIN_REQUEST = 0;
-
+    private Tracker mTracker;
     private TextView titleTextView;
     private TextView emailTextView;
     private TextView nameTextView;
@@ -71,13 +73,17 @@ public class LogIn extends Fragment {
     public LogIn() {
         // Required empty public constructor
     }
-
+    @Override
+    public void onResume() {
+        super.onResume();
+        mTracker.setScreenName("LogIn");
+        mTracker.send(new HitBuilders.ScreenViewBuilder().build());
+    }
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-
-        }
+        StarterApplication application = (StarterApplication) getActivity().getApplication();
+        mTracker = application.getDefaultTracker();
         setHasOptionsMenu(true);
     }
 
@@ -102,7 +108,10 @@ public class LogIn extends Fragment {
                     // User clicked to log out.
                     ParseUser.logOut();
                     currentUser = null;
-
+                    mTracker.send(new HitBuilders.EventBuilder()
+                            .setCategory("LOGGING")
+                            .setAction("press")
+                            .build());
                     showProfileLoggedOut();
                 } else {
                     // User clicked to log in.
@@ -255,6 +264,7 @@ public class LogIn extends Fragment {
 
         Drawable res = getResources().getDrawable(R.drawable.loginimage);
         pic.setImageDrawable(res);
+
     }
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {

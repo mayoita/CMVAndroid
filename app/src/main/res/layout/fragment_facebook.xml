@@ -67,7 +67,7 @@
         android:id="@+id/facebook"
         android:text="@string/facebook"
         android:background="@drawable/button_login_custom_bg"
-        android:textSize="20sp"
+        android:textSize="16sp"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="15dp"
         android:layout_marginRight="15dp"

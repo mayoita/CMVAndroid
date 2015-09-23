@@ -24,6 +24,8 @@ import com.facebook.rebound.SpringConfig;
 import com.facebook.rebound.SpringListener;
 import com.facebook.rebound.SpringSystem;
 
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Tracker;
 import com.parse.GetDataCallback;
 import com.parse.ParseException;
 import com.parse.ParseFile;
@@ -59,7 +61,6 @@ public class EventsAdapter extends BaseAdapter  {
     private ViewHolder isSpeaking;
 
     private void speakOut(String text, ViewHolder view) {
-
 
         String utteranceId=this.hashCode() + "";
         HashMap<String, String> map = new HashMap<String, String>();

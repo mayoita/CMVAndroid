@@ -20,6 +20,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.daimajia.slider.library.SliderTypes.BaseSliderView;
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Tracker;
 
 import org.lucasr.twowayview.TwoWayView;
 
@@ -47,7 +49,7 @@ public class TournamentDetails extends Fragment implements BaseSliderView.OnSlid
     private TwoWayView lvTest;
     private int currentVisibleItemCount;
     private int currentScrollState;
-
+    private Tracker mTracker;
 
 
 private OnEventsInteractionListener mListener;
@@ -79,16 +81,21 @@ public String getShownIndex(){
 public TournamentDetails(){
         // Required empty public constructor
         }
-
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (Venue.currentVenue == 1) {
+            mTracker.setScreenName("TournamentDetailsCN");
+        } else {
+            mTracker.setScreenName("TournamentDetailsVE");
+        }
+        mTracker.send(new HitBuilders.ScreenViewBuilder().build());
+    }
 @Override
 public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
-        if(getArguments()!=null){
-
-
-        }
-
-
+    StarterApplication application = (StarterApplication) getActivity().getApplication();
+    mTracker = application.getDefaultTracker();
         }
 
 @Override

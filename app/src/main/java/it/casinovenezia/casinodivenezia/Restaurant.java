@@ -31,6 +31,8 @@ import com.daimajia.slider.library.Animations.DescriptionAnimation;
 import com.daimajia.slider.library.SliderLayout;
 import com.daimajia.slider.library.SliderTypes.BaseSliderView;
 import com.daimajia.slider.library.SliderTypes.DefaultSliderView;
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Tracker;
 import com.parse.GetCallback;
 import com.parse.ParseException;
 import com.parse.ParseObject;
@@ -52,7 +54,7 @@ public class Restaurant extends Fragment implements View.OnClickListener {
 
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "title";
-
+    private Tracker mTracker;
     private String mTitle;
     private SliderLayout mySlider;
     private LayoutInflater myInflater;
@@ -95,7 +97,16 @@ public class Restaurant extends Fragment implements View.OnClickListener {
     public Restaurant() {
         // Required empty public constructor
     }
-
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (Venue.currentVenue == 1) {
+            mTracker.setScreenName("RestaurantMenuCN");
+        } else {
+            mTracker.setScreenName("RestaurantMenuVE");
+        }
+        mTracker.send(new HitBuilders.ScreenViewBuilder().build());
+    }
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -104,6 +115,8 @@ public class Restaurant extends Fragment implements View.OnClickListener {
             mTitle = getArguments().getString(ARG_PARAM1);
 
         }
+        StarterApplication application = (StarterApplication) getActivity().getApplication();
+        mTracker = application.getDefaultTracker();
         setHasOptionsMenu(true);
     }
 

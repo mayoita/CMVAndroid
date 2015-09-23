@@ -21,6 +21,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.daimajia.slider.library.SliderTypes.BaseSliderView;
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Tracker;
 
 import org.lucasr.twowayview.TwoWayView;
 
@@ -49,7 +51,7 @@ public class PokerDetails extends Fragment implements BaseSliderView.OnSliderCli
     private int currentScrollState;
     int fragmentWidth;
 
-
+    private Tracker mTracker;
 
 
 private OnEventsInteractionListener mListener;
@@ -83,15 +85,17 @@ public String getShownIndex() {
 public PokerDetails() {
         // Required empty public constructor
         }
-
+    @Override
+    public void onResume() {
+        super.onResume();
+        mTracker.setScreenName("PokerHourDetails");
+        mTracker.send(new HitBuilders.ScreenViewBuilder().build());
+    }
 @Override
 public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-
-
-        }
-
+    StarterApplication application = (StarterApplication) getActivity().getApplication();
+    mTracker = application.getDefaultTracker();
 
         }
 

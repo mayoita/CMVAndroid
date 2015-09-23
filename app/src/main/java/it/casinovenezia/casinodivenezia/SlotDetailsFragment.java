@@ -33,6 +33,8 @@ import com.daimajia.slider.library.SliderLayout;
 import com.daimajia.slider.library.SliderTypes.BaseSliderView;
 import com.daimajia.slider.library.SliderTypes.DefaultSliderView;
 import com.daimajia.slider.library.SliderTypes.TextSliderView;
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Tracker;
 import com.parse.GetCallback;
 import com.parse.ParseException;
 import com.parse.ParseFile;
@@ -61,12 +63,11 @@ public class SlotDetailsFragment extends Fragment {
 
     private String[] slot_array;
     private String[] slot_array_title;
-    private String mParam1;
     private SliderLayout mySlider;
     private CoverFlowAdapter mAdapter;
     private FeatureCoverFlow mCoverFlow;
     int fragmentWidth;
-
+    private Tracker mTracker;
     DisplayMetrics dm;
     int theIndex;
     Typeface XLight;
@@ -125,8 +126,19 @@ public class SlotDetailsFragment extends Fragment {
         }
         Display display = getActivity().getWindowManager().getDefaultDisplay();
         fragmentWidth= display.getWidth();
+        StarterApplication application = (StarterApplication) getActivity().getApplication();
+        mTracker = application.getDefaultTracker();
 
-
+    }
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (Venue.currentVenue == 1) {
+            mTracker.setScreenName("SlotsDetailsCN");
+        } else {
+            mTracker.setScreenName("SlotsDetailsVE");
+        }
+        mTracker.send(new HitBuilders.ScreenViewBuilder().build());
     }
     @Override
     public void onStop() {

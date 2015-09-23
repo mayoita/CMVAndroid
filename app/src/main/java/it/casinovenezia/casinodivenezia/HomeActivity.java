@@ -361,7 +361,9 @@ public class HomeActivity extends AppCompatActivity implements
         }
 
         if (fragment != null) {
+
             FragmentManager fragmentManager = getSupportFragmentManager();
+
             fragmentManager.beginTransaction()
                     .replace(R.id.frame_container, fragment).commit();
 
@@ -531,13 +533,38 @@ public class HomeActivity extends AppCompatActivity implements
 
     @Override
     public void onBackPressed() {
-        if (onBackPressedListener != null)
-           switch (onBackPressedListener.getClass().getSimpleName()) {
-               case "CasinoGame":
-                   onBackPressedListener.doBack();
-                   onBackPressedListener = null;
-                   break;
-           }
+        int count = getFragmentManager().getBackStackEntryCount();
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        Object currentFragment = this.getSupportFragmentManager().findFragmentById(R.id.frame_container);
+        if (currentFragment instanceof HomeMainFr) {
+            mPager = (ViewPager) ((HomeMainFr) currentFragment).getView().findViewById(R.id.viewpager);
+            int u = mPager.getCurrentItem();
+            HomeMainFr.MyPageAdapter myadapter = (HomeMainFr.MyPageAdapter) mPager.getAdapter();
+            for (int i=0; i < myadapter.getCount(); i++ ) {
+                Fragment theFragment = myadapter.getRegisteredFragment(i);
+                if (theFragment != null) {
+                    if (theFragment.getClass().getName() == "it.casinovenezia.casinodivenezia.HomeFr") {
+                        finish();
+                        } else {
+                        fragmentManager.beginTransaction()
+                                .replace(R.id.frame_container, new HomeMainFr()).commit();
+                    }
+                }
+            }
+
+            finish();
+        } else {
+            fragmentManager.beginTransaction()
+                    .replace(R.id.frame_container, new HomeMainFr()).commit();
+        }
+
+//        if (onBackPressedListener != null)
+//           switch (onBackPressedListener.getClass().getSimpleName()) {
+//               case "CasinoGame":
+//                   onBackPressedListener.doBack();
+//                   onBackPressedListener = null;
+//                   break;
+//           }
 
         // else
            // super.onBackPressed();
@@ -728,4 +755,5 @@ public class HomeActivity extends AppCompatActivity implements
         mDrawerLayout.openDrawer(Gravity.LEFT);
 
     }
+
 }

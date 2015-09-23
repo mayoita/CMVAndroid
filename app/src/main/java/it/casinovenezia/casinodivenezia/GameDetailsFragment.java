@@ -23,6 +23,9 @@ import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Tracker;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.lucasr.twowayview.TwoWayView;
@@ -33,7 +36,7 @@ import org.lucasr.twowayview.TwoWayView;
 public class GameDetailsFragment extends Fragment {
 
     private static final String MY_ARRAY = "theDataArray";
-
+    private Tracker mTracker;
     private String mParam1;
     private TextView myTexttitle;
     private DisplayMetrics dm;
@@ -83,7 +86,16 @@ public class GameDetailsFragment extends Fragment {
     public GameDetailsFragment() {
         // Required empty public constructor
     }
-
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (Venue.currentVenue == 1) {
+            mTracker.setScreenName("TableGameDetailsCN");
+        } else {
+            mTracker.setScreenName("TableGameDetailsVE");
+        }
+        mTracker.send(new HitBuilders.ScreenViewBuilder().build());
+    }
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -91,7 +103,8 @@ public class GameDetailsFragment extends Fragment {
             mParam1 = getArguments().getString(MY_ARRAY);
 
         }
-
+        StarterApplication application = (StarterApplication) getActivity().getApplication();
+        mTracker = application.getDefaultTracker();
 
     }
 

@@ -38,6 +38,8 @@ import com.facebook.rebound.SpringSystem;
 import com.facebook.rebound.SpringUtil;
 import com.facebook.rebound.ui.SpringConfiguratorView;
 import com.facebook.rebound.ui.Util;
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Tracker;
 import com.helpshift.Helpshift;
 import com.parse.GetCallback;
 import com.parse.ParseObject;
@@ -68,11 +70,15 @@ public class HomeFr extends Fragment {
     private View rootView;
     private List<Object> arrayFestivity= new ArrayList<>();
     private Boolean VPS2 = false;
+    private int DURATION = 1000;
+    private Tracker mTracker;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
+        StarterApplication application = (StarterApplication) getActivity().getApplication();
+        mTracker = application.getDefaultTracker();
     }
 
     public static final HomeFr newInstance(String message) {
@@ -112,7 +118,7 @@ public class HomeFr extends Fragment {
             HomeActivity.hasBeenSeen = true;
 
             YoYo.with(Techniques.Shake)
-                    .duration(700)
+                    .duration(DURATION)
                     .playOn(rootView.findViewById(R.id.arrow));
             fb_back.setAnimation(animation2);
             arrow.setAnimation(animation2);
@@ -145,6 +151,17 @@ public class HomeFr extends Fragment {
         jackpotLabel.getPaint().setShader(textShader);
         setOffice();
         return rootView;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (Venue.currentVenue == 1) {
+            mTracker.setScreenName("HomeCN");
+        } else {
+            mTracker.setScreenName("HomeVE");
+        }
+        mTracker.send(new HitBuilders.ScreenViewBuilder().build());
     }
 
     @Override

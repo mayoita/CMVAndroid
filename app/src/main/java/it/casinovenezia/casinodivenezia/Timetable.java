@@ -20,6 +20,8 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Tracker;
 import com.parse.FindCallback;
 import com.parse.GetCallback;
 import com.parse.ParseException;
@@ -35,7 +37,7 @@ public class Timetable extends Fragment {
 
     private static final String TAG = "BUS";
 
-
+    private Tracker mTracker;
     private TimetablesCellAdapter mCellAdapter;
     int fragmentWidth;
     private View myView;
@@ -75,9 +77,19 @@ public class Timetable extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
-
+        StarterApplication application = (StarterApplication) getActivity().getApplication();
+        mTracker = application.getDefaultTracker();
     }
-
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (Venue.currentVenue == 1) {
+            mTracker.setScreenName("ServicesInfoCN");
+        } else {
+            mTracker.setScreenName("ServicesInfoVE");
+        }
+        mTracker.send(new HitBuilders.ScreenViewBuilder().build());
+    }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {

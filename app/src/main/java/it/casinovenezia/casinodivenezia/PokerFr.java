@@ -206,6 +206,7 @@ public class PokerFr extends Fragment {
                 FragmentTransaction ft = getFragmentManager().beginTransaction();
                 //  if (index == 0) {
                 ft.replace(R.id.containerInLandPoker, details);
+                ft.addToBackStack(null);
                 // } else {
                 // ft.replace(R.id.a_item, details);
                 //}

@@ -22,6 +22,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.daimajia.slider.library.SliderTypes.BaseSliderView;
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Tracker;
 
 import org.lucasr.twowayview.TwoWayView;
 
@@ -43,19 +45,29 @@ public class TournamentDetailsActivity extends AppCompatActivity implements Base
     private int currentVisibleItemCount;
     private int currentScrollState;
     Context context = TournamentDetailsActivity.this;
-
+    private Tracker mTracker;
 
     private int convertDpToPx(int dp, DisplayMetrics displayMetrics) {
         float pixels = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, displayMetrics);
         return Math.round(pixels);
     }
-
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (Venue.currentVenue == 1) {
+            mTracker.setScreenName("TournamentDetailsCN");
+        } else {
+            mTracker.setScreenName("TournamentDetailsVE");
+        }
+        mTracker.send(new HitBuilders.ScreenViewBuilder().build());
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Intent i = getIntent();
         boolean tabletSize = getResources().getBoolean(R.bool.isTablet);
-
+        StarterApplication application = (StarterApplication) getApplication();
+        mTracker = application.getDefaultTracker();
         Display display = getWindowManager().getDefaultDisplay();
 
         DisplayMetrics dm = getResources().getDisplayMetrics();

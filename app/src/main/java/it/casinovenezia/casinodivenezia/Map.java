@@ -12,6 +12,8 @@ import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Tracker;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -31,7 +33,7 @@ public class Map extends Fragment implements OnMapReadyCallback {
     private static final String ARG_PARAM1 = "title";
     private GoogleMap map;
     private LatLngBounds.Builder builder;
-
+    private Tracker mTracker;
     public static Map newInstance(String param1) {
         Map fragment = new Map();
         Bundle args = new Bundle();
@@ -44,11 +46,18 @@ public class Map extends Fragment implements OnMapReadyCallback {
     public Map() {
         // Required empty public constructor
     }
-
+    @Override
+    public void onResume() {
+        super.onResume();
+        mTracker.setScreenName("MapVE");
+        mTracker.send(new HitBuilders.ScreenViewBuilder().build());
+    }
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
+        StarterApplication application = (StarterApplication) getActivity().getApplication();
+        mTracker = application.getDefaultTracker();
     }
 
     @Override

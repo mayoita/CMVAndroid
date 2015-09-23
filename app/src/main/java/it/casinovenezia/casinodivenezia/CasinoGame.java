@@ -352,9 +352,11 @@ public void openPop(View v) {
                         FragmentTransaction ft = getFragmentManager().beginTransaction();
                         //  if (index == 0) {
                         ft.replace(R.id.containerInLandGame, detailsG);
+                        ft.addToBackStack(null);
                         // } else {
                         // ft.replace(R.id.a_item, details);
                         //}
+
                         ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
                         ft.commit();
                     }
@@ -380,6 +382,7 @@ public void openPop(View v) {
                         FragmentTransaction ft = getFragmentManager().beginTransaction();
                         //  if (index == 0) {
                         ft.replace(R.id.containerInLandGame, details);
+                        ft.addToBackStack(null);
                         // } else {
                         // ft.replace(R.id.a_item, details);
                         //}
@@ -487,7 +490,7 @@ public void openPop(View v) {
                         mAdapter.notifyDataSetChanged();
 
                         try {
-                            myjArr = gameList.getJSONArray("Tavoli").getJSONArray(1).getJSONArray(2);
+                            myjArr = gameList.getJSONArray("Tavoli").getJSONArray(0).getJSONArray(2);
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }

@@ -36,6 +36,8 @@ import com.daimajia.slider.library.Animations.DescriptionAnimation;
 import com.daimajia.slider.library.SliderLayout;
 import com.daimajia.slider.library.SliderTypes.BaseSliderView;
 import com.daimajia.slider.library.SliderTypes.DefaultSliderView;
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Tracker;
 import com.parse.FindCallback;
 import com.parse.GetCallback;
 import com.parse.ParseException;
@@ -68,7 +70,7 @@ public class SlotDetailsActivity extends AppCompatActivity {
     DisplayMetrics dm;
     private ArrayList<GameEntity> mData = new ArrayList<>(0);
     private TextSwitcher mTitle;
-
+    private Tracker mTracker;
     List<ParseObject> ob;
     private List<EventItem> eventitemlist = null;
     TextView theText;
@@ -94,7 +96,16 @@ public class SlotDetailsActivity extends AppCompatActivity {
         float pixels = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, displayMetrics);
         return Math.round(pixels);
     }
-
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (Venue.currentVenue == 1) {
+            mTracker.setScreenName("SlotsDetailsCN");
+        } else {
+            mTracker.setScreenName("SlotsDetailsVE");
+        }
+        mTracker.send(new HitBuilders.ScreenViewBuilder().build());
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -103,8 +114,9 @@ public class SlotDetailsActivity extends AppCompatActivity {
         final Typeface XLight = Typeface.createFromAsset(getAssets(), "fonts/GothamXLight.otf");
         Intent intent = getIntent();
         String jsonArray = intent.getStringExtra("jsonArray");
-        int theIndex = intent.getIntExtra("index",0);
-
+        int theIndex = intent.getIntExtra("index", 0);
+        StarterApplication application = (StarterApplication) getApplication();
+        mTracker = application.getDefaultTracker();
         boolean tabletSize = getResources().getBoolean(R.bool.isTablet);
         if (tabletSize) {
 

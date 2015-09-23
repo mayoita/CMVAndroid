@@ -21,6 +21,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.ToggleButton;
 
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Tracker;
 import com.parse.ParseException;
 import com.parse.ParsePush;
 import com.parse.SaveCallback;
@@ -28,7 +30,7 @@ import com.parse.SaveCallback;
 
 public class Subscription extends Fragment {
 
-
+    private Tracker mTracker;
     private TextView mySubscription;
     private TextView news;
     private TextView slot;
@@ -49,11 +51,17 @@ public class Subscription extends Fragment {
     public Subscription() {
         // Required empty public constructor
     }
-
+    @Override
+    public void onResume() {
+        super.onResume();
+        mTracker.setScreenName("Subscriptions");
+        mTracker.send(new HitBuilders.ScreenViewBuilder().build());
+    }
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        StarterApplication application = (StarterApplication) getActivity().getApplication();
+        mTracker = application.getDefaultTracker();
     }
 
     @Override

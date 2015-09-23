@@ -23,6 +23,8 @@ import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Tracker;
 import com.parse.FindCallback;
 import com.parse.GetCallback;
 import com.parse.ParseException;
@@ -50,8 +52,7 @@ public class EventsFr extends Fragment implements TextToSpeech.OnInitListener{
     private List<EventItem> eventitemlist = null;
     private List<EventItem> myEventitemlist = null;
     public static TextToSpeech engine;
-
-    ProgressDialog mProgressDialog;
+    private Tracker mTracker;
 
     boolean mDualPane;
     int mCurCheckPosition = 0;
@@ -82,7 +83,9 @@ public class EventsFr extends Fragment implements TextToSpeech.OnInitListener{
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
-
+// Obtain the shared Tracker instance.
+        StarterApplication application = (StarterApplication) getActivity().getApplication();
+        mTracker = application.getDefaultTracker();
     }
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
@@ -182,6 +185,7 @@ public class EventsFr extends Fragment implements TextToSpeech.OnInitListener{
                 FragmentTransaction ft = getFragmentManager().beginTransaction();
               //  if (index == 0) {
                     ft.replace(R.id.containerInLand, details);
+                ft.addToBackStack(null);
                // } else {
                    // ft.replace(R.id.a_item, details);
                 //}
@@ -288,31 +292,31 @@ public class EventsFr extends Fragment implements TextToSpeech.OnInitListener{
                                 map.setName((String) event.get("NameIT"));
                                 map.setMemo((String)event.get("memoIT"));
                                 break;
-                            case "es":
-                                map.setDescription((String) event.get("DescriptionES"));
-                                map.setName((String) event.get("NameES"));
-                                map.setMemo((String) event.get("memoES"));
-                                break;
-                            case "fr":
-                                map.setDescription((String) event.get("DescriptionFR"));
-                                map.setName((String) event.get("NameFR"));
-                                map.setMemo((String) event.get("memoFR"));
-                                break;
-                            case "de":
-                                map.setDescription((String) event.get("DescriptionDE"));
-                                map.setName((String) event.get("NameDE"));
-                                map.setMemo((String) event.get("memoDE"));
-                                break;
-                            case "ru":
-                                map.setDescription((String) event.get("DescriptionRU"));
-                                map.setName((String) event.get("NameRU"));
-                                map.setMemo((String) event.get("memoRU"));
-                                break;
-                            case "ch":
-                                map.setDescription((String) event.get("DescriptionZH"));
-                                map.setName((String) event.get("NameZH"));
-                                map.setMemo((String) event.get("memoZH"));
-                                break;
+//                            case "es":
+//                                map.setDescription((String) event.get("DescriptionES"));
+//                                map.setName((String) event.get("NameES"));
+//                                map.setMemo((String) event.get("memoES"));
+//                                break;
+//                            case "fr":
+//                                map.setDescription((String) event.get("DescriptionFR"));
+//                                map.setName((String) event.get("NameFR"));
+//                                map.setMemo((String) event.get("memoFR"));
+//                                break;
+//                            case "de":
+//                                map.setDescription((String) event.get("DescriptionDE"));
+//                                map.setName((String) event.get("NameDE"));
+//                                map.setMemo((String) event.get("memoDE"));
+//                                break;
+//                            case "ru":
+//                                map.setDescription((String) event.get("DescriptionRU"));
+//                                map.setName((String) event.get("NameRU"));
+//                                map.setMemo((String) event.get("memoRU"));
+//                                break;
+//                            case "ch":
+//                                map.setDescription((String) event.get("DescriptionZH"));
+//                                map.setName((String) event.get("NameZH"));
+//                                map.setMemo((String) event.get("memoZH"));
+//                                break;
                             default:
                                 map.setDescription((String) event.get("Description"));
                                 map.setName((String) event.get("Name"));
@@ -348,6 +352,12 @@ public class EventsFr extends Fragment implements TextToSpeech.OnInitListener{
     @Override
     public void onResume() {
         super.onResume();
+        if (Venue.currentVenue == 1) {
+            mTracker.setScreenName("EventDetailsCN");
+        } else {
+            mTracker.setScreenName("EventDetailsVE");
+        }
+        mTracker.send(new HitBuilders.ScreenViewBuilder().build());
         if (mAdapter != null)
         mAdapter.notifyDataSetChanged();
         engine = new TextToSpeech(getContext(), this);

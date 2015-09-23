@@ -75,7 +75,12 @@ public class HomeActivity extends AppCompatActivity implements
 
 {
     protected OnBackPressedListener onBackPressedListener;
-
+    public static String jackpot;
+    public static List<Object> arrayFestivity= new ArrayList<>();
+    public static List<EventItem> eventitemlist = null;
+    public static List<PokerItem> pokeritemlist = null;
+    public static List<TournamentItem> tournamentlistitem = null;
+    public static boolean appRunning = false;
     //slide menu titles
     private String[] navMenuTitles;
     private TypedArray navMenuIcons;
@@ -96,6 +101,7 @@ public class HomeActivity extends AppCompatActivity implements
     public static Boolean hasBeenSeen = false;
     public String id;
     private Geofence geofenceToAdd;
+    public static List<Fragment> fragments;
     /**
      * Provides the entry point to Google Play services.
      */
@@ -131,7 +137,7 @@ public class HomeActivity extends AppCompatActivity implements
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        fragments = getFragments();
         ParseAnalytics.trackAppOpenedInBackground(getIntent());
 
         boolean tabletSize = getResources().getBoolean(R.bool.isTablet);
@@ -533,26 +539,17 @@ public class HomeActivity extends AppCompatActivity implements
 
     @Override
     public void onBackPressed() {
-        int count = getFragmentManager().getBackStackEntryCount();
+
         FragmentManager fragmentManager = getSupportFragmentManager();
         Object currentFragment = this.getSupportFragmentManager().findFragmentById(R.id.frame_container);
         if (currentFragment instanceof HomeMainFr) {
             mPager = (ViewPager) ((HomeMainFr) currentFragment).getView().findViewById(R.id.viewpager);
-            int u = mPager.getCurrentItem();
-            HomeMainFr.MyPageAdapter myadapter = (HomeMainFr.MyPageAdapter) mPager.getAdapter();
-            for (int i=0; i < myadapter.getCount(); i++ ) {
-                Fragment theFragment = myadapter.getRegisteredFragment(i);
-                if (theFragment != null) {
-                    if (theFragment.getClass().getName() == "it.casinovenezia.casinodivenezia.HomeFr") {
+                    if (mPager.getCurrentItem() == 0) {
                         finish();
                         } else {
                         fragmentManager.beginTransaction()
                                 .replace(R.id.frame_container, new HomeMainFr()).commit();
                     }
-                }
-            }
-
-            finish();
         } else {
             fragmentManager.beginTransaction()
                     .replace(R.id.frame_container, new HomeMainFr()).commit();
@@ -754,6 +751,19 @@ public class HomeActivity extends AppCompatActivity implements
 
         mDrawerLayout.openDrawer(Gravity.LEFT);
 
+    }
+    public List<Fragment> getFragments() {
+        List<Fragment> fList = new ArrayList<Fragment>();
+
+        fList.add(HomeFr.newInstance("@string/home_title"));
+        fList.add(EventsFr.newInstance("@string/events_title"));
+        fList.add(CasinoGame.newInstance("@string/casino_title"));
+        fList.add(PokerFr.newInstance("@string/poker_title"));
+        fList.add(TournamentFr.newInstance("@string/tournament_title"));
+        fList.add(Restaurant.newInstance("@string/restaurant_title"));
+        fList.add(Map.newInstance("@string/map_title"));
+
+        return fList;
     }
 
 }

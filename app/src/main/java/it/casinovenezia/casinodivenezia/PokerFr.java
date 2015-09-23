@@ -244,37 +244,43 @@ public class PokerFr extends Fragment {
         return sdf.format(myDate);
     }
     public void loadPoker() {
-        ParseQuery<ParseObject> query = new ParseQuery<ParseObject>(
-                "Poker");
+        if (HomeActivity.pokeritemlist == null) {
+            ParseQuery<ParseObject> query = new ParseQuery<ParseObject>(
+                    "Poker");
 
-        query.orderByDescending("StartDate");
-        query.findInBackground(new FindCallback<ParseObject>() {
-            public void done(List<ParseObject> eventList, ParseException e) {
-                if (e == null) {
-                    pokeritemlist = new ArrayList<PokerItem>();
-                    for (ParseObject event : eventList) {
-                        PokerItem map = new PokerItem();
+            query.orderByDescending("StartDate");
+            query.findInBackground(new FindCallback<ParseObject>() {
+                public void done(List<ParseObject> eventList, ParseException e) {
+                    if (e == null) {
+                        pokeritemlist = new ArrayList<PokerItem>();
+                        for (ParseObject event : eventList) {
+                            PokerItem map = new PokerItem();
 
-                        map.setOffice((String) event.get("office"));
-                        map.setMyId((String) event.getObjectId());
-                        map.setTournamentDescription((String) event.get("TournamentDescription"));
-                        map.setTournamentDate((String) event.get("TournamentDate"));
-                        map.setTournamentsName((String) event.get("TournamentName"));
-                        map.setTournamentsRules((ArrayList) event.get("TournamentsRules"));
-                        map.setTournamentUrl((String) event.get("TournamentURL"));
-                        map.setPokerData((ArrayList) event.get("PokerData"));
-                        map.setStartDate(formatMyDate(event.getDate("StartDate")));
-                        map.setEndDate(formatMyDate(event.getDate("EndDate")));
+                            map.setOffice((String) event.get("office"));
+                            map.setMyId((String) event.getObjectId());
+                            map.setTournamentDescription((String) event.get("TournamentDescription"));
+                            map.setTournamentDate((String) event.get("TournamentDate"));
+                            map.setTournamentsName((String) event.get("TournamentName"));
+                            map.setTournamentsRules((ArrayList) event.get("TournamentsRules"));
+                            map.setTournamentUrl((String) event.get("TournamentURL"));
+                            map.setPokerData((ArrayList) event.get("PokerData"));
+                            map.setStartDate(formatMyDate(event.getDate("StartDate")));
+                            map.setEndDate(formatMyDate(event.getDate("EndDate")));
 
-                        pokeritemlist.add(map);
+                            pokeritemlist.add(map);
 
+                        }
+                        HomeActivity.pokeritemlist = pokeritemlist;
+                        setOffice();
+                    } else {
+                        Log.d("events", "Error: " + e.getMessage());
                     }
-                    setOffice();
-                } else {
-                    Log.d("events", "Error: " + e.getMessage());
                 }
-            }
-        });
-    }
+            });
 
+        } else {
+            pokeritemlist = HomeActivity.pokeritemlist;
+            setOffice();
+        }
+    }
 }

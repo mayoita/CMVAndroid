@@ -55,7 +55,7 @@ public class HomeMainFr extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        List<Fragment> fragments = getFragments();
+        List<Fragment> fragments = HomeActivity.fragments;
 
 
         title_strip = (android.support.v4.view.PagerTitleStripV22)getView().findViewById(R.id.pager_title_strip);

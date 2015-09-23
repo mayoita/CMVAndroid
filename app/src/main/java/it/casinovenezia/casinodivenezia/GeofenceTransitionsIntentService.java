@@ -30,7 +30,7 @@ public class GeofenceTransitionsIntentService extends IntentService  {
     private final String TAG = GeofenceTransitionsIntentService.class.getName();
     private SharedPreferences prefs;
     private Gson gson;
-
+    private boolean appRunning = false;
     public GeofenceTransitionsIntentService() {
         super("GeofenceTransitionsIntentService");
     }
@@ -57,18 +57,20 @@ public class GeofenceTransitionsIntentService extends IntentService  {
             }
 
             if (transition == Geofence.GEOFENCE_TRANSITION_ENTER ) {
-                if (settings.getInt("notification", 0) < 3) {
-                    if (settings.getInt("notification", 0) == 0) {
-                        editor.putInt("notification", 1);
-                        editor.commit();
-                        onEnteredGeofences(geofenceIds);
-                    } else {
-                        editor.putInt("notification", settings.getInt("notification", 0) + 1);
-                        editor.commit();
-                        onEnteredGeofences(geofenceIds);
+                if(!HomeActivity.appRunning) {
+                    HomeActivity.appRunning=true;
+                    if (settings.getInt("notification", 0) < 3) {
+                        if (settings.getInt("notification", 0) == 0) {
+                            editor.putInt("notification", 1);
+                            editor.commit();
+                            onEnteredGeofences(geofenceIds);
+                        } else {
+                            editor.putInt("notification", settings.getInt("notification", 0) + 1);
+                            editor.commit();
+                            onEnteredGeofences(geofenceIds);
+                        }
                     }
                 }
-
             }
         }
 

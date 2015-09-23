@@ -173,23 +173,26 @@ public class HomeFr extends Fragment {
         Resources res = getResources();
         loadStorageFestivity();
         loadFestivity(res.getString(R.string.todayOpen), res.getString(R.string.todayOpenVenice));
-        ParseQuery<ParseObject> query = ParseQuery.getQuery("Jackpot");
-        query.getInBackground("ykIRbhqKUn", new GetCallback<ParseObject>() {
-                    public void done(ParseObject object, ParseException e) {
-                        if (e == null) {
-                            // object will be your game score
+        if (HomeActivity.jackpot == null) {
+            ParseQuery<ParseObject> query = ParseQuery.getQuery("Jackpot");
+            query.getInBackground("ykIRbhqKUn", new GetCallback<ParseObject>() {
+                        public void done(ParseObject object, ParseException e) {
+                            if (e == null) {
+                                // object will be your game score
 
-                            double d = Double.parseDouble(object.getString("jackpot"));
-                            jackpotamount.setText(DecimalFormat.getCurrencyInstance(Locale.GERMANY).format(d));
+                                double d = Double.parseDouble(object.getString("jackpot"));
+                                jackpotamount.setText(DecimalFormat.getCurrencyInstance(Locale.getDefault()).format(d));
+                                HomeActivity.jackpot = DecimalFormat.getCurrencyInstance(Locale.getDefault()).format(d);
+                            } else {
+                                // something went wrong
 
-                        } else {
-                            // something went wrong
-
+                            }
                         }
                     }
-                }
-        );
-
+            );
+        } else {
+            jackpotamount.setText(HomeActivity.jackpot);
+        }
     }
 
     @Override
@@ -199,22 +202,25 @@ public class HomeFr extends Fragment {
     }
 
     public void loadStorageFestivity () {
-        ParseQuery<ParseObject> query = ParseQuery.getQuery("Festivity");
-        query.getInBackground("7VTo3n7rum", new GetCallback<ParseObject>() {
-                    public void done(ParseObject object, ParseException e) {
-                        if (e == null) {
-                            // object will be your game score
+        if(HomeActivity.arrayFestivity.size() == 0) {
+            ParseQuery<ParseObject> query = ParseQuery.getQuery("Festivity");
+            query.getInBackground("7VTo3n7rum", new GetCallback<ParseObject>() {
+                        public void done(ParseObject object, ParseException e) {
+                            if (e == null) {
+                                // object will be your game score
 
-                            arrayFestivity = object.getList("festivity");
+                                arrayFestivity = object.getList("festivity");
+                                HomeActivity.arrayFestivity = arrayFestivity;
+                            } else {
+                                // something went wrong
 
-                        } else {
-                            // something went wrong
-
+                            }
                         }
                     }
-                }
-        );
-
+            );
+        } else {
+            arrayFestivity = HomeActivity.arrayFestivity;
+        }
     }
 
     public void loadFestivity(String todayOpen, String andVSP) {

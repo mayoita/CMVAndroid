@@ -270,28 +270,29 @@ public class EventsFr extends Fragment implements TextToSpeech.OnInitListener{
     }
 
     public void loadEvent () {
-        ParseQuery<ParseObject> query = new ParseQuery<ParseObject>(
-                "Events");
-        query.orderByDescending("StartDate");
-        query.findInBackground(new FindCallback<ParseObject>() {
-            public void done(List<ParseObject> eventList, ParseException e) {
-                if (e == null) {
-                    eventitemlist = new ArrayList<EventItem>();
-                    for (ParseObject event : eventList) {
-                        // Locate images in flag column
-                        ParseFile image = (ParseFile) event.get("ImageName");
+        if(HomeActivity.eventitemlist == null) {
+            ParseQuery<ParseObject> query = new ParseQuery<ParseObject>(
+                    "Events");
+            query.orderByDescending("StartDate");
+            query.findInBackground(new FindCallback<ParseObject>() {
+                public void done(List<ParseObject> eventList, ParseException e) {
+                    if (e == null) {
+                        eventitemlist = new ArrayList<EventItem>();
+                        for (ParseObject event : eventList) {
+                            // Locate images in flag column
+                            ParseFile image = (ParseFile) event.get("ImageName");
 
-                        EventItem map = new EventItem();
-                        map.setImageMain(image);
-                        map.setOffice((String) event.get("office"));
-                        map.setMyId((String) event.getObjectId());
+                            EventItem map = new EventItem();
+                            map.setImageMain(image);
+                            map.setOffice((String) event.get("office"));
+                            map.setMyId((String) event.getObjectId());
 
-                        switch (Locale.getDefault().getLanguage()) {
-                            case "it":
-                                map.setDescription((String) event.get("DescriptionIT"));
-                                map.setName((String) event.get("NameIT"));
-                                map.setMemo((String)event.get("memoIT"));
-                                break;
+                            switch (Locale.getDefault().getLanguage()) {
+                                case "it":
+                                    map.setDescription((String) event.get("DescriptionIT"));
+                                    map.setName((String) event.get("NameIT"));
+                                    map.setMemo((String) event.get("memoIT"));
+                                    break;
 //                            case "es":
 //                                map.setDescription((String) event.get("DescriptionES"));
 //                                map.setName((String) event.get("NameES"));
@@ -317,30 +318,39 @@ public class EventsFr extends Fragment implements TextToSpeech.OnInitListener{
 //                                map.setName((String) event.get("NameZH"));
 //                                map.setMemo((String) event.get("memoZH"));
 //                                break;
-                            default:
-                                map.setDescription((String) event.get("Description"));
-                                map.setName((String) event.get("Name"));
-                                map.setMemo((String) event.get("memo"));
-                                break;
+                                default:
+                                    map.setDescription((String) event.get("Description"));
+                                    map.setName((String) event.get("Name"));
+                                    map.setMemo((String) event.get("memo"));
+                                    break;
+                            }
+
+                            map.setStartDate(formatMyDate(event.getDate("StartDate")));
+                            map.setEndDate(event.getDate("EndDate"));
+
+                            eventitemlist.add(map);
+
+
                         }
-
-                        map.setStartDate(formatMyDate(event.getDate("StartDate")));
-                        map.setEndDate(event.getDate("EndDate"));
-
-                        eventitemlist.add(map);
-
-
-                    }
-                    if(isAdded()) {
-                        setOffice();
+                        HomeActivity.eventitemlist = eventitemlist;
+                        if (isAdded()) {
+                            setOffice();
+                        } else {
+                            Log.e("isAdded", "EventsFr not added");
+                        }
                     } else {
-                        Log.e("isAdded", "EventsFr not added");
+                        Log.d("events", "Error: " + e.getMessage());
                     }
-                } else {
-                    Log.d("events", "Error: " + e.getMessage());
                 }
+            });
+        } else {
+            eventitemlist = HomeActivity.eventitemlist;
+            if (isAdded()) {
+                setOffice();
+            } else {
+                Log.e("isAdded", "EventsFr not added");
             }
-        });
+        }
     }
 
     @Override

@@ -34,7 +34,7 @@ public static Locale currentLocale;
         FacebookSdk.sdkInitialize(this);
         Parse.enableLocalDatastore(this);
         // Enable Crash Reporting
-        ParseCrashReporting.enable(this);
+        //ParseCrashReporting.enable(this);
         Parse.initialize(this, "yO3MBzW9liNCaiAfXWGb3NtZJ3VhXyy4Zh8rR5ck", "KImYuYCrJ9j3IbDI3W2KtDXCXwmfqsRDCn5Em6A9");
 
         ParseInstallation.getCurrentInstallation().saveInBackground();

@@ -9,8 +9,8 @@ android {
         applicationId "it.casinovenezia.casinodivenezia"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 6
-        versionName "1.2.3"
+        versionCode 9
+        versionName "1.2.6"
         multiDexEnabled true
     }
     signingConfigs {

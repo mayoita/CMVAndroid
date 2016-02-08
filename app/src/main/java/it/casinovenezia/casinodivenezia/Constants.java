@@ -9,7 +9,7 @@ public class Constants {
     public static float radius = 200;
     public static String VENEZIA = "Venezia_geofence";
     public static final String PREFS_NAME = "MyPreferences";
-    public static final String BARCODE_FREEENTRANCE = "WFB519--2510936";
+    public static final String BARCODE_FREEENTRANCE = "WFB519--2S10936";
 
 
 }

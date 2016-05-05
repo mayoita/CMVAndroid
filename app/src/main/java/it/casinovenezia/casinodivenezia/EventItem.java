@@ -1,6 +1,6 @@
 package it.casinovenezia.casinodivenezia;
 
-import com.parse.ParseFile;
+
 
 import java.util.Date;
 
@@ -14,10 +14,10 @@ public class EventItem {
     private String memo;
     private String startDate;
     private Date endDate;
-    private ParseFile image1;
-    private ParseFile image2;
-    private ParseFile image3;
-    private ParseFile imageMain;
+//    private ParseFile image1;
+//    private ParseFile image2;
+//    private ParseFile image3;
+//    private ParseFile imageMain;
     private String url;
     private String eventType;
     private String isSlotEvent;
@@ -73,30 +73,30 @@ public class EventItem {
     public void setEndDate(Date name) {
         this.endDate = name;
     }
-    public ParseFile getImage1() {
-        return image1;
-    }
-    public void setImage1(ParseFile name) {
-        this.image1 = name;
-    }
-    public ParseFile getImage2() {
-        return image2;
-    }
-    public void setImage2(ParseFile name) {
-        this.image2 = name;
-    }
-    public ParseFile getImage3() {
-        return image3;
-    }
-    public void setImage3(ParseFile name) {
-        this.image3 = name;
-    }
-    public ParseFile getImageMain() {
-        return imageMain;
-    }
-    public void setImageMain(ParseFile name) {
-        this.imageMain = name;
-    }
+//    public ParseFile getImage1() {
+//        return image1;
+//    }
+//    public void setImage1(ParseFile name) {
+//        this.image1 = name;
+//    }
+//    public ParseFile getImage2() {
+//        return image2;
+//    }
+//    public void setImage2(ParseFile name) {
+//        this.image2 = name;
+//    }
+//    public ParseFile getImage3() {
+//        return image3;
+//    }
+//    public void setImage3(ParseFile name) {
+//        this.image3 = name;
+//    }
+//    public ParseFile getImageMain() {
+//        return imageMain;
+//    }
+//    public void setImageMain(ParseFile name) {
+//        this.imageMain = name;
+//    }
     public String getUrl() {
         return url;
     }

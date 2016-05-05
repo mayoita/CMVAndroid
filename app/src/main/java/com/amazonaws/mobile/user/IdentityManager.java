@@ -7,6 +7,7 @@ package com.amazonaws.mobile.user;
 //
 // Source code generated from template: aws-my-sample-app-android v0.7
 //
+
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -24,10 +25,10 @@ import com.amazonaws.regions.Regions;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
-import java.util.Date;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 

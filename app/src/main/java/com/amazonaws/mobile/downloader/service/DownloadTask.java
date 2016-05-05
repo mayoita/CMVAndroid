@@ -2,6 +2,8 @@ package com.amazonaws.mobile.downloader.service;
 
 import android.util.Log;
 
+import com.amazonaws.mobile.downloader.policy.DownloadPolicyProvider;
+
 import java.io.Closeable;
 import java.io.File;
 import java.io.IOException;
@@ -11,8 +13,6 @@ import java.lang.ref.WeakReference;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.concurrent.Callable;
-
-import com.amazonaws.mobile.downloader.policy.DownloadPolicyProvider;
 
 /**
  * A class to represent a single file to download.

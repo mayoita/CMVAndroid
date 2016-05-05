@@ -1,9 +1,5 @@
 package com.amazonaws.mobile.downloader.request;
 
-import java.io.Serializable;
-import java.net.URI;
-import java.net.URISyntaxException;
-
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
@@ -13,6 +9,10 @@ import android.util.Log;
 import com.amazonaws.mobile.downloader.query.DownloadQueueProvider;
 import com.amazonaws.mobile.downloader.service.DownloadFlags;
 import com.amazonaws.mobile.downloader.service.DownloadService;
+
+import java.io.Serializable;
+import java.net.URI;
+import java.net.URISyntaxException;
 
 
 /**

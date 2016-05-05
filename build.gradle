@@ -4,13 +4,10 @@ buildscript {
     repositories {
         jcenter()
         mavenCentral()
-        maven {
-            url 'https://maven.parse.com/repo'
-        }
+
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:1.3.0'
-        classpath 'com.parse.tools:gradle:1.1'
+        classpath 'com.android.tools.build:gradle:2.1.0'
         classpath 'com.google.gms:google-services:1.3.0-beta1'
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
@@ -26,14 +23,11 @@ allprojects {
 }
 ext {
     compileSdkVersion = 23
-    buildToolsVersion = "23.0.1"
+    buildToolsVersion = "23.0.3"
     minSdkVersion = 16
     targetSdkVersion = 23
 
     facebookSDK = 'com.facebook.android:facebook-android-sdk:4.5.0'
     androidSupport = 'com.android.support:support-v4:23.0.1'
-    bolts = 'com.parse.bolts:bolts-android:1.2.1'
-    parse = 'com.parse:parse-android:1.10.1'
-    parseFacebookUtilsPath = "$rootProject.projectDir/ParseLoginUI/libs/ParseFacebookUtilsV4-1.10.1.jar"
-    parseTwitterUtilsPath = "$rootProject.projectDir/ParseLoginUI/libs/ParseTwitterUtils-1.10.1.jar"
+
 }

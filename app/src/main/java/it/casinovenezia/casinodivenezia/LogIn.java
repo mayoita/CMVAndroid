@@ -30,11 +30,7 @@ import com.facebook.GraphResponse;
 import com.facebook.GraphRequest;
 import com.google.android.gms.analytics.HitBuilders;
 import com.google.android.gms.analytics.Tracker;
-import com.parse.ParseFacebookUtils;
-import com.parse.ParseTwitterUtils;
-import com.parse.ParseUser;
-import com.parse.twitter.Twitter;
-import com.parse.ui.ParseLoginBuilder;
+
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -55,7 +51,7 @@ public class LogIn extends Fragment {
 
 
 
-    private ParseUser currentUser;
+//    private ParseUser currentUser;
 
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
@@ -104,22 +100,22 @@ public class LogIn extends Fragment {
         loginOrLogoutButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (currentUser != null) {
-                    // User clicked to log out.
-                    ParseUser.logOut();
-                    currentUser = null;
-                    mTracker.send(new HitBuilders.EventBuilder()
-                            .setCategory("LOGGING")
-                            .setAction("press")
-                            .build());
-                    showProfileLoggedOut();
-                } else {
-                    // User clicked to log in.
-                    ParseLoginBuilder loginBuilder = new ParseLoginBuilder(
-                            getActivity());
-
-                    startActivityForResult(loginBuilder.build(), LOGIN_REQUEST);
-                }
+//                if (currentUser != null) {
+//                    // User clicked to log out.
+//                    ParseUser.logOut();
+//                    currentUser = null;
+//                    mTracker.send(new HitBuilders.EventBuilder()
+//                            .setCategory("LOGGING")
+//                            .setAction("press")
+//                            .build());
+//                    showProfileLoggedOut();
+//                } else {
+//                    // User clicked to log in.
+//                    ParseLoginBuilder loginBuilder = new ParseLoginBuilder(
+//                            getActivity());
+//
+//                    startActivityForResult(loginBuilder.build(), LOGIN_REQUEST);
+//                }
             }
         });
 
@@ -153,28 +149,28 @@ public class LogIn extends Fragment {
     public void onStart() {
         super.onStart();
 
-        currentUser = ParseUser.getCurrentUser();
-        if (currentUser != null) {
-            if (ParseFacebookUtils.isLinked(currentUser)) {
-                showProfileLoggedIn();
-                return;
-            }
-            if (ParseTwitterUtils.isLinked(currentUser)) {
-                Twitter twitterUser = ParseTwitterUtils.getTwitter();
-                if (twitterUser.getScreenName().length() > 0) {
-                    nameTextView.setText(twitterUser.getScreenName());
-
-                }
-                loginOrLogoutButton.setText(R.string.profile_logout_button_label);
-                return;
-            }
-            String myName = getResources().getString(R.string.welcome) + "\n" + currentUser.getString("name");
-            emailTextView.setText((CharSequence) currentUser.getEmail());
-            nameTextView.setText(myName);
-            loginOrLogoutButton.setText(R.string.profile_logout_button_label);
-        } else {
-            showProfileLoggedOut();
-        }
+//        currentUser = ParseUser.getCurrentUser();
+//        if (currentUser != null) {
+//            if (ParseFacebookUtils.isLinked(currentUser)) {
+//                showProfileLoggedIn();
+//                return;
+//            }
+//            if (ParseTwitterUtils.isLinked(currentUser)) {
+//                Twitter twitterUser = ParseTwitterUtils.getTwitter();
+//                if (twitterUser.getScreenName().length() > 0) {
+//                    nameTextView.setText(twitterUser.getScreenName());
+//
+//                }
+//                loginOrLogoutButton.setText(R.string.profile_logout_button_label);
+//                return;
+//            }
+//            String myName = getResources().getString(R.string.welcome) + "\n" + currentUser.getString("name");
+//            emailTextView.setText((CharSequence) currentUser.getEmail());
+//            nameTextView.setText(myName);
+//            loginOrLogoutButton.setText(R.string.profile_logout_button_label);
+//        } else {
+//            showProfileLoggedOut();
+//        }
     }
     /**
      * Shows the profile of the given user.
@@ -207,7 +203,7 @@ public class LogIn extends Fragment {
 
                         }
 
-                        // Application code
+
                     }
                 });
         Bundle parameters = new Bundle();
@@ -217,11 +213,11 @@ public class LogIn extends Fragment {
         request.executeAsync();
 
         //titleTextView.setText(R.string.profile_title_logged_in);
-        emailTextView.setText(currentUser.getEmail());
-        String fullName = currentUser.getString("name");
-        if (fullName != null) {
-            nameTextView.setText(fullName);
-        }
+     //   emailTextView.setText(currentUser.getEmail());
+       // String fullName = currentUser.getString("name");
+    //    if (fullName != null) {
+       //     nameTextView.setText(fullName);
+     //   }
         loginOrLogoutButton.setText(R.string.profile_logout_button_label);
     }
     private synchronized void downloadAvatar(final String myId) {

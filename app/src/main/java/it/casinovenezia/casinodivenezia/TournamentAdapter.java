@@ -9,8 +9,6 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.parse.GetDataCallback;
-import com.parse.ParseImageView;
 
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -44,7 +42,7 @@ public class TournamentAdapter extends BaseAdapter {
 
     class ViewHolder {
 
-        public ParseImageView image;
+ //       public ParseImageView image;
         private TextView text;
         private TextView date;
     }
@@ -114,7 +112,7 @@ public class TournamentAdapter extends BaseAdapter {
                     //configure view holder
                     ViewHolder viewHolder = new ViewHolder();
                     //viewHolder.text = (TextView) rowView.findViewById(R.id.textView1);
-                    viewHolder.image = (ParseImageView) rowView.findViewById(R.id.image_event);
+                  //  viewHolder.image = (ParseImageView) rowView.findViewById(R.id.image_event);
                     viewHolder.text = (TextView) rowView.findViewById(R.id.editText4);
                     viewHolder.text.setTypeface(Aachen);
                     viewHolder.date = (TextView) rowView.findViewById(R.id.editText5);
@@ -138,20 +136,20 @@ public class TournamentAdapter extends BaseAdapter {
             case TYPE_ITEM:
                 ViewHolder holder = (ViewHolder)rowView.getTag();
                 if (arraylist.get(position).getType().equals("C")) {
-                    holder.image.setParseFile(arraylist.get(position).getImageTournament());
-                    holder.image.loadInBackground(new GetDataCallback() {
-                        @Override
-                        public void done(byte[] data, com.parse.ParseException e) {
-
-                        }
-                    });
-                    holder.text.setVisibility(View.GONE);
-                    holder.date.setVisibility(View.GONE);
+//                    holder.image.setParseFile(arraylist.get(position).getImageTournament());
+//                    holder.image.loadInBackground(new GetDataCallback() {
+//                        @Override
+//                        public void done(byte[] data, com.parse.ParseException e) {
+//
+//                        }
+//                    });
+//                    holder.text.setVisibility(View.GONE);
+//                    holder.date.setVisibility(View.GONE);
                 } else {
-                    holder.image.setImageResource(R.drawable.tournament_cell_background);
-
-                    holder.text.setVisibility(View.VISIBLE);
-                    holder.date.setVisibility(View.VISIBLE);
+//                    holder.image.setImageResource(R.drawable.tournament_cell_background);
+//
+//                    holder.text.setVisibility(View.VISIBLE);
+//                    holder.date.setVisibility(View.VISIBLE);
                 }
                 holder.text.setText(arraylist.get(position).getTournamentsName());
                 holder.date.setText(arraylist.get(position).getStartDate() + " - " + arraylist.get(position).getEndDate());

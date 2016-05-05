@@ -10,8 +10,8 @@ import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 
 import com.amazonaws.mobile.downloader.query.BasicDownloadInfo;
-import com.amazonaws.mobile.downloader.query.DownloadState;
 import com.amazonaws.mobile.downloader.query.DownloadQueueProvider;
+import com.amazonaws.mobile.downloader.query.DownloadState;
 
 import java.net.HttpURLConnection;
 import java.util.HashSet;

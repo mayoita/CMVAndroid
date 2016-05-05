@@ -1,12 +1,12 @@
 package com.amazonaws.mobile.downloader.request;
 
-import java.io.Serializable;
-
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
 import com.amazonaws.mobile.downloader.service.DownloadService;
+
+import java.io.Serializable;
 
 /**
  * A class which represents a request to remove a download.

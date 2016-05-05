@@ -18,13 +18,6 @@ import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.parse.GetCallback;
-import com.parse.GetDataCallback;
-import com.parse.ParseException;
-import com.parse.ParseFile;
-import com.parse.ParseImageView;
-import com.parse.ParseObject;
-import com.parse.ParseQuery;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -48,7 +41,7 @@ public class MenuActivity extends AppCompatActivity {
     private List<Object> arraySecondCourse= new ArrayList<>();
     private List<Object> arrayDessert= new ArrayList<>();
     Resources res;
-    private ParseImageView imageView;
+   // private ParseImageView imageView;
     TextView date;
     TextView name;
 
@@ -78,7 +71,7 @@ public class MenuActivity extends AppCompatActivity {
         Typeface Thin = Typeface.createFromAsset(getAssets(), "fonts/Giorgio-Thin.ttf");
 
         Display display = getWindowManager().getDefaultDisplay();
-        imageView = (ParseImageView) findViewById(R.id.imageView9);
+       // imageView = (ParseImageView) findViewById(R.id.imageView9);
         ImageView imageViewWhite = (ImageView) findViewById(R.id.imageView10);
         DisplayMetrics dm = getResources().getDisplayMetrics();
         int width = display.getWidth();
@@ -89,7 +82,7 @@ public class MenuActivity extends AppCompatActivity {
 
         fp.setMargins(convertDpToPx(3, dm), convertDpToPx(0, dm), convertDpToPx(3, dm), 0);
         sp.setMargins(convertDpToPx(5, dm), convertDpToPx(3, dm), convertDpToPx(5, dm), 0);
-        imageView.setLayoutParams(sp);
+       // imageView.setLayoutParams(sp);
         imageViewWhite.setLayoutParams(fp);
         res = getResources();
         mAdapter = new MenuAdapter(this);
@@ -122,72 +115,72 @@ public class MenuActivity extends AppCompatActivity {
     }
 
     public void loadMenu () {
-        ParseQuery<ParseObject> query = ParseQuery.getQuery("Menu");
-        if (Venue.currentVenue == 1) {
-
-            menuId = CA_NOGHERA;
-        } else {
-            menuId = VENEZIA;
-        }
-        query.getInBackground(menuId, new GetCallback<ParseObject>() {
-                    public void done(ParseObject object, ParseException e) {
-                        if (e == null) {
-                            date.setText(formatMyDate(object.getDate("StartDate")) + " - " + formatMyDate(object.getDate("EndDate")));
-                            name.setText(object.getString("Chief"));
-                            arrayStarters = object.getList("Starters");
-                            arrayFirstCourse = object.getList("FirstCourse");
-                            arraySecondCourse = object.getList("SecondCourse");
-                            arrayDessert = object.getList("Dessert");
-                            ParseFile image = (ParseFile) object.get("ImageChief");
-                            imageView.setParseFile(image);
-                            imageView.loadInBackground(new GetDataCallback() {
-                                @Override
-                                public void done(byte[] data, com.parse.ParseException e) {
-
-                                }
-                            });
-                            for (int i = 0; i < 4; i++) {
-                                switch (i) {
-                                    case 0:
-
-                                        mAdapter.addSectionHeaderItem(res.getString(R.string.starters));
-                                        for (int y = 0; y < arrayStarters.size(); y += 2) {
-                                                mAdapter.addItem((String) arrayStarters.get(y), (String) arrayStarters.get(y + 1));
-                                        }
-                                        break;
-                                    case 1:
-                                        mAdapter.addSectionHeaderItem(res.getString(R.string.first));
-                                        for (int y = 0; y < arrayFirstCourse.size(); y += 2) {
-                                            mAdapter.addItem((String) arrayFirstCourse.get(y), (String) arrayFirstCourse.get(y + 1));
-                                        }
-                                        break;
-                                    case 2:
-                                        mAdapter.addSectionHeaderItem(res.getString(R.string.second));
-                                        for (int y = 0; y < arraySecondCourse.size(); y += 2) {
-                                            mAdapter.addItem((String) arraySecondCourse.get(y), (String) arraySecondCourse.get(y + 1));
-                                        }
-                                        break;
-                                    case 3:
-                                        mAdapter.addSectionHeaderItem(res.getString(R.string.dessert));
-                                        for (int y = 0; y < arrayDessert.size(); y += 2) {
-                                            mAdapter.addItem((String) arrayDessert.get(y), (String) arrayDessert.get(y + 1));
-                                        }
-                                        break;
-                                    default:
-                                        mAdapter.addSectionHeaderItem(res.getString(R.string.starters));
-                                }
-
-
-                            }
-
-                            listView.setAdapter(mAdapter);
-                        } else {
-                            // something went wrong
-
-                        }
-                    }
-                }
-        );
+//        ParseQuery<ParseObject> query = ParseQuery.getQuery("Menu");
+//        if (Venue.currentVenue == 1) {
+//
+//            menuId = CA_NOGHERA;
+//        } else {
+//            menuId = VENEZIA;
+//        }
+//        query.getInBackground(menuId, new GetCallback<ParseObject>() {
+//                    public void done(ParseObject object, ParseException e) {
+//                        if (e == null) {
+//                            date.setText(formatMyDate(object.getDate("StartDate")) + " - " + formatMyDate(object.getDate("EndDate")));
+//                            name.setText(object.getString("Chief"));
+//                            arrayStarters = object.getList("Starters");
+//                            arrayFirstCourse = object.getList("FirstCourse");
+//                            arraySecondCourse = object.getList("SecondCourse");
+//                            arrayDessert = object.getList("Dessert");
+//                            ParseFile image = (ParseFile) object.get("ImageChief");
+//                            imageView.setParseFile(image);
+//                            imageView.loadInBackground(new GetDataCallback() {
+//                                @Override
+//                                public void done(byte[] data, com.parse.ParseException e) {
+//
+//                                }
+//                            });
+//                            for (int i = 0; i < 4; i++) {
+//                                switch (i) {
+//                                    case 0:
+//
+//                                        mAdapter.addSectionHeaderItem(res.getString(R.string.starters));
+//                                        for (int y = 0; y < arrayStarters.size(); y += 2) {
+//                                                mAdapter.addItem((String) arrayStarters.get(y), (String) arrayStarters.get(y + 1));
+//                                        }
+//                                        break;
+//                                    case 1:
+//                                        mAdapter.addSectionHeaderItem(res.getString(R.string.first));
+//                                        for (int y = 0; y < arrayFirstCourse.size(); y += 2) {
+//                                            mAdapter.addItem((String) arrayFirstCourse.get(y), (String) arrayFirstCourse.get(y + 1));
+//                                        }
+//                                        break;
+//                                    case 2:
+//                                        mAdapter.addSectionHeaderItem(res.getString(R.string.second));
+//                                        for (int y = 0; y < arraySecondCourse.size(); y += 2) {
+//                                            mAdapter.addItem((String) arraySecondCourse.get(y), (String) arraySecondCourse.get(y + 1));
+//                                        }
+//                                        break;
+//                                    case 3:
+//                                        mAdapter.addSectionHeaderItem(res.getString(R.string.dessert));
+//                                        for (int y = 0; y < arrayDessert.size(); y += 2) {
+//                                            mAdapter.addItem((String) arrayDessert.get(y), (String) arrayDessert.get(y + 1));
+//                                        }
+//                                        break;
+//                                    default:
+//                                        mAdapter.addSectionHeaderItem(res.getString(R.string.starters));
+//                                }
+//
+//
+//                            }
+//
+//                            listView.setAdapter(mAdapter);
+//                        } else {
+//                            // something went wrong
+//
+//                        }
+//                    }
+//                }
+//        );
     }
 
     private String formatMyDate(Date myDate) {

@@ -35,11 +35,7 @@ import com.daimajia.slider.library.SliderTypes.DefaultSliderView;
 import com.daimajia.slider.library.SliderTypes.TextSliderView;
 import com.google.android.gms.analytics.HitBuilders;
 import com.google.android.gms.analytics.Tracker;
-import com.parse.GetCallback;
-import com.parse.ParseException;
-import com.parse.ParseFile;
-import com.parse.ParseObject;
-import com.parse.ParseQuery;
+
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -73,7 +69,7 @@ public class SlotDetailsFragment extends Fragment {
     Typeface XLight;
     View rootView;
     private TextSwitcher mTitle;
-    List<ParseObject> ob;
+ //   List<ParseObject> ob;
     private List<EventItem> eventitemlist = null;
     View myView;
     private int[][][] arraySlot = {
@@ -326,37 +322,37 @@ public class SlotDetailsFragment extends Fragment {
 
         @Override
         protected Void doInBackground(Void... params) {
-            // Create the array
-            eventitemlist = new ArrayList<EventItem>();
-            try {
-                // Locate the class table named "Country" in Parse.com
-                ParseQuery<ParseObject> query = new ParseQuery<ParseObject>(
-                        "Events");
-                // Locate the column named "ranknum" in Parse.com and order list
-                // by ascending
-                query.orderByDescending("StartDate");
-                query.whereEqualTo("eventType", "E");
-                query.whereEqualTo("isSlotsEvents",true);
-                ob = query.find();
-                for (ParseObject event : ob) {
-                    // Locate images in flag column
-                    ParseFile image = (ParseFile) event.get("ImageName");
-
-                    EventItem map = new EventItem();
-                    map.setImageMain(image);
-                    map.setOffice((String) event.get("office"));
-                    map.setMyId((String)event.getObjectId());
-                    map.setNameIT((String) event.get("NameIT"));
-                    map.setDescriptionIT((String) event.get("DescriptionIT"));
-                    map.setStartDate(formatMyDate(event.getDate("StartDate")));
-                    map.setEndDate(event.getDate("EndDate"));
-
-                    eventitemlist.add(map);
-                }
-            } catch (ParseException e) {
-                Log.e("Error", e.getMessage());
-                e.printStackTrace();
-            }
+//            // Create the array
+//            eventitemlist = new ArrayList<EventItem>();
+//            try {
+//                // Locate the class table named "Country" in Parse.com
+//                ParseQuery<ParseObject> query = new ParseQuery<ParseObject>(
+//                        "Events");
+//                // Locate the column named "ranknum" in Parse.com and order list
+//                // by ascending
+//                query.orderByDescending("StartDate");
+//                query.whereEqualTo("eventType", "E");
+//                query.whereEqualTo("isSlotsEvents",true);
+//                ob = query.find();
+//                for (ParseObject event : ob) {
+//                    // Locate images in flag column
+//                    ParseFile image = (ParseFile) event.get("ImageName");
+//
+//                    EventItem map = new EventItem();
+//                   // map.setImageMain(image);
+//                    map.setOffice((String) event.get("office"));
+//                    map.setMyId((String)event.getObjectId());
+//                    map.setNameIT((String) event.get("NameIT"));
+//                    map.setDescriptionIT((String) event.get("DescriptionIT"));
+//                    map.setStartDate(formatMyDate(event.getDate("StartDate")));
+//                    map.setEndDate(event.getDate("EndDate"));
+//
+//                    eventitemlist.add(map);
+//                }
+//            } catch (ParseException e) {
+//                Log.e("Error", e.getMessage());
+//                e.printStackTrace();
+//            }
             return null;
         }
         private String formatMyDate(Date myDate) {
@@ -425,46 +421,46 @@ public class SlotDetailsFragment extends Fragment {
         @Override
         protected Void doInBackground(Void... params) {
             // Create the array
-
-            // Locate the class table named "Country" in Parse.com
-            ParseQuery<ParseObject> query = ParseQuery.getQuery("Jackpot");
-            query.whereEqualTo("objectId", "pclLmCGRbH");
-            query.getFirstInBackground(new GetCallback<ParseObject>() {
-                public void done(ParseObject object, ParseException e) {
-                    if (object == null) {
-
-                        Log.d("jackpot", "The getFirst request failed.");
-                    } else {
-
-                        switch (Locale.getDefault().getLanguage()) {
-                            case "it":
-                                theText.setText((String) object.get("ourJackpotIT"));
-
-                                break;
-                            case "es":
-                                theText.setText((String) object.get("ourJackpotES"));
-                                break;
-                            case "fr":
-                                theText.setText((String) object.get("ourJackpotFR"));
-                                break;
-                            case "de":
-                                theText.setText((String) object.get("ourJackpotDE"));
-                                break;
-                            case "ru":
-                                theText.setText((String) object.get("ourJackpotRU"));
-                                break;
-                            case "ch":
-                                theText.setText((String) object.get("ourJackpotCH"));
-                                break;
-                            default:
-                                theText.setText((String) object.get("ourJackpots"));
-
-                                break;
-                        }
-
-                    }
-                }
-            });
+//
+//            // Locate the class table named "Country" in Parse.com
+//            ParseQuery<ParseObject> query = ParseQuery.getQuery("Jackpot");
+//            query.whereEqualTo("objectId", "pclLmCGRbH");
+//            query.getFirstInBackground(new GetCallback<ParseObject>() {
+//                public void done(ParseObject object, ParseException e) {
+//                    if (object == null) {
+//
+//                        Log.d("jackpot", "The getFirst request failed.");
+//                    } else {
+//
+//                        switch (Locale.getDefault().getLanguage()) {
+//                            case "it":
+//                                theText.setText((String) object.get("ourJackpotIT"));
+//
+//                                break;
+//                            case "es":
+//                                theText.setText((String) object.get("ourJackpotES"));
+//                                break;
+//                            case "fr":
+//                                theText.setText((String) object.get("ourJackpotFR"));
+//                                break;
+//                            case "de":
+//                                theText.setText((String) object.get("ourJackpotDE"));
+//                                break;
+//                            case "ru":
+//                                theText.setText((String) object.get("ourJackpotRU"));
+//                                break;
+//                            case "ch":
+//                                theText.setText((String) object.get("ourJackpotCH"));
+//                                break;
+//                            default:
+//                                theText.setText((String) object.get("ourJackpots"));
+//
+//                                break;
+//                        }
+//
+//                    }
+//                }
+//            });
 
             return null;
         }

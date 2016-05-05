@@ -1,13 +1,5 @@
 package com.amazonaws.mobile.downloader.service;
 
-import java.io.File;
-import java.net.HttpURLConnection;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.Future;
-import java.util.concurrent.RejectedExecutionException;
-import java.util.concurrent.atomic.AtomicInteger;
-
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
@@ -20,9 +12,17 @@ import android.support.v4.util.LongSparseArray;
 import android.util.Log;
 
 import com.amazonaws.mobile.downloader.policy.DownloadPolicyProvider;
-import com.amazonaws.mobile.downloader.query.DownloadState;
 import com.amazonaws.mobile.downloader.query.DownloadQueueProvider;
+import com.amazonaws.mobile.downloader.query.DownloadState;
 import com.amazonaws.mobile.downloader.query.QueryHelper;
+
+import java.io.File;
+import java.net.HttpURLConnection;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
+import java.util.concurrent.RejectedExecutionException;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * This classes handles downloading files using DownloadTasks

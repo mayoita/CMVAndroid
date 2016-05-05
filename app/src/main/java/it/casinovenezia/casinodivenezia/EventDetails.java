@@ -24,11 +24,7 @@ import com.daimajia.slider.library.Animations.DescriptionAnimation;
 import com.daimajia.slider.library.SliderLayout;
 import com.daimajia.slider.library.SliderTypes.BaseSliderView;
 import com.daimajia.slider.library.SliderTypes.DefaultSliderView;
-import com.parse.GetCallback;
-import com.parse.ParseException;
-import com.parse.ParseFile;
-import com.parse.ParseObject;
-import com.parse.ParseQuery;
+
 
 import java.util.HashMap;
 
@@ -163,40 +159,40 @@ public class EventDetails extends Fragment implements BaseSliderView.OnSliderCli
 
 
     public void loadImage(String myId) {
-        ParseQuery<ParseObject> query = new ParseQuery<ParseObject>(
-                "Events");
-
-        query.getInBackground(myId,
-                new GetCallback<ParseObject>() {
-
-                    public void done(ParseObject object,
-                                     ParseException e) {
-
-                        ParseFile image1F = (ParseFile) object
-                                .get("ImageEvent1");
-                        ParseFile image2F = (ParseFile) object
-                                .get("ImageEvent2");
-                        ParseFile image3F = (ParseFile) object
-                                .get("ImageEvent3");
-                        ParseFile imageDefault = (ParseFile) object
-                                .get("ImageName");
-                        if (image1F != null){
-                            image1 = image1F.getUrl();
-                        } else {
-                            image1 = imageDefault.getUrl();
-                        }
-
-                        if (image2F != null){
-                            image2 = image2F.getUrl();
-                        }
-                        if (image3F != null){
-                            image3 = image3F.getUrl();
-                        }
-                        createSlider();
-
-
-                    }
-                });
+//        ParseQuery<ParseObject> query = new ParseQuery<ParseObject>(
+//                "Events");
+//
+//        query.getInBackground(myId,
+//                new GetCallback<ParseObject>() {
+//
+//                    public void done(ParseObject object,
+//                                     ParseException e) {
+//
+//                        ParseFile image1F = (ParseFile) object
+//                                .get("ImageEvent1");
+//                        ParseFile image2F = (ParseFile) object
+//                                .get("ImageEvent2");
+//                        ParseFile image3F = (ParseFile) object
+//                                .get("ImageEvent3");
+//                        ParseFile imageDefault = (ParseFile) object
+//                                .get("ImageName");
+//                        if (image1F != null){
+//                            image1 = image1F.getUrl();
+//                        } else {
+//                            image1 = imageDefault.getUrl();
+//                        }
+//
+//                        if (image2F != null){
+//                            image2 = image2F.getUrl();
+//                        }
+//                        if (image3F != null){
+//                            image3 = image3F.getUrl();
+//                        }
+//                        createSlider();
+//
+//
+//                    }
+//                });
     }
     public void createSlider (){
         HashMap<String, String> file_maps = new HashMap<String, String>();

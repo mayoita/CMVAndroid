@@ -25,12 +25,7 @@ import android.widget.Toast;
 
 import com.google.android.gms.analytics.HitBuilders;
 import com.google.android.gms.analytics.Tracker;
-import com.parse.FindCallback;
-import com.parse.GetCallback;
-import com.parse.ParseException;
-import com.parse.ParseFile;
-import com.parse.ParseObject;
-import com.parse.ParseQuery;
+
 
 import java.io.Serializable;
 import java.text.DateFormat;
@@ -47,7 +42,7 @@ public class EventsFr extends Fragment implements TextToSpeech.OnInitListener{
 
     public static final String EXTRA_MESSAGE = "EXTRA_MESSAGE";
     private ListView listView;
-    List<ParseObject> ob;
+  //  List<ParseObject> ob;
     private EventsAdapter mAdapter;
     private List<EventItem> eventitemlist = null;
     private List<EventItem> myEventitemlist = null;
@@ -271,78 +266,78 @@ public class EventsFr extends Fragment implements TextToSpeech.OnInitListener{
 
     public void loadEvent () {
         if(HomeActivity.eventitemlist == null) {
-            ParseQuery<ParseObject> query = new ParseQuery<ParseObject>(
-                    "Events");
-            query.orderByDescending("StartDate");
-            query.findInBackground(new FindCallback<ParseObject>() {
-                public void done(List<ParseObject> eventList, ParseException e) {
-                    if (e == null) {
-                        eventitemlist = new ArrayList<EventItem>();
-                        for (ParseObject event : eventList) {
-                            // Locate images in flag column
-                            ParseFile image = (ParseFile) event.get("ImageName");
-
-                            EventItem map = new EventItem();
-                            map.setImageMain(image);
-                            map.setOffice((String) event.get("office"));
-                            map.setMyId((String) event.getObjectId());
-
-                            switch (Locale.getDefault().getLanguage()) {
-                                case "it":
-                                    map.setDescription((String) event.get("DescriptionIT"));
-                                    map.setName((String) event.get("NameIT"));
-                                    map.setMemo((String) event.get("memoIT"));
-                                    break;
-//                            case "es":
-//                                map.setDescription((String) event.get("DescriptionES"));
-//                                map.setName((String) event.get("NameES"));
-//                                map.setMemo((String) event.get("memoES"));
-//                                break;
-//                            case "fr":
-//                                map.setDescription((String) event.get("DescriptionFR"));
-//                                map.setName((String) event.get("NameFR"));
-//                                map.setMemo((String) event.get("memoFR"));
-//                                break;
-//                            case "de":
-//                                map.setDescription((String) event.get("DescriptionDE"));
-//                                map.setName((String) event.get("NameDE"));
-//                                map.setMemo((String) event.get("memoDE"));
-//                                break;
-//                            case "ru":
-//                                map.setDescription((String) event.get("DescriptionRU"));
-//                                map.setName((String) event.get("NameRU"));
-//                                map.setMemo((String) event.get("memoRU"));
-//                                break;
-//                            case "ch":
-//                                map.setDescription((String) event.get("DescriptionZH"));
-//                                map.setName((String) event.get("NameZH"));
-//                                map.setMemo((String) event.get("memoZH"));
-//                                break;
-                                default:
-                                    map.setDescription((String) event.get("Description"));
-                                    map.setName((String) event.get("Name"));
-                                    map.setMemo((String) event.get("memo"));
-                                    break;
-                            }
-
-                            map.setStartDate(formatMyDate(event.getDate("StartDate")));
-                            map.setEndDate(event.getDate("EndDate"));
-
-                            eventitemlist.add(map);
-
-
-                        }
-                        HomeActivity.eventitemlist = eventitemlist;
-                        if (isAdded()) {
-                            setOffice();
-                        } else {
-                            Log.e("isAdded", "EventsFr not added");
-                        }
-                    } else {
-                        Log.d("events", "Error: " + e.getMessage());
-                    }
-                }
-            });
+//            ParseQuery<ParseObject> query = new ParseQuery<ParseObject>(
+//                    "Events");
+//            query.orderByDescending("StartDate");
+//            query.findInBackground(new FindCallback<ParseObject>() {
+//                public void done(List<ParseObject> eventList, ParseException e) {
+//                    if (e == null) {
+//                        eventitemlist = new ArrayList<EventItem>();
+//                        for (ParseObject event : eventList) {
+//                            // Locate images in flag column
+//                            ParseFile image = (ParseFile) event.get("ImageName");
+//
+//                            EventItem map = new EventItem();
+//                            map.setImageMain(image);
+//                            map.setOffice((String) event.get("office"));
+//                            map.setMyId((String) event.getObjectId());
+//
+//                            switch (Locale.getDefault().getLanguage()) {
+//                                case "it":
+//                                    map.setDescription((String) event.get("DescriptionIT"));
+//                                    map.setName((String) event.get("NameIT"));
+//                                    map.setMemo((String) event.get("memoIT"));
+//                                    break;
+////                            case "es":
+////                                map.setDescription((String) event.get("DescriptionES"));
+////                                map.setName((String) event.get("NameES"));
+////                                map.setMemo((String) event.get("memoES"));
+////                                break;
+////                            case "fr":
+////                                map.setDescription((String) event.get("DescriptionFR"));
+////                                map.setName((String) event.get("NameFR"));
+////                                map.setMemo((String) event.get("memoFR"));
+////                                break;
+////                            case "de":
+////                                map.setDescription((String) event.get("DescriptionDE"));
+////                                map.setName((String) event.get("NameDE"));
+////                                map.setMemo((String) event.get("memoDE"));
+////                                break;
+////                            case "ru":
+////                                map.setDescription((String) event.get("DescriptionRU"));
+////                                map.setName((String) event.get("NameRU"));
+////                                map.setMemo((String) event.get("memoRU"));
+////                                break;
+////                            case "ch":
+////                                map.setDescription((String) event.get("DescriptionZH"));
+////                                map.setName((String) event.get("NameZH"));
+////                                map.setMemo((String) event.get("memoZH"));
+////                                break;
+//                                default:
+//                                    map.setDescription((String) event.get("Description"));
+//                                    map.setName((String) event.get("Name"));
+//                                    map.setMemo((String) event.get("memo"));
+//                                    break;
+//                            }
+//
+//                            map.setStartDate(formatMyDate(event.getDate("StartDate")));
+//                            map.setEndDate(event.getDate("EndDate"));
+//
+//                            eventitemlist.add(map);
+//
+//
+//                        }
+//                        HomeActivity.eventitemlist = eventitemlist;
+//                        if (isAdded()) {
+//                            setOffice();
+//                        } else {
+//                            Log.e("isAdded", "EventsFr not added");
+//                        }
+//                    } else {
+//                        Log.d("events", "Error: " + e.getMessage());
+//                    }
+//                }
+//            });
         } else {
             eventitemlist = HomeActivity.eventitemlist;
             if (isAdded()) {

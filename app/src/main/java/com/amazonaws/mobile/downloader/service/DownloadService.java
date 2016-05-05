@@ -1,8 +1,5 @@
 package com.amazonaws.mobile.downloader.service;
 
-import java.util.ArrayList;
-import java.util.Collection;
-
 import android.app.Service;
 import android.content.ContentResolver;
 import android.content.ContentValues;
@@ -19,11 +16,14 @@ import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 import android.util.SparseBooleanArray;
 
-import com.amazonaws.mobile.downloader.query.DownloadState;
 import com.amazonaws.mobile.downloader.query.DownloadQueueProvider;
+import com.amazonaws.mobile.downloader.query.DownloadState;
 import com.amazonaws.mobile.downloader.query.QueryHelper;
 import com.amazonaws.mobile.downloader.request.DownloadAddRequest;
 import com.amazonaws.mobile.downloader.request.DownloadRemoveRequest;
+
+import java.util.ArrayList;
+import java.util.Collection;
 
 /**
  * Service to manage downloads.

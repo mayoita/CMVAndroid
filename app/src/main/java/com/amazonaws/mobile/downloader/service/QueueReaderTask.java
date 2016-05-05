@@ -1,15 +1,15 @@
 package com.amazonaws.mobile.downloader.service;
 
-import java.lang.ref.WeakReference;
-import java.util.concurrent.Callable;
-
 import android.content.ContentResolver;
 import android.content.Context;
 import android.database.Cursor;
 import android.util.Log;
 
-import com.amazonaws.mobile.downloader.query.DownloadState;
 import com.amazonaws.mobile.downloader.query.DownloadQueueProvider;
+import com.amazonaws.mobile.downloader.query.DownloadState;
+
+import java.lang.ref.WeakReference;
+import java.util.concurrent.Callable;
 
 /**
  * A class to represent the task of initializing the queue from the content provider.

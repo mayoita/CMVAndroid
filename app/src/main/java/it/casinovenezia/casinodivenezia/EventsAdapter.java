@@ -26,9 +26,7 @@ import com.facebook.rebound.SpringSystem;
 
 import com.google.android.gms.analytics.HitBuilders;
 import com.google.android.gms.analytics.Tracker;
-import com.parse.GetDataCallback;
-import com.parse.ParseException;
-import com.parse.ParseFile;
+
 
 import java.util.ArrayList;
 
@@ -233,7 +231,7 @@ public class EventsAdapter extends BaseAdapter  {
 
                 holder.speak.setImageResource(R.drawable.speak);
                 //download image
-                loadImage(arraylist.get(position).getImageMain(), holder.image);
+              //  loadImage(arraylist.get(position).getImageMain(), holder.image);
                 holder.text.setVisibility(View.GONE);
                 holder.date.setVisibility(View.GONE);
                 SpringSystem mSpringSystem = SpringSystem.create();
@@ -254,32 +252,32 @@ public class EventsAdapter extends BaseAdapter  {
         return rowView;
     }
 
-    public void loadImage(ParseFile file, final ImageView myImage) {
-        file
-                .getDataInBackground(new GetDataCallback() {
-
-                    public void done(byte[] data,
-                                     ParseException e) {
-                        if (e == null) {
-                            Log.d("test",
-                                    "We've got data in data.");
-                            // Decode the Byte[] into
-                            // Bitmap
-                            Bitmap bmp = BitmapFactory
-                                    .decodeByteArray(
-                                            data, 0,
-                                            data.length);
-
-                            myImage.setImageBitmap(bmp);
-
-
-                        } else {
-                            Log.d("test",
-                                    "There was a problem downloading the data.");
-                        }
-                    }
-                });
-    }
+//    public void loadImage(ParseFile file, final ImageView myImage) {
+//        file
+//                .getDataInBackground(new GetDataCallback() {
+//
+//                    public void done(byte[] data,
+//                                     ParseException e) {
+//                        if (e == null) {
+//                            Log.d("test",
+//                                    "We've got data in data.");
+//                            // Decode the Byte[] into
+//                            // Bitmap
+//                            Bitmap bmp = BitmapFactory
+//                                    .decodeByteArray(
+//                                            data, 0,
+//                                            data.length);
+//
+//                            myImage.setImageBitmap(bmp);
+//
+//
+//                        } else {
+//                            Log.d("test",
+//                                    "There was a problem downloading the data.");
+//                        }
+//                    }
+//                });
+//    }
     public class SpringRunnable implements Runnable{
         Spring _spring;
         View _view;

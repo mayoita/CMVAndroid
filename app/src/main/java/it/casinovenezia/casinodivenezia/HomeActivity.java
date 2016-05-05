@@ -36,6 +36,8 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.amazonaws.mobile.AWSMobileClient;
+import com.amazonaws.mobileconnectors.dynamodbv2.dynamodbmapper.DynamoDBMapper;
 import com.facebook.FacebookSdk;
 import com.facebook.appevents.AppEventsLogger;
 import com.google.android.gms.common.ConnectionResult;
@@ -46,15 +48,7 @@ import com.google.android.gms.common.api.Status;
 import com.google.android.gms.location.Geofence;
 import com.google.android.gms.location.GeofencingRequest;
 import com.google.android.gms.location.LocationServices;
-import com.parse.Parse;
-import com.parse.ParseAnalytics;
-import com.parse.ParseException;
-import com.parse.ParseFacebookUtils;
-import com.parse.ParseInstallation;
-import com.parse.ParsePush;
-import com.parse.ParseTwitterUtils;
-import com.parse.SaveCallback;
-import com.parse.ui.ParseLoginBuilder;
+
 
 import org.json.JSONException;
 
@@ -111,6 +105,8 @@ public class HomeActivity extends AppCompatActivity implements
      * Used when requesting to add or remove geofences.
      */
     private PendingIntent mGeofencePendingIntent;
+
+
     private final Handler mHandler = new Handler();
     private Drawable.Callback mDrawableCallback = new Drawable.Callback() {
         @Override
@@ -138,7 +134,7 @@ public class HomeActivity extends AppCompatActivity implements
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         fragments = getFragments();
-        ParseAnalytics.trackAppOpenedInBackground(getIntent());
+
 
         boolean tabletSize = getResources().getBoolean(R.bool.isTablet);
         if (tabletSize) {
@@ -162,47 +158,49 @@ public class HomeActivity extends AppCompatActivity implements
             }
         }
         if (!settings.contains("news")) {
-            ParsePush.subscribeInBackground("Events", new SaveCallback() {
-                @Override
-                public void done(ParseException e) {
-                    if (e == null) {
-                        Log.d("com.parse.push", "successfully subscribed to the  channels.");
-                        editor.putBoolean("news", true).commit();
-
-                    } else {
-                        Log.e("com.parse.push", "failed to subscribe for push", e);
-                    }
-                }
-            });
+//            ParsePush.subscribeInBackground("Events", new SaveCallback() {
+//                @Override
+//                public void done(ParseException e) {
+//                    if (e == null) {
+//                        Log.d("com.parse.push", "successfully subscribed to the  channels.");
+//                        editor.putBoolean("news", true).commit();
+//
+//                    } else {
+//                        Log.e("com.parse.push", "failed to subscribe for push", e);
+//                    }
+//                }
+//            });
         }
         if (!settings.contains("slot")) {
-            ParsePush.subscribeInBackground("Slots", new SaveCallback() {
-                @Override
-                public void done(ParseException e) {
-                    if (e == null) {
-                        Log.d("com.parse.push", "successfully subscribed to the  channels.");
-                        editor.putBoolean("slot", true).commit();
-
-                    } else {
-                        Log.e("com.parse.push", "failed to subscribe for push", e);
-                    }
-                }
-            });
+//            ParsePush.subscribeInBackground("Slots", new SaveCallback() {
+//                @Override
+//                public void done(ParseException e) {
+//                    if (e == null) {
+//                        Log.d("com.parse.push", "successfully subscribed to the  channels.");
+//                        editor.putBoolean("slot", true).commit();
+//
+//                    } else {
+//                        Log.e("com.parse.push", "failed to subscribe for push", e);
+//                    }
+//                }
+//            });
         }
         if (!settings.contains("poker")) {
-            ParsePush.subscribeInBackground("Poker", new SaveCallback() {
-                @Override
-                public void done(ParseException e) {
-                    if (e == null) {
-                        Log.d("com.parse.push", "successfully subscribed to the  channels.");
-                        editor.putBoolean("poker", true).commit();
-
-                    } else {
-                        Log.e("com.parse.push", "failed to subscribe for push", e);
-                    }
-                }
-            });
+//            ParsePush.subscribeInBackground("Poker", new SaveCallback() {
+//                @Override
+//                public void done(ParseException e) {
+//                    if (e == null) {
+//                        Log.d("com.parse.push", "successfully subscribed to the  channels.");
+//                        editor.putBoolean("poker", true).commit();
+//
+//                    } else {
+//                        Log.e("com.parse.push", "failed to subscribe for push", e);
+//                    }
+//                }
+//            });
         }
+
+
 
         geofenceToAdd =geofence();
         buildGoogleApiClient();
@@ -577,8 +575,8 @@ public class HomeActivity extends AppCompatActivity implements
     }
 
     public void openSignUpLogIn(View v) {
-        ParseLoginBuilder builder = new ParseLoginBuilder(HomeActivity.this);
-        startActivityForResult(builder.build(), 0);
+//        ParseLoginBuilder builder = new ParseLoginBuilder(HomeActivity.this);
+//        startActivityForResult(builder.build(), 0);
     }
 
     @Override

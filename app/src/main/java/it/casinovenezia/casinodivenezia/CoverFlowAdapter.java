@@ -9,9 +9,7 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.parse.GetDataCallback;
-import com.parse.ParseException;
-import com.parse.ParseImageView;
+
 
 import java.util.ArrayList;
 
@@ -54,21 +52,21 @@ public class CoverFlowAdapter extends BaseAdapter {
 
             ViewHolder viewHolder = new ViewHolder();
             viewHolder.text = (TextView) rowView.findViewById(R.id.label);
-            viewHolder.image = (ParseImageView) rowView
-                    .findViewById(R.id.image);
+//            viewHolder.image = (ParseImageView) rowView
+//                    .findViewById(R.id.image);
             rowView.setTag(viewHolder);
         }
 
         ViewHolder holder = (ViewHolder) rowView.getTag();
 
         //holder.image.setImageResource(mData.get(position).imageResId);
-		holder.image.setParseFile(mData.get(position).getImageMain());
-		holder.image.loadInBackground(new GetDataCallback() {
-			@Override
-			public void done(byte[] data, ParseException e) {
-
-			}
-		});
+//		holder.image.setParseFile(mData.get(position).getImageMain());
+//		holder.image.loadInBackground(new GetDataCallback() {
+//			@Override
+//			public void done(byte[] data, ParseException e) {
+//
+//			}
+//		});
 		String a = mData.get(position).getNameIT();
         holder.text.setText(mData.get(position).getNameIT());
 
@@ -78,6 +76,6 @@ public class CoverFlowAdapter extends BaseAdapter {
 
     static class ViewHolder {
         public TextView text;
-        public ParseImageView image;
+      //  public ParseImageView image;
     }
 }

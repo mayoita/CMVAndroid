@@ -2,6 +2,7 @@ package it.casinovenezia.casinodivenezia;
 
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -23,12 +24,23 @@ import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.amazonaws.mobile.AWSMobileClient;
+import com.amazonaws.mobile.content.ContentItem;
+import com.amazonaws.mobile.content.ContentListHandler;
+import com.amazonaws.mobile.content.ContentListItem;
+import com.amazonaws.mobile.content.ContentManager;
+import com.amazonaws.mobile.content.ContentState;
+import com.amazonaws.mobile.util.StringFormatUtils;
+import com.amazonaws.mobileconnectors.dynamodbv2.dynamodbmapper.DynamoDBMapper;
+import com.amazonaws.mobileconnectors.dynamodbv2.dynamodbmapper.DynamoDBScanExpression;
+import com.amazonaws.mobileconnectors.dynamodbv2.dynamodbmapper.PaginatedScanList;
 import com.google.android.gms.analytics.HitBuilders;
 import com.google.android.gms.analytics.Tracker;
 
 
 import java.io.Serializable;
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -51,6 +63,34 @@ public class EventsFr extends Fragment implements TextToSpeech.OnInitListener{
 
     boolean mDualPane;
     int mCurCheckPosition = 0;
+    private final DynamoDBMapper mapper;
+    /** Content Manager that manages the content for this demo. */
+    private ContentManager contentManager;
+    /** Handles the main content list. */
+    private EventsAdapter contentListItems;
+    /** The current relative path within the ContentManager. */
+    private String currentPath = "";
+
+    private void createContentList(final View fragmentView, final ContentManager contentManager) {
+        listView = (ListView) fragmentView.findViewById(R.id.list_events);
+        contentListItems = new EventsAdapter(fragmentView.getContext(), contentManager,
+                new EventsAdapter.ContentListPathProvider() {
+                    @Override
+                    public String getCurrentPath() {
+                        return currentPath;
+                    }
+                },
+                new EventsAdapter.ContentListCacheObserver() {
+                    @Override
+                    public void onCacheChanged() {
+                        //refreshCacheSummary();
+                    }
+                },
+                R.layout.events_fragment);
+        listView.setAdapter(contentListItems);
+      //  listView.setOnItemClickListener(this);
+        listView.setOnCreateContextMenuListener(this);
+    }
 
     @Override
     public void onInit(int status) {
@@ -92,6 +132,7 @@ public class EventsFr extends Fragment implements TextToSpeech.OnInitListener{
      * fragment (e.g. upon screen orientation changes).
      */
     public EventsFr() {
+        mapper = AWSMobileClient.defaultMobileClient().getDynamoDBMapper();
     }
 //
     @Override
@@ -100,7 +141,7 @@ public class EventsFr extends Fragment implements TextToSpeech.OnInitListener{
         View rootView = inflater.inflate(R.layout.events_fragment, container, false);
         listView = (ListView) rootView.findViewById(R.id.list_events);
 
-
+        this.contentManager = StarterApplication.contentManager;
 
 
         if (savedInstanceState != null) {
@@ -131,7 +172,30 @@ public class EventsFr extends Fragment implements TextToSpeech.OnInitListener{
         return rootView;
     }
 
+    @Override
+    public void onViewCreated(final View view, final Bundle savedInstanceState) {
 
+        AWSMobileClient.defaultMobileClient().
+                createDefaultContentManager(new ContentManager.BuilderResultHandler() {
+
+                    @Override
+                    public void onComplete(final ContentManager contentManager) {
+                        if (!isAdded()) {
+                            contentManager.destroy();
+                            return;
+                        }
+
+                        final View fragmentView = getView();
+                        EventsFr.this.contentManager = contentManager;
+                        createContentList(fragmentView, contentManager);
+                        contentManager.setContentRemovedListener(contentListItems);
+                       // dialog.dismiss();
+                        refreshContent(currentPath);
+                    }
+                });
+
+
+    }
 
 
     public static final EventsFr newInstance(String message) {
@@ -223,19 +287,19 @@ public class EventsFr extends Fragment implements TextToSpeech.OnInitListener{
         if (Venue.currentVenue == 1) {
 
             myEventitemlist = inOffice("CN");
-            mAdapter = new EventsAdapter(getActivity(),
-                    myEventitemlist);
+         //   mAdapter = new EventsAdapter(getActivity(), this.contentManager,
+     //               myEventitemlist);
 
-            mAdapter.notifyDataSetChanged();
+   //         mAdapter.notifyDataSetChanged();
             listView.setAdapter(mAdapter);
 
         } else {
 
             myEventitemlist = inOffice("VE");
-            mAdapter = new EventsAdapter(getActivity(),
-                    myEventitemlist);
+      //      mAdapter = new EventsAdapter(getActivity(), this.contentManager,
+      //              myEventitemlist);
             //inOffice("VE");
-            mAdapter.notifyDataSetChanged();
+//            mAdapter.notifyDataSetChanged();
             listView.setAdapter(mAdapter);
         }
     }
@@ -257,15 +321,80 @@ public class EventsFr extends Fragment implements TextToSpeech.OnInitListener{
     }
 
 
-    private String formatMyDate(Date myDate) {
+    private String formatMyDate(String myDate) {
+        DateFormat format = new SimpleDateFormat("dd/MM/yy");
+        Date date = new Date();
+        try {
+             date = format.parse(myDate);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
 
         SimpleDateFormat sdf = new SimpleDateFormat("EEEE dd LLLL", StarterApplication.currentLocale);
 
-        return sdf.format(myDate);
+        return sdf.format(date);
     }
 
     public void loadEvent () {
         if(HomeActivity.eventitemlist == null) {
+            eventitemlist = new ArrayList<EventItem>();
+            DynamoDBScanExpression scanExpression = new DynamoDBScanExpression();
+            PaginatedScanList<EventsDO> result = mapper.scan(EventsDO.class, scanExpression);
+            for (EventsDO item : result) {
+                EventItem map = new EventItem();
+                            map.setImageMain(item.get_ImageName());
+                            map.setOffice(item.get_office());
+                        //    map.setMyId((String) event.getObjectId());
+
+                switch (Locale.getDefault().getLanguage()) {
+                                case "it":
+                                    map.setDescription(item.get_DescriptionIT());
+                                    map.setName(item.get_NameIT());
+                                    map.setMemo(item.get_memoIT());
+                                    break;
+                            case "es":
+                                map.setDescription(item.get_DescriptionES());
+                                map.setName(item.get_NameES());
+                                map.setMemo(item.get_memoES());
+                                break;
+                            case "fr":
+                                map.setDescription(item.get_DescriptionFR());
+                                map.setName(item.get_NameFR());
+                                map.setMemo(item.get_memoFR());
+                                break;
+                            case "de":
+                                map.setDescription(item.get_DescriptionDE());
+                                map.setName(item.get_NameDE());
+                                map.setMemo(item.get_memoDE());
+                                break;
+                            case "ru":
+                                map.setDescription(item.get_DescriptionRU());
+                                map.setName(item.get_NameRU());
+                                map.setMemo(item.get_memoRU());
+                                break;
+                            case "ch":
+                                map.setDescription(item.get_DescriptionZH());
+                                map.setName(item.get_NameZH());
+                                map.setMemo(item.get_memoZH());
+                                break;
+                                default:
+                                    map.setDescription(item.get_Description());
+                                    map.setName(item.getName());
+                                    map.setMemo(item.get_memo());
+                                    break;
+                }
+                map.setStartDate(formatMyDate(item.getStartDate()));
+                            map.setEndDate(item.get_EndDate());
+
+                            eventitemlist.add(map);
+            }
+            HomeActivity.eventitemlist = eventitemlist;
+                        if (isAdded()) {
+                            setOffice();
+                        } else {
+                            Log.e("isAdded", "EventsFr not added");
+                        }
+
 //            ParseQuery<ParseObject> query = new ParseQuery<ParseObject>(
 //                    "Events");
 //            query.orderByDescending("StartDate");
@@ -344,6 +473,7 @@ public class EventsFr extends Fragment implements TextToSpeech.OnInitListener{
                 setOffice();
             } else {
                 Log.e("isAdded", "EventsFr not added");
+
             }
         }
     }
@@ -385,4 +515,74 @@ public class EventsFr extends Fragment implements TextToSpeech.OnInitListener{
             }
         });
     }
+    public void refreshContent(final String path) {
+   //     if (!listingContentInProgress) {
+    //        listingContentInProgress = true;
+
+          //  refreshCacheSummary();
+
+            // Remove all progress listeners.
+            contentManager.clearProgressListeners();
+
+            // Clear old content.
+            contentListItems.clear();
+            contentListItems.notifyDataSetChanged();
+            currentPath = path;
+           // updatePath();
+
+        //    final ProgressDialog dialog = getProgressDialog(
+           //         R.string.content_progress_dialog_message_load_content);
+
+            contentManager.listAvailableContent(path, new ContentListHandler() {
+                @Override
+                public boolean onContentReceived(final int startIndex,
+                                                 final List<ContentItem> partialResults,
+                                                 final boolean hasMoreResults) {
+                    // if the activity is no longer alive, we can stop immediately.
+                    if (getActivity() == null) {
+                    //    listingContentInProgress = false;
+                        return false;
+                    }
+                    if (startIndex == 0) {
+                  //      dialog.dismiss();
+                    }
+
+                    for (final ContentItem contentItem : partialResults) {
+                        // Add the item to the list.
+                        contentListItems.add(new ContentListItem(contentItem));
+
+                        // If the content is transferring, ensure the progress listener is set.
+                        final ContentState contentState = contentItem.getContentState();
+                        if (ContentState.isTransferringOrWaitingToTransfer(contentState)) {
+                            contentManager.setProgressListener(contentItem.getFilePath(),
+                                    contentListItems);
+                        }
+                    }
+                    // sort items added.
+                    contentListItems.sort(ContentListItem.contentAlphebeticalComparator);
+
+                    if (!hasMoreResults) {
+                  //      listingContentInProgress = false;
+                    }
+                    // Return true to continue listing.
+                    return true;
+                }
+
+                @Override
+                public void onError(final Exception ex) {
+             //       dialog.dismiss();
+             //       listingContentInProgress = false;
+                    final Activity activity = getActivity();
+                    if (activity != null) {
+                        final AlertDialog.Builder errorDialogBuilder = new AlertDialog.Builder(activity);
+                  //      errorDialogBuilder.setTitle(activity.getString(R.string.content_list_failure_text));
+                        errorDialogBuilder.setMessage(ex.getMessage());
+                        errorDialogBuilder.setNegativeButton(
+                                activity.getString(R.string.content_dialog_ok), null);
+                        errorDialogBuilder.show();
+                    }
+                }
+            });
+        }
+   // }
 }

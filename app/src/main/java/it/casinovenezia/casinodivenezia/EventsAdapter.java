@@ -5,19 +5,32 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Handler;
 import android.speech.tts.TextToSpeech;
 import android.speech.tts.UtteranceProgressListener;
+import android.support.v4.content.FileProvider;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.amazonaws.mobile.AWSMobileClient;
+import com.amazonaws.mobile.content.ContentDownloadPolicy;
+import com.amazonaws.mobile.content.ContentItem;
+import com.amazonaws.mobile.content.ContentListItem;
+import com.amazonaws.mobile.content.ContentManager;
+import com.amazonaws.mobile.content.ContentProgressListener;
+import com.amazonaws.mobile.content.ContentRemovedListener;
+import com.amazonaws.mobile.user.IdentityManager;
+import com.amazonaws.mobileconnectors.s3.transferutility.TransferObserver;
+import com.amazonaws.mobileconnectors.s3.transferutility.TransferUtility;
 import com.facebook.rebound.Spring;
 import com.facebook.rebound.SpringConfig;
 
@@ -28,6 +41,7 @@ import com.google.android.gms.analytics.HitBuilders;
 import com.google.android.gms.analytics.Tracker;
 
 
+import java.io.File;
 import java.util.ArrayList;
 
 import java.util.HashMap;
@@ -39,7 +53,7 @@ import java.util.TreeSet;
 /**
  * Created by massimomoro on 14/04/15.
  */
-public class EventsAdapter extends BaseAdapter  {
+public class EventsAdapter extends ArrayAdapter<ContentListItem> implements ContentProgressListener,ContentRemovedListener {
     private final Context context;
     private LayoutInflater mInflater;
     private ProgressDialog progressDialog;
@@ -54,9 +68,21 @@ public class EventsAdapter extends BaseAdapter  {
     private static final SpringConfig SPRING_CONFIG = SpringConfig.fromOrigamiTensionAndFriction(10, 3);
     private static final int MAX = 300;
     private static final int MIN = 500;
-
+    private final ContentListPathProvider pathProvider;
+    private final ContentListCacheObserver cacheObserver;
 
     private ViewHolder isSpeaking;
+    /** Content Manager that manages the content for this demo. */
+    private final ContentManager contentManager ;
+    /** Map from file name to content list item. */
+    HashMap<String, ContentListItem> contentListItemMap = new HashMap<>();
+
+    public interface ContentListPathProvider {
+        String getCurrentPath();
+    }
+    public interface ContentListCacheObserver {
+        void onCacheChanged();
+    }
 
     private void speakOut(String text, ViewHolder view) {
 
@@ -100,6 +126,54 @@ public class EventsAdapter extends BaseAdapter  {
 
     }
 
+    @Override
+    public void onSuccess(ContentItem contentItem) {
+        String b= contentItem.getFilePath();
+        File c= contentItem.getFile();
+        File d= contentItem.getFile();
+        if (contentItem == null) {
+            Log.w("tag", String.format("Warning: item '%s' completed," +
+                    " but is not in the content list.", contentItem.getFilePath()));
+            return;
+        }
+        cacheObserver.onCacheChanged();
+    }
+
+    @Override
+    public void onProgressUpdate(String filePath, boolean isWaiting, long bytesCurrent, long bytesTotal) {
+        if (filePath == null) {
+            Log.w("tag", String.format("Warning: item '%s' completed," +
+                    " but is not in the content list.", filePath));
+            return;
+        }
+    }
+
+    @Override
+    public void onError(String filePath, Exception ex) {
+        if (filePath == null) {
+            Log.w("tag", String.format("Warning: item '%s' completed," +
+                    " but is not in the content list.", filePath));
+            return;
+        }
+    }
+
+    @Override
+    public void onFileRemoved(File removedItem) {
+        if (removedItem == null) {
+            Log.w("tag", String.format("Warning: item '%s' completed," +
+                    " but is not in the content list.", removedItem));
+            return;
+        }
+    }
+
+    @Override
+    public void onRemoveError(File file) {
+        if (file == null) {
+            Log.w("tag", String.format("Warning: item '%s' completed," +
+                    " but is not in the content list.", file));
+            return;
+        }
+    }
 
 
     enum RowType {
@@ -123,7 +197,15 @@ public class EventsAdapter extends BaseAdapter  {
         private TextView text;
     }
 
-    public EventsAdapter(Context context, List<EventItem> eventitemlist) {
+    public EventsAdapter(Context context,
+                         final ContentManager contentManager,
+                         final ContentListPathProvider pathProvider,
+                         final ContentListCacheObserver cacheObserver,
+                         final int resource) {
+        super(context, resource);
+        this.contentManager = contentManager;
+        this.pathProvider = pathProvider;
+        this.cacheObserver = cacheObserver;
         if (context != null) {
 
             mInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -131,11 +213,21 @@ public class EventsAdapter extends BaseAdapter  {
             this.eventitemList = eventitemlist;
             this.arraylist = new ArrayList<EventItem>();
             this.arraylist.addAll(eventitemlist);
+
+
         } else {
             this.context = null;
             Log.e("Event", "Context is null");
         }
 
+
+    }
+    @Override
+    public void add(ContentListItem item) {
+        if (item.getContentItem() != null) {
+            contentListItemMap.put(item.getContentItem().getFilePath(), item);
+        }
+        super.add(item);
     }
 
     public void addItem(EventItem item) {
@@ -148,11 +240,11 @@ public class EventsAdapter extends BaseAdapter  {
         notifyDataSetChanged();
     }
 
-    @Override
-    public int getCount() {
-
-        return eventitemList.size();
-    }
+//    @Override
+//    public int getCount() {
+//
+//        return eventitemList.size();
+//    }
 
     @Override
     public int getViewTypeCount() {
@@ -161,11 +253,11 @@ public class EventsAdapter extends BaseAdapter  {
     }
 
 
-    @Override
-    public Object getItem(int position) {
-
-        return eventitemList.get(position);
-    }
+//    @Override
+//    public Object getItem(int position) {
+//
+//        return eventitemList.get(position);
+//    }
 
     @Override
     public long getItemId(int position) {
@@ -231,7 +323,40 @@ public class EventsAdapter extends BaseAdapter  {
 
                 holder.speak.setImageResource(R.drawable.speak);
                 //download image
+
               //  loadImage(arraylist.get(position).getImageMain(), holder.image);
+                // get the item state from the server.
+                contentManager.getContent("1.png", 0, ContentDownloadPolicy.DOWNLOAD_ALWAYS, false,
+                        new ContentProgressListener() {
+                            @Override
+                            public void onSuccess(final ContentItem contentItem) {
+                                // holder.image.setContentItem(contentItem);
+                                // ContentListViewAdapter.this.sort(ContentListItem.contentAlphebeticalComparator);
+                                //Bitmap myBitmap = BitmapFactory.decodeFile(contentItem.getFilePath());
+                                File r = contentItem.getFile();
+//                                final Uri contentUri = FileProvider.getUriForFile(
+//                                        context,
+//                                        context.getString(R.string.content_file_provider_authority),
+//                                        contentItem.getFile());
+//String a = contentItem.getFilePath();
+
+
+
+                               // holder.image.setImageBitmap(myBitmap);
+                            }
+
+                            @Override
+                            public void onProgressUpdate(String fileName, boolean isWaiting,
+                                                         long bytesCurrent, long bytesTotal) {
+                                // Nothing to do here.
+                            }
+
+                            @Override
+                            public void onError(String fileName, Exception ex) {
+                                // Remove the item since we can't determine if it exists anymore.
+                                // ContentListViewAdapter.this.remove(item);
+                            }
+                        });
                 holder.text.setVisibility(View.GONE);
                 holder.date.setVisibility(View.GONE);
                 SpringSystem mSpringSystem = SpringSystem.create();

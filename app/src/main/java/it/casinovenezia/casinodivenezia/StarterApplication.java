@@ -5,6 +5,10 @@ import android.os.Build;
 import android.os.StrictMode;
 import android.util.Log;
 
+import com.amazonaws.mobile.content.ContentDownloadPolicy;
+import com.amazonaws.mobile.content.ContentItem;
+import com.amazonaws.mobile.content.ContentManager;
+import com.amazonaws.mobile.content.ContentProgressListener;
 import com.facebook.FacebookSdk;
 import com.google.android.gms.analytics.GoogleAnalytics;
 import com.google.android.gms.analytics.Tracker;
@@ -24,6 +28,7 @@ public static Locale currentLocale;
     private final String HELPSHIFT_APP_ID = "casinovenezia_platform_20131218091253899-f3f796e2d4b9e99";
     private Tracker mTracker;
     private final static String LOG_TAG = Application.class.getSimpleName();
+    public static ContentManager contentManager;
     @Override
     public void onCreate() {
         super.onCreate();
@@ -54,6 +59,15 @@ public static Locale currentLocale;
     private void initializeApplication() {
         AWSMobileClient.initializeMobileClientIfNecessary(getApplicationContext());
 
-        // ...Put any application-specific initialization logic here...
+        AWSMobileClient.defaultMobileClient().
+                createDefaultContentManager(new ContentManager.BuilderResultHandler() {
+
+                    @Override
+                    public void onComplete(final ContentManager contentManager) {
+
+                        StarterApplication.this.contentManager = contentManager;
+
+                    }
+                });
     }
 }

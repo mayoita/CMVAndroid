@@ -49,7 +49,11 @@ import com.helpshift.Helpshift;
 
 
 
-import org.json.JSONArray;
+
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.JSONArray;
+import org.json.simple.parser.ParseException;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -77,7 +81,7 @@ public class HomeFr extends Fragment {
     private Boolean VPS2 = false;
     private int DURATION = 1000;
     private Tracker mTracker;
-    private JackpotDO jackpotresult;
+
     /** The DynamoDB object mapper for accessing DynamoDB. */
     private final DynamoDBMapper mapper;
 
@@ -212,33 +216,9 @@ public class HomeFr extends Fragment {
 
         if(HomeActivity.arrayFestivity.size() == 0) {
             FestivityDO selectedFestivity = mapper.load(FestivityDO.class, "1");
-            String a = selectedFestivity.getFestivity();
-            List<Object> myList = new ArrayList<Object>(Arrays.asList(a));
-            String[] ary = a.split("");
-            String[] array = {a};
-          //  arrayFestivity = myList;
+            arrayFestivity = selectedFestivity.getFestivityConv();
             HomeActivity.arrayFestivity = arrayFestivity;
-            String commaSeparated = "[[a,b],[c,d]]";
-            List<String> supplierNames = Arrays.asList("sup1", "sup2", "sup3");
-            List<Object> objectList = new ArrayList<Object>(supplierNames);
-            List<String> items = Arrays.asList(commaSeparated.split("[*]"));
-            arrayFestivity =new ArrayList<Object>(Arrays.asList(selectedFestivity.getFestivity().split("[*]")));
-            String as ="a";
-//            ParseQuery<ParseObject> query = ParseQuery.getQuery("Festivity");
-//            query.getInBackground("7VTo3n7rum", new GetCallback<ParseObject>() {
-//                        public void done(ParseObject object, ParseException e) {
-//                            if (e == null) {
-//                                // object will be your game score
-//
-//                                arrayFestivity = object.getList("festivity");
-//                                HomeActivity.arrayFestivity = arrayFestivity;
-//                            } else {
-//                                // something went wrong
-//
-//                            }
-//                        }
-//                    }
-//            );
+
         } else {
             arrayFestivity = HomeActivity.arrayFestivity;
         }
@@ -251,10 +231,10 @@ public class HomeFr extends Fragment {
         int month = calendar.get(Calendar.MONTH); //zero-based
 
         for (int i=0; i< arrayFestivity.size(); i++) {
-            List<Object> www = (List<Object>) arrayFestivity.get(i);
+
             List<Object> myArray = (List<Object>) arrayFestivity.get(i);
 
-            if ((day == (Integer) myArray.get(0)) && (month == (Integer) myArray.get(1) + 1)) {
+            if ((day == (int)(long) myArray.get(0)) && (month == (int)(long) myArray.get(1) + 1)) {
                 VPS2=true;
             }
         }

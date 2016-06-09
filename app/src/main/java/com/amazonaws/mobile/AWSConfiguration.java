@@ -30,10 +30,11 @@ public class AWSConfiguration {
     // Amazon Mobile Analytics region
     public static final Regions AMAZON_MOBILE_ANALYTICS_REGION = Regions.US_EAST_1;
     public static final String AMAZON_CONTENT_DELIVERY_S3_BUCKET =
-        "cmv-contentdelivery-mobilehub-1695406899";
+            "cmv-events";
     public static final String AMAZON_CLOUD_FRONT_DISTRIBUTION_DOMAIN =
         "dmgpccwajo2md.cloudfront.net";
     // S3 BUCKET
     public static final String AMAZON_S3_USER_FILES_BUCKET =
         "cmv-userfiles-mobilehub-1695406899";
+
 }

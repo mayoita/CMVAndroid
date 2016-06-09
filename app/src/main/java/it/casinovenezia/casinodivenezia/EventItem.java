@@ -13,11 +13,11 @@ public class EventItem {
     private String description;
     private String memo;
     private String startDate;
-    private Date endDate;
+    private String endDate;
 //    private ParseFile image1;
 //    private ParseFile image2;
 //    private ParseFile image3;
-//    private ParseFile imageMain;
+    private String imageMain;
     private String url;
     private String eventType;
     private String isSlotEvent;
@@ -67,10 +67,10 @@ public class EventItem {
     public void setStartDate(String name) {
         this.startDate = name;
     }
-    public Date getEndDate() {
+    public String getEndDate() {
         return endDate;
     }
-    public void setEndDate(Date name) {
+    public void setEndDate(String name) {
         this.endDate = name;
     }
 //    public ParseFile getImage1() {
@@ -91,12 +91,12 @@ public class EventItem {
 //    public void setImage3(ParseFile name) {
 //        this.image3 = name;
 //    }
-//    public ParseFile getImageMain() {
-//        return imageMain;
-//    }
-//    public void setImageMain(ParseFile name) {
-//        this.imageMain = name;
-//    }
+    public String getImageMain() {
+        return imageMain;
+    }
+    public void setImageMain(String name) {
+        this.imageMain = name;
+    }
     public String getUrl() {
         return url;
     }

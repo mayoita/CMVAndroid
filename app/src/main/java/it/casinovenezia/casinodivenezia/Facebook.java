@@ -62,15 +62,15 @@ public class Facebook extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         StarterApplication application = (StarterApplication) getActivity().getApplication();
-        mTracker = application.getDefaultTracker();
+        // mTracker = application.getDefaultTracker();
 
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        mTracker.setScreenName("FREE_ENTRY_FACEBOOK");
-         mTracker.send(new HitBuilders.ScreenViewBuilder().build());
+        // mTracker.setScreenName("FREE_ENTRY_FACEBOOK");
+         // mTracker.send(new HitBuilders.ScreenViewBuilder().build());
     }
 
     @Override
@@ -94,10 +94,10 @@ public class Facebook extends Fragment {
                 } else {
                     Intent intent = new Intent(getActivity(), FreeEntrance.class);
                     startActivity(intent);
-                    mTracker.send(new HitBuilders.EventBuilder()
-                            .setCategory("FREE_ENTRY")
-                            .setAction("press")
-                            .build());
+                    // mTracker.send(new HitBuilders.EventBuilder()
+                    //        .setCategory("FREE_ENTRY")
+                   //         .setAction("press")
+                    //        .build());
                 }
             }
         });

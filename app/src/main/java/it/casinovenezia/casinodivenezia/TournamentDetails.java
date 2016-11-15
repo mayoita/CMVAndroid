@@ -85,17 +85,17 @@ public TournamentDetails(){
     public void onResume() {
         super.onResume();
         if (Venue.currentVenue == 1) {
-            mTracker.setScreenName("TournamentDetailsCN");
+            // mTracker.setScreenName("TournamentDetailsCN");
         } else {
-            mTracker.setScreenName("TournamentDetailsVE");
+            // mTracker.setScreenName("TournamentDetailsVE");
         }
-        mTracker.send(new HitBuilders.ScreenViewBuilder().build());
+        // mTracker.send(new HitBuilders.ScreenViewBuilder().build());
     }
 @Override
 public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
     StarterApplication application = (StarterApplication) getActivity().getApplication();
-    mTracker = application.getDefaultTracker();
+    // mTracker = application.getDefaultTracker();
         }
 
 @Override

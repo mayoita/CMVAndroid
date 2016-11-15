@@ -88,14 +88,14 @@ public PokerDetails() {
     @Override
     public void onResume() {
         super.onResume();
-        mTracker.setScreenName("PokerHourDetails");
-        mTracker.send(new HitBuilders.ScreenViewBuilder().build());
+        // mTracker.setScreenName("PokerHourDetails");
+        // mTracker.send(new HitBuilders.ScreenViewBuilder().build());
     }
 @Override
 public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     StarterApplication application = (StarterApplication) getActivity().getApplication();
-    mTracker = application.getDefaultTracker();
+    // mTracker = application.getDefaultTracker();
 
         }
 

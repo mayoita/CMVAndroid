@@ -55,14 +55,14 @@ public class PokerDetailsActivity extends AppCompatActivity implements BaseSlide
     @Override
     public void onResume() {
         super.onResume();
-        mTracker.setScreenName("PokerHourDetails");
-        mTracker.send(new HitBuilders.ScreenViewBuilder().build());
+        // mTracker.setScreenName("PokerHourDetails");
+        // mTracker.send(new HitBuilders.ScreenViewBuilder().build());
     }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         StarterApplication application = (StarterApplication) getApplication();
-        mTracker = application.getDefaultTracker();
+        // mTracker = application.getDefaultTracker();
         Intent i = getIntent();
         boolean tabletSize = getResources().getBoolean(R.bool.isTablet);
         if (tabletSize) {

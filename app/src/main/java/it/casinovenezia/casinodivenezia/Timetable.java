@@ -78,17 +78,17 @@ public class Timetable extends Fragment {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
         StarterApplication application = (StarterApplication) getActivity().getApplication();
-        mTracker = application.getDefaultTracker();
+        // mTracker = application.getDefaultTracker();
     }
     @Override
     public void onResume() {
         super.onResume();
         if (Venue.currentVenue == 1) {
-            mTracker.setScreenName("ServicesInfoCN");
+            // mTracker.setScreenName("ServicesInfoCN");
         } else {
-            mTracker.setScreenName("ServicesInfoVE");
+            // mTracker.setScreenName("ServicesInfoVE");
         }
-        mTracker.send(new HitBuilders.ScreenViewBuilder().build());
+        // mTracker.send(new HitBuilders.ScreenViewBuilder().build());
     }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

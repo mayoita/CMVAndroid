@@ -54,14 +54,14 @@ public class Subscription extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        mTracker.setScreenName("Subscriptions");
-        mTracker.send(new HitBuilders.ScreenViewBuilder().build());
+        // mTracker.setScreenName("Subscriptions");
+        // mTracker.send(new HitBuilders.ScreenViewBuilder().build());
     }
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         StarterApplication application = (StarterApplication) getActivity().getApplication();
-        mTracker = application.getDefaultTracker();
+        // mTracker = application.getDefaultTracker();
     }
 
     @Override

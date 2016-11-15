@@ -47,7 +47,7 @@ public static Locale currentLocale;
     /**
      * Gets the default {@link Tracker} for this {@link Application}.
      * @return tracker
-     */
+
     synchronized public Tracker getDefaultTracker() {
         if (mTracker == null) {
             GoogleAnalytics analytics = GoogleAnalytics.getInstance(this);
@@ -56,6 +56,7 @@ public static Locale currentLocale;
         }
         return mTracker;
     }
+*/
     private void initializeApplication() {
         AWSMobileClient.initializeMobileClientIfNecessary(getApplicationContext());
 

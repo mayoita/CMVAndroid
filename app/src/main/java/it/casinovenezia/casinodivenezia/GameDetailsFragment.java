@@ -90,11 +90,11 @@ public class GameDetailsFragment extends Fragment {
     public void onResume() {
         super.onResume();
         if (Venue.currentVenue == 1) {
-            mTracker.setScreenName("TableGameDetailsCN");
+           // mTracker.setScreenName("TableGameDetailsCN");
         } else {
-            mTracker.setScreenName("TableGameDetailsVE");
+          //  mTracker.setScreenName("TableGameDetailsVE");
         }
-        mTracker.send(new HitBuilders.ScreenViewBuilder().build());
+       // mTracker.send(new HitBuilders.ScreenViewBuilder().build());
     }
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -104,7 +104,7 @@ public class GameDetailsFragment extends Fragment {
 
         }
         StarterApplication application = (StarterApplication) getActivity().getApplication();
-        mTracker = application.getDefaultTracker();
+        //mTracker = application.getDefaultTracker();
 
     }
 

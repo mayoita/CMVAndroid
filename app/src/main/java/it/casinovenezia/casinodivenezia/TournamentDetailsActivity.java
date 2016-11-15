@@ -55,11 +55,11 @@ public class TournamentDetailsActivity extends AppCompatActivity implements Base
     public void onResume() {
         super.onResume();
         if (Venue.currentVenue == 1) {
-            mTracker.setScreenName("TournamentDetailsCN");
+            // mTracker.setScreenName("TournamentDetailsCN");
         } else {
-            mTracker.setScreenName("TournamentDetailsVE");
+            // mTracker.setScreenName("TournamentDetailsVE");
         }
-        mTracker.send(new HitBuilders.ScreenViewBuilder().build());
+        // mTracker.send(new HitBuilders.ScreenViewBuilder().build());
     }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,7 +67,7 @@ public class TournamentDetailsActivity extends AppCompatActivity implements Base
         Intent i = getIntent();
         boolean tabletSize = getResources().getBoolean(R.bool.isTablet);
         StarterApplication application = (StarterApplication) getApplication();
-        mTracker = application.getDefaultTracker();
+        // mTracker = application.getDefaultTracker();
         Display display = getWindowManager().getDefaultDisplay();
 
         DisplayMetrics dm = getResources().getDisplayMetrics();

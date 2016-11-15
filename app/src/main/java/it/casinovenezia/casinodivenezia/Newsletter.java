@@ -46,13 +46,13 @@ public class Newsletter extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         StarterApplication application = (StarterApplication) getActivity().getApplication();
-        mTracker = application.getDefaultTracker();
+        // mTracker = application.getDefaultTracker();
     }
     @Override
     public void onResume() {
         super.onResume();
-        mTracker.setScreenName("Newsletter");
-        mTracker.send(new HitBuilders.ScreenViewBuilder().build());
+        // mTracker.setScreenName("Newsletter");
+        // mTracker.send(new HitBuilders.ScreenViewBuilder().build());
     }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

@@ -23,14 +23,14 @@ public class InfoActivity extends AppCompatActivity {
     @Override
     public void onResume() {
         super.onResume();
-        mTracker.setScreenName("InfoMapVE");
-        mTracker.send(new HitBuilders.ScreenViewBuilder().build());
+        // mTracker.setScreenName("InfoMapVE");
+        // mTracker.send(new HitBuilders.ScreenViewBuilder().build());
     }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         StarterApplication application = (StarterApplication) getApplication();
-        mTracker = application.getDefaultTracker();
+        // mTracker = application.getDefaultTracker();
         boolean tabletSize = getResources().getBoolean(R.bool.isTablet);
         if (tabletSize) {
 

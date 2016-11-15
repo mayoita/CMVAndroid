@@ -101,11 +101,11 @@ public class Restaurant extends Fragment implements View.OnClickListener {
     public void onResume() {
         super.onResume();
         if (Venue.currentVenue == 1) {
-            mTracker.setScreenName("RestaurantMenuCN");
+            // mTracker.setScreenName("RestaurantMenuCN");
         } else {
-            mTracker.setScreenName("RestaurantMenuVE");
+            // mTracker.setScreenName("RestaurantMenuVE");
         }
-        mTracker.send(new HitBuilders.ScreenViewBuilder().build());
+        // mTracker.send(new HitBuilders.ScreenViewBuilder().build());
     }
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -116,7 +116,7 @@ public class Restaurant extends Fragment implements View.OnClickListener {
 
         }
         StarterApplication application = (StarterApplication) getActivity().getApplication();
-        mTracker = application.getDefaultTracker();
+        // mTracker = application.getDefaultTracker();
         setHasOptionsMenu(true);
     }
 

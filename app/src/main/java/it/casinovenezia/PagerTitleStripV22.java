@@ -20,6 +20,8 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.database.DataSetObserver;
 import android.graphics.drawable.Drawable;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.text.TextUtils.TruncateAt;
 import android.util.AttributeSet;
 import android.util.TypedValue;
@@ -28,6 +30,7 @@ import android.view.ViewGroup;
 import android.view.ViewParent;
 import android.widget.TextView;
 
+import java.lang.annotation.Annotation;
 import java.lang.ref.WeakReference;
 
 /**
@@ -47,7 +50,7 @@ import java.lang.ref.WeakReference;
  * Since v23 of the support library contain a layout bug we include the v22 of these files.
  * https://code.google.com/p/android/issues/detail?id=184715
  */
-public class PagerTitleStripV22 extends ViewGroup implements ViewPager.Decor {
+public class PagerTitleStripV22 extends ViewGroup implements ViewPager.DecorView {
     private static final String TAG = "PagerTitleStrip";
 
     ViewPager mPager;
@@ -83,6 +86,11 @@ public class PagerTitleStripV22 extends ViewGroup implements ViewPager.Decor {
 
     private int mNonPrimaryAlpha;
     int mTextColor;
+
+    @Override
+    public Class<? extends Annotation> annotationType() {
+        return null;
+    }
 
     interface PagerTitleStripImpl {
         void setSingleLineAllCaps(TextView text);
@@ -256,7 +264,8 @@ public class PagerTitleStripV22 extends ViewGroup implements ViewPager.Decor {
         final PagerAdapter adapter = pager.getAdapter();
 
         pager.setInternalPageChangeListener(mPageListener);
-        pager.setOnAdapterChangeListener(mPageListener);
+
+        //pager.setOnAdapterChangeListener(mPageListener);
         mPager = pager;
         updateAdapter(mWatchingAdapter != null ? mWatchingAdapter.get() : null, adapter);
     }
@@ -267,7 +276,7 @@ public class PagerTitleStripV22 extends ViewGroup implements ViewPager.Decor {
         if (mPager != null) {
             updateAdapter(mPager.getAdapter(), null);
             mPager.setInternalPageChangeListener(null);
-            mPager.setOnAdapterChangeListener(null);
+            //mPager.setOnAdapterChangeListener(null);
             mPager = null;
         }
     }
@@ -501,10 +510,6 @@ public class PagerTitleStripV22 extends ViewGroup implements ViewPager.Decor {
             mScrollState = state;
         }
 
-        @Override
-        public void onAdapterChanged(PagerAdapter oldAdapter, PagerAdapter newAdapter) {
-            updateAdapter(oldAdapter, newAdapter);
-        }
 
         @Override
         public void onChanged() {
@@ -512,6 +517,12 @@ public class PagerTitleStripV22 extends ViewGroup implements ViewPager.Decor {
 
             final float offset = mLastKnownPositionOffset >= 0 ? mLastKnownPositionOffset : 0;
             updateTextPositions(mPager.getCurrentItem(), offset, true);
+        }
+
+        @Override
+        public void onAdapterChanged(@NonNull ViewPager viewPager, @Nullable PagerAdapter oldAdapter, @Nullable PagerAdapter newAdapter) {
+            //da inserire?
+            updateAdapter(oldAdapter, newAdapter);
         }
     }
 }

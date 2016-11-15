@@ -94,7 +94,7 @@ public class HomeFr extends Fragment {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
         StarterApplication application = (StarterApplication) getActivity().getApplication();
-        mTracker = application.getDefaultTracker();
+        // mTracker = application.getDefaultTracker();
         //StrictMode
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
@@ -178,11 +178,11 @@ public class HomeFr extends Fragment {
     public void onResume() {
         super.onResume();
         if (Venue.currentVenue == 1) {
-            mTracker.setScreenName("HomeCN");
+            // mTracker.setScreenName("HomeCN");
         } else {
-            mTracker.setScreenName("HomeVE");
+            // mTracker.setScreenName("HomeVE");
         }
-        mTracker.send(new HitBuilders.ScreenViewBuilder().build());
+        // mTracker.send(new HitBuilders.ScreenViewBuilder().build());
     }
 
     @Override

@@ -123,18 +123,18 @@ public class SlotDetailsFragment extends Fragment {
         Display display = getActivity().getWindowManager().getDefaultDisplay();
         fragmentWidth= display.getWidth();
         StarterApplication application = (StarterApplication) getActivity().getApplication();
-        mTracker = application.getDefaultTracker();
+        // mTracker = application.getDefaultTracker();
 
     }
     @Override
     public void onResume() {
         super.onResume();
         if (Venue.currentVenue == 1) {
-            mTracker.setScreenName("SlotsDetailsCN");
+            // mTracker.setScreenName("SlotsDetailsCN");
         } else {
-            mTracker.setScreenName("SlotsDetailsVE");
+            // mTracker.setScreenName("SlotsDetailsVE");
         }
-        mTracker.send(new HitBuilders.ScreenViewBuilder().build());
+        // mTracker.send(new HitBuilders.ScreenViewBuilder().build());
     }
     @Override
     public void onStop() {

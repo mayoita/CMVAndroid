@@ -95,11 +95,11 @@ public class SlotDetailsActivity extends AppCompatActivity {
     public void onResume() {
         super.onResume();
         if (Venue.currentVenue == 1) {
-            mTracker.setScreenName("SlotsDetailsCN");
+            // mTracker.setScreenName("SlotsDetailsCN");
         } else {
-            mTracker.setScreenName("SlotsDetailsVE");
+            // mTracker.setScreenName("SlotsDetailsVE");
         }
-        mTracker.send(new HitBuilders.ScreenViewBuilder().build());
+        // mTracker.send(new HitBuilders.ScreenViewBuilder().build());
     }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -111,7 +111,7 @@ public class SlotDetailsActivity extends AppCompatActivity {
         String jsonArray = intent.getStringExtra("jsonArray");
         int theIndex = intent.getIntExtra("index", 0);
         StarterApplication application = (StarterApplication) getApplication();
-        mTracker = application.getDefaultTracker();
+        // mTracker = application.getDefaultTracker();
         boolean tabletSize = getResources().getBoolean(R.bool.isTablet);
         if (tabletSize) {
 

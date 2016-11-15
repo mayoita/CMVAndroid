@@ -36,6 +36,11 @@ import com.amazonaws.mobileconnectors.dynamodbv2.dynamodbmapper.DynamoDBScanExpr
 import com.amazonaws.mobileconnectors.dynamodbv2.dynamodbmapper.PaginatedScanList;
 import com.google.android.gms.analytics.HitBuilders;
 import com.google.android.gms.analytics.Tracker;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 
 import java.io.Serializable;
@@ -120,7 +125,7 @@ public class EventsFr extends Fragment implements TextToSpeech.OnInitListener{
         setHasOptionsMenu(true);
 // Obtain the shared Tracker instance.
         StarterApplication application = (StarterApplication) getActivity().getApplication();
-        mTracker = application.getDefaultTracker();
+        // mTracker = application.getDefaultTracker();
     }
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
@@ -338,6 +343,26 @@ public class EventsFr extends Fragment implements TextToSpeech.OnInitListener{
     public void loadEvent () {
         if(HomeActivity.eventitemlist == null) {
             eventitemlist = new ArrayList<EventItem>();
+
+//            FirebaseDatabase database = FirebaseDatabase.getInstance();
+//            DatabaseReference myRef = database.getReference("Events");
+//            myRef.addValueEventListener(new ValueEventListener() {
+//                @Override
+//                public void onDataChange(DataSnapshot dataSnapshot) {
+//                    // This method is called once with the initial value and again
+//                    // whenever data at this location is updated.
+//                    String value = dataSnapshot.getValue(String.class);
+//                    eventitemlist.add(dataSnapshot.getValue(EventItem.class));
+//                    String value2 = dataSnapshot.getValue(String.class);
+//                   // Log.d(TAG, "Value is: " + value);
+//                }
+//
+//                @Override
+//                public void onCancelled(DatabaseError error) {
+//                    // Failed to read value
+//                    Log.w("EventAdapter", "Failed to read value.", error.toException());
+//                }
+//            });
             DynamoDBScanExpression scanExpression = new DynamoDBScanExpression();
             PaginatedScanList<EventsDO> result = mapper.scan(EventsDO.class, scanExpression);
             for (EventsDO item : result) {
@@ -488,11 +513,11 @@ public class EventsFr extends Fragment implements TextToSpeech.OnInitListener{
     public void onResume() {
         super.onResume();
         if (Venue.currentVenue == 1) {
-            mTracker.setScreenName("EventDetailsCN");
+            // mTracker.setScreenName("EventDetailsCN");
         } else {
-            mTracker.setScreenName("EventDetailsVE");
+            // mTracker.setScreenName("EventDetailsVE");
         }
-        mTracker.send(new HitBuilders.ScreenViewBuilder().build());
+        // mTracker.send(new HitBuilders.ScreenViewBuilder().build());
         if (mAdapter != null)
         mAdapter.notifyDataSetChanged();
         engine = new TextToSpeech(getContext(), this);

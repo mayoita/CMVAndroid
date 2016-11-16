@@ -13,6 +13,8 @@ import com.facebook.FacebookSdk;
 import com.google.android.gms.analytics.GoogleAnalytics;
 import com.google.android.gms.analytics.Tracker;
 import com.google.android.gms.analytics.Logger;
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.database.FirebaseDatabase;
 import com.helpshift.Helpshift;
 import java.util.Locale;
 
@@ -36,6 +38,10 @@ public static Locale currentLocale;
         Log.d(LOG_TAG, "StarterApplication.onCreate - Application initialized OK");
         currentLocale=getResources().getConfiguration().locale;
         FacebookSdk.sdkInitialize(this);
+
+        if (!FirebaseApp.getApps(this).isEmpty()) {
+            FirebaseDatabase.getInstance().setPersistenceEnabled(true);
+        }
 
         Helpshift.install(this, // "this" should be the application object
                 HELPSHIFT_API_KEY,

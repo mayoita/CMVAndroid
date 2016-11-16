@@ -20,8 +20,10 @@ import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.ListAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.amazonaws.mobile.AWSMobileClient;
@@ -34,12 +36,15 @@ import com.amazonaws.mobile.util.StringFormatUtils;
 import com.amazonaws.mobileconnectors.dynamodbv2.dynamodbmapper.DynamoDBMapper;
 import com.amazonaws.mobileconnectors.dynamodbv2.dynamodbmapper.DynamoDBScanExpression;
 import com.amazonaws.mobileconnectors.dynamodbv2.dynamodbmapper.PaginatedScanList;
+
+import com.firebase.ui.database.FirebaseListAdapter;
 import com.google.android.gms.analytics.HitBuilders;
 import com.google.android.gms.analytics.Tracker;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.GenericTypeIndicator;
 import com.google.firebase.database.ValueEventListener;
 
 
@@ -76,6 +81,10 @@ public class EventsFr extends Fragment implements TextToSpeech.OnInitListener{
     /** The current relative path within the ContentManager. */
     private String currentPath = "";
 
+    DatabaseReference mRootRef = FirebaseDatabase.getInstance().getReference();
+    DatabaseReference eventsChild = mRootRef.child("Events");
+
+
     private void createContentList(final View fragmentView, final ContentManager contentManager) {
         listView = (ListView) fragmentView.findViewById(R.id.list_events);
         contentListItems = new EventsAdapter(fragmentView.getContext(), contentManager,
@@ -92,9 +101,34 @@ public class EventsFr extends Fragment implements TextToSpeech.OnInitListener{
                     }
                 },
                 R.layout.events_fragment);
+
         listView.setAdapter(contentListItems);
       //  listView.setOnItemClickListener(this);
         listView.setOnCreateContextMenuListener(this);
+
+        FirebaseListAdapter<EventFB> mAdapterF = new FirebaseListAdapter<EventFB>(
+                getActivity(),
+                EventFB.class,
+                R.layout.events_fragment,
+                eventsChild) {
+            @Override
+            protected void populateView(View view, EventFB event, int position) {
+                ((TextView) view.findViewById(R.id.editText5)).setText(event.getName());
+
+            }
+        };
+        ArrayAdapter<EventFB> mAdapterFB = new ArrayAdapter<EventFB>(
+                fragmentView.getContext(),
+                R.layout.events_fragment
+
+        );
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+
+
     }
 
     @Override
@@ -344,25 +378,26 @@ public class EventsFr extends Fragment implements TextToSpeech.OnInitListener{
         if(HomeActivity.eventitemlist == null) {
             eventitemlist = new ArrayList<EventItem>();
 
-//            FirebaseDatabase database = FirebaseDatabase.getInstance();
-//            DatabaseReference myRef = database.getReference("Events");
-//            myRef.addValueEventListener(new ValueEventListener() {
-//                @Override
-//                public void onDataChange(DataSnapshot dataSnapshot) {
-//                    // This method is called once with the initial value and again
-//                    // whenever data at this location is updated.
-//                    String value = dataSnapshot.getValue(String.class);
-//                    eventitemlist.add(dataSnapshot.getValue(EventItem.class));
-//                    String value2 = dataSnapshot.getValue(String.class);
-//                   // Log.d(TAG, "Value is: " + value);
-//                }
-//
-//                @Override
-//                public void onCancelled(DatabaseError error) {
-//                    // Failed to read value
-//                    Log.w("EventAdapter", "Failed to read value.", error.toException());
-//                }
-//            });
+
+            eventsChild.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    // This method is called once with the initial value and again
+                    // whenever data at this location is updated.
+
+                    ArrayList<EventFB> eventListFB = new ArrayList<EventFB>();
+                    for (DataSnapshot child : dataSnapshot.getChildren()) {
+                        eventListFB.add(child.getValue(EventFB.class));
+                    }
+                    
+                }
+
+                @Override
+                public void onCancelled(DatabaseError error) {
+                    // Failed to read value
+                    Log.w("EventAdapter", "Failed to read value.", error.toException());
+                }
+            });
             DynamoDBScanExpression scanExpression = new DynamoDBScanExpression();
             PaginatedScanList<EventsDO> result = mapper.scan(EventsDO.class, scanExpression);
             for (EventsDO item : result) {

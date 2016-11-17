@@ -66,6 +66,7 @@ public class EventsFr extends Fragment implements TextToSpeech.OnInitListener{
     private ListView listView;
   //  List<ParseObject> ob;
     private EventsAdapter mAdapter;
+    private EventFBAdapter mAdapterFB;
     private List<EventItem> eventitemlist = null;
     private List<EventItem> myEventitemlist = null;
     public static TextToSpeech engine;
@@ -106,22 +107,7 @@ public class EventsFr extends Fragment implements TextToSpeech.OnInitListener{
       //  listView.setOnItemClickListener(this);
         listView.setOnCreateContextMenuListener(this);
 
-        FirebaseListAdapter<EventFB> mAdapterF = new FirebaseListAdapter<EventFB>(
-                getActivity(),
-                EventFB.class,
-                R.layout.events_fragment,
-                eventsChild) {
-            @Override
-            protected void populateView(View view, EventFB event, int position) {
-                ((TextView) view.findViewById(R.id.editText5)).setText(event.getName());
 
-            }
-        };
-        ArrayAdapter<EventFB> mAdapterFB = new ArrayAdapter<EventFB>(
-                fragmentView.getContext(),
-                R.layout.events_fragment
-
-        );
     }
 
     @Override
@@ -214,24 +200,24 @@ public class EventsFr extends Fragment implements TextToSpeech.OnInitListener{
     @Override
     public void onViewCreated(final View view, final Bundle savedInstanceState) {
 
-        AWSMobileClient.defaultMobileClient().
-                createDefaultContentManager(new ContentManager.BuilderResultHandler() {
-
-                    @Override
-                    public void onComplete(final ContentManager contentManager) {
-                        if (!isAdded()) {
-                            contentManager.destroy();
-                            return;
-                        }
-
-                        final View fragmentView = getView();
-                        EventsFr.this.contentManager = contentManager;
-                        createContentList(fragmentView, contentManager);
-                        contentManager.setContentRemovedListener(contentListItems);
-                       // dialog.dismiss();
-                        refreshContent(currentPath);
-                    }
-                });
+//        AWSMobileClient.defaultMobileClient().
+//                createDefaultContentManager(new ContentManager.BuilderResultHandler() {
+//
+//                    @Override
+//                    public void onComplete(final ContentManager contentManager) {
+//                        if (!isAdded()) {
+//                            contentManager.destroy();
+//                            return;
+//                        }
+//
+//                        final View fragmentView = getView();
+//                        EventsFr.this.contentManager = contentManager;
+//                        createContentList(fragmentView, contentManager);
+//                        contentManager.setContentRemovedListener(contentListItems);
+//                       // dialog.dismiss();
+//                        refreshContent(currentPath);
+//                    }
+//                });
 
 
     }
@@ -326,20 +312,22 @@ public class EventsFr extends Fragment implements TextToSpeech.OnInitListener{
         if (Venue.currentVenue == 1) {
 
             myEventitemlist = inOffice("CN");
+            mAdapterFB = new EventFBAdapter(getActivity(), R.layout.events_fragment, myEventitemlist);
          //   mAdapter = new EventsAdapter(getActivity(), this.contentManager,
      //               myEventitemlist);
 
    //         mAdapter.notifyDataSetChanged();
-            listView.setAdapter(mAdapter);
+            listView.setAdapter(mAdapterFB);
 
         } else {
 
             myEventitemlist = inOffice("VE");
+            mAdapterFB = new EventFBAdapter(getActivity(), R.layout.events_fragment, myEventitemlist);
       //      mAdapter = new EventsAdapter(getActivity(), this.contentManager,
       //              myEventitemlist);
             //inOffice("VE");
 //            mAdapter.notifyDataSetChanged();
-            listView.setAdapter(mAdapter);
+            listView.setAdapter(mAdapterFB);
         }
     }
 
@@ -387,9 +375,60 @@ public class EventsFr extends Fragment implements TextToSpeech.OnInitListener{
 
                     ArrayList<EventFB> eventListFB = new ArrayList<EventFB>();
                     for (DataSnapshot child : dataSnapshot.getChildren()) {
-                        eventListFB.add(child.getValue(EventFB.class));
+                        EventItem map = new EventItem();
+                        map.setImageMain(child.child("ImageName").getValue(String.class));
+                        map.setOffice(child.child("office").getValue(String.class));
+                        //    map.setMyId((String) event.getObjectId());
+
+                        switch (Locale.getDefault().getLanguage()) {
+                            case "it":
+                                map.setDescription(child.child("DescriptionIT").getValue(String.class));
+                                map.setName(child.child("NameIT").getValue(String.class));
+                                map.setMemo(child.child("memoIT").getValue(String.class));
+                                break;
+                            case "es":
+                                map.setDescription(child.child("DescriptionES").getValue(String.class));
+                                map.setName(child.child("NameES").getValue(String.class));
+                                map.setMemo(child.child("memoES").getValue(String.class));
+                                break;
+                            case "fr":
+                                map.setDescription(child.child("DescriptionFR").getValue(String.class));
+                                map.setName(child.child("NameFR").getValue(String.class));
+                                map.setMemo(child.child("memoFR").getValue(String.class));
+                                break;
+                            case "de":
+                                map.setDescription(child.child("DescriptionDE").getValue(String.class));
+                                map.setName(child.child("NameDE").getValue(String.class));
+                                map.setMemo(child.child("memoDE").getValue(String.class));
+                                break;
+                            case "ru":
+                                map.setDescription(child.child("DescriptionRU").getValue(String.class));
+                                map.setName(child.child("NameRU").getValue(String.class));
+                                map.setMemo(child.child("memoRU").getValue(String.class));
+                                break;
+                            case "ch":
+                                map.setDescription(child.child("DescriptionZH").getValue(String.class));
+                                map.setName(child.child("NameZH").getValue(String.class));
+                                map.setMemo(child.child("memoZH").getValue(String.class));
+                                break;
+                            default:
+                                map.setDescription(child.child("Description").getValue(String.class));
+                                map.setName(child.child("Name").getValue(String.class));
+                                map.setMemo(child.child("memo").getValue(String.class));
+                                break;
+                        }
+                        map.setStartDate(formatMyDate(child.child("StartDate").getValue(String.class)));
+                        map.setEndDate(child.child("EndDate").getValue(String.class));
+
+                        eventitemlist.add(map);
                     }
-                    
+                    HomeActivity.eventitemlist = eventitemlist;
+                    if (isAdded()) {
+                        setOffice();
+                    } else {
+                        Log.e("isAdded", "EventsFr not added");
+                    }
+
                 }
 
                 @Override
@@ -398,135 +437,63 @@ public class EventsFr extends Fragment implements TextToSpeech.OnInitListener{
                     Log.w("EventAdapter", "Failed to read value.", error.toException());
                 }
             });
-            DynamoDBScanExpression scanExpression = new DynamoDBScanExpression();
-            PaginatedScanList<EventsDO> result = mapper.scan(EventsDO.class, scanExpression);
-            for (EventsDO item : result) {
-                EventItem map = new EventItem();
-                            map.setImageMain(item.get_ImageName());
-                            map.setOffice(item.get_office());
-                        //    map.setMyId((String) event.getObjectId());
-
-                switch (Locale.getDefault().getLanguage()) {
-                                case "it":
-                                    map.setDescription(item.get_DescriptionIT());
-                                    map.setName(item.get_NameIT());
-                                    map.setMemo(item.get_memoIT());
-                                    break;
-                            case "es":
-                                map.setDescription(item.get_DescriptionES());
-                                map.setName(item.get_NameES());
-                                map.setMemo(item.get_memoES());
-                                break;
-                            case "fr":
-                                map.setDescription(item.get_DescriptionFR());
-                                map.setName(item.get_NameFR());
-                                map.setMemo(item.get_memoFR());
-                                break;
-                            case "de":
-                                map.setDescription(item.get_DescriptionDE());
-                                map.setName(item.get_NameDE());
-                                map.setMemo(item.get_memoDE());
-                                break;
-                            case "ru":
-                                map.setDescription(item.get_DescriptionRU());
-                                map.setName(item.get_NameRU());
-                                map.setMemo(item.get_memoRU());
-                                break;
-                            case "ch":
-                                map.setDescription(item.get_DescriptionZH());
-                                map.setName(item.get_NameZH());
-                                map.setMemo(item.get_memoZH());
-                                break;
-                                default:
-                                    map.setDescription(item.get_Description());
-                                    map.setName(item.getName());
-                                    map.setMemo(item.get_memo());
-                                    break;
-                }
-                map.setStartDate(formatMyDate(item.getStartDate()));
-                            map.setEndDate(item.get_EndDate());
-
-                            eventitemlist.add(map);
-            }
-            HomeActivity.eventitemlist = eventitemlist;
-                        if (isAdded()) {
-                            setOffice();
-                        } else {
-                            Log.e("isAdded", "EventsFr not added");
-                        }
-
-//            ParseQuery<ParseObject> query = new ParseQuery<ParseObject>(
-//                    "Events");
-//            query.orderByDescending("StartDate");
-//            query.findInBackground(new FindCallback<ParseObject>() {
-//                public void done(List<ParseObject> eventList, ParseException e) {
-//                    if (e == null) {
-//                        eventitemlist = new ArrayList<EventItem>();
-//                        for (ParseObject event : eventList) {
-//                            // Locate images in flag column
-//                            ParseFile image = (ParseFile) event.get("ImageName");
+//            DynamoDBScanExpression scanExpression = new DynamoDBScanExpression();
+//            PaginatedScanList<EventsDO> result = mapper.scan(EventsDO.class, scanExpression);
+//            for (EventsDO item : result) {
+//                EventItem map = new EventItem();
+//                            map.setImageMain(item.get_ImageName());
+//                            map.setOffice(item.get_office());
+//                        //    map.setMyId((String) event.getObjectId());
 //
-//                            EventItem map = new EventItem();
-//                            map.setImageMain(image);
-//                            map.setOffice((String) event.get("office"));
-//                            map.setMyId((String) event.getObjectId());
-//
-//                            switch (Locale.getDefault().getLanguage()) {
+//                switch (Locale.getDefault().getLanguage()) {
 //                                case "it":
-//                                    map.setDescription((String) event.get("DescriptionIT"));
-//                                    map.setName((String) event.get("NameIT"));
-//                                    map.setMemo((String) event.get("memoIT"));
+//                                    map.setDescription(item.get_DescriptionIT());
+//                                    map.setName(item.get_NameIT());
+//                                    map.setMemo(item.get_memoIT());
 //                                    break;
-////                            case "es":
-////                                map.setDescription((String) event.get("DescriptionES"));
-////                                map.setName((String) event.get("NameES"));
-////                                map.setMemo((String) event.get("memoES"));
-////                                break;
-////                            case "fr":
-////                                map.setDescription((String) event.get("DescriptionFR"));
-////                                map.setName((String) event.get("NameFR"));
-////                                map.setMemo((String) event.get("memoFR"));
-////                                break;
-////                            case "de":
-////                                map.setDescription((String) event.get("DescriptionDE"));
-////                                map.setName((String) event.get("NameDE"));
-////                                map.setMemo((String) event.get("memoDE"));
-////                                break;
-////                            case "ru":
-////                                map.setDescription((String) event.get("DescriptionRU"));
-////                                map.setName((String) event.get("NameRU"));
-////                                map.setMemo((String) event.get("memoRU"));
-////                                break;
-////                            case "ch":
-////                                map.setDescription((String) event.get("DescriptionZH"));
-////                                map.setName((String) event.get("NameZH"));
-////                                map.setMemo((String) event.get("memoZH"));
-////                                break;
+//                            case "es":
+//                                map.setDescription(item.get_DescriptionES());
+//                                map.setName(item.get_NameES());
+//                                map.setMemo(item.get_memoES());
+//                                break;
+//                            case "fr":
+//                                map.setDescription(item.get_DescriptionFR());
+//                                map.setName(item.get_NameFR());
+//                                map.setMemo(item.get_memoFR());
+//                                break;
+//                            case "de":
+//                                map.setDescription(item.get_DescriptionDE());
+//                                map.setName(item.get_NameDE());
+//                                map.setMemo(item.get_memoDE());
+//                                break;
+//                            case "ru":
+//                                map.setDescription(item.get_DescriptionRU());
+//                                map.setName(item.get_NameRU());
+//                                map.setMemo(item.get_memoRU());
+//                                break;
+//                            case "ch":
+//                                map.setDescription(item.get_DescriptionZH());
+//                                map.setName(item.get_NameZH());
+//                                map.setMemo(item.get_memoZH());
+//                                break;
 //                                default:
-//                                    map.setDescription((String) event.get("Description"));
-//                                    map.setName((String) event.get("Name"));
-//                                    map.setMemo((String) event.get("memo"));
+//                                    map.setDescription(item.get_Description());
+//                                    map.setName(item.getName());
+//                                    map.setMemo(item.get_memo());
 //                                    break;
-//                            }
-//
-//                            map.setStartDate(formatMyDate(event.getDate("StartDate")));
-//                            map.setEndDate(event.getDate("EndDate"));
+//                }
+//                map.setStartDate(formatMyDate(item.getStartDate()));
+//                            map.setEndDate(item.get_EndDate());
 //
 //                            eventitemlist.add(map);
-//
-//
-//                        }
-//                        HomeActivity.eventitemlist = eventitemlist;
+//            }
+//            HomeActivity.eventitemlist = eventitemlist;
 //                        if (isAdded()) {
 //                            setOffice();
 //                        } else {
 //                            Log.e("isAdded", "EventsFr not added");
 //                        }
-//                    } else {
-//                        Log.d("events", "Error: " + e.getMessage());
-//                    }
-//                }
-//            });
+
         } else {
             eventitemlist = HomeActivity.eventitemlist;
             if (isAdded()) {

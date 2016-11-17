@@ -204,6 +204,7 @@ public class EventsAdapter extends ArrayAdapter<ContentListItem> implements Cont
         private TextView text;
     }
 
+
     public EventsAdapter(Context context,
                          final ContentManager contentManager,
                          final ContentListPathProvider pathProvider,
@@ -217,28 +218,10 @@ public class EventsAdapter extends ArrayAdapter<ContentListItem> implements Cont
 
             mInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             this.context = context;
-            //this.eventitemList = eventitemlist;
+            this.eventitemList = eventitemlist;
             this.arraylist = new ArrayList<EventItem>();
             this.arraylist.addAll(eventitemlist);
-//            FirebaseDatabase database = FirebaseDatabase.getInstance();
-//            DatabaseReference myRef = database.getReference("Events");
-//            myRef.addValueEventListener(new ValueEventListener() {
-//                @Override
-//                public void onDataChange(DataSnapshot dataSnapshot) {
-//                    // This method is called once with the initial value and again
-//                    // whenever data at this location is updated.
-//                    String value = dataSnapshot.getValue(String.class);
-//                    arraylist.add(dataSnapshot.getValue(EventItem.class));
-//                    String value2 = dataSnapshot.getValue(String.class);
-//                   // Log.d(TAG, "Value is: " + value);
-//                }
-//
-//                @Override
-//                public void onCancelled(DatabaseError error) {
-//                    // Failed to read value
-//                    Log.w("EventAdapter", "Failed to read value.", error.toException());
-//                }
-//            });
+
 
         } else {
             this.context = null;

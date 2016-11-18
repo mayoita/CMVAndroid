@@ -262,7 +262,16 @@ public class EventsFr extends Fragment implements TextToSpeech.OnInitListener{
                     getFragmentManager().findFragmentById(R.id.containerInLand);
             if (details == null || details.getShownIndex() != myEventitemlist.get(index).getName()) {
                 // Make new fragment to show this selection.
-                details = EventDetails.newInstance(myEventitemlist.get(index).getName(), myEventitemlist.get(index).getDescription(),myEventitemlist.get(index).getStartDate(),myEventitemlist.get(index).getMyId());
+
+                details = EventDetails.newInstance(myEventitemlist.get(index).getName(),
+                        myEventitemlist.get(index).getDescription(),
+                        myEventitemlist.get(index).getStartDate(),
+                        myEventitemlist.get(index).getMyId(),
+                        myEventitemlist.get(index).getImage1(),
+                        myEventitemlist.get(index).getImage2(),
+                        myEventitemlist.get(index).getImage3(),
+                        this.getContext()
+                );
 
                 // Execute a transaction, replacing any existing fragment
                 // with this one inside the frame.

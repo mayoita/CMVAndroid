@@ -1,5 +1,6 @@
 package it.casinovenezia.casinodivenezia;
 
+import android.content.Context;
 import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
@@ -24,6 +25,9 @@ import com.daimajia.slider.library.Animations.DescriptionAnimation;
 import com.daimajia.slider.library.SliderLayout;
 import com.daimajia.slider.library.SliderTypes.BaseSliderView;
 import com.daimajia.slider.library.SliderTypes.DefaultSliderView;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 
 import java.util.HashMap;
@@ -41,6 +45,9 @@ public class EventDetails extends Fragment implements BaseSliderView.OnSliderCli
     private String image1;
     private String image2;
     private String image3;
+    private  static Context myContext;
+    FirebaseStorage storage = FirebaseStorage.getInstance();
+    StorageReference storageRef = storage.getReferenceFromUrl("gs://cmv-gioco.appspot.com/Events");
 
 
     private int convertDpToPx(int dp, DisplayMetrics displayMetrics) {
@@ -48,13 +55,25 @@ public class EventDetails extends Fragment implements BaseSliderView.OnSliderCli
         return Math.round(pixels);
     }
 
-    public static EventDetails newInstance(String name, String description, String date, String objecyId) {
+    public static EventDetails newInstance(String name,
+                                           String description,
+                                           String date,
+                                           String objecyId,
+                                           String image1,
+                                           String image2,
+                                           String image3,
+                                           Context context) {
         EventDetails fragment = new EventDetails();
+        //DA controllare de context non crea problemi
+        myContext = context;
         Bundle args = new Bundle();
         args.putString(NAME, name);
         args.putString(DESCRIPTION, description);
         args.putString(DATE, date);
         args.putString(OBJECTID, objecyId);
+        args.putString("image1", image1);
+        args.putString("image2", image2);
+        args.putString("image3", image3);
 
         fragment.setArguments(args);
         return fragment;
@@ -195,31 +214,52 @@ public class EventDetails extends Fragment implements BaseSliderView.OnSliderCli
 //                });
     }
     public void createSlider (){
-        HashMap<String, String> file_maps = new HashMap<String, String>();
+        final HashMap<String, String> file_maps = new HashMap<String, String>();
         if (image1 != null) {
-            file_maps.put("image1", image1);
+            storageRef.child(image1).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                @Override
+                public void onSuccess(Uri uri) {
+                    DefaultSliderView textSliderView = new DefaultSliderView(myContext);
+                    textSliderView
+                            .description("Image")
+                            .image(uri.toString())
+                            .setScaleType(BaseSliderView.ScaleType.Fit);
+                    //.setOnSliderClickListener(this);
+                    mySlider.addSlider(textSliderView);
+
+                }
+            });
+
         }
         if (image2 != null) {
-            file_maps.put("image2", image2);
+            storageRef.child(image2).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                @Override
+                public void onSuccess(Uri uri) {
+                    DefaultSliderView textSliderView = new DefaultSliderView(myContext);
+                    textSliderView
+                            .description("Image")
+                            .image(uri.toString())
+                            .setScaleType(BaseSliderView.ScaleType.Fit);
+                    // .setOnSliderClickListener(this);
+                    mySlider.addSlider(textSliderView);
+
+                }
+            });
         }
         if (image3 != null) {
-            file_maps.put("image3", image3);
-        }
+            storageRef.child(image3).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                @Override
+                public void onSuccess(Uri uri) {
+                    DefaultSliderView textSliderView = new DefaultSliderView(myContext);
+                    textSliderView
+                            .description("Image")
+                            .image(uri.toString())
+                            .setScaleType(BaseSliderView.ScaleType.Fit);
+                    // .setOnSliderClickListener(this);
+                    mySlider.addSlider(textSliderView);
 
-        for(String nameF : file_maps.keySet()){
-            DefaultSliderView textSliderView = new DefaultSliderView(getActivity());
-            // initialize a SliderLayout
-            textSliderView
-                    .description(nameF)
-                    .image(file_maps.get(nameF))
-                    .setScaleType(BaseSliderView.ScaleType.Fit)
-                    .setOnSliderClickListener(this);
-
-            //add your extra information
-            textSliderView.getBundle()
-                    .putString("extra",nameF);
-
-            mySlider.addSlider(textSliderView);
+                }
+            });
         }
         mySlider.setPresetTransformer(SliderLayout.Transformer.Fade);
         mySlider.setPresetIndicator(SliderLayout.PresetIndicators.Center_Bottom);

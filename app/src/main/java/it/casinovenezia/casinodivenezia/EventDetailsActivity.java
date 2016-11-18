@@ -1,5 +1,6 @@
 package it.casinovenezia.casinodivenezia;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
@@ -50,6 +51,7 @@ public class EventDetailsActivity extends AppCompatActivity implements BaseSlide
     private String image1;
     private String image2;
     private String image3;
+    private Context myContext;
     FirebaseStorage storage = FirebaseStorage.getInstance();
     StorageReference storageRef = storage.getReferenceFromUrl("gs://cmv-gioco.appspot.com/Events");
 
@@ -62,7 +64,7 @@ public class EventDetailsActivity extends AppCompatActivity implements BaseSlide
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Intent i = getIntent();
-
+        myContext = this;
         boolean tabletSize = getResources().getBoolean(R.bool.isTablet);
         if (tabletSize) {
 
@@ -183,37 +185,52 @@ public class EventDetailsActivity extends AppCompatActivity implements BaseSlide
             storageRef.child(image1).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                 @Override
                 public void onSuccess(Uri uri) {
-                    file_maps.put("image1", uri.toString());
+                    DefaultSliderView textSliderView = new DefaultSliderView(myContext);
+                    textSliderView
+                            .description("Image")
+                            .image(uri.toString())
+                            .setScaleType(BaseSliderView.ScaleType.Fit);
+                            //.setOnSliderClickListener(this);
+                    mySlider.addSlider(textSliderView);
 
                 }
             });
 
         }
         if (image2 != null) {
-            file_maps.put("image2", image2);
+            storageRef.child(image2).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                @Override
+                public void onSuccess(Uri uri) {
+                    DefaultSliderView textSliderView = new DefaultSliderView(myContext);
+                    textSliderView
+                            .description("Image")
+                            .image(uri.toString())
+                            .setScaleType(BaseSliderView.ScaleType.Fit);
+                    // .setOnSliderClickListener(this);
+                    mySlider.addSlider(textSliderView);
+
+                }
+            });
         }
         if (image3 != null) {
-            file_maps.put("image3", image3);
-        }
+            storageRef.child(image3).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                @Override
+                public void onSuccess(Uri uri) {
+                    DefaultSliderView textSliderView = new DefaultSliderView(myContext);
+                    textSliderView
+                            .description("Image")
+                            .image(uri.toString())
+                            .setScaleType(BaseSliderView.ScaleType.Fit);
+                    // .setOnSliderClickListener(this);
+                    mySlider.addSlider(textSliderView);
 
-        for(String nameF : file_maps.keySet()){
-            DefaultSliderView textSliderView = new DefaultSliderView(this);
-            // initialize a SliderLayout
-            textSliderView
-                    .description(nameF)
-                    .image(file_maps.get(nameF))
-                    .setScaleType(BaseSliderView.ScaleType.Fit)
-                    .setOnSliderClickListener(this);
-
-            //add your extra information
-            textSliderView.getBundle()
-                    .putString("extra",nameF);
-
-            mySlider.addSlider(textSliderView);
+                }
+            });
         }
         mySlider.setPresetTransformer(SliderLayout.Transformer.Fade);
         mySlider.setPresetIndicator(SliderLayout.PresetIndicators.Center_Bottom);
         mySlider.setCustomAnimation(new DescriptionAnimation());
         mySlider.setDuration(2000);
     }
+
 }

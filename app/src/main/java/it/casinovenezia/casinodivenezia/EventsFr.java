@@ -287,6 +287,9 @@ public class EventsFr extends Fragment implements TextToSpeech.OnInitListener{
             intent.putExtra("description", myEventitemlist.get(index).getDescription());
             intent.putExtra("date", myEventitemlist.get(index).getStartDate());
             intent.putExtra("objectId", myEventitemlist.get(index).getMyId());
+            intent.putExtra("image1", myEventitemlist.get(index).getImage1());
+            intent.putExtra("image2", myEventitemlist.get(index).getImage2());
+            intent.putExtra("image3", myEventitemlist.get(index).getImage3());
             startActivity(intent);
         }
 
@@ -377,6 +380,9 @@ public class EventsFr extends Fragment implements TextToSpeech.OnInitListener{
                     for (DataSnapshot child : dataSnapshot.getChildren()) {
                         EventItem map = new EventItem();
                         map.setImageMain(child.child("ImageName").getValue(String.class));
+                        map.setImage1(child.child("ImageEvent1").getValue(String.class));
+                        map.setImage2(child.child("ImageEvent2").getValue(String.class));
+                        map.setImage3(child.child("ImageEvent3").getValue(String.class));
                         map.setOffice(child.child("office").getValue(String.class));
                         //    map.setMyId((String) event.getObjectId());
 

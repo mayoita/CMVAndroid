@@ -58,7 +58,7 @@ dependencies {
     compile 'com.android.support:appcompat-v7:23.3.0'
     compile 'com.android.support:support-v4:23.3.0'
 
-    compile 'com.squareup.picasso:picasso:2.3.2'
+    compile 'com.squareup.picasso:picasso:2.5.2'
     compile 'com.nineoldandroids:library:2.4.0'
 
     compile 'org.lucasr.twowayview:twowayview:0.1.4'
@@ -68,9 +68,7 @@ dependencies {
     compile 'com.firebaseui:firebase-ui-database:1.0.0'
     compile 'com.google.firebase:firebase-storage:9.8.0'
     compile 'com.google.firebase:firebase-auth:9.8.0'
-    compile 'com.github.bumptech.glide:glide:3.7.0'
-    compile 'com.android.support:support-v4:19.1.0'
-    compile 'com.firebaseui:firebase-ui-storage:1.0.0'
+
 
     // Uncomment if using Facebook Login (optional Maven dependency)
     compile 'com.facebook.android:facebook-android-sdk:4.5.0'

@@ -188,7 +188,7 @@ public class EventDetails extends Fragment implements BaseSliderView.OnSliderCli
 //                        if (image3F != null){
 //                            image3 = image3F.getUrl();
 //                        }
-//                        createSlider();
+                       createSlider();
 //
 //
 //                    }

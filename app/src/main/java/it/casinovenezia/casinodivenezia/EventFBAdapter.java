@@ -1,6 +1,7 @@
 package it.casinovenezia.casinodivenezia;
 
 import android.content.Context;
+import android.net.Uri;
 import android.os.Handler;
 import android.speech.tts.TextToSpeech;
 import android.support.annotation.NonNull;
@@ -16,14 +17,17 @@ import android.widget.TextView;
 import com.amazonaws.mobile.content.ContentDownloadPolicy;
 import com.amazonaws.mobile.content.ContentItem;
 import com.amazonaws.mobile.content.ContentProgressListener;
-import com.bumptech.glide.Glide;
+
 import com.facebook.rebound.Spring;
 import com.facebook.rebound.SpringConfig;
 import com.facebook.rebound.SpringListener;
 import com.facebook.rebound.SpringSystem;
-import com.firebase.ui.storage.images.FirebaseImageLoader;
+
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+import com.squareup.picasso.Picasso;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -132,11 +136,6 @@ public class EventFBAdapter extends ArrayAdapter<EventItem> {
             this._spring = spring;
             this._view = view;
         }
-
-
-
-
-
         @Override
         public void run() {
             _spring.setEndValue(1);
@@ -246,8 +245,6 @@ public class EventFBAdapter extends ArrayAdapter<EventItem> {
                     rowView.setTag(viewHolderHeader);
                     break;
             }
-
-
         }
         switch (rowType) {
             case TYPE_ITEM:
@@ -260,27 +257,18 @@ public class EventFBAdapter extends ArrayAdapter<EventItem> {
                 holder.speak.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View arg0) {
-
                         if (textToSpeach != null)
                             speakOut(textToSpeach,holder);
-
                     }
                 });
-                //holder.image.setImageResource(R.drawable.default_event);
-               //  if(holder.image == null) {
-                     StorageReference imagesRef = storageRef.child(eventitemList.get(position).getImageMain());
-                     ImageView imageView = holder.image;
-                     Glide.with(getContext() /* context */)
-                             .using(new FirebaseImageLoader())
-                             .load(imagesRef)
-                             .into(imageView);
-               //  }
+                StorageReference imagesRef = storageRef.child(eventitemList.get(position).getImageMain());
+                imagesRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                    @Override
+                    public void onSuccess(Uri uri) {
+                        Picasso.with(context).load(uri.toString()).placeholder(R.drawable.default_event).into(holder.image);
+                    }
+                });
                 holder.speak.setImageResource(R.drawable.speak);
-                //download image
-
-                //  loadImage(arraylist.get(position).getImageMain(), holder.image);
-                // get the item state from the server.
-
                 holder.text.setVisibility(View.GONE);
                 holder.date.setVisibility(View.GONE);
                 SpringSystem mSpringSystem = SpringSystem.create();

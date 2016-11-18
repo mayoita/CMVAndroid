@@ -9,6 +9,7 @@ import android.graphics.Typeface;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.media.Image;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.AppCompatActivity;
@@ -30,6 +31,10 @@ import com.daimajia.slider.library.Animations.DescriptionAnimation;
 import com.daimajia.slider.library.SliderLayout;
 import com.daimajia.slider.library.SliderTypes.BaseSliderView;
 import com.daimajia.slider.library.SliderTypes.DefaultSliderView;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.squareup.picasso.Picasso;
 
 
 import java.io.ByteArrayOutputStream;
@@ -45,6 +50,8 @@ public class EventDetailsActivity extends AppCompatActivity implements BaseSlide
     private String image1;
     private String image2;
     private String image3;
+    FirebaseStorage storage = FirebaseStorage.getInstance();
+    StorageReference storageRef = storage.getReferenceFromUrl("gs://cmv-gioco.appspot.com/Events");
 
     private int convertDpToPx(int dp, DisplayMetrics displayMetrics) {
         float pixels = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, displayMetrics);
@@ -77,6 +84,10 @@ public class EventDetailsActivity extends AppCompatActivity implements BaseSlide
         name.setTypeface(XLight);
         date.setTypeface(XLight);
         description.setTypeface(XLight);
+
+        image1 = (i.getStringExtra("image1"));
+        image2 = (i.getStringExtra("image2"));
+        image3 = (i.getStringExtra("image3"));
         loadImage(i.getStringExtra("objectId"));
         Display display = getWindowManager().getDefaultDisplay();
         ImageView imageView = (ImageView) findViewById(R.id.imageView7);
@@ -159,7 +170,7 @@ public class EventDetailsActivity extends AppCompatActivity implements BaseSlide
 //                        if (image3F != null){
 //                            image3 = image3F.getUrl();
 //                        }
-//                       createSlider();
+                       createSlider();
 //
 //
 //                    }
@@ -167,9 +178,16 @@ public class EventDetailsActivity extends AppCompatActivity implements BaseSlide
     }
 
     public void createSlider (){
-        HashMap<String, String> file_maps = new HashMap<String, String>();
+        final HashMap<String, String> file_maps = new HashMap<String, String>();
         if (image1 != null) {
-            file_maps.put("image1", image1);
+            storageRef.child(image1).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                @Override
+                public void onSuccess(Uri uri) {
+                    file_maps.put("image1", uri.toString());
+
+                }
+            });
+
         }
         if (image2 != null) {
             file_maps.put("image2", image2);

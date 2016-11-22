@@ -15,6 +15,7 @@ import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.text.method.LinkMovementMethod;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -44,6 +45,11 @@ import com.facebook.rebound.ui.SpringConfiguratorView;
 import com.facebook.rebound.ui.Util;
 import com.google.android.gms.analytics.HitBuilders;
 import com.google.android.gms.analytics.Tracker;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.helpshift.Helpshift;
 
 
@@ -81,6 +87,8 @@ public class HomeFr extends Fragment {
     private Boolean VPS2 = false;
     private int DURATION = 1000;
     private Tracker mTracker;
+    DatabaseReference mRootRef = FirebaseDatabase.getInstance().getReference();
+    DatabaseReference festivity = mRootRef.child("Festivity");
 
     /** The DynamoDB object mapper for accessing DynamoDB. */
     private final DynamoDBMapper mapper;
@@ -215,6 +223,23 @@ public class HomeFr extends Fragment {
     public void loadStorageFestivity () {
 
         if(HomeActivity.arrayFestivity.size() == 0) {
+
+            festivity.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    // This method is called once with the initial value and again
+                    // whenever data at this location is updated.
+                    
+
+                }
+
+                @Override
+                public void onCancelled(DatabaseError error) {
+                    // Failed to read value
+                    Log.w("EventAdapter", "Failed to read value.", error.toException());
+                }
+            });
+
             FestivityDO selectedFestivity = mapper.load(FestivityDO.class, "1");
             arrayFestivity = selectedFestivity.getFestivityConv();
             HomeActivity.arrayFestivity = arrayFestivity;

@@ -385,7 +385,7 @@ public class EventsFr extends Fragment implements TextToSpeech.OnInitListener{
                     // This method is called once with the initial value and again
                     // whenever data at this location is updated.
 
-                    ArrayList<EventFB> eventListFB = new ArrayList<EventFB>();
+
                     for (DataSnapshot child : dataSnapshot.getChildren()) {
                         EventItem map = new EventItem();
                         map.setImageMain(child.child("ImageName").getValue(String.class));

@@ -83,7 +83,7 @@ public class PokerDetailsActivity extends AppCompatActivity implements BaseSlide
         DisplayMetrics dm = getResources().getDisplayMetrics();
         TextView titolo = (TextView)findViewById(R.id.textViewPoker);
         TextView titoloR = (TextView)findViewById(R.id.textViewPokerRule);
-        titoloR.setText(Html.fromHtml(createRules(i.getStringArrayListExtra("TournamentsRules"))));
+        titoloR.setText(Html.fromHtml(createRules(i.getStringArrayListExtra("TournamentRules"))));
         titolo.setText((i.getStringExtra("TournamentName")));
         titolo.setTypeface(XLight);
         titoloR.setTypeface(XLight);
@@ -202,13 +202,12 @@ public class PokerDetailsActivity extends AppCompatActivity implements BaseSlide
     }
     public String createRules (ArrayList theList) {
         String theRules ="";
-
-        for (int i = 0; i < theList.size(); i++) {
-
-            ArrayList a = (ArrayList) theList.get(i);
-            theRules = theRules + "<font color=#cc0029>" + a.get(0) + "</font><BR>"  + a.get(1) + "<BR><BR>";
+        if (theList != null) {
+             for (int i = 0; i < theList.size(); i++) {
+                 ArrayList a = (ArrayList) theList.get(i);
+                theRules = theRules + "<font color=#cc0029>" + a.get(0) + "</font><BR>" + a.get(1) + "<BR><BR>";
+            }
         }
-
         return theRules;
     }
 

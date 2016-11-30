@@ -8,6 +8,8 @@ import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
@@ -81,8 +83,8 @@ public class Map extends Fragment implements OnMapReadyCallback {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        map = ((SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map));
-        map.getMapAsync(this);;
+       // map = ((SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map));
+        //map.getMapAsync(this);
     }
 
     @Override
@@ -96,7 +98,10 @@ public class Map extends Fragment implements OnMapReadyCallback {
         super.onActivityCreated(savedInstanceState);
         android.support.v7.app.ActionBar action_bar = ((AppCompatActivity) getActivity()).getSupportActionBar();
         action_bar.setDisplayShowCustomEnabled(true);
-
+        FragmentManager a = getChildFragmentManager();
+        FragmentManager b = getFragmentManager();
+        map = ((SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map));
+        map.getMapAsync(this);
     }
 
     @Override
@@ -106,9 +111,9 @@ public class Map extends Fragment implements OnMapReadyCallback {
     }
 
     @Override
-    public void onMapReady(GoogleMap googleMap) {
-        if (ActivityCompat.checkSelfPermission(getActivity(), android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
-                ActivityCompat.checkSelfPermission(getActivity(), android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+    public void onMapReady(final GoogleMap googleMap) {
+     //   if (ActivityCompat.checkSelfPermission(getActivity(), android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
+           //     ActivityCompat.checkSelfPermission(getActivity(), android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             // TODO: Consider calling
             //    ActivityCompat#requestPermissions
             // here to request the missing permissions, and then overriding
@@ -116,7 +121,7 @@ public class Map extends Fragment implements OnMapReadyCallback {
             //                                          int[] grantResults)
             // to handle the case where the user grants the permission. See the documentation
             // for ActivityCompat#requestPermissions for more details.
-            googleMap.setMyLocationEnabled(true);
+        //    googleMap.setMyLocationEnabled(true);
             Marker noghera = googleMap.addMarker(new MarkerOptions()
                     .position(CaNoghera)
                     .snippet("Ca'Noghera")
@@ -140,9 +145,9 @@ public class Map extends Fragment implements OnMapReadyCallback {
                 @Override
                 public void onCameraIdle() {
                     // Move camera.
-                 //   googleMap.moveCamera(CameraUpdateFactory.newLatLngBounds(builder.build(), 50));
+                    googleMap.moveCamera(CameraUpdateFactory.newLatLngBounds(builder.build(), 50));
                     // Remove listener to prevent position reset on camera move.
-                  //  googleMap.setOnCameraChangeListener(null);
+                    googleMap.setOnCameraChangeListener(null);
                 }
 
                // @Override
@@ -154,7 +159,7 @@ public class Map extends Fragment implements OnMapReadyCallback {
                // }
             });
             return;
-        }
+        //}
 
     }
 }

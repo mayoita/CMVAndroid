@@ -8,7 +8,7 @@
         android:layout_height="match_parent"
         android:id="@+id/image_event"
     android:adjustViewBounds="true"
-        android:src="@drawable/poker_cell_background"/>
+        android:src="@drawable/default_event"/>
 
     <TextView
         android:layout_width="wrap_content"

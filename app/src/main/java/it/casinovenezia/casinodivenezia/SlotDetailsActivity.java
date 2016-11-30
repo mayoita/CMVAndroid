@@ -38,12 +38,21 @@ import com.daimajia.slider.library.SliderTypes.BaseSliderView;
 import com.daimajia.slider.library.SliderTypes.DefaultSliderView;
 import com.google.android.gms.analytics.HitBuilders;
 import com.google.android.gms.analytics.Tracker;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 
 
 import org.json.JSONArray;
 import org.json.JSONException;
 
 
+import java.text.DateFormat;
+import java.text.DecimalFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -67,8 +76,14 @@ public class SlotDetailsActivity extends AppCompatActivity {
     private TextSwitcher mTitle;
     private Tracker mTracker;
   //  List<ParseObject> ob;
-    private List<EventItem> eventitemlist = null;
+    private List<EventItem> eventitemlist = new ArrayList<EventItem>();
     TextView theText;
+
+    DatabaseReference mRootRef = FirebaseDatabase.getInstance().getReference();
+    DatabaseReference eventsChild = mRootRef.child("Events");
+    DatabaseReference jackpot = mRootRef.child("Jackpot");
+
+
     private int[][][] arraySlot = {
             {
                     {R.drawable.slotvenezia, R.drawable.slotvenezia2, R.drawable.slotvenezia3, R.drawable.slotvenezia4},
@@ -137,8 +152,8 @@ public class SlotDetailsActivity extends AppCompatActivity {
                 Animation out = AnimationUtils.loadAnimation(this, R.anim.slide_out_bottom);
                 mTitle.setInAnimation(in);
                 mTitle.setOutAnimation(out);
-
-                new RemoteDataTask().execute();
+                LoadJackcpotEvent();
+                //new RemoteDataTask().execute();
                 break;
             case 2:
                 setContentView(R.layout.activity_slot_details);
@@ -182,7 +197,8 @@ public class SlotDetailsActivity extends AppCompatActivity {
                 mySlider.setPresetIndicator(SliderLayout.PresetIndicators.Center_Bottom);
                 mySlider.setCustomAnimation(new DescriptionAnimation());
                 mySlider.setDuration(4000);
-                new RemoteDataTaskForJackpots().execute();
+                LoadJackcpotPrize();
+                //new RemoteDataTaskForJackpots().execute();
                 break;
             default:
                 setContentView(R.layout.activity_slot_details);
@@ -284,107 +300,115 @@ public class SlotDetailsActivity extends AppCompatActivity {
         mCoverFlow = null;
 
     }
-
-    private class RemoteDataTask extends AsyncTask<Void, Void, Void> {
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-
+    private String formatMyDate(String myDate) {
+        DateFormat format = new SimpleDateFormat("dd/MM/yy");
+        Date date = new Date();
+        try {
+            date = format.parse(myDate);
+        } catch (ParseException e) {
+            e.printStackTrace();
         }
 
-        @Override
-        protected Void doInBackground(Void... params) {
-            // Create the array
-//            eventitemlist = new ArrayList<EventItem>();
-//            try {
-//                // Locate the class table named "Country" in Parse.com
-//                ParseQuery<ParseObject> query = new ParseQuery<ParseObject>(
-//                        "Events");
-//                // Locate the column named "ranknum" in Parse.com and order list
-//                // by ascending
-//                query.orderByDescending("StartDate");
-//                query.whereEqualTo("eventType", "E");
-//                query.whereEqualTo("isSlotsEvents",true);
-//                ob = query.find();
-//                for (ParseObject event : ob) {
-//                    // Locate images in flag column
-//                    ParseFile image = (ParseFile) event.get("ImageName");
-//
-//                    EventItem map = new EventItem();
-//                   // map.setImageMain(image);
-//                    map.setOffice((String) event.get("office"));
-//                    map.setMyId((String)event.getObjectId());
-//                    map.setNameIT((String) event.get("NameIT"));
-//                    map.setDescriptionIT((String) event.get("DescriptionIT"));
-//                    map.setStartDate(formatMyDate(event.getDate("StartDate")));
-//                    map.setEndDate(event.getDate("EndDate"));
-//
-//                    eventitemlist.add(map);
-//                }
-//            } catch (ParseException e) {
-//                Log.e("Error", e.getMessage());
-//                e.printStackTrace();
-//            }
-            return null;
+        SimpleDateFormat sdf = new SimpleDateFormat("LLLL yyyy", StarterApplication.currentLocale);
+
+        return sdf.format(date);
+    }
+    private void  LoadJackcpotEvent() {
+        for (EventItem event:HomeActivity.eventitemlist) {
+            if (event.getIsSlotEvent() != null) {
+                EventItem map = new EventItem();
+                map.setImageMain(event.getImageMain());
+                map.setOffice(event.getOffice());
+                map.setNameIT(event.getNameIT());
+                map.setDescriptionIT(event.getDescriptionIT());
+                map.setStartDate(formatMyDate(event.getStartDate()));
+                map.setEndDate(event.getEndDate());
+
+                eventitemlist.add(map);
+            }
         }
-        private String formatMyDate(Date myDate) {
-
-            SimpleDateFormat sdf = new SimpleDateFormat("LLLL yyyy", getResources().getConfiguration().locale);
-
-            return sdf.format(myDate);
-        }
-
-        @Override
-        protected void onPostExecute(Void result) {
-            Context context = SlotDetailsActivity.this;
+        Context context = SlotDetailsActivity.this;
 
 
-            RelativeLayout layout = (RelativeLayout)findViewById(R.id.carouselLayout);
+        RelativeLayout layout = (RelativeLayout)findViewById(R.id.carouselLayout);
 
-            FeatureCoverFlow coverFlow = new FeatureCoverFlow(SlotDetailsActivity.this);
-            coverFlow.setLayoutParams(new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.MATCH_PARENT));
-            coverFlow.setCoverHeight(convertDpToPx(180,dm));
-            coverFlow.setCoverWidth(convertDpToPx(120,dm));
-            coverFlow.setMaxScaleFactor((float) 1.5);
-            coverFlow.setReflectionGap(0);
-            coverFlow.setRotationTreshold((float) 1.5);
-            coverFlow.setScalingThreshold((float) 0.5);
-            coverFlow.setSpacing((float) 0.6);
-            layout.addView(coverFlow);
-
-
-            mAdapter = new CoverFlowAdapter(SlotDetailsActivity.this);
-            mAdapter.setData((ArrayList<EventItem>) eventitemlist);
-
-            mCoverFlow = coverFlow;
-            mCoverFlow.setAdapter(mAdapter);
-
-            mCoverFlow.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                @Override
-                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-                     //mTitle.setText(getResources().getString(mData.get(position).titleResId));
-                }
-            });
-
-            mCoverFlow.setOnScrollPositionListener(new FeatureCoverFlow.OnScrollPositionListener() {
-                @Override
-                public void onScrolledToPosition(int position) {
-
-                    mTitle.setText(eventitemlist.get(position).getStartDate() + " - " + eventitemlist.get(position).getNameIT());
-                }
-
-                @Override
-                public void onScrolling() {
-
-                    mTitle.setText("");
-                }
-            });
+        FeatureCoverFlow coverFlow = new FeatureCoverFlow(SlotDetailsActivity.this);
+        coverFlow.setLayoutParams(new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.MATCH_PARENT));
+        coverFlow.setCoverHeight(convertDpToPx(120,dm));
+        coverFlow.setCoverWidth(convertDpToPx(180,dm));
+        coverFlow.setMaxScaleFactor((float) 1.5);
+        coverFlow.setReflectionGap(0);
+        coverFlow.setRotationTreshold((float) 1.5);
+        coverFlow.setScalingThreshold((float) 0.5);
+        coverFlow.setSpacing((float) 0.6);
+        layout.addView(coverFlow);
 
 
-        }
+        mAdapter = new CoverFlowAdapter(SlotDetailsActivity.this);
+        mAdapter.setData((ArrayList<EventItem>) eventitemlist);
+
+        mCoverFlow = coverFlow;
+        mCoverFlow.setAdapter(mAdapter);
+
+        mCoverFlow.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                //mTitle.setText(getResources().getString(mData.get(position).titleResId));
+            }
+        });
+
+        mCoverFlow.setOnScrollPositionListener(new FeatureCoverFlow.OnScrollPositionListener() {
+            @Override
+            public void onScrolledToPosition(int position) {
+
+                mTitle.setText(eventitemlist.get(position).getStartDate() + " - " + eventitemlist.get(position).getNameIT());
+            }
+
+            @Override
+            public void onScrolling() {
+
+                mTitle.setText("");
+            }
+        });
     }
 
+    private void  LoadJackcpotPrize() {
+        jackpot.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                                        switch (Locale.getDefault().getLanguage()) {
+                            case "it":
+                                theText.setText(dataSnapshot.child("ourIT").getValue(String.class));
+                                break;
+                            case "es":
+                                theText.setText(dataSnapshot.child("ourES").getValue(String.class));
+                                break;
+                            case "fr":
+                                theText.setText(dataSnapshot.child("ourFR").getValue(String.class));
+                                break;
+                            case "de":
+                                theText.setText(dataSnapshot.child("ourDE").getValue(String.class));
+                                break;
+                            case "ru":
+                                theText.setText(dataSnapshot.child("ourRU").getValue(String.class));
+                                break;
+                            case "zh":
+                                theText.setText(dataSnapshot.child("ourZH").getValue(String.class));
+                                break;
+                            default:
+                                theText.setText(dataSnapshot.child("our").getValue(String.class));
+                                break;
+                        }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+    }
     private class RemoteDataTaskForJackpots extends AsyncTask<Void, Void, Void> {
         @Override
         protected void onPreExecute() {

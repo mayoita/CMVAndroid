@@ -40,11 +40,12 @@ public class EventDetails extends Fragment implements BaseSliderView.OnSliderCli
     private static final String DESCRIPTION = "description";
     private static final String DATE = "date";
     private static final String OBJECTID = "objectId";
+    private static final String IMAGE1 = "image1";
+    private static final String IMAGE2 = "image2";
+    private static final String IMAGE3 = "image3";
+    private static final String IMAGEMAIN = "imageMain";
     private SliderLayout mySlider;
     int fragmentWidth;
-    private String image1;
-    private String image2;
-    private String image3;
     private  static Context myContext;
     FirebaseStorage storage = FirebaseStorage.getInstance();
     StorageReference storageRef = storage.getReferenceFromUrl("gs://cmv-gioco.appspot.com/Events");
@@ -62,7 +63,8 @@ public class EventDetails extends Fragment implements BaseSliderView.OnSliderCli
                                            String image1,
                                            String image2,
                                            String image3,
-                                           Context context) {
+                                           Context context,
+                                           String imageMain) {
         EventDetails fragment = new EventDetails();
         //DA controllare de context non crea problemi
         myContext = context;
@@ -71,9 +73,10 @@ public class EventDetails extends Fragment implements BaseSliderView.OnSliderCli
         args.putString(DESCRIPTION, description);
         args.putString(DATE, date);
         args.putString(OBJECTID, objecyId);
-        args.putString("image1", image1);
-        args.putString("image2", image2);
-        args.putString("image3", image3);
+        args.putString(IMAGE1, image1);
+        args.putString(IMAGE2, image2);
+        args.putString(IMAGE3, image3);
+        args.putString(IMAGEMAIN, imageMain);
 
         fragment.setArguments(args);
         return fragment;
@@ -178,45 +181,13 @@ public class EventDetails extends Fragment implements BaseSliderView.OnSliderCli
 
 
     public void loadImage(String myId) {
-//        ParseQuery<ParseObject> query = new ParseQuery<ParseObject>(
-//                "Events");
-//
-//        query.getInBackground(myId,
-//                new GetCallback<ParseObject>() {
-//
-//                    public void done(ParseObject object,
-//                                     ParseException e) {
-//
-//                        ParseFile image1F = (ParseFile) object
-//                                .get("ImageEvent1");
-//                        ParseFile image2F = (ParseFile) object
-//                                .get("ImageEvent2");
-//                        ParseFile image3F = (ParseFile) object
-//                                .get("ImageEvent3");
-//                        ParseFile imageDefault = (ParseFile) object
-//                                .get("ImageName");
-//                        if (image1F != null){
-//                            image1 = image1F.getUrl();
-//                        } else {
-//                            image1 = imageDefault.getUrl();
-//                        }
-//
-//                        if (image2F != null){
-//                            image2 = image2F.getUrl();
-//                        }
-//                        if (image3F != null){
-//                            image3 = image3F.getUrl();
-//                        }
+
                        createSlider();
-//
-//
-//                    }
-//                });
     }
     public void createSlider (){
         final HashMap<String, String> file_maps = new HashMap<String, String>();
-        if (image1 != null) {
-            storageRef.child(image1).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+        if (getArguments().getString(IMAGE1) != null) {
+            storageRef.child(getArguments().getString(IMAGE1)).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                 @Override
                 public void onSuccess(Uri uri) {
                     DefaultSliderView textSliderView = new DefaultSliderView(myContext);
@@ -230,9 +201,23 @@ public class EventDetails extends Fragment implements BaseSliderView.OnSliderCli
                 }
             });
 
+        } else {
+            storageRef.child(getArguments().getString(IMAGEMAIN)).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                @Override
+                public void onSuccess(Uri uri) {
+                    DefaultSliderView textSliderView = new DefaultSliderView(myContext);
+                    textSliderView
+                            .description("Image")
+                            .image(uri.toString())
+                            .setScaleType(BaseSliderView.ScaleType.Fit);
+                    //.setOnSliderClickListener(this);
+                    mySlider.addSlider(textSliderView);
+
+                }
+            });
         }
-        if (image2 != null) {
-            storageRef.child(image2).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+        if (getArguments().getString(IMAGE2) != null) {
+            storageRef.child(getArguments().getString(IMAGE2)).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                 @Override
                 public void onSuccess(Uri uri) {
                     DefaultSliderView textSliderView = new DefaultSliderView(myContext);
@@ -246,8 +231,8 @@ public class EventDetails extends Fragment implements BaseSliderView.OnSliderCli
                 }
             });
         }
-        if (image3 != null) {
-            storageRef.child(image3).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+        if (getArguments().getString(IMAGE3) != null) {
+            storageRef.child(getArguments().getString(IMAGE3)).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                 @Override
                 public void onSuccess(Uri uri) {
                     DefaultSliderView textSliderView = new DefaultSliderView(myContext);

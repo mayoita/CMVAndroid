@@ -39,7 +39,7 @@ public class PokerDetails extends Fragment implements BaseSliderView.OnSliderCli
     private static final String TOURNAMENT_NAME = "TournamentName";
     private static final String TOURNAMENT_URL = "TournamentURL";
     private static final String START_DATE = "StartDate";
-    private static final String TOURNAMENTS_RULES = "TournamentsRules";
+    private static final String TOURNAMENTS_RULES = "TournamentRules";
     private static final String POKER_DATA = "PokerData";
 
     private PokerDayAdapter mAdapter;
@@ -204,7 +204,7 @@ final View myView = getView();
             TextView titoloR = (TextView)myView.findViewById(R.id.textViewPokerRule);
             titolo.setTypeface(XLight);
             titoloR.setTypeface(XLight);
-            titoloR.setText(Html.fromHtml(createRules(getArguments().getStringArrayList("TournamentsRules"))));
+            titoloR.setText(Html.fromHtml(createRules(getArguments().getStringArrayList("TournamentRules"))));
             titolo.setText((getArguments().getString("TournamentName")));
         }
 
@@ -241,13 +241,13 @@ public interface OnEventsInteractionListener {
 }
     public String createRules (ArrayList theList) {
         String theRules ="";
+        if (theList != null) {
+            for (int i = 0; i < theList.size(); i++) {
 
-        for (int i = 0; i < theList.size(); i++) {
-
-            ArrayList a = (ArrayList) theList.get(i);
-            theRules = theRules + "<font color=#cc0029>" + a.get(0) + "</font><BR>"  + a.get(1) + "<BR><BR>";
+                ArrayList a = (ArrayList) theList.get(i);
+                theRules = theRules + "<font color=#cc0029>" + a.get(0) + "</font><BR>" + a.get(1) + "<BR><BR>";
+            }
         }
-
         return theRules;
     }
 

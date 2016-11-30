@@ -3,22 +3,25 @@ package it.casinovenezia.casinodivenezia;
 import android.app.Application;
 import android.os.Build;
 import android.os.StrictMode;
+import android.support.annotation.NonNull;
 import android.util.Log;
+import android.widget.Toast;
 
-import com.amazonaws.mobile.content.ContentDownloadPolicy;
-import com.amazonaws.mobile.content.ContentItem;
-import com.amazonaws.mobile.content.ContentManager;
-import com.amazonaws.mobile.content.ContentProgressListener;
 import com.facebook.FacebookSdk;
 import com.google.android.gms.analytics.GoogleAnalytics;
 import com.google.android.gms.analytics.Tracker;
 import com.google.android.gms.analytics.Logger;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.FirebaseApp;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.FirebaseDatabase;
 import com.helpshift.Helpshift;
 import java.util.Locale;
+import java.util.concurrent.Executor;
 
-import com.amazonaws.mobile.AWSMobileClient;
 
 /**
  * Created by massimomoro on 02/09/15.
@@ -29,15 +32,18 @@ public static Locale currentLocale;
     private final String HELPSHIFT_DOMAIN = "casinovenezia.helpshift.com";
     private final String HELPSHIFT_APP_ID = "casinovenezia_platform_20131218091253899-f3f796e2d4b9e99";
     private Tracker mTracker;
+
+
     private final static String LOG_TAG = Application.class.getSimpleName();
-    public static ContentManager contentManager;
+
     @Override
     public void onCreate() {
         super.onCreate();
-        initializeApplication();
+        //initializeApplication();
         Log.d(LOG_TAG, "StarterApplication.onCreate - Application initialized OK");
         currentLocale=getResources().getConfiguration().locale;
         FacebookSdk.sdkInitialize(this);
+
 
         if (!FirebaseApp.getApps(this).isEmpty()) {
             FirebaseDatabase.getInstance().setPersistenceEnabled(true);
@@ -63,18 +69,5 @@ public static Locale currentLocale;
         return mTracker;
     }
 */
-    private void initializeApplication() {
-        AWSMobileClient.initializeMobileClientIfNecessary(getApplicationContext());
 
-        AWSMobileClient.defaultMobileClient().
-                createDefaultContentManager(new ContentManager.BuilderResultHandler() {
-
-                    @Override
-                    public void onComplete(final ContentManager contentManager) {
-
-                        StarterApplication.this.contentManager = contentManager;
-
-                    }
-                });
-    }
 }

@@ -64,7 +64,7 @@
             android:background="@color/white"
             android:layout_centerHorizontal="true" />
 
-        <com.parse.ParseImageView
+        <ImageView
             android:layout_width="wrap_content"
             android:layout_height="294dp"
             android:id="@+id/imageView9"

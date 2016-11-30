@@ -17,6 +17,11 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseFile;
@@ -40,7 +45,8 @@ public class TournamentFr extends Fragment {
     private TournamentAdapter mAdapter;
     private List<TournamentItem> pokeritemlist = null;
     private List<TournamentItem> myEventitemlist = null;
-    List<ParseObject> ob;
+    DatabaseReference mRootRef = FirebaseDatabase.getInstance().getReference();
+    DatabaseReference tournaments = mRootRef.child("Tournaments");
 
     boolean mDualPane;
     int mCurCheckPosition = 0;
@@ -187,7 +193,7 @@ public class TournamentFr extends Fragment {
             intent.putExtra("TournamentName", myEventitemlist.get(index).getTournamentsName());
             intent.putExtra("TournamentURL", myEventitemlist.get(index).getTournamentUrl());
             intent.putExtra("StartDate", myEventitemlist.get(index).getStartDate());
-            intent.putStringArrayListExtra("TournamentsRules", myEventitemlist.get(index).getTournamentsRules());
+            intent.putStringArrayListExtra("TournamentRules", myEventitemlist.get(index).getTournamentsRules());
             intent.putStringArrayListExtra("TournamentEvent", myEventitemlist.get(index).getTournamentEvent());
             intent.putExtra("Type", myEventitemlist.get(index).getType());
             startActivity(intent);
@@ -236,48 +242,55 @@ public class TournamentFr extends Fragment {
     }
 
 
-    private String formatMyDate(Date myDate) {
+    private String formatMyDate(String myDate)  {
 
+        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+        Date date = new Date();
+        try {
+            date = format.parse(myDate);
+            System.out.println(date);
+
+        } catch (java.text.ParseException e) {
+            e.printStackTrace();
+        }
         SimpleDateFormat sdf = new SimpleDateFormat("dd LLLL", StarterApplication.currentLocale);
 
-        return sdf.format(myDate);
+        return sdf.format(date);
     }
     public void loadTournament() {
+
         if (HomeActivity.tournamentlistitem == null) {
-            ParseQuery<ParseObject> query = new ParseQuery<ParseObject>(
-                    "Tournaments");
 
-            query.orderByDescending("StartDate");
-            query.findInBackground(new FindCallback<ParseObject>() {
-                public void done(List<ParseObject> eventList, ParseException e) {
-                    if (e == null) {
-                        pokeritemlist = new ArrayList<TournamentItem>();
-                        for (ParseObject event : eventList) {
-                            TournamentItem map = new TournamentItem();
+            tournaments.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    pokeritemlist = new ArrayList<TournamentItem>();
+                    for (DataSnapshot child : dataSnapshot.getChildren()) {
+                        TournamentItem map = new TournamentItem();
 
-                            map.setOffice((String) event.get("office"));
+                        map.setOffice(child.child("office").getValue(String.class));
 
-                            map.setTournamentDescription((String) event.get("TournamentDescription"));
-
-                            map.setTournamentsName((String) event.get("TournamentName"));
-                            map.setTournamentsRules((ArrayList) event.get("TournamentsRules"));
-                            map.setTournamentUrl((String) event.get("TournamentURL"));
-                            map.setType((String) event.get("Type"));
-                            map.setTournamentEvent((ArrayList) event.get("TournamentEvent"));
-                            map.setStartDate(formatMyDate(event.getDate("StartDate")));
-                            map.setEndDate(formatMyDate(event.getDate("EndDate")));
-                            map.setImageTournament((ParseFile) event.get("ImageTournament"));
-
-                            pokeritemlist.add(map);
-
-                        }
-                        HomeActivity.tournamentlistitem=pokeritemlist;
-                        setOffice();
-                    } else {
-                        Log.d("tournaments", "Error: " + e.getMessage());
+                        map.setTournamentDescription(child.child("TournamentDescription").getValue(String.class));
+                        map.setTournamentsName(child.child("TournamentName").getValue(String.class));
+                        map.setTournamentsRules((ArrayList) child.child("TournamentsRules").getValue());
+                        map.setTournamentUrl(child.child("TournamentURL").getValue(String.class));
+                        map.setType(child.child("Type").getValue(String.class));
+                        map.setTournamentEvent((ArrayList) child.child("TournamentEvent").getValue());
+                        map.setStartDate(formatMyDate(child.child("StartDate").getValue(String.class)));
+                        map.setEndDate(formatMyDate(child.child("EndDate").getValue(String.class)));
+                        map.setImageTournament(child.child("ImageTournament").getValue(String.class));
+                        pokeritemlist.add(map);
                     }
+                    HomeActivity.tournamentlistitem=pokeritemlist;
+                    setOffice();
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+
                 }
             });
+
 
         } else {
             pokeritemlist=HomeActivity.tournamentlistitem;

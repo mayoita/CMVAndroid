@@ -2,12 +2,14 @@ package it.casinovenezia.casinodivenezia;
 
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.PagerTitleStrip;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.util.SparseArray;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -15,22 +17,30 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.Executor;
 
 /**
  * Created by massimomoro on 27/03/15.
  */
 public class HomeMainFr extends Fragment {
-    public static android.support.v4.view.PagerTitleStripV22 title_strip;
+    public static android.support.v4.view.PagerTitleStrip title_strip;
     public static final String EXTRA_MESSAGE = "EXTRA_MESSAGE";
     MyPageAdapter pageAdapter;
     ViewPager mPager;
 
+
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
 
     }
 
@@ -58,7 +68,7 @@ public class HomeMainFr extends Fragment {
         List<Fragment> fragments = HomeActivity.fragments;
 
 
-        title_strip = (android.support.v4.view.PagerTitleStripV22)getView().findViewById(R.id.pager_title_strip);
+        title_strip = (android.support.v4.view.PagerTitleStrip)getView().findViewById(R.id.pager_title_strip);
         Typeface font = Typeface.createFromAsset(getActivity().getBaseContext().getAssets(), "fonts/GothamXLight.otf");
         for (int counter = 0 ; counter<title_strip.getChildCount(); counter++) {
 

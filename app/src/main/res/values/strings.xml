@@ -138,14 +138,16 @@
         the transfer of cash to and from clients within the gaming house can only be for amounts of less than €1000.00.</string>
     <string name="info_titolo">WAYS OF GAINING ADMISSION TO THE CASINO</string>
     <string name="info_activiy_text">INFO</string>
-    <string name="title_activity_sign_up">SignUpActivity</string>
+    <string name="title_activity_sign_up">Sign Up/Log In</string>
     <string name="title_activity_login">Log in</string>
     <string name="title_activity_signup">Sign up</string>
     <string name="prompt_username">Username</string>
     <string name="prompt_password">Password</string>
     <string name="prompt_password_again">Password Again</string>
     <string name="error_intro">"Please "</string>
-    <string name="error_blank_username">enter a username</string>
+    <string name="error_blank_name">enter a name</string>
+    <string name="error_blank_surname">enter a surname</string>
+    <string name="error_blank_username">enter an email</string>
     <string name="error_blank_password">enter a password</string>
     <string name="error_mismatched_passwords">enter the same password twice</string>
     <string name="error_join">", and "</string>
@@ -276,4 +278,5 @@
     <string name="download_queue_provider_authority">com.amazonaws.mobile.downloader-it.casinovenezia.casinodivenezia</string>
     <!-- This can be anything, but it should be unique to the app. -->
     <string name="content_file_provider_authority">it.casinovenezia.fileprovider</string>
+    <string name="title_sign_up">Sign Up</string>
 </resources>

@@ -51,6 +51,7 @@ public class EventDetailsActivity extends AppCompatActivity implements BaseSlide
     private String image1;
     private String image2;
     private String image3;
+    private String imageMain;
     private Context myContext;
     FirebaseStorage storage = FirebaseStorage.getInstance();
     StorageReference storageRef = storage.getReferenceFromUrl("gs://cmv-gioco.appspot.com/Events");
@@ -90,6 +91,7 @@ public class EventDetailsActivity extends AppCompatActivity implements BaseSlide
         image1 = (i.getStringExtra("image1"));
         image2 = (i.getStringExtra("image2"));
         image3 = (i.getStringExtra("image3"));
+        imageMain = (i.getStringExtra("imageMain"));
         loadImage(i.getStringExtra("objectId"));
         Display display = getWindowManager().getDefaultDisplay();
         ImageView imageView = (ImageView) findViewById(R.id.imageView7);
@@ -143,40 +145,7 @@ public class EventDetailsActivity extends AppCompatActivity implements BaseSlide
 
     }
     public void loadImage(String myId) {
-//        ParseQuery<ParseObject> query = new ParseQuery<ParseObject>(
-//                "Events");
-//
-//        query.getInBackground(myId,
-//                new GetCallback<ParseObject>() {
-//
-//                    public void done(ParseObject object,
-//                                     ParseException e) {
-//
-//                        ParseFile image1F = (ParseFile) object
-//                                .get("ImageEvent1");
-//                        ParseFile image2F = (ParseFile) object
-//                                .get("ImageEvent2");
-//                        ParseFile image3F = (ParseFile) object
-//                                .get("ImageEvent3");
-//                        ParseFile imageDefault = (ParseFile) object
-//                                .get("ImageName");
-//                        if (image1F != null){
-//                            image1 = image1F.getUrl();
-//                        } else {
-//                            image1 = imageDefault.getUrl();
-//                        }
-//
-//                        if (image2F != null){
-//                            image2 = image2F.getUrl();
-//                        }
-//                        if (image3F != null){
-//                            image3 = image3F.getUrl();
-//                        }
                        createSlider();
-//
-//
-//                    }
-//                });
     }
 
     public void createSlider (){
@@ -196,6 +165,20 @@ public class EventDetailsActivity extends AppCompatActivity implements BaseSlide
                 }
             });
 
+        } else {
+            storageRef.child(imageMain).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                @Override
+                public void onSuccess(Uri uri) {
+                    DefaultSliderView textSliderView = new DefaultSliderView(myContext);
+                    textSliderView
+                            .description("Image")
+                            .image(uri.toString())
+                            .setScaleType(BaseSliderView.ScaleType.Fit);
+                    //.setOnSliderClickListener(this);
+                    mySlider.addSlider(textSliderView);
+
+                }
+            });
         }
         if (image2 != null) {
             storageRef.child(image2).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {

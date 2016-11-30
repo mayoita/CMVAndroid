@@ -12,10 +12,12 @@ import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.text.method.LinkMovementMethod;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -30,6 +32,9 @@ import com.facebook.GraphResponse;
 import com.facebook.GraphRequest;
 import com.google.android.gms.analytics.HitBuilders;
 import com.google.android.gms.analytics.Tracker;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserInfo;
 
 
 import org.json.JSONException;
@@ -48,7 +53,9 @@ public class LogIn extends Fragment {
     private TextView nameTextView;
     private Button loginOrLogoutButton;
     private ImageView pic;
-
+    private FirebaseAuth mAuth;
+    private FirebaseAuth.AuthStateListener mAuthListener;
+    private static final String TAG = "LogInAcitivityAuth";
 
 
 //    private ParseUser currentUser;
@@ -81,6 +88,49 @@ public class LogIn extends Fragment {
         StarterApplication application = (StarterApplication) getActivity().getApplication();
         // mTracker = application.getDefaultTracker();
         setHasOptionsMenu(true);
+
+        mAuth = FirebaseAuth.getInstance();
+        // [END initialize_auth]
+
+        // [START auth_state_listener]
+        mAuthListener = new FirebaseAuth.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                FirebaseUser user = firebaseAuth.getCurrentUser();
+                if (user != null) {
+                    // User is signed in
+                    Log.d(TAG, "onAuthStateChanged:signed_in:" + user.getUid());
+
+                } else {
+                    // User is signed out
+                    Log.d(TAG, "onAuthStateChanged:signed_out");
+                }
+                // [START_EXCLUDE]
+                updateUI(user);
+                // [END_EXCLUDE]
+            }
+        };
+    }
+    private void updateUI(FirebaseUser user) {
+
+
+      //  TextView idView = (TextView) findViewById(R.id.anonymous_status_id);
+     //   TextView emailView = (TextView) findViewById(R.id.anonymous_status_email);
+        boolean isSignedIn = (user != null);
+
+        // Status text
+        if (isSignedIn) {
+      //      idView.setText(getString(R.string.id_fmt, user.getUid()));
+     //       emailView.setText(getString(R.string.email_fmt, user.getEmail()));
+        } else {
+       //     idView.setText(R.string.signed_out);
+      //      emailView.setText(null);
+        }
+
+        // Button visibility
+      //  findViewById(R.id.button_anonymous_sign_in).setEnabled(!isSignedIn);
+      //  findViewById(R.id.button_anonymous_sign_out).setEnabled(isSignedIn);
+      //  findViewById(R.id.button_link_account).setEnabled(isSignedIn);
     }
 
     @Override
@@ -100,6 +150,13 @@ public class LogIn extends Fragment {
         loginOrLogoutButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                FirebaseUser user = mAuth.getCurrentUser();
+                if (user != null) {
+                    if (user.isAnonymous()) {
+                        Intent logInSignIn = new Intent(getActivity(), SignUp.class);
+                        startActivity(logInSignIn);
+                    }
+                }
 //                if (currentUser != null) {
 //                    // User clicked to log out.
 //                    ParseUser.logOut();
@@ -143,12 +200,50 @@ public class LogIn extends Fragment {
 
     }
 
-
+    @Override
+    public void onStop() {
+        super.onStop();
+        if (mAuthListener != null) {
+            mAuth.removeAuthStateListener(mAuthListener);
+        }
+    }
 
     @Override
     public void onStart() {
         super.onStart();
+        mAuth.addAuthStateListener(mAuthListener);
+        FirebaseUser user = mAuth.getCurrentUser();
 
+        if (user.isAnonymous()) {
+            return;
+        }
+        if (user != null) {
+            if (user.getProviderId().equals("password")) {
+                nameTextView.setText("prova");
+                emailTextView.setText("due");
+            }
+            String providerId = "";
+            for (UserInfo profile : user.getProviderData()) {
+                // Id of the provider (ex: google.com)
+                providerId = profile.getProviderId();
+
+                // UID specific to the provider
+                String uid = profile.getUid();
+
+                // Name, email address, and profile photo Url
+                String name = profile.getDisplayName();
+                String email = profile.getEmail();
+                Uri photoUrl = profile.getPhotoUrl();
+            };
+            if (providerId.equals("password")) {
+                nameTextView.setText("prova");
+                emailTextView.setText("due");
+            }
+
+        } else {
+            // User is signed out
+            Log.d(TAG, "onAuthStateChanged:signed_out");
+        }
 //        currentUser = ParseUser.getCurrentUser();
 //        if (currentUser != null) {
 //            if (ParseFacebookUtils.isLinked(currentUser)) {

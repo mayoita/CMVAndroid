@@ -251,6 +251,7 @@
     <string name="offer">我们的机器分为从1欧分到10.00欧元的多个投注点，最大赌注能够到达500,00欧元.</string>
     <string name="what_new">不断地进行更新以保证最先进的现代科技，不断地寻求更高的客户满意度.</string>
     <string name="slot_rooms">卡诺凯拉宫赌场，美国在意大利的第一个赌场：4000平方米的赌博老虎机以及相关的配套赌博服务。\n\n文德拉明宫赌场：将最先进的技术完美地和古老非凡的赌博艺术相结合</string>
+    <string name="title_sign_up">Sign Up</string>
     <string-array name="slot_array">
         <item name="offer">我们的机器分为从1欧分到10.00欧元的多个投注点，最大赌注能够到达500,00欧元.</item>
         <item name="what_new">不断地进行更新以保证最先进的现代科技，不断地寻求更高的客户满意度.</item>

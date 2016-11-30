@@ -28,11 +28,6 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
-
-import com.amazonaws.mobileconnectors.dynamodbv2.dynamodbmapper.DynamoDBMapper;
-import com.amazonaws.auth.CognitoCachingCredentialsProvider;
-import com.amazonaws.services.dynamodbv2.AmazonDynamoDBClient;
 import com.daimajia.androidanimations.library.Techniques;
 import com.daimajia.androidanimations.library.YoYo;
 import com.facebook.rebound.Spring;
@@ -69,7 +64,7 @@ import java.util.List;
 import java.util.Locale;
 import android.os.Handler;
 
-import com.amazonaws.mobile.AWSMobileClient;
+
 
 /**
  * Created by massimomoro on 25/03/15.
@@ -89,12 +84,13 @@ public class HomeFr extends Fragment {
     private Tracker mTracker;
     DatabaseReference mRootRef = FirebaseDatabase.getInstance().getReference();
     DatabaseReference festivity = mRootRef.child("Festivity");
+    DatabaseReference jackpot = mRootRef.child("Jackpot");
 
     /** The DynamoDB object mapper for accessing DynamoDB. */
-    private final DynamoDBMapper mapper;
+
 
     public HomeFr() {
-        mapper = AWSMobileClient.defaultMobileClient().getDynamoDBMapper();
+
     }
 
     @Override
@@ -177,7 +173,7 @@ public class HomeFr extends Fragment {
                 new int[]{Color.rgb(253, 255, 26), Color.rgb(250, 100, 22)},
                 new float[]{0, 1}, Shader.TileMode.CLAMP);
         jackpotLabel.getPaint().setShader(textShader);
-        setOffice();
+        //setOffice();
 
         return rootView;
     }
@@ -203,11 +199,24 @@ public class HomeFr extends Fragment {
         loadStorageFestivity();
         loadFestivity(res.getString(R.string.todayOpen), res.getString(R.string.todayOpenVenice));
         if (HomeActivity.jackpot == null) {
+            jackpot.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    try {
+                        Double p = dataSnapshot.child("jackpot").getValue(Double.class); // Same
+                        jackpotamount.setText(DecimalFormat.getCurrencyInstance(Locale.getDefault()).format(p));
+                        HomeActivity.jackpot = DecimalFormat.getCurrencyInstance(Locale.getDefault()).format(p);
+                    } catch (NumberFormatException e) {
+                        // p did not contain a valid double
+                    }
+                }
 
-            JackpotDO selectedJackpot = mapper.load(JackpotDO.class, "1");
-            double d = Double.parseDouble(selectedJackpot.getJackpot());
-            jackpotamount.setText(DecimalFormat.getCurrencyInstance(Locale.getDefault()).format(d));
-            HomeActivity.jackpot = DecimalFormat.getCurrencyInstance(Locale.getDefault()).format(d);
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+
+                }
+            });
+
 
         } else {
             jackpotamount.setText(HomeActivity.jackpot);
@@ -227,10 +236,18 @@ public class HomeFr extends Fragment {
             festivity.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
-                    // This method is called once with the initial value and again
-                    // whenever data at this location is updated.
-                    
 
+                    JSONParser parser = new JSONParser();
+                    try {
+                        if (dataSnapshot.child("festivity").getValue() != null) {
+                            Object obj = parser.parse(dataSnapshot.child("festivity").getValue(String.class));
+                            arrayFestivity = (JSONArray)obj;
+                            HomeActivity.arrayFestivity = arrayFestivity;
+                            setOffice();
+                        }
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
                 }
 
                 @Override
@@ -240,12 +257,10 @@ public class HomeFr extends Fragment {
                 }
             });
 
-            FestivityDO selectedFestivity = mapper.load(FestivityDO.class, "1");
-            arrayFestivity = selectedFestivity.getFestivityConv();
-            HomeActivity.arrayFestivity = arrayFestivity;
 
         } else {
             arrayFestivity = HomeActivity.arrayFestivity;
+            setOffice();
         }
     }
 
@@ -259,7 +274,7 @@ public class HomeFr extends Fragment {
 
             List<Object> myArray = (List<Object>) arrayFestivity.get(i);
 
-            if ((day == (int)(long) myArray.get(0)) && (month == (int)(long) myArray.get(1) + 1)) {
+            if ((day == (int)(long) myArray.get(0)) && (month == (int)(long) myArray.get(1) )) {
                 VPS2=true;
             }
         }

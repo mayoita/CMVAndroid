@@ -22,6 +22,12 @@ import android.widget.TextView;
 
 import com.google.android.gms.analytics.HitBuilders;
 import com.google.android.gms.analytics.Tracker;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 import com.parse.FindCallback;
 import com.parse.GetCallback;
 import com.parse.ParseException;
@@ -30,6 +36,8 @@ import com.parse.ParseQuery;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 
@@ -43,9 +51,12 @@ public class Timetable extends Fragment {
     private View myView;
     private List<Object> arrayFestivity= new ArrayList<>();
     private Boolean VPS2 = false;
-    private ParseQuery<ParseObject> queryForFestivity;
-    private List<ParseObject> arrayTimetables= new ArrayList<>();
+
+    private List<Object> arrayTimetables= new ArrayList<>();
     private ListView myListView;
+    DatabaseReference mRootRef = FirebaseDatabase.getInstance().getReference();
+    Query services;
+
     TextView  left;
     TextView  right;
     TextView titolo;
@@ -255,21 +266,10 @@ public class Timetable extends Fragment {
 
 
     public void loadStorageFestivity () {
-        ParseQuery<ParseObject> query = ParseQuery.getQuery("Festivity");
-        query.getInBackground("7VTo3n7rum", new GetCallback<ParseObject>() {
-                    public void done(ParseObject object, ParseException e) {
-                        if (e == null) {
-                            // object will be your game score
-
-                            arrayFestivity = object.getList("festivity");
-                            loadFestivity();
-                        } else {
-                            // something went wrong
-
-                        }
-                    }
-                }
-        );
+        if (HomeActivity.arrayFestivity.size() != 0) {
+            arrayFestivity = HomeActivity.arrayFestivity;
+            loadFestivity();
+        }
 
     }
     public void loadFestivity() {
@@ -280,8 +280,9 @@ public class Timetable extends Fragment {
 
         for (int i=0; i< arrayFestivity.size(); i++) {
             List<Object> myArray = (List<Object>) arrayFestivity.get(i);
-
-            if ((day == (Integer) myArray.get(0)) && (month == (Integer) myArray.get(1) + 1)) {
+            int dayR = ((Long) myArray.get(0)).intValue();
+            int monthR = ((Long) myArray.get(1)).intValue();
+            if ((day == dayR) && (month == monthR)) {
                 VPS2=true;
             }
         }
@@ -298,29 +299,57 @@ public class Timetable extends Fragment {
 
         if ((month == 11) && ((day == 24) || (day == 25))) {
 
-            queryForFestivity = ParseQuery.getQuery("ServicesVSP");
+            services = mRootRef.child("ServicesVSP");
         } else {
-            if ((weekDay == 7) || VPS2) {
-                queryForFestivity = ParseQuery.getQuery("Services");
+            if ((weekDay == 7) ||  (weekDay == 6) || VPS2) {
+                //queryForFestivity = ParseQuery.getQuery("Services");
+                services = mRootRef.child("ServicesVSP");
+
             } else {
-                queryForFestivity = ParseQuery.getQuery("Services");
+                //queryForFestivity = ParseQuery.getQuery("Services");
+                services = mRootRef.child("Services");
+
             }
         }
+        services.addValueEventListener(new ValueEventListener() {
+        @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+            List<Object> arrayTimetablesHelper= new ArrayList<>();
+            for (DataSnapshot child : dataSnapshot.getChildren()) {
+                String a = child.child("2").getValue(String.class);
+                if (a.equals(currentVenue)) {
+                    ArrayList item = (ArrayList) child.getValue();
+                    arrayTimetablesHelper.add(item);
+            }
 
-        queryForFestivity.orderByAscending("Order");
-        queryForFestivity.whereEqualTo("MEVE", currentVenue);
-        queryForFestivity.findInBackground(new FindCallback<ParseObject>() {
-            public void done(List<ParseObject> services, ParseException e) {
-                if (e == null) {
-                    arrayTimetables = services;
-                    mCellAdapter = new TimetablesCellAdapter(getActivity(), fragmentWidth, arrayTimetables);
-                    myListView.setAdapter(mCellAdapter);
+            }
 
-                } else {
-                    Log.d("Services", "Error: " + e.getMessage());
-                }
+           Collections.sort(arrayTimetablesHelper, new Comparator<Object>() {
+               @Override
+               public int compare(Object lhs, Object rhs) {
+                   ArrayList a = (ArrayList) lhs;
+                   ArrayList b = (ArrayList) rhs;
+                   int aI = ((Long) a.get(3)).intValue();
+                   int bI = ((Long) b.get(3)).intValue();
+                    if (aI > bI) {
+                         return 1;
+                    } else {
+                        return -1;
+                    }
+
+               }
+           });
+            arrayTimetables = arrayTimetablesHelper;
+            mCellAdapter = new TimetablesCellAdapter(getActivity(), fragmentWidth, arrayTimetables);
+            myListView.setAdapter(mCellAdapter);
+            }
+
+        @Override
+            public void onCancelled(DatabaseError databaseError) {
+
             }
         });
+
 
     }
     public void setOffice() {

@@ -20,7 +20,7 @@ public class EventItem {
     private String imageMain;
     private String url;
     private String eventType;
-    private String isSlotEvent;
+    private Boolean isSlotEvent;
     private String office;
     private String nameIT;
     private String descriptionIT;
@@ -116,10 +116,10 @@ public class EventItem {
     public void setEventType(String name) {
         this.eventType = name;
     }
-    public String getIsSlotEvent() {
+    public Boolean getIsSlotEvent() {
         return isSlotEvent;
     }
-    public void setIsSlotEvent(String name) {
+    public void setIsSlotEvent(Boolean name) {
         this.isSlotEvent = name;
     }
     public String getOffice() {

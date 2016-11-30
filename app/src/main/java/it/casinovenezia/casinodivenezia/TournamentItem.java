@@ -1,6 +1,16 @@
 package it.casinovenezia.casinodivenezia;
 
+import android.content.Context;
+import android.net.Uri;
+import android.widget.ImageView;
+
+import com.daimajia.slider.library.SliderTypes.BaseSliderView;
+import com.daimajia.slider.library.SliderTypes.DefaultSliderView;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 import com.parse.ParseFile;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -18,7 +28,8 @@ public class TournamentItem {
     private String tournamentsName;
     private String office;
     private String tournamentUrl;
-    private ParseFile imageTournament;
+    private String imageTournament;
+
 
     public String getTournamentUrl() {
         return tournamentUrl;
@@ -37,6 +48,7 @@ public class TournamentItem {
     }
 
     public String getTournamentsName() {
+
         return tournamentsName;
     }
 
@@ -52,11 +64,11 @@ public class TournamentItem {
         this.tournamentsRules = tournamentsRules;
     }
 
-    public ParseFile getImageTournament() {
+    public String getImageTournament() {
         return imageTournament;
     }
 
-    public void setImageTournament(ParseFile imageTournament) {
+    public void setImageTournament(String imageTournament) {
         this.imageTournament = imageTournament;
     }
 
@@ -69,6 +81,7 @@ public class TournamentItem {
     }
 
     public String getStartDate() {
+
         return startDate;
     }
 

@@ -250,6 +250,7 @@
     <string name="offer">Para jugar con nuestras máquinas se necesita un mínimo de un céntimo de euro hasta hacer múltiples apuestas de 10,00 euros llegando a apuestas máximas de 500,00 euros.</string>
     <string name="what_new">Una oferta que evoluciona constantemente con tal de garantizar lo mejor de la tecnología moderna en pos de una mayor satisfacción por parte del cliente.</string>
     <string name="slot_rooms">Ca\'Noghera, el primer casino de estilo americano en Italia: 4.000 metros cuadrados de salas slot y servicios auxiliares para el juego. Ca\'Vendramin Calergi: encontrará una oferta en donde la tecnología más puntera se integra perfectamente en un ambiente clásico y extraordinario</string>
+    <string name="title_sign_up">Sign Up</string>
     <string-array name="slot_array">
         <item name="offer">Para jugar con nuestras máquinas se necesita un mínimo de un céntimo de euro hasta hacer múltiples apuestas de 10,00 euros llegando a apuestas máximas de 500,00 euros.</item>
         <item name="what_new">Una oferta que evoluciona constantemente con tal de garantizar lo mejor de la tecnología moderna en pos de una mayor satisfacción por parte del cliente.</item>

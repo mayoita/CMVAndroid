@@ -36,7 +36,7 @@ public class PokerAdapter extends BaseAdapter {
 
 
     class ViewHolder {
-
+        private ImageView image;
         private TextView text;
         private TextView date;
     }
@@ -107,7 +107,7 @@ public class PokerAdapter extends BaseAdapter {
                     rowView = mInflater.inflate(R.layout.poker_items, parent, false);
                     //configure view holder
                     ViewHolder viewHolder = new ViewHolder();
-                    //viewHolder.text = (TextView) rowView.findViewById(R.id.textView1);
+                    viewHolder.image = (ImageView) rowView.findViewById(R.id.image_event);
                     viewHolder.text = (TextView) rowView.findViewById(R.id.editText4);
                     viewHolder.text.setTypeface(Aachen);
                     viewHolder.date = (TextView) rowView.findViewById(R.id.editText5);
@@ -132,9 +132,10 @@ public class PokerAdapter extends BaseAdapter {
                 ViewHolder holder = (ViewHolder)rowView.getTag();
 
                 holder.text.setText(arraylist.get(position).getTournamentsName());
-                holder.date.setText(arraylist.get(position).getTournamentDate());
-                //download image
-                // holder.image
+                holder.date.setText(arraylist.get(position).getStartDate() + " - " + arraylist.get(position).getEndDate());
+                holder.image.setImageResource(R.drawable.poker_cell_background);
+                holder.text.setVisibility(View.VISIBLE);
+                holder.date.setVisibility(View.VISIBLE);
                 break;
             case TYPE_SEPARATOR:
                 ViewHolderHeader holderHeader = (ViewHolderHeader)rowView.getTag();

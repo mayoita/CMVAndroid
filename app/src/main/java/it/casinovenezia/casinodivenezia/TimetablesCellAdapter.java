@@ -22,7 +22,7 @@ public class TimetablesCellAdapter extends BaseAdapter {
     private int theWidth;
     private LayoutInflater mInflater;
     private Typeface myTypeFace;
-    public List<ParseObject> mData = new ArrayList();
+    public List<Object> mData = new ArrayList();
 
     private final int sumOfMarginLeftAndRight = 60;
     private DisplayMetrics dm;
@@ -34,7 +34,7 @@ public class TimetablesCellAdapter extends BaseAdapter {
     }
 
 
-    public TimetablesCellAdapter(Context context, int theWidth, List<ParseObject> theData) {
+    public TimetablesCellAdapter(Context context, int theWidth, List<Object> theData) {
 
         this.context = context;
         this.theWidth = theWidth;
@@ -66,7 +66,7 @@ public class TimetablesCellAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
 
         ViewHolder mViewHolder;
-        ParseObject itemarray =  mData.get(position);
+        ArrayList itemarray = (ArrayList) mData.get(position);
 
         if (convertView == null) {
             convertView = mInflater.inflate(R.layout.fragment_timetable_cell, parent, false);
@@ -81,8 +81,18 @@ public class TimetablesCellAdapter extends BaseAdapter {
         } else {
             mViewHolder = (ViewHolder)convertView.getTag();
         }
-        mViewHolder.oraS.setText(itemarray.getString("LeftColumn"));
-        mViewHolder.oraD.setText((String)itemarray.getString("RightColumn"));
+        String Left = (String)itemarray.get(1);
+        String Right = (String)itemarray.get(4);
+        if (!Left.equals("NULL")) {
+            mViewHolder.oraS.setText((String) itemarray.get(1));
+        } else {
+            mViewHolder.oraS.setText("");
+        }
+        if (!Right.equals("NULL")) {
+            mViewHolder.oraD.setText((String) itemarray.get(4));
+        } else {
+            mViewHolder.oraD.setText("");
+        }
 
 
 //        final TwoWayView.LayoutParams params = (TwoWayView.LayoutParams) convertView.getLayoutParams();

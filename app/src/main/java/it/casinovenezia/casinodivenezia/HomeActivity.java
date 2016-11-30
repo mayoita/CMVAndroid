@@ -17,6 +17,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.annotation.NonNull;
 import android.support.multidex.MultiDex;
 
 
@@ -39,8 +40,6 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.amazonaws.mobile.AWSMobileClient;
-import com.amazonaws.mobileconnectors.dynamodbv2.dynamodbmapper.DynamoDBMapper;
 import com.facebook.FacebookSdk;
 import com.facebook.appevents.AppEventsLogger;
 import com.google.android.gms.common.ConnectionResult;
@@ -51,6 +50,13 @@ import com.google.android.gms.common.api.Status;
 import com.google.android.gms.location.Geofence;
 import com.google.android.gms.location.GeofencingRequest;
 import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 
 import org.json.JSONException;
@@ -58,6 +64,7 @@ import org.json.JSONException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+import java.util.concurrent.Executor;
 
 import it.casinovenezia.adapter.NavDrawerListAdapter;
 import it.casinovenezia.it.casinovenezia.model.NavDrawerItem;
@@ -108,6 +115,13 @@ public class HomeActivity extends AppCompatActivity implements
      * Used when requesting to add or remove geofences.
      */
     private PendingIntent mGeofencePendingIntent;
+    private static final String TAG2 = "AnonymousAuth";
+    private FirebaseAuth.AuthStateListener mAuthListener;
+
+    // [START declare_auth]
+    private FirebaseAuth mAuth;
+    DatabaseReference mRootRef = FirebaseDatabase.getInstance().getReference();
+    DatabaseReference eventsChild = mRootRef.child("Events");
 
 
     private final Handler mHandler = new Handler();
@@ -137,6 +151,39 @@ public class HomeActivity extends AppCompatActivity implements
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         fragments = getFragments();
+        mAuth = FirebaseAuth.getInstance();
+        mAuthListener = new FirebaseAuth.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                FirebaseUser user = firebaseAuth.getCurrentUser();
+                if (user != null) {
+                    // User is signed in
+                    Log.d(TAG, "onAuthStateChanged:signed_in:" + user.getUid());
+                    //mRootRef.child("users").child(user.getUid()).child("name").setValue("Anonymous");
+                } else {
+                    // User is signed out
+                    Log.d(TAG, "onAuthStateChanged:signed_out");
+                }
+                // ...
+            }
+        };
+        final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
+        if (user == null) {
+            mAuth.signInAnonymously()
+                    .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            Log.d(TAG2, "signInAnonymously:onComplete:" + task.isSuccessful());
+
+                            if (!task.isSuccessful()) {
+                                Log.w(TAG2, "signInAnonymously", task.getException());
+
+                            }
+
+                        }
+                    });
+        }
 
 
         boolean tabletSize = getResources().getBoolean(R.bool.isTablet);
@@ -159,48 +206,6 @@ public class HomeActivity extends AppCompatActivity implements
             } else {
                 hasBeenSeen = true;
             }
-        }
-        if (!settings.contains("news")) {
-//            ParsePush.subscribeInBackground("Events", new SaveCallback() {
-//                @Override
-//                public void done(ParseException e) {
-//                    if (e == null) {
-//                        Log.d("com.parse.push", "successfully subscribed to the  channels.");
-//                        editor.putBoolean("news", true).commit();
-//
-//                    } else {
-//                        Log.e("com.parse.push", "failed to subscribe for push", e);
-//                    }
-//                }
-//            });
-        }
-        if (!settings.contains("slot")) {
-//            ParsePush.subscribeInBackground("Slots", new SaveCallback() {
-//                @Override
-//                public void done(ParseException e) {
-//                    if (e == null) {
-//                        Log.d("com.parse.push", "successfully subscribed to the  channels.");
-//                        editor.putBoolean("slot", true).commit();
-//
-//                    } else {
-//                        Log.e("com.parse.push", "failed to subscribe for push", e);
-//                    }
-//                }
-//            });
-        }
-        if (!settings.contains("poker")) {
-//            ParsePush.subscribeInBackground("Poker", new SaveCallback() {
-//                @Override
-//                public void done(ParseException e) {
-//                    if (e == null) {
-//                        Log.d("com.parse.push", "successfully subscribed to the  channels.");
-//                        editor.putBoolean("poker", true).commit();
-//
-//                    } else {
-//                        Log.e("com.parse.push", "failed to subscribe for push", e);
-//                    }
-//                }
-//            });
         }
 
 
@@ -664,6 +669,7 @@ public class HomeActivity extends AppCompatActivity implements
     protected void onStart() {
         super.onStart();
         mGoogleApiClient.connect();
+        mAuth.addAuthStateListener(mAuthListener);
     }
 
     @Override

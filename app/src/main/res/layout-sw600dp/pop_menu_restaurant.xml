@@ -63,7 +63,7 @@
             android:layout_marginRight="3dp"
             android:background="@color/white" />
 
-        <com.parse.ParseImageView
+        <ImageView
             android:layout_width="wrap_content"
             android:layout_height="394dp"
             android:id="@+id/imageView9"

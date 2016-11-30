@@ -256,6 +256,7 @@
     <string name="offer">Pour jouer, nos machines accèptent un minimum d\'un centime d\'euro jusqu\'à des mises multiples de la base 10,00 euros, avec des mises maximales de 500,00 euros.</string>
     <string name="what_new">Une offre en constante évolution, afin de toujours garantir le meilleur de la technologie moderne, à la recherche constante d\'une plus grande satisfaction du client.</string>
     <string name="slot_rooms">Ca\'Noghera, le premier casino à l\'américaine en Italie: 4000 mètres carrés de machines à sous et des services relatifs au jeu.\n\nCa\'Vendramin Calergi:. une offre où la technologie d\'avant-garde s\'intègre parfaitement dans une ambiance ancienne et extraordinaire</string>
+    <string name="title_sign_up">Sign Up</string>
     <string-array name="slot_array">
         <item name="offer">Pour jouer, nos machines accèptent un minimum d\'un centime d\'euro jusqu\'à des mises multiples de la base 10,00 euros, avec des mises maximales de 500,00 euros.</item>
         <item name="what_new">Une offre en constante évolution, afin de toujours garantir le meilleur de la technologie moderne, à la recherche constante d\'une plus grande satisfaction du client.</item>

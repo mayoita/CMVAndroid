@@ -14,10 +14,6 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.amazonaws.mobile.content.ContentDownloadPolicy;
-import com.amazonaws.mobile.content.ContentItem;
-import com.amazonaws.mobile.content.ContentProgressListener;
-
 import com.facebook.rebound.Spring;
 import com.facebook.rebound.SpringConfig;
 import com.facebook.rebound.SpringListener;
@@ -261,6 +257,7 @@ public class EventFBAdapter extends ArrayAdapter<EventItem> {
                             speakOut(textToSpeach,holder);
                     }
                 });
+                holder.image.setImageResource(R.drawable.default_event);
                 StorageReference imagesRef = storageRef.child(eventitemList.get(position).getImageMain());
                 imagesRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                     @Override

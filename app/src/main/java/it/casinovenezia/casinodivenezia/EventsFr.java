@@ -26,16 +26,6 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.amazonaws.mobile.AWSMobileClient;
-import com.amazonaws.mobile.content.ContentItem;
-import com.amazonaws.mobile.content.ContentListHandler;
-import com.amazonaws.mobile.content.ContentListItem;
-import com.amazonaws.mobile.content.ContentManager;
-import com.amazonaws.mobile.content.ContentState;
-import com.amazonaws.mobile.util.StringFormatUtils;
-import com.amazonaws.mobileconnectors.dynamodbv2.dynamodbmapper.DynamoDBMapper;
-import com.amazonaws.mobileconnectors.dynamodbv2.dynamodbmapper.DynamoDBScanExpression;
-import com.amazonaws.mobileconnectors.dynamodbv2.dynamodbmapper.PaginatedScanList;
 
 import com.firebase.ui.database.FirebaseListAdapter;
 import com.google.android.gms.analytics.HitBuilders;
@@ -52,10 +42,7 @@ import java.io.Serializable;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Locale;
+import java.util.*;
 
 /**
  * Created by massimomoro on 25/03/15.
@@ -64,8 +51,7 @@ public class EventsFr extends Fragment implements TextToSpeech.OnInitListener{
 
     public static final String EXTRA_MESSAGE = "EXTRA_MESSAGE";
     private ListView listView;
-  //  List<ParseObject> ob;
-    private EventsAdapter mAdapter;
+
     private EventFBAdapter mAdapterFB;
     private List<EventItem> eventitemlist = null;
     private List<EventItem> myEventitemlist = null;
@@ -74,11 +60,8 @@ public class EventsFr extends Fragment implements TextToSpeech.OnInitListener{
 
     boolean mDualPane;
     int mCurCheckPosition = 0;
-    private final DynamoDBMapper mapper;
-    /** Content Manager that manages the content for this demo. */
-    private ContentManager contentManager;
-    /** Handles the main content list. */
-    private EventsAdapter contentListItems;
+
+
     /** The current relative path within the ContentManager. */
     private String currentPath = "";
 
@@ -86,29 +69,6 @@ public class EventsFr extends Fragment implements TextToSpeech.OnInitListener{
     DatabaseReference eventsChild = mRootRef.child("Events");
 
 
-    private void createContentList(final View fragmentView, final ContentManager contentManager) {
-        listView = (ListView) fragmentView.findViewById(R.id.list_events);
-        contentListItems = new EventsAdapter(fragmentView.getContext(), contentManager,
-                new EventsAdapter.ContentListPathProvider() {
-                    @Override
-                    public String getCurrentPath() {
-                        return currentPath;
-                    }
-                },
-                new EventsAdapter.ContentListCacheObserver() {
-                    @Override
-                    public void onCacheChanged() {
-                        //refreshCacheSummary();
-                    }
-                },
-                R.layout.events_fragment);
-
-        listView.setAdapter(contentListItems);
-      //  listView.setOnItemClickListener(this);
-        listView.setOnCreateContextMenuListener(this);
-
-
-    }
 
     @Override
     public void onStart() {
@@ -157,7 +117,7 @@ public class EventsFr extends Fragment implements TextToSpeech.OnInitListener{
      * fragment (e.g. upon screen orientation changes).
      */
     public EventsFr() {
-        mapper = AWSMobileClient.defaultMobileClient().getDynamoDBMapper();
+
     }
 //
     @Override
@@ -166,7 +126,7 @@ public class EventsFr extends Fragment implements TextToSpeech.OnInitListener{
         View rootView = inflater.inflate(R.layout.events_fragment, container, false);
         listView = (ListView) rootView.findViewById(R.id.list_events);
 
-        this.contentManager = StarterApplication.contentManager;
+
 
 
         if (savedInstanceState != null) {
@@ -199,26 +159,6 @@ public class EventsFr extends Fragment implements TextToSpeech.OnInitListener{
 
     @Override
     public void onViewCreated(final View view, final Bundle savedInstanceState) {
-
-//        AWSMobileClient.defaultMobileClient().
-//                createDefaultContentManager(new ContentManager.BuilderResultHandler() {
-//
-//                    @Override
-//                    public void onComplete(final ContentManager contentManager) {
-//                        if (!isAdded()) {
-//                            contentManager.destroy();
-//                            return;
-//                        }
-//
-//                        final View fragmentView = getView();
-//                        EventsFr.this.contentManager = contentManager;
-//                        createContentList(fragmentView, contentManager);
-//                        contentManager.setContentRemovedListener(contentListItems);
-//                       // dialog.dismiss();
-//                        refreshContent(currentPath);
-//                    }
-//                });
-
 
     }
 
@@ -270,7 +210,8 @@ public class EventsFr extends Fragment implements TextToSpeech.OnInitListener{
                         myEventitemlist.get(index).getImage1(),
                         myEventitemlist.get(index).getImage2(),
                         myEventitemlist.get(index).getImage3(),
-                        this.getContext()
+                        this.getContext(),
+                        myEventitemlist.get(index).getImageMain()
                 );
 
                 // Execute a transaction, replacing any existing fragment
@@ -299,6 +240,7 @@ public class EventsFr extends Fragment implements TextToSpeech.OnInitListener{
             intent.putExtra("image1", myEventitemlist.get(index).getImage1());
             intent.putExtra("image2", myEventitemlist.get(index).getImage2());
             intent.putExtra("image3", myEventitemlist.get(index).getImage3());
+            intent.putExtra("imageMain", myEventitemlist.get(index).getImageMain());
             startActivity(intent);
         }
 
@@ -393,6 +335,10 @@ public class EventsFr extends Fragment implements TextToSpeech.OnInitListener{
                         map.setImage2(child.child("ImageEvent2").getValue(String.class));
                         map.setImage3(child.child("ImageEvent3").getValue(String.class));
                         map.setOffice(child.child("office").getValue(String.class));
+                        map.setIsSlotEvent(child.child("isSlotEvents").getValue(Boolean.class));
+                        //Need for SlotDetailsActivity
+                        map.setDescriptionIT(child.child("DescriptionIT").getValue(String.class));
+                        map.setNameIT(child.child("NameIT").getValue(String.class));
                         //    map.setMyId((String) event.getObjectId());
 
                         switch (Locale.getDefault().getLanguage()) {
@@ -421,7 +367,7 @@ public class EventsFr extends Fragment implements TextToSpeech.OnInitListener{
                                 map.setName(child.child("NameRU").getValue(String.class));
                                 map.setMemo(child.child("memoRU").getValue(String.class));
                                 break;
-                            case "ch":
+                            case "zh":
                                 map.setDescription(child.child("DescriptionZH").getValue(String.class));
                                 map.setName(child.child("NameZH").getValue(String.class));
                                 map.setMemo(child.child("memoZH").getValue(String.class));
@@ -437,6 +383,36 @@ public class EventsFr extends Fragment implements TextToSpeech.OnInitListener{
 
                         eventitemlist.add(map);
                     }
+                    Collections.sort(eventitemlist, new Comparator<Object>() {
+                        @Override
+                        public int compare(Object lhs, Object rhs) {
+                            EventItem a = (EventItem) lhs;
+                            EventItem b = (EventItem) rhs;
+                            DateFormat format = new SimpleDateFormat("EEEE MM LLLL");
+
+                            Date dateA = null;
+                            try {
+                                dateA = format.parse(a.getStartDate());
+                            } catch (ParseException e) {
+                                e.printStackTrace();
+                            }
+                            ;
+                            Date dateB = null;
+                            try {
+                                dateB = format.parse(b.getStartDate());
+                            } catch (ParseException e) {
+                                e.printStackTrace();
+                            }
+
+
+                            if (dateA.after(dateB)) {
+                                return -1;
+                            } else {
+                                return 1;
+                            }
+
+                        }
+                    });
                     HomeActivity.eventitemlist = eventitemlist;
                     if (isAdded()) {
                         setOffice();
@@ -452,62 +428,6 @@ public class EventsFr extends Fragment implements TextToSpeech.OnInitListener{
                     Log.w("EventAdapter", "Failed to read value.", error.toException());
                 }
             });
-//            DynamoDBScanExpression scanExpression = new DynamoDBScanExpression();
-//            PaginatedScanList<EventsDO> result = mapper.scan(EventsDO.class, scanExpression);
-//            for (EventsDO item : result) {
-//                EventItem map = new EventItem();
-//                            map.setImageMain(item.get_ImageName());
-//                            map.setOffice(item.get_office());
-//                        //    map.setMyId((String) event.getObjectId());
-//
-//                switch (Locale.getDefault().getLanguage()) {
-//                                case "it":
-//                                    map.setDescription(item.get_DescriptionIT());
-//                                    map.setName(item.get_NameIT());
-//                                    map.setMemo(item.get_memoIT());
-//                                    break;
-//                            case "es":
-//                                map.setDescription(item.get_DescriptionES());
-//                                map.setName(item.get_NameES());
-//                                map.setMemo(item.get_memoES());
-//                                break;
-//                            case "fr":
-//                                map.setDescription(item.get_DescriptionFR());
-//                                map.setName(item.get_NameFR());
-//                                map.setMemo(item.get_memoFR());
-//                                break;
-//                            case "de":
-//                                map.setDescription(item.get_DescriptionDE());
-//                                map.setName(item.get_NameDE());
-//                                map.setMemo(item.get_memoDE());
-//                                break;
-//                            case "ru":
-//                                map.setDescription(item.get_DescriptionRU());
-//                                map.setName(item.get_NameRU());
-//                                map.setMemo(item.get_memoRU());
-//                                break;
-//                            case "ch":
-//                                map.setDescription(item.get_DescriptionZH());
-//                                map.setName(item.get_NameZH());
-//                                map.setMemo(item.get_memoZH());
-//                                break;
-//                                default:
-//                                    map.setDescription(item.get_Description());
-//                                    map.setName(item.getName());
-//                                    map.setMemo(item.get_memo());
-//                                    break;
-//                }
-//                map.setStartDate(formatMyDate(item.getStartDate()));
-//                            map.setEndDate(item.get_EndDate());
-//
-//                            eventitemlist.add(map);
-//            }
-//            HomeActivity.eventitemlist = eventitemlist;
-//                        if (isAdded()) {
-//                            setOffice();
-//                        } else {
-//                            Log.e("isAdded", "EventsFr not added");
-//                        }
 
         } else {
             eventitemlist = HomeActivity.eventitemlist;
@@ -535,8 +455,8 @@ public class EventsFr extends Fragment implements TextToSpeech.OnInitListener{
             // mTracker.setScreenName("EventDetailsVE");
         }
         // mTracker.send(new HitBuilders.ScreenViewBuilder().build());
-        if (mAdapter != null)
-        mAdapter.notifyDataSetChanged();
+        if (mAdapterFB != null)
+        mAdapterFB.notifyDataSetChanged();
         engine = new TextToSpeech(getContext(), this);
         engine.setOnUtteranceProgressListener(new UtteranceProgressListener() {
             @Override
@@ -557,74 +477,5 @@ public class EventsFr extends Fragment implements TextToSpeech.OnInitListener{
             }
         });
     }
-    public void refreshContent(final String path) {
-   //     if (!listingContentInProgress) {
-    //        listingContentInProgress = true;
 
-          //  refreshCacheSummary();
-
-            // Remove all progress listeners.
-            contentManager.clearProgressListeners();
-
-            // Clear old content.
-            contentListItems.clear();
-            contentListItems.notifyDataSetChanged();
-            currentPath = path;
-           // updatePath();
-
-        //    final ProgressDialog dialog = getProgressDialog(
-           //         R.string.content_progress_dialog_message_load_content);
-
-            contentManager.listAvailableContent(path, new ContentListHandler() {
-                @Override
-                public boolean onContentReceived(final int startIndex,
-                                                 final List<ContentItem> partialResults,
-                                                 final boolean hasMoreResults) {
-                    // if the activity is no longer alive, we can stop immediately.
-                    if (getActivity() == null) {
-                    //    listingContentInProgress = false;
-                        return false;
-                    }
-                    if (startIndex == 0) {
-                  //      dialog.dismiss();
-                    }
-
-                    for (final ContentItem contentItem : partialResults) {
-                        // Add the item to the list.
-                        contentListItems.add(new ContentListItem(contentItem));
-
-                        // If the content is transferring, ensure the progress listener is set.
-                        final ContentState contentState = contentItem.getContentState();
-                        if (ContentState.isTransferringOrWaitingToTransfer(contentState)) {
-                            contentManager.setProgressListener(contentItem.getFilePath(),
-                                    contentListItems);
-                        }
-                    }
-                    // sort items added.
-                    contentListItems.sort(ContentListItem.contentAlphebeticalComparator);
-
-                    if (!hasMoreResults) {
-                  //      listingContentInProgress = false;
-                    }
-                    // Return true to continue listing.
-                    return true;
-                }
-
-                @Override
-                public void onError(final Exception ex) {
-             //       dialog.dismiss();
-             //       listingContentInProgress = false;
-                    final Activity activity = getActivity();
-                    if (activity != null) {
-                        final AlertDialog.Builder errorDialogBuilder = new AlertDialog.Builder(activity);
-                  //      errorDialogBuilder.setTitle(activity.getString(R.string.content_list_failure_text));
-                        errorDialogBuilder.setMessage(ex.getMessage());
-                        errorDialogBuilder.setNegativeButton(
-                                activity.getString(R.string.content_dialog_ok), null);
-                        errorDialogBuilder.show();
-                    }
-                }
-            });
-        }
-   // }
 }

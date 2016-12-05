@@ -32,9 +32,17 @@ import com.facebook.GraphResponse;
 import com.facebook.GraphRequest;
 import com.google.android.gms.analytics.HitBuilders;
 import com.google.android.gms.analytics.Tracker;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserInfo;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 
 import org.json.JSONException;
@@ -43,6 +51,7 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.List;
 
 
 public class LogIn extends Fragment {
@@ -56,6 +65,7 @@ public class LogIn extends Fragment {
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
     private static final String TAG = "LogInAcitivityAuth";
+    DatabaseReference mRootRef = FirebaseDatabase.getInstance().getReference().child("users");
 
 
 //    private ParseUser currentUser;
@@ -111,26 +121,51 @@ public class LogIn extends Fragment {
             }
         };
     }
-    private void updateUI(FirebaseUser user) {
+    private void updateUI(final FirebaseUser user) {
 
-
-      //  TextView idView = (TextView) findViewById(R.id.anonymous_status_id);
-     //   TextView emailView = (TextView) findViewById(R.id.anonymous_status_email);
-        boolean isSignedIn = (user != null);
-
-        // Status text
-        if (isSignedIn) {
-      //      idView.setText(getString(R.string.id_fmt, user.getUid()));
-     //       emailView.setText(getString(R.string.email_fmt, user.getEmail()));
-        } else {
-       //     idView.setText(R.string.signed_out);
-      //      emailView.setText(null);
+        if (user.isAnonymous()) {
+            showProfileLoggedOut();
+            return;
         }
+        if (user != null) {
 
-        // Button visibility
-      //  findViewById(R.id.button_anonymous_sign_in).setEnabled(!isSignedIn);
-      //  findViewById(R.id.button_anonymous_sign_out).setEnabled(isSignedIn);
-      //  findViewById(R.id.button_link_account).setEnabled(isSignedIn);
+            String providerId = "";
+            for (UserInfo profile : user.getProviderData()) {
+                // Id of the provider (ex: google.com)
+                providerId = profile.getProviderId();
+
+                // UID specific to the provider
+                String uid = profile.getUid();
+
+                // Name, email address, and profile photo Url
+                String name = profile.getDisplayName();
+                String email = profile.getEmail();
+                Uri photoUrl = profile.getPhotoUrl();
+            }
+
+            if (providerId.equals("password")) {
+                DatabaseReference mUser = mRootRef.child(user.getUid());
+                mUser.addValueEventListener(new ValueEventListener() {
+
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        User a = dataSnapshot.getValue(User.class);
+                        nameTextView.setText(a.name);
+                        emailTextView.setText(user.getEmail());
+                        loginOrLogoutButton.setText(R.string.profile_logout_button_label);
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
+            }
+
+        } else {
+            // User is signed out
+            Log.d(TAG, "onAuthStateChanged:signed_out");
+        }
     }
 
     @Override
@@ -155,24 +190,39 @@ public class LogIn extends Fragment {
                     if (user.isAnonymous()) {
                         Intent logInSignIn = new Intent(getActivity(), SignUp.class);
                         startActivity(logInSignIn);
+                    } else {
+                            //FirebaseAuth.getInstance().signOut();
+                        for (UserInfo profile : user.getProviderData()) {
+                            // Id of the provider (ex: google.com)
+                            String providerId = profile.getProviderId();
+
+                            // UID specific to the provider
+                            String uid = profile.getUid();
+
+                            // Name, email address, and profile photo Url
+                            String name = profile.getDisplayName();
+                            String email = profile.getEmail();
+                            Uri photoUrl = profile.getPhotoUrl();
+                            if (providerId.equals("password")) {
+                                user.unlink(providerId).addOnCompleteListener(getActivity(), new OnCompleteListener<AuthResult>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<AuthResult> task) {
+                                        if (!task.isSuccessful()) {
+                                            Log.d("a",task.getException().getLocalizedMessage());
+
+                                            // Auth provider u)nlinked from account
+                                        } else {
+                                            Log.d("a",task.getResult().toString());
+                                        }
+                                    }
+                                });
+                            }
+                        };
+                        showProfileLoggedOut();
+
                     }
                 }
-//                if (currentUser != null) {
-//                    // User clicked to log out.
-//                    ParseUser.logOut();
-//                    currentUser = null;
-//                    mTracker.send(new HitBuilders.EventBuilder()
-//                            .setCategory("LOGGING")
-//                            .setAction("press")
-//                            .build());
-//                    showProfileLoggedOut();
-//                } else {
-//                    // User clicked to log in.
-//                    ParseLoginBuilder loginBuilder = new ParseLoginBuilder(
-//                            getActivity());
-//
-//                    startActivityForResult(loginBuilder.build(), LOGIN_REQUEST);
-//                }
+
             }
         });
 
@@ -212,38 +262,7 @@ public class LogIn extends Fragment {
     public void onStart() {
         super.onStart();
         mAuth.addAuthStateListener(mAuthListener);
-        FirebaseUser user = mAuth.getCurrentUser();
 
-        if (user.isAnonymous()) {
-            return;
-        }
-        if (user != null) {
-            if (user.getProviderId().equals("password")) {
-                nameTextView.setText("prova");
-                emailTextView.setText("due");
-            }
-            String providerId = "";
-            for (UserInfo profile : user.getProviderData()) {
-                // Id of the provider (ex: google.com)
-                providerId = profile.getProviderId();
-
-                // UID specific to the provider
-                String uid = profile.getUid();
-
-                // Name, email address, and profile photo Url
-                String name = profile.getDisplayName();
-                String email = profile.getEmail();
-                Uri photoUrl = profile.getPhotoUrl();
-            };
-            if (providerId.equals("password")) {
-                nameTextView.setText("prova");
-                emailTextView.setText("due");
-            }
-
-        } else {
-            // User is signed out
-            Log.d(TAG, "onAuthStateChanged:signed_out");
-        }
 //        currentUser = ParseUser.getCurrentUser();
 //        if (currentUser != null) {
 //            if (ParseFacebookUtils.isLinked(currentUser)) {

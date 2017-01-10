@@ -184,10 +184,6 @@
     <string name="veneziatime2">OUVERT DE 11h00 À 02h45</string>
     <string name="text_for_event_general">Musique live, concerts, discothèques, spectacles, divertissement, piano bar et un restaurant suggestions de l\'happy hour au dîner de gala organisée directement dans les deux endroits du Casino de Venise.\n
         Un mélange de jeu et de divertissement pour les soirées spéciales de plaisir et de divertissement.</string>
-    <string name="title1">God of War Ascension</string>
-    <string name="title2">Assassin\'s Creed III</string>
-    <string name="title3">Hitman Absolution</string>
-    <string name="title4">Dishonored</string>
     <string name="wagner_restaurant">RESTAURANT WAGNER</string>
     <string name="marcopolo_restaurant">RESTAURANT MARCO POLO</string>
     <string name="wagner_details">Un hommage au grand compositeur qui a vécu à Venise dans le palais historique qui abrite le casino et un privilège incomparable pour les visiteurs du casino.\n
@@ -269,4 +265,8 @@
         <item name="jackpot_slot">NOS GROS LOTS</item>
         <item name="rooms">LES SALLES DE MACHINES À SOUS</item>
     </string-array>
+    <string name="error_blank_name">enter a name</string>
+    <string name="error_blank_surname">enter a surname</string>
+
+    <string name="lore_news">Our offering is under constant evolution to guarantee the best in modern technology, in our constant desire to offer the best customer satisfaction.</string>
 </resources>

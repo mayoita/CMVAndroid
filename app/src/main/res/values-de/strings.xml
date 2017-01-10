@@ -42,7 +42,7 @@
     </array>
 
 <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+
     <string name="please">PLEASE LOGIN OR SIGN UP</string>
     <string name="loginsignup">LOG IN / SIGN UP</string>
     <string name="newsletter">NEWSLETTER</string>
@@ -168,10 +168,6 @@ An beiden Orten können Sie außerdem an der internationalen Meisterschaft von T
     <string name="veneziatime2">VON 11:00 BIS 02.45 UHR GEÖFFNET</string>
     <string name="text_for_event_general">Live-Musik, Konzerte, Diskotheken, Shows, Unterhaltung, Piano-Bar und Restaurantempfehlungen aus der Happy Hour an der Gala-Dinner direkt in den beiden Standorten des Casinos von Venedig organisiert.\nEin Mix aus Gaming und Entertainment für besondere Abende voller Spaß und Unterhaltung.</string>
     <string name="lore_news">Our offering is under constant evolution to guarantee the best in modern technology, in our constant desire to offer the best customer satisfaction.</string>
-    <string name="title1">God of War Ascension</string>
-    <string name="title2">Assassin\'s Creed III</string>
-    <string name="title3">Hitman Absolution</string>
-    <string name="title4">Dishonored</string>
     <string name="wagner_restaurant">WAGNER RESTAURANT</string>
     <string name="marcopolo_restaurant">MARCO POLO RESTAURANT</string>
     <string name="wagner_details">Eine Hommage an den großen Komponisten, der in Venedig in diesem historischen Gebäude gewohnt hat, wo das Spielcasino untergebracht ist; ein unvergleichliches Privileg für die Besucher des Spielcasinos.
@@ -250,4 +246,7 @@ Köstlichkeiten aus allen Epochen und Fischspezialitäten, nach der typischen ku
         <item name="jackpot_slot">UNSERE JACKPOTS</item>
         <item name="rooms">SLOTSPIELHALLEN</item>
     </string-array>
+    <string name="error_blank_name">enter a name</string>
+    <string name="error_blank_surname">enter a surname</string>
+
 </resources>

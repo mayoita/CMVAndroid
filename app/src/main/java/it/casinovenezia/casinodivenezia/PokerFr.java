@@ -32,8 +32,11 @@ import com.parse.ParseQuery;
 
 import org.json.JSONArray;
 
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -275,11 +278,41 @@ public class PokerFr extends Fragment {
                         map.setTournamentsRules((ArrayList) child.child("TournamentRules").getValue());
                         map.setTournamentUrl(child.child("TournamentURL").getValue(String.class));
                         map.setPokerData((ArrayList) child.child("PokerData").getValue());
-                        map.setStartDate(formatMyDate(child.child("StartDate").getValue(String.class)));
-                        map.setEndDate(formatMyDate(child.child("EndDate").getValue(String.class)));
+                        map.setStartDate(child.child("StartDate").getValue(String.class));
+                        map.setEndDate(child.child("EndDate").getValue(String.class));
 
                         pokeritemlist.add(map);
                     }
+                    Collections.sort(pokeritemlist, new Comparator<Object>() {
+                        @Override
+                        public int compare(Object lhs, Object rhs) {
+                            PokerItem a = (PokerItem) lhs;
+                            PokerItem b = (PokerItem) rhs;
+                            DateFormat format =new SimpleDateFormat("dd/MM/yy");
+
+                            Date dateA = null;
+                            try {
+                                dateA = format.parse(a.getStartDate());
+                            } catch (java.text.ParseException e) {
+                                e.printStackTrace();
+                            }
+                            ;
+                            Date dateB = null;
+                            try {
+                                dateB = format.parse(b.getStartDate());
+                            } catch (java.text.ParseException e) {
+                                e.printStackTrace();
+                            }
+
+
+                            if (dateA.after(dateB)) {
+                                return -1;
+                            } else {
+                                return 1;
+                            }
+
+                        }
+                    });
                     HomeActivity.pokeritemlist=pokeritemlist;
                     setOffice();
                 }

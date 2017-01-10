@@ -9,6 +9,7 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -132,7 +133,7 @@ public class PokerAdapter extends BaseAdapter {
                 ViewHolder holder = (ViewHolder)rowView.getTag();
 
                 holder.text.setText(arraylist.get(position).getTournamentsName());
-                holder.date.setText(arraylist.get(position).getStartDate() + " - " + arraylist.get(position).getEndDate());
+                holder.date.setText(formatMyDate(arraylist.get(position).getStartDate()) + " - " + formatMyDate(arraylist.get(position).getEndDate()));
                 holder.image.setImageResource(R.drawable.poker_cell_background);
                 holder.text.setVisibility(View.VISIBLE);
                 holder.date.setVisibility(View.VISIBLE);
@@ -140,10 +141,25 @@ public class PokerAdapter extends BaseAdapter {
             case TYPE_SEPARATOR:
                 ViewHolderHeader holderHeader = (ViewHolderHeader)rowView.getTag();
 
-                holderHeader.text.setText(arraylist.get(position).getStartDate());
+                holderHeader.text.setText(formatMyDate(arraylist.get(position).getStartDate()));
                 break;
         }
 
         return rowView;
+    }
+    private String formatMyDate(String myDate)  {
+
+        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+        Date date = new Date();
+        try {
+            date = format.parse(myDate);
+            System.out.println(date);
+
+        } catch (java.text.ParseException e) {
+            e.printStackTrace();
+        }
+        SimpleDateFormat sdf = new SimpleDateFormat("dd LLLL", StarterApplication.currentLocale);
+
+        return sdf.format(date);
     }
 }

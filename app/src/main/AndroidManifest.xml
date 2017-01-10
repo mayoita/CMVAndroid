@@ -25,7 +25,9 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <!-- Allows the API to use the Global Positioning System (GPS) to determine the device's location to within a very small area -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-
+    <uses-feature
+        android:glEsVersion="0x00020000"
+        android:required="true" />
     <application
         android:name=".StarterApplication"
         android:allowBackup="true"
@@ -39,9 +41,7 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyBrHur8ZaVUML-PHpTzFtrQXDorn3gsBt4" />
 
-        <uses-feature
-            android:glEsVersion="0x00020000"
-            android:required="true" />
+
 
         <activity
             android:name=".HomeActivity"
@@ -122,8 +122,10 @@
      See README(https://goo.gl/l4GJaQ) for more. -->
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_icon"
-            android:resource="@drawable/appicon" />
-
+            android:resource="@drawable/ic_stat_appiconn" />
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_color"
+            android:resource="@color/navy" />
 
 
 
@@ -145,7 +147,7 @@
 
         <provider
             android:name="android.support.v4.content.FileProvider"
-            android:authorities="@string/content_file_provider_authority"
+            android:authorities="it.casinovenezia.fileprovider"
             android:exported="false"
             android:grantUriPermissions="true">
             <meta-data

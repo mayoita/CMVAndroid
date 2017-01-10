@@ -28,8 +28,11 @@ import com.parse.ParseFile;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 
@@ -242,21 +245,6 @@ public class TournamentFr extends Fragment {
     }
 
 
-    private String formatMyDate(String myDate)  {
-
-        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
-        Date date = new Date();
-        try {
-            date = format.parse(myDate);
-            System.out.println(date);
-
-        } catch (java.text.ParseException e) {
-            e.printStackTrace();
-        }
-        SimpleDateFormat sdf = new SimpleDateFormat("dd LLLL", StarterApplication.currentLocale);
-
-        return sdf.format(date);
-    }
     public void loadTournament() {
 
         if (HomeActivity.tournamentlistitem == null) {
@@ -276,11 +264,41 @@ public class TournamentFr extends Fragment {
                         map.setTournamentUrl(child.child("TournamentURL").getValue(String.class));
                         map.setType(child.child("Type").getValue(String.class));
                         map.setTournamentEvent((ArrayList) child.child("TournamentEvent").getValue());
-                        map.setStartDate(formatMyDate(child.child("StartDate").getValue(String.class)));
-                        map.setEndDate(formatMyDate(child.child("EndDate").getValue(String.class)));
+                        map.setStartDate(child.child("StartDate").getValue(String.class));
+                        map.setEndDate(child.child("EndDate").getValue(String.class));
                         map.setImageTournament(child.child("ImageTournament").getValue(String.class));
                         pokeritemlist.add(map);
                     }
+                    Collections.sort(pokeritemlist, new Comparator<Object>() {
+                        @Override
+                        public int compare(Object lhs, Object rhs) {
+                            TournamentItem a = (TournamentItem) lhs;
+                            TournamentItem b = (TournamentItem) rhs;
+                            DateFormat format =new SimpleDateFormat("dd/MM/yy");
+
+                            Date dateA = null;
+                            try {
+                                dateA = format.parse(a.getStartDate());
+                            } catch (java.text.ParseException e) {
+                                e.printStackTrace();
+                            }
+                            ;
+                            Date dateB = null;
+                            try {
+                                dateB = format.parse(b.getStartDate());
+                            } catch (java.text.ParseException e) {
+                                e.printStackTrace();
+                            }
+
+
+                            if (dateA.after(dateB)) {
+                                return -1;
+                            } else {
+                                return 1;
+                            }
+
+                        }
+                    });
                     HomeActivity.tournamentlistitem=pokeritemlist;
                     setOffice();
                 }

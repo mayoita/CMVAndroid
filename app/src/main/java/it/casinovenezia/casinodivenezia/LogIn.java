@@ -13,6 +13,7 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.AppCompatActivity;
@@ -43,6 +44,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Picasso;
 
 
 import org.json.JSONException;
@@ -130,6 +132,9 @@ public class LogIn extends Fragment {
         if (user != null) {
 
             String providerId = "";
+            Uri photoUrl = user.getPhotoUrl();
+            String name =user.getDisplayName();
+            String email = user.getEmail();
             for (UserInfo profile : user.getProviderData()) {
                 // Id of the provider (ex: google.com)
                 providerId = profile.getProviderId();
@@ -138,9 +143,9 @@ public class LogIn extends Fragment {
                 String uid = profile.getUid();
 
                 // Name, email address, and profile photo Url
-                String name = profile.getDisplayName();
-                String email = profile.getEmail();
-                Uri photoUrl = profile.getPhotoUrl();
+                 name = profile.getDisplayName();
+                 email = profile.getEmail();
+                 photoUrl = profile.getPhotoUrl();
             }
 
             if (providerId.equals("password")) {
@@ -160,6 +165,13 @@ public class LogIn extends Fragment {
 
                     }
                 });
+            } else {
+                nameTextView.setText(name);
+                emailTextView.setText(email);
+                Picasso.with(getContext()).load(photoUrl).into(pic);
+                loginOrLogoutButton.setText(R.string.profile_logout_button_label);
+
+
             }
 
         } else {
@@ -187,7 +199,7 @@ public class LogIn extends Fragment {
             public void onClick(View v) {
                 FirebaseUser user = mAuth.getCurrentUser();
                 if (user != null) {
-                    if (user.isAnonymous()) {
+                    if (user.isAnonymous() || user.getProviderData().size() == 1) {
                         Intent logInSignIn = new Intent(getActivity(), SignUp.class);
                         startActivity(logInSignIn);
                     } else {
@@ -203,16 +215,16 @@ public class LogIn extends Fragment {
                             String name = profile.getDisplayName();
                             String email = profile.getEmail();
                             Uri photoUrl = profile.getPhotoUrl();
-                            if (providerId.equals("password")) {
+                            if (providerId.equals("password") || providerId.equals("facebook.com")) {
                                 user.unlink(providerId).addOnCompleteListener(getActivity(), new OnCompleteListener<AuthResult>() {
                                     @Override
                                     public void onComplete(@NonNull Task<AuthResult> task) {
                                         if (!task.isSuccessful()) {
-                                            Log.d("a",task.getException().getLocalizedMessage());
+                                            Log.d("unlink",task.getException().getLocalizedMessage());
 
                                             // Auth provider u)nlinked from account
                                         } else {
-                                            Log.d("a",task.getResult().toString());
+                                            Log.d("unlink",task.getResult().toString());
                                         }
                                     }
                                 });

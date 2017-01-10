@@ -14,9 +14,9 @@ android {
     }
     signingConfigs {
         release {
-            storeFile file("CMVAndroid.jks")
+            storeFile file('/Users/massimomoro/CMVAndroid/app/CMVAndroid.jks')
             storePassword "punitore6872"
-            keyAlias 'key0'
+            keyAlias 'cmvalias'
             keyPassword "punitore6872"
         }
     }

@@ -242,6 +242,7 @@ public class HomeActivity extends AppCompatActivity implements
         // What's hot, We  will add a counter here
         navDrawerItems.add(new NavDrawerItem(navMenuTitles[5], navMenuIcons.getResourceId(Integer.valueOf(5), -1)));
         navDrawerItems.add(new NavDrawerItem(navMenuTitles[6], navMenuIcons.getResourceId(Integer.valueOf(6), -1)));
+        navDrawerItems.add(new NavDrawerItem(navMenuTitles[7], navMenuIcons.getResourceId(Integer.valueOf(7), -1)));
 
         navDrawerItemsEmpty.add(new NavDrawerItem(navMenuTitles[0], navMenuIcons.getResourceId(Integer.valueOf(7), -1)));
         // Find People
@@ -255,7 +256,7 @@ public class HomeActivity extends AppCompatActivity implements
         // What's hot, We  will add a counter here
         navDrawerItemsEmpty.add(new NavDrawerItem(navMenuTitles[5], navMenuIcons.getResourceId(Integer.valueOf(7), -1)));
         navDrawerItemsEmpty.add(new NavDrawerItem(navMenuTitles[6], navMenuIcons.getResourceId(Integer.valueOf(7), -1)));
-
+        navDrawerItemsEmpty.add(new NavDrawerItem(navMenuTitles[7], navMenuIcons.getResourceId(Integer.valueOf(7), -1)));
         // Recycle the typed array
         navMenuIcons.recycle();
 
@@ -367,7 +368,8 @@ public class HomeActivity extends AppCompatActivity implements
             case 6:
                 fragment = new Facebook();
                 break;
-
+            case 7:
+                fragment = new QRCode();
             default:
                 break;
         }

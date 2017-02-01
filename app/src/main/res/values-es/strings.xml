@@ -24,6 +24,7 @@
         <item>CASINÒ MOBILE</item>
         <item>MIS SUSCRIPCIONES</item>
         <item>HAZ CLIC EN ME GUSTA EN FACEBOOK</item>
+        <item>PROMOCIONES</item>
         <item></item>
     </string-array>
     <string name="drawer_open">Open navigation drawer</string>

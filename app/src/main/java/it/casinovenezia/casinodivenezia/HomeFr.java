@@ -8,6 +8,7 @@ import android.graphics.Color;
 import android.graphics.LinearGradient;
 import android.graphics.Shader;
 import android.graphics.Typeface;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.support.annotation.Nullable;
@@ -28,6 +29,9 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.target.GlideDrawableImageViewTarget;
 import com.daimajia.androidanimations.library.Techniques;
 import com.daimajia.androidanimations.library.YoYo;
 import com.facebook.rebound.Spring;
@@ -40,15 +44,16 @@ import com.facebook.rebound.ui.SpringConfiguratorView;
 import com.facebook.rebound.ui.Util;
 import com.google.android.gms.analytics.HitBuilders;
 import com.google.android.gms.analytics.Tracker;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 import com.helpshift.Helpshift;
-
-
-
+import com.squareup.picasso.Picasso;
 
 
 import org.json.simple.JSONObject;
@@ -85,6 +90,9 @@ public class HomeFr extends Fragment {
     DatabaseReference mRootRef = FirebaseDatabase.getInstance().getReference();
     DatabaseReference festivity = mRootRef.child("Festivity");
     DatabaseReference jackpot = mRootRef.child("Jackpot");
+    DatabaseReference promotions = mRootRef.child("QRCode");
+    FirebaseStorage storage = FirebaseStorage.getInstance();
+    StorageReference storageRef = storage.getReferenceFromUrl("gs://cmv-gioco.appspot.com/Promotions");
 
     /** The DynamoDB object mapper for accessing DynamoDB. */
 
@@ -127,6 +135,38 @@ public class HomeFr extends Fragment {
         ImageView contactus = (ImageView)rootView.findViewById(R.id.contactUs);
         ImageView fb_back = (ImageView) rootView.findViewById(R.id.imageView3);
         ImageView arrow = (ImageView)rootView.findViewById(R.id.arrow);
+        final ImageView promotionsImg = (ImageView)rootView.findViewById(R.id.imageViewPromotions);
+        promotionsImg.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), QRCodeActivity.class);
+                startActivity(intent);
+            }
+        });
+        //Load Promotions Image
+        promotions.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                StorageReference imagesRef = storageRef.child(dataSnapshot.child("imagePro").getValue(String.class));
+                String visible = dataSnapshot.child("visible").getValue(String.class);
+                if (visible.equals("YES")) {
+                    imagesRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                        @Override
+                        public void onSuccess(Uri uri) {
+                            Glide.with(getContext()).load(uri.toString()).into(new GlideDrawableImageViewTarget(promotionsImg));
+                        }
+                    });
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError error) {
+                // Failed to read value
+                Log.w("EventAdapter", "Failed to read value.", error.toException());
+            }
+        });
+
+
 
         if(!HomeActivity.hasBeenSeen) {
             contactus.setVisibility(View.VISIBLE);

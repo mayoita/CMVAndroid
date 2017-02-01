@@ -24,6 +24,7 @@
         <item>CASINÒ MOBILE</item>
         <item>MY SUBSCRIPTION</item>
         <item>CLICK "LIKE" ON FACEBOOK</item>
+        <item>PROMOTIONS</item>
         <item></item>
     </string-array>
     <string name="drawer_open">Open navigation drawer</string>
@@ -121,7 +122,7 @@
     <string name="map">MAP</string>
     <string name="info_map">INFO</string>
     <string name="directions">(click on icons to get directions)</string>
-    <string formatted="false" name="info_text">With the exception of December 24 and 25 the Casinò di Venezia\’s two venues, Ca\’ Vendramin Calergi and Ca\’ Noghera are open all year round.\n
+    <string name="info_text" formatted="false">With the exception of December 24 and 25 the Casinò di Venezia\’s two venues, Ca\’ Vendramin Calergi and Ca\’ Noghera are open all year round.\n
         Access to the Casinò di Venezia\’s games rooms is restricted to adults only who are in possession of a valid ID document:\n\nacceptable forms of identification include either an ID Card,
         a driving licence or a passport.\n\n€5.00 Admission Card (services excluded);\n€10.00 Admission Card: a €10 admission.\n\nThe €10.00 Admission Card includes services:\n-
         The gift of a non convertible chip or ez-pay ticket worth € 10.00 for use at the gaming tables or on the slot machines;\n- cloakroom;\n- parking (at Ca\' Noghera it\'s free of charge;

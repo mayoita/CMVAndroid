@@ -82,9 +82,11 @@ public class QRCode extends Fragment {
         View rootView = inflater.inflate(R.layout.qr_code, container, false);
         final ImageView qrCode = (ImageView)rootView.findViewById(R.id.qr_imageView);
         final TextView qr_text = (TextView)rootView.findViewById(R.id.qr_textView);
+        qr_text.setText("No Internet Connection");
         qr_text.setMovementMethod(new ScrollingMovementMethod());
         final TextView footer_text = (TextView)rootView.findViewById(R.id.qr_footer);
         footer_text.setMovementMethod(new ScrollingMovementMethod());
+        footer_text.setText("");
         Display display = getActivity().getWindowManager().getDefaultDisplay();
         final int width = display.getWidth();
 

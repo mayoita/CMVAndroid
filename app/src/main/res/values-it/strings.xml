@@ -40,6 +40,7 @@
         <item>@drawable/subscription</item>
         <item>@drawable/like</item>
         <item>@drawable/homeempty</item>
+        <item>@drawable/promo</item>
     </array>
 
     <string name="please">ESEGUI IL LOGIN O REGISTRATI</string>

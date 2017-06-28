@@ -221,7 +221,9 @@ public class HomeFr extends Fragment {
         } else {
             jackpotamount.setText(HomeActivity.jackpot);
         }
+        startActivity(new Intent(getActivity(),EventAds.class));
     }
+
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {

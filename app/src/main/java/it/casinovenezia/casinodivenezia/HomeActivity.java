@@ -337,6 +337,8 @@ public class HomeActivity extends AppCompatActivity implements
             displayView(0);
         }
 
+
+
     }
 
     private void displayView(int position) {
@@ -389,6 +391,7 @@ public class HomeActivity extends AppCompatActivity implements
             // error in creating fragment
             Log.e("MainActivity", "Error in creating fragment");
         }
+
     }
 
 

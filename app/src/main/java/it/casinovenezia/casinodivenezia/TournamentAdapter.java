@@ -164,15 +164,30 @@ public class TournamentAdapter extends BaseAdapter {
                 }
 
                 holder.text.setText(arraylist.get(position).getTournamentsName());
-                holder.date.setText(arraylist.get(position).getStartDate() + " - " + arraylist.get(position).getEndDate());
+                holder.date.setText(formatMyDate(arraylist.get(position).getStartDate()) + " - " + formatMyDate(arraylist.get(position).getEndDate()));
                 break;
             case TYPE_SEPARATOR:
                 ViewHolderHeader holderHeader = (ViewHolderHeader)rowView.getTag();
-                holderHeader.text.setText(arraylist.get(position).getStartDate());
+                holderHeader.text.setText(formatMyDate(arraylist.get(position).getStartDate()));
                 break;
         }
 
         return rowView;
+    }
+    private String formatMyDate(String myDate)  {
+
+        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+        Date date = new Date();
+        try {
+            date = format.parse(myDate);
+            System.out.println(date);
+
+        } catch (java.text.ParseException e) {
+            e.printStackTrace();
+        }
+        SimpleDateFormat sdf = new SimpleDateFormat("dd LLLL", StarterApplication.currentLocale);
+
+        return sdf.format(date);
     }
 
 }

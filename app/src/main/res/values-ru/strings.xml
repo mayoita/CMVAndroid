@@ -24,6 +24,7 @@
         <item>CASINÒ MOBILE</item>
         <item>МОИ ПОДПИСКИ</item>
         <item>ОТМЕТЬТЕ НАШУ СТРАНИЦУ КАК ПОНРАВИВШУЮСЯ НА FACEBOOK</item>
+        <item>продвижение по службе</item>
         <item></item>
     </string-array>
     <string name="drawer_open">Open navigation drawer</string>
@@ -39,6 +40,7 @@
         <item>@drawable/subscription</item>
         <item>@drawable/like</item>
         <item>@drawable/homeempty</item>
+        <item>@drawable/promo</item>
     </array>
 
     <string name="please">PLEASE LOGIN OR SIGN UP</string>
@@ -179,10 +181,6 @@
     <string name="veneziatime2">ОТКРЫТО С 11:00 ДО 2:45</string>
     <string name="text_for_event_general">Live music, concerts, disco club, performances, entertainment, bar area and refreshments ranging from Happy Hours to gala dinners.\n\nA mix of games and entertainment for special evenings of fun devoted to teaching the game.</string>
     <string name="lore_news">Our offering is under constant evolution to guarantee the best in modern technology, in our constant desire to offer the best customer satisfaction.</string>
-    <string name="title1">God of War Ascension</string>
-    <string name="title2">Assassin\'s Creed III</string>
-    <string name="title3">Hitman Absolution</string>
-    <string name="title4">Dishonored</string>
     <string name="wagner_restaurant">РЕСТОРАН WAGNER</string>
     <string name="marcopolo_restaurant">РЕСТОРАН MARCO POLO</string>
     <string name="wagner_details">Дань великому композитору, который проживал в Венеции в историческом здании, в котором находится казино и несравненная привилегия для посетителей игорного дома.\n
@@ -263,4 +261,7 @@
         <item name="jackpot_slot">ЗАЛ СЛОТОВ</item>
         <item name="rooms">НАШИ ДЖЕКПОТЫ</item>
     </string-array>
+    <string name="error_blank_name">enter a name</string>
+    <string name="error_blank_surname">enter a surname</string>
+
 </resources>

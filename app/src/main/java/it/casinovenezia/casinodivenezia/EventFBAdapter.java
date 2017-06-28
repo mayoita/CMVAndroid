@@ -26,7 +26,11 @@ import com.google.firebase.storage.StorageReference;
 import com.squareup.picasso.Picasso;
 
 import java.io.File;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.TreeSet;
@@ -279,10 +283,24 @@ public class EventFBAdapter extends ArrayAdapter<EventItem> {
             case TYPE_SEPARATOR:
                 ViewHolderHeader holderHeader = (ViewHolderHeader)rowView.getTag();
 
-                holderHeader.text.setText(eventitemList.get(position).getStartDate());
+                holderHeader.text.setText(formatMyDate(eventitemList.get(position).getStartDate()));
                 break;
         }
 
         return rowView;
+    }
+
+    private String formatMyDate(String myDate) {
+        DateFormat format = new SimpleDateFormat("dd/MM/yy");
+        Date date = new Date();
+        try {
+            date = format.parse(myDate);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        SimpleDateFormat sdf = new SimpleDateFormat("EEEE dd LLLL", StarterApplication.currentLocale);
+
+        return sdf.format(date);
     }
 }

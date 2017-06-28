@@ -24,6 +24,7 @@
         <item>CASINÒ MOBILE</item>
         <item>MY SUBSCRIPTION</item>
         <item>CLICK "LIKE" ON FACEBOOK</item>
+        <item>PROMOTIONS</item>
         <item></item>
     </string-array>
     <string name="drawer_open">Open navigation drawer</string>
@@ -39,6 +40,7 @@
         <item>@drawable/subscription</item>
         <item>@drawable/like</item>
         <item>@drawable/homeempty</item>
+        <item>@drawable/promo</item>
     </array>
 
     <string name="please">PLEASE LOGIN OR SIGN UP</string>
@@ -121,7 +123,7 @@
     <string name="map">MAP</string>
     <string name="info_map">INFO</string>
     <string name="directions">(click on icons to get directions)</string>
-    <string formatted="false" name="info_text">With the exception of December 24 and 25 the Casinò di Venezia\’s two venues, Ca\’ Vendramin Calergi and Ca\’ Noghera are open all year round.\n
+    <string name="info_text" formatted="false">With the exception of December 24 and 25 the Casinò di Venezia\’s two venues, Ca\’ Vendramin Calergi and Ca\’ Noghera are open all year round.\n
         Access to the Casinò di Venezia\’s games rooms is restricted to adults only who are in possession of a valid ID document:\n\nacceptable forms of identification include either an ID Card,
         a driving licence or a passport.\n\n€5.00 Admission Card (services excluded);\n€10.00 Admission Card: a €10 admission.\n\nThe €10.00 Admission Card includes services:\n-
         The gift of a non convertible chip or ez-pay ticket worth € 10.00 for use at the gaming tables or on the slot machines;\n- cloakroom;\n- parking (at Ca\' Noghera it\'s free of charge;
@@ -181,10 +183,6 @@
     <string name="veneziatime2">Today open 11:00 am - 02:45 am</string>
     <string name="text_for_event_general">Live music, concerts, disco club, performances, entertainment, bar area and refreshments ranging from Happy Hours to gala dinners.\n\nA mix of games and entertainment for special evenings of fun devoted to teaching the game.</string>
     <string name="lore_news">Our offering is under constant evolution to guarantee the best in modern technology, in our constant desire to offer the best customer satisfaction.</string>
-    <string name="title1">God of War Ascension</string>
-    <string name="title2">Assassin\'s Creed III</string>
-    <string name="title3">Hitman Absolution</string>
-    <string name="title4">Dishonored</string>
     <string name="wagner_restaurant">WAGNER RESTAURANT</string>
     <string name="marcopolo_restaurant">MARCO POLO RESTAURANT</string>
     <string name="wagner_details">Dedicated to the great composer who lived in Venice in the historical
@@ -271,12 +269,10 @@
         <item name="jackpot_slot">OUR JACKPOTS</item>
         <item name="rooms">SLOT MACHINE ROOMS</item>
     </string-array>
-    <string name="content_folder_text">This is a folder.</string>
-    <string name="content_dialog_ok">OK</string>
     <!-- Suffix after '-' must be the app package name as specified in the build.gradle file. This
-       is used by the com.amazonaws.mobile.downloader.query.DownloadQueueProvider class. -->
-    <string name="download_queue_provider_authority">com.amazonaws.mobile.downloader-it.casinovenezia.casinodivenezia</string>
+       is used by the com.amazonaws.mobile.downloader.query.DownloadQueueProvider class.
+    <string name="download_queue_provider_authority">com.amazonaws.mobile.downloader-it.casinovenezia.casinodivenezia</string> -->
     <!-- This can be anything, but it should be unique to the app. -->
-    <string name="content_file_provider_authority">it.casinovenezia.fileprovider</string>
+
     <string name="title_sign_up">Sign Up</string>
 </resources>

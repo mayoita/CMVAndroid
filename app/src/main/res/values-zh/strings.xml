@@ -24,6 +24,7 @@
         <item>CASINÒ MOBILE</item>
         <item>我的订阅"</item>
         <item>点击FACEBOOK连接</item>
+        <item>促销</item>
         <item></item>
     </string-array>
     <string name="drawer_open">Open navigation drawer</string>
@@ -39,6 +40,7 @@
         <item>@drawable/subscription</item>
         <item>@drawable/like</item>
         <item>@drawable/homeempty</item>
+        <item>@drawable/promo</item>
     </array>
 
     <string name="please">请登录或注册</string>
@@ -177,10 +179,6 @@
     <string name="veneziatime2">营业时间为11:00至凌晨2:45</string>
     <string name="text_for_event_general">Live music, concerts, disco club, performances, entertainment, bar area and refreshments ranging from Happy Hours to gala dinners.\n\nA mix of games and entertainment for special evenings of fun devoted to teaching the game.</string>
     <string name="lore_news">Our offering is under constant evolution to guarantee the best in modern technology, in our constant desire to offer the best customer satisfaction.</string>
-    <string name="title1">God of War Ascension</string>
-    <string name="title2">Assassin\'s Creed III</string>
-    <string name="title3">Hitman Absolution</string>
-    <string name="title4">Dishonored</string>
     <string name="wagner_restaurant">瓦格纳餐厅</string>
     <string name="marcopolo_restaurant">马可波罗餐厅</string>
     <string name="wagner_details">威尼斯历史悠久宫殿曾作为伟大作曲家的住宅，
@@ -264,4 +262,7 @@
         <item name="jackpot_slot">我们的彩池</item>
         <item name="rooms">老虎机大厅</item>
     </string-array>
+    <string name="error_blank_name">enter a name</string>
+    <string name="error_blank_surname">enter a surname</string>
+
 </resources>

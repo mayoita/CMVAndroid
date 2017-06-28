@@ -302,19 +302,6 @@ public class EventsFr extends Fragment implements TextToSpeech.OnInitListener{
     }
 
 
-    private String formatMyDate(String myDate) {
-        DateFormat format = new SimpleDateFormat("dd/MM/yy");
-        Date date = new Date();
-        try {
-             date = format.parse(myDate);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-
-        SimpleDateFormat sdf = new SimpleDateFormat("EEEE dd LLLL", StarterApplication.currentLocale);
-
-        return sdf.format(date);
-    }
 
     public void loadEvent () {
         if(HomeActivity.eventitemlist == null) {
@@ -378,7 +365,7 @@ public class EventsFr extends Fragment implements TextToSpeech.OnInitListener{
                                 map.setMemo(child.child("memo").getValue(String.class));
                                 break;
                         }
-                        map.setStartDate(formatMyDate(child.child("StartDate").getValue(String.class)));
+                        map.setStartDate(child.child("StartDate").getValue(String.class));
                         map.setEndDate(child.child("EndDate").getValue(String.class));
 
                         eventitemlist.add(map);
@@ -388,7 +375,7 @@ public class EventsFr extends Fragment implements TextToSpeech.OnInitListener{
                         public int compare(Object lhs, Object rhs) {
                             EventItem a = (EventItem) lhs;
                             EventItem b = (EventItem) rhs;
-                            DateFormat format = new SimpleDateFormat("EEEE MM LLLL");
+                            DateFormat format =new SimpleDateFormat("dd/MM/yy");
 
                             Date dateA = null;
                             try {

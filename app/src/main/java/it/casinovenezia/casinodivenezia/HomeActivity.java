@@ -232,30 +232,31 @@ public class HomeActivity extends AppCompatActivity implements
         // Home
         navDrawerItems.add(new NavDrawerItem(navMenuTitles[0], navMenuIcons.getResourceId(0, -1)));
         // Find People
-        navDrawerItems.add(new NavDrawerItem(navMenuTitles[1], navMenuIcons.getResourceId(1, -1)));
+        navDrawerItems.add(new NavDrawerItem(navMenuTitles[1], navMenuIcons.getResourceId(Integer.valueOf(1), -1)));
         // Photos
-        navDrawerItems.add(new NavDrawerItem(navMenuTitles[2], navMenuIcons.getResourceId(2, -1)));
+        navDrawerItems.add(new NavDrawerItem(navMenuTitles[2], navMenuIcons.getResourceId(Integer.valueOf(2), -1)));
         // Communities, Will add a counter here
-        navDrawerItems.add(new NavDrawerItem(navMenuTitles[3], navMenuIcons.getResourceId(3, -1)));
+        navDrawerItems.add(new NavDrawerItem(navMenuTitles[3], navMenuIcons.getResourceId(Integer.valueOf(3), -1)));
         // Pages
-        navDrawerItems.add(new NavDrawerItem(navMenuTitles[4], navMenuIcons.getResourceId(4, -1)));
+        navDrawerItems.add(new NavDrawerItem(navMenuTitles[4], navMenuIcons.getResourceId(Integer.valueOf(4), -1)));
         // What's hot, We  will add a counter here
-        navDrawerItems.add(new NavDrawerItem(navMenuTitles[5], navMenuIcons.getResourceId(5, -1)));
-        navDrawerItems.add(new NavDrawerItem(navMenuTitles[6], navMenuIcons.getResourceId(6, -1)));
+        navDrawerItems.add(new NavDrawerItem(navMenuTitles[5], navMenuIcons.getResourceId(Integer.valueOf(5), -1)));
+        navDrawerItems.add(new NavDrawerItem(navMenuTitles[6], navMenuIcons.getResourceId(Integer.valueOf(6), -1)));
+        navDrawerItems.add(new NavDrawerItem(navMenuTitles[7], navMenuIcons.getResourceId(Integer.valueOf(8), -1)));
 
-        navDrawerItemsEmpty.add(new NavDrawerItem(navMenuTitles[0], navMenuIcons.getResourceId(7, -1)));
+        navDrawerItemsEmpty.add(new NavDrawerItem(navMenuTitles[0], navMenuIcons.getResourceId(Integer.valueOf(7), -1)));
         // Find People
-        navDrawerItemsEmpty.add(new NavDrawerItem(navMenuTitles[1], navMenuIcons.getResourceId(7, -1)));
+        navDrawerItemsEmpty.add(new NavDrawerItem(navMenuTitles[1], navMenuIcons.getResourceId(Integer.valueOf(7), -1)));
         // Photos
-        navDrawerItemsEmpty.add(new NavDrawerItem(navMenuTitles[2], navMenuIcons.getResourceId(7, -1)));
+        navDrawerItemsEmpty.add(new NavDrawerItem(navMenuTitles[2], navMenuIcons.getResourceId(Integer.valueOf(7), -1)));
         // Communities, Will add a counter here
-        navDrawerItemsEmpty.add(new NavDrawerItem(navMenuTitles[3], navMenuIcons.getResourceId(7, -1)));
+        navDrawerItemsEmpty.add(new NavDrawerItem(navMenuTitles[3], navMenuIcons.getResourceId(Integer.valueOf(7), -1)));
         // Pages
-        navDrawerItemsEmpty.add(new NavDrawerItem(navMenuTitles[4], navMenuIcons.getResourceId(7, -1)));
+        navDrawerItemsEmpty.add(new NavDrawerItem(navMenuTitles[4], navMenuIcons.getResourceId(Integer.valueOf(7), -1)));
         // What's hot, We  will add a counter here
-        navDrawerItemsEmpty.add(new NavDrawerItem(navMenuTitles[5], navMenuIcons.getResourceId(7, -1)));
-        navDrawerItemsEmpty.add(new NavDrawerItem(navMenuTitles[6], navMenuIcons.getResourceId(7, -1)));
-
+        navDrawerItemsEmpty.add(new NavDrawerItem(navMenuTitles[5], navMenuIcons.getResourceId(Integer.valueOf(7), -1)));
+        navDrawerItemsEmpty.add(new NavDrawerItem(navMenuTitles[6], navMenuIcons.getResourceId(Integer.valueOf(7), -1)));
+        navDrawerItemsEmpty.add(new NavDrawerItem(navMenuTitles[7], navMenuIcons.getResourceId(Integer.valueOf(7), -1)));
         // Recycle the typed array
         navMenuIcons.recycle();
 
@@ -369,7 +370,8 @@ public class HomeActivity extends AppCompatActivity implements
             case 6:
                 fragment = new Facebook();
                 break;
-
+            case 7:
+                fragment = new QRCode();
             default:
                 break;
         }

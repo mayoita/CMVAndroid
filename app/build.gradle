@@ -8,15 +8,15 @@ android {
         applicationId "it.casinovenezia.casinodivenezia"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 9
-        versionName "1.2.6"
+        versionCode 10
+        versionName "1.2.7"
         multiDexEnabled true
     }
     signingConfigs {
         release {
-            storeFile file("CMVAndroid.jks")
+            storeFile file('/Users/massimomoro/CMVAndroid/app/CMVAndroid.jks')
             storePassword "punitore6872"
-            keyAlias "CMVAlias"
+            keyAlias 'cmvalias'
             keyPassword "punitore6872"
         }
     }
@@ -24,13 +24,14 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
         }
     }
     dexOptions {
         jumboMode = true
         javaMaxHeapSize "4g"
     }
-    buildToolsVersion '25.0.1'
+    buildToolsVersion '25.0.2'
 }
 repositories {
 
@@ -41,30 +42,25 @@ repositories {
 }
 
 dependencies {
+
     //Firebase
-
-
     compile 'com.android.support:multidex:1.0.1'
-    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile fileTree(include: ['*.jar'], dir: 'libs')
     compile 'com.android.support:appcompat-v7:25.0.1'
     compile 'com.android.support:support-v4:25.0.1'
-
     compile 'com.squareup.picasso:picasso:2.5.2'
+    compile 'com.github.bumptech.glide:glide:3.7.0'
     compile 'com.nineoldandroids:library:2.4.0'
-
     compile 'org.lucasr.twowayview:twowayview:0.1.4'
     compile 'com.google.android.gms:play-services:10.0.1'
-    compile 'com.google.firebase:firebase-core:9.8.0'
-    compile 'com.google.firebase:firebase-database:9.8.0'
+    compile 'com.google.firebase:firebase-core:10.0.1'
+    compile 'com.google.firebase:firebase-database:10.0.1'
     compile 'com.firebaseui:firebase-ui-database:1.0.0'
-    compile 'com.google.firebase:firebase-storage:9.8.0'
-    compile 'com.google.firebase:firebase-auth:9.8.0'
-
-
-
+    compile 'com.google.firebase:firebase-storage:10.0.1'
+    compile 'com.google.firebase:firebase-auth:10.0.1'
+    compile 'com.google.firebase:firebase-messaging:10.0.1'
     // Uncomment if using Facebook Login (optional Maven dependency)
     compile 'com.facebook.android:facebook-android-sdk:4.5.0'
-
     compile 'com.github.moondroid.coverflow:library:1.0'
     compile 'com.google.code.gson:gson:2.4'
     //compile  'com.google.zxing:core:2.2'

@@ -144,7 +144,7 @@ public class PagerTitleStrip22 extends ViewGroup implements ViewPager.DecorView 
             setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize);
         }
         if (a.hasValue(2)) {
-            final int textColor = a.getColor(2, 0);
+            final int textColor = a.getColor(Integer.valueOf(2), 0);
             mPrevText.setTextColor(textColor);
             mCurrText.setTextColor(textColor);
             mNextText.setTextColor(textColor);
